@@ -1,6 +1,6 @@
 {
-    "name": "asystent_diagnozy",
-    "short_name": "asystent_diagnozy",
+    "name": "asystent_diagnozy_test",
+    "short_name": "asystent_diagnozy_test",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

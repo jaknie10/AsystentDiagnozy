@@ -1,4 +1,4 @@
-package com.example.asystent_diagnozy
+package com.example.asystent_diagnozy_test
 
 import io.flutter.embedding.android.FlutterActivity
 
