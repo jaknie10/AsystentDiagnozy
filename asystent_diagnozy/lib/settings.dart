@@ -10,7 +10,7 @@ class Settings extends StatelessWidget {
     return Flexible(
     child: Container(
       width: double.infinity,
-      color: Color.fromARGB(255, 21, 0, 255),
+      color: const Color.fromARGB(255, 21, 0, 255),
       child: const Center(
         child: Text('Settings'),
       ),
