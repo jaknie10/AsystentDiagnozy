@@ -58,7 +58,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/db.json
 
   fonts:
   - family: Montserrat

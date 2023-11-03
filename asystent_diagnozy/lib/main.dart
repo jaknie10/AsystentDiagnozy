@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'morfologia.dart';
+import 'gazometria.dart';
 import 'home.dart';
 import 'profile.dart';
 import 'settings.dart';
@@ -214,16 +216,40 @@ class _MyHomePageState extends State<MyHomePage> {
                         }
                       });
                     },
-                    icon: _page == 'settings'
-                        ? const ImageIcon(
-                            AssetImage('assets/settings_focused.png'),
-                            size: 30,
-                            color: Color.fromRGBO(22, 20, 35, 60),
+                    icon: _page == 'morfologia'
+                        ? const Icon(
+                            Icons.favorite,
                           )
-                        : const ImageIcon(
-                            AssetImage('assets/settings.png'),
-                            size: 30,
-                            color: Color.fromRGBO(22, 20, 35, 60),
+                        : const Icon(
+                            Icons.abc,
+                          ),
+                  ),
+                ),
+                Container(
+                  width: 100.0,
+                  height: 80.0,
+                  color: Colors.white,
+                  child: IconButton(
+                    style: IconButton.styleFrom(
+                        elevation: 0,
+                        hoverColor: Theme.of(context).colorScheme.secondary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0),
+                        )),
+                    onPressed: () {
+                      setState(() {
+                        if (_page != 'gazometria') {
+                          _page = 'gazometria';
+                          debugPrint(_page);
+                        }
+                      });
+                    },
+                    icon: _page == 'gazometria'
+                        ? const Icon(
+                            Icons.message,
+                          )
+                        : const Icon(
+                            Icons.pan_tool,
                           ),
                   ),
                 ),
@@ -234,6 +260,10 @@ class _MyHomePageState extends State<MyHomePage> {
             const Settings()
           else if (_page == 'home')
             const HomePage()
+          else if (_page == 'morfologia')
+            const Morfologia()
+          else if (_page == 'gazometria')
+            const Gazometria()
           else if (_page == 'profile')
             const Profile(),
         ],

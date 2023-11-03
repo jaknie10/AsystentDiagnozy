@@ -4,21 +4,21 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-class Morfologia extends StatefulWidget {
-  const Morfologia({Key? key}) : super(key: key);
+class Gazometria extends StatefulWidget {
+  const Gazometria({Key? key}) : super(key: key);
 
   @override
-  State<Morfologia> createState() => _MorfologiaState();
+  State<Gazometria> createState() => _GazometriaState();
 }
 
-class _MorfologiaState extends State<Morfologia> {
+class _GazometriaState extends State<Gazometria> {
   final _formKey = GlobalKey<FormState>();
 
   List _items = [];
 
   Future<void> readJson() async {
     final String response =
-        await rootBundle.loadString('assets/morfologia.json');
+        await rootBundle.loadString('assets/gazometria.json');
     final data = await json.decode(response);
     setState(() {
       _items = data;
