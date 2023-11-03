@@ -10,7 +10,7 @@ class Profile extends StatelessWidget {
     return Flexible(
     child: Container(
       width: double.infinity,
-      color: Color.fromARGB(255, 225, 17, 44),
+      color: const Color.fromARGB(255, 225, 17, 44),
       child: const Center(
         child: Text('Profile'),
       ),
