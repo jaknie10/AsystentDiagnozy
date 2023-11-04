@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({
+class PatientEditProfile extends StatelessWidget {
+  const PatientEditProfile({
     super.key,
   });
 
@@ -10,9 +10,9 @@ class Profile extends StatelessWidget {
     return Flexible(
     child: Container(
       width: double.infinity,
-      color: Color.fromARGB(255, 21, 100, 255),
+      color: Colors.cyan,
       child: const Center(
-        child: Text('Profile'),
+        child: Text('PatientEditProfile'),
       ),
     ),
     );

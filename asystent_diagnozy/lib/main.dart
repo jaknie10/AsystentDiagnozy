@@ -1,9 +1,11 @@
 
+import 'package:Asystent_Diagnozy/patientEditProfile.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
 import 'profile.dart';
 import 'settings.dart';
+import 'partientProfile.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,14 +37,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String _page = 'home';
 
+
   @override
   Widget build(BuildContext context) {
+
+    changeState(state){
+      setState(() {
+        _page = state;            
+    });}
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        foregroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
         toolbarHeight: 80,
         leading: Container(
+          color: Colors.white,
           width: 80.0,
           child: IconButton(
             style: IconButton.styleFrom(
@@ -69,13 +80,14 @@ class _MyHomePageState extends State<MyHomePage> {
             alignment: Alignment.centerLeft,
             child: 
               Container(
-                width: 350,
+                width: 300,
+                height: 45,
                 child: SearchBar(),),),
         actions: [
           Container(
             width: 250,
             height: 80,
-            color: Colors.blue,
+            color: Colors.white,
             padding: EdgeInsets.all(20.0),
             child: 
               Align(
@@ -83,8 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row( 
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Icon(Icons.people, size: 30,),
-                    Text("Jan Kowalski", style: TextStyle(fontSize: 20))]
+                    Icon(Icons.people, size: 30,color: Colors.black,),
+                    Text("Jan Kowalski", style: TextStyle(fontSize: 20, color: Colors.black))]
                 )
               ),
           )
@@ -132,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 100.0,
                     height: 80.0,
                     color: Colors.white,
-                    child: IconButton(
+                    child: IconButton( 
                     style: IconButton.styleFrom(
                               elevation: 0,
                               hoverColor: Theme.of(context).colorScheme.secondary,
@@ -186,8 +198,10 @@ class _MyHomePageState extends State<MyHomePage> {
               )),
             ),
             if(_page == 'settings') new Settings() 
-            else if(_page == 'home') new HomePage() 
-            else if(_page == 'profile') new Profile(),
+            else if(_page == 'home') new HomePage(changeState: changeState,) 
+            else if(_page == 'profile') new Profile()
+            else if(_page =='patientProfile') new PatientProfile(changeState: changeState,)
+            else if(_page == 'patientEditProfile') new PatientEditProfile(),
 
           ],
         ),
