@@ -1,10 +1,10 @@
+import 'patientEditProfile.dart';
 import 'package:flutter/material.dart';
 
-import 'morfologia.dart';
-import 'gazometria.dart';
 import 'home.dart';
 import 'profile.dart';
 import 'settings.dart';
+import 'partientProfile.dart';
 
 void main() => runApp(const MyApp());
 
@@ -41,11 +41,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    changeState(state) {
+      setState(() {
+        _page = state;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        foregroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
         toolbarHeight: 80,
-        leading: SizedBox(
+        leading: Container(
+            color: Colors.white,
             width: 80.0,
             child: IconButton(
               style: IconButton.styleFrom(
@@ -61,16 +70,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
               icon: ImageIcon(
-                const AssetImage('assets/cardiologyLogo.png'),
+                AssetImage('assets/cardiologyLogo.png'),
                 size: 100,
                 color: Theme.of(context).colorScheme.primary,
               ),
             )),
         leadingWidth: 80,
-        title: const Align(
+        title: Align(
           alignment: Alignment.centerLeft,
-          child: SizedBox(
-            width: 350,
+          child: Container(
+            width: 300,
+            height: 45,
             child: SearchBar(),
           ),
         ),
@@ -78,9 +88,9 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             width: 250,
             height: 80,
-            color: Colors.blue,
-            padding: const EdgeInsets.all(20.0),
-            child: const Align(
+            color: Colors.white,
+            padding: EdgeInsets.all(20.0),
+            child: Align(
                 alignment: Alignment.centerLeft,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -88,8 +98,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       Icon(
                         Icons.people,
                         size: 30,
+                        color: Colors.black,
                       ),
-                      Text("Jan Kowalski", style: TextStyle(fontSize: 20))
+                      Text("Jan Kowalski",
+                          style: TextStyle(fontSize: 20, color: Colors.black))
                     ])),
           )
         ], // default is 56
@@ -117,17 +129,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         setState(() {
                           if (_page != 'home') {
                             _page = 'home';
-                            debugPrint(_page);
+                            debugPrint('$_page');
                           }
                         });
                       },
                       icon: _page == 'home'
-                          ? const ImageIcon(
+                          ? ImageIcon(
                               AssetImage('assets/home_focused.png'),
                               size: 30,
                               color: Color.fromRGBO(22, 20, 35, 60),
                             )
-                          : const ImageIcon(
+                          : ImageIcon(
                               AssetImage('assets/home.png'),
                               size: 30,
                               color: Color.fromRGBO(22, 20, 35, 60),
@@ -197,75 +209,23 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                   ),
                 ),
-                Container(
-                  width: 100.0,
-                  height: 80.0,
-                  color: Colors.white,
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                        elevation: 0,
-                        hoverColor: Theme.of(context).colorScheme.secondary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0),
-                        )),
-                    onPressed: () {
-                      setState(() {
-                        if (_page != 'morfologia') {
-                          _page = 'morfologia';
-                          debugPrint(_page);
-                        }
-                      });
-                    },
-                    icon: _page == 'morfologia'
-                        ? const Icon(
-                            Icons.favorite,
-                          )
-                        : const Icon(
-                            Icons.abc,
-                          ),
-                  ),
-                ),
-                Container(
-                  width: 100.0,
-                  height: 80.0,
-                  color: Colors.white,
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                        elevation: 0,
-                        hoverColor: Theme.of(context).colorScheme.secondary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0),
-                        )),
-                    onPressed: () {
-                      setState(() {
-                        if (_page != 'gazometria') {
-                          _page = 'gazometria';
-                          debugPrint(_page);
-                        }
-                      });
-                    },
-                    icon: _page == 'gazometria'
-                        ? const Icon(
-                            Icons.message,
-                          )
-                        : const Icon(
-                            Icons.pan_tool,
-                          ),
-                  ),
-                ),
               ],
             )),
           ),
           if (_page == 'settings')
-            const Settings()
+            new Settings()
           else if (_page == 'home')
-            const HomePage()
-          else if (_page == 'morfologia')
-            const Morfologia()
-          else if (_page == 'gazometria')
-            const Gazometria()
+            new HomePage(
+              changeState: changeState,
+            )
           else if (_page == 'profile')
-            const Profile(),
+            new Profile()
+          else if (_page == 'patientProfile')
+            new PatientProfile(
+              changeState: changeState,
+            )
+          else if (_page == 'patientEditProfile')
+            new PatientEditProfile(),
         ],
       ),
     );
