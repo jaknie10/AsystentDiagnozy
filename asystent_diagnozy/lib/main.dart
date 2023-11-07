@@ -1,10 +1,10 @@
-import 'patientEditProfile.dart';
+import 'patient_edit_profile.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
 import 'profile.dart';
 import 'settings.dart';
-import 'partientProfile.dart';
+import 'partient_profile.dart';
 
 void main() => runApp(const MyApp());
 
@@ -70,15 +70,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
               icon: ImageIcon(
-                AssetImage('assets/cardiologyLogo.png'),
+                const AssetImage('assets/cardiologyLogo.png'),
                 size: 100,
                 color: Theme.of(context).colorScheme.primary,
               ),
             )),
         leadingWidth: 80,
-        title: Align(
+        title: const Align(
           alignment: Alignment.centerLeft,
-          child: Container(
+          child: SizedBox(
             width: 300,
             height: 45,
             child: SearchBar(),
@@ -89,8 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
             width: 250,
             height: 80,
             color: Colors.white,
-            padding: EdgeInsets.all(20.0),
-            child: Align(
+            padding: const EdgeInsets.all(20.0),
+            child: const Align(
                 alignment: Alignment.centerLeft,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -129,17 +129,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         setState(() {
                           if (_page != 'home') {
                             _page = 'home';
-                            debugPrint('$_page');
+                            debugPrint(_page);
                           }
                         });
                       },
                       icon: _page == 'home'
-                          ? ImageIcon(
+                          ? const ImageIcon(
                               AssetImage('assets/home_focused.png'),
                               size: 30,
                               color: Color.fromRGBO(22, 20, 35, 60),
                             )
-                          : ImageIcon(
+                          : const ImageIcon(
                               AssetImage('assets/home.png'),
                               size: 30,
                               color: Color.fromRGBO(22, 20, 35, 60),
@@ -213,19 +213,19 @@ class _MyHomePageState extends State<MyHomePage> {
             )),
           ),
           if (_page == 'settings')
-            new Settings()
+            const Settings()
           else if (_page == 'home')
-            new HomePage(
+            HomePage(
               changeState: changeState,
             )
           else if (_page == 'profile')
-            new Profile()
+            const Profile()
           else if (_page == 'patientProfile')
-            new PatientProfile(
+            PatientProfile(
               changeState: changeState,
             )
           else if (_page == 'patientEditProfile')
-            new PatientEditProfile(),
+            const PatientEditProfile(),
         ],
       ),
     );

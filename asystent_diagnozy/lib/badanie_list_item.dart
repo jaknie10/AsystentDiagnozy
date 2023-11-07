@@ -12,26 +12,23 @@ class BadanieListItem extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 60,
-        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
-        child:  Padding(
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            color: Colors.white),
+        child: const Padding(
           padding: EdgeInsets.all(12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
                 child: Row(
-                  children: [
-                  
-                  ],
+                  children: [],
                 ),
               ),
               Row(
-                children: [
-                  
-                ],
+                children: [],
               ),
-              
             ],
           ),
         ),
