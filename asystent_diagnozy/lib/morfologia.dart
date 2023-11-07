@@ -5,7 +5,9 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class Morfologia extends StatefulWidget {
-  const Morfologia({Key? key}) : super(key: key);
+  const Morfologia({Key? key, required this.patientId}) : super(key: key);
+
+  final int patientId;
 
   @override
   State<Morfologia> createState() => _MorfologiaState();
@@ -28,8 +30,9 @@ class _MorfologiaState extends State<Morfologia> {
   @override
   Widget build(BuildContext context) {
     readJson();
-    return Flexible(
-      child: Container(
+    return  
+    Scaffold(
+      body:Container(
         width: double.infinity,
         color: const Color.fromARGB(255, 255, 255, 255),
         child: Form(
@@ -60,12 +63,11 @@ class _MorfologiaState extends State<Morfologia> {
                     );
                   }
                 },
-                child: const Text('Analizuj'),
+                child: TextButton(onPressed: (){Navigator.pop(context, widget.patientId);}, child: Text("Powrót")),
               ),
             ],
           ),
         ),
-      ),
-    );
+    ),);
   }
 }

@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
 
-class PatientEditProfile extends StatelessWidget {
+class PatientEditProfile extends StatefulWidget {
   const PatientEditProfile({
-    super.key,
-  });
+    Key? key,
+    required this.patientId,
+  }) : super(key: key);
+
+  final int patientId;
+
+  @override
+  State<PatientEditProfile> createState() => _PatientEditProfileState();
+}
+
+class _PatientEditProfileState extends State<PatientEditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-    child: Container(
+
+    return Container(
       width: double.infinity,
-      color: Colors.cyan,
-      child: const Center(
-        child: Text('PatientEditProfile'),
+      color: Theme.of(context).colorScheme.background,
+      child: Center(
+        child: Column(
+          children: [
+            Text('PatientEditProfile'+" PatientId:"+widget.patientId.toString(), style: TextStyle(fontSize: 25, color: Colors.black,)),
+            TextButton(onPressed: (){Navigator.pop(context, widget.patientId);}, child: Text("Powrót"))
+          ],
+        ),
       ),
-    ),
     );
   }
 }

@@ -9,7 +9,7 @@ class Patient {
   final String gender;
   final bool showDateOfBirth;
   final String buttonText;
-  final String buttonAction;
+  final int id;
 
   Patient(
       {required this.imie,
@@ -18,13 +18,11 @@ class Patient {
       required this.gender,
       required this.showDateOfBirth,
       required this.buttonText,
-      required this.buttonAction});
+      required this.id,});
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.changeState}) : super(key: key);
-
-  final changeState;
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -54,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           gender: "M",
           showDateOfBirth: false,
           buttonText: "Profil",
-          buttonAction: "patientProfile"),
+          id: 1,),
       Patient(
           imie: "Adam",
           nazwisko: "Nowak",
@@ -62,7 +60,7 @@ class _HomePageState extends State<HomePage> {
           gender: "M",
           showDateOfBirth: false,
           buttonText: "Profil",
-          buttonAction: "patientProfile"),
+          id: 2),
       Patient(
           imie: "XYZ",
           nazwisko: "ABC",
@@ -70,7 +68,7 @@ class _HomePageState extends State<HomePage> {
           gender: "K",
           showDateOfBirth: false,
           buttonText: "Profil",
-          buttonAction: "patientProfile"),
+          id: 3),
       Patient(
           imie: "Jan",
           nazwisko: "Kowalski",
@@ -78,7 +76,7 @@ class _HomePageState extends State<HomePage> {
           gender: "M",
           showDateOfBirth: false,
           buttonText: "Profil",
-          buttonAction: "patientProfile"),
+          id: 4),
       Patient(
           imie: "Adam",
           nazwisko: "Nowak",
@@ -86,7 +84,7 @@ class _HomePageState extends State<HomePage> {
           gender: "M",
           showDateOfBirth: false,
           buttonText: "Profil",
-          buttonAction: "patientProfile"),
+          id: 5),
       Patient(
           imie: "XYZ",
           nazwisko: "ABC",
@@ -94,55 +92,7 @@ class _HomePageState extends State<HomePage> {
           gender: "K",
           showDateOfBirth: false,
           buttonText: "Profil",
-          buttonAction: "patientProfile"),
-      Patient(
-          imie: "Jan",
-          nazwisko: "Kowalski",
-          dataUrodzenia: DateTime.utc(2000, 10, 10),
-          gender: "M",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          buttonAction: "patientProfile"),
-      Patient(
-          imie: "Adam",
-          nazwisko: "Nowak",
-          dataUrodzenia: DateTime.utc(2023, 5, 10),
-          gender: "M",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          buttonAction: "patientProfile"),
-      Patient(
-          imie: "XYZ",
-          nazwisko: "ABC",
-          dataUrodzenia: DateTime.utc(2010, 10, 8),
-          gender: "K",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          buttonAction: "patientProfile"),
-      Patient(
-          imie: "Jan",
-          nazwisko: "Kowalski",
-          dataUrodzenia: DateTime.utc(2000, 10, 10),
-          gender: "M",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          buttonAction: "patientProfile"),
-      Patient(
-          imie: "Adam",
-          nazwisko: "Nowak",
-          dataUrodzenia: DateTime.utc(2023, 5, 10),
-          gender: "M",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          buttonAction: "patientProfile"),
-      Patient(
-          imie: "XYZ",
-          nazwisko: "ABC",
-          dataUrodzenia: DateTime.utc(2010, 10, 8),
-          gender: "K",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          buttonAction: "patientProfile"),
+          id: 6)
     ];
 
     return Flexible(
@@ -220,10 +170,9 @@ class _HomePageState extends State<HomePage> {
                     nazwisko: patientList[index].nazwisko,
                     dataUrodzenia: patientList[index].dataUrodzenia,
                     gender: patientList[index].gender,
-                    changeState: widget.changeState,
                     showDateOfBirth: patientList[index].showDateOfBirth,
                     buttonText: patientList[index].buttonText,
-                    buttonAction: patientList[index].buttonAction,
+                    id: patientList[index].id,
                   );
                 },
               ),

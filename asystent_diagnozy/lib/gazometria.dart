@@ -5,7 +5,9 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class Gazometria extends StatefulWidget {
-  const Gazometria({Key? key}) : super(key: key);
+ const Gazometria({Key? key, required this.patientId}) : super(key: key);
+
+  final int patientId;
 
   @override
   State<Gazometria> createState() => _GazometriaState();
@@ -28,8 +30,8 @@ class _GazometriaState extends State<Gazometria> {
   @override
   Widget build(BuildContext context) {
     readJson();
-    return Flexible(
-      child: Container(
+    return Scaffold( 
+      body:Container(
         width: double.infinity,
         color: const Color.fromARGB(255, 255, 255, 255),
         child: Form(
@@ -60,12 +62,11 @@ class _GazometriaState extends State<Gazometria> {
                     );
                   }
                 },
-                child: const Text('Analizuj'),
+                child: TextButton(onPressed: (){Navigator.pop(context, widget.patientId);}, child: Text("Powrót")),
               ),
             ],
           ),
         ),
-      ),
-    );
+    ),);
   }
 }

@@ -1,10 +1,8 @@
-import 'patient_edit_profile.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
 import 'profile.dart';
 import 'settings.dart';
-import 'patient_profile.dart';
 
 void main() => runApp(const MyApp());
 
@@ -205,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         : const ImageIcon(
                             AssetImage('assets/settings.png'),
                             size: 30,
-                            color: Color.fromRGBO(22, 20, 35, 60),
+                            color: Color.fromRGBO(175, 172, 195, 0.769),
                           ),
                   ),
                 ),
@@ -215,17 +213,9 @@ class _MyHomePageState extends State<MyHomePage> {
           if (_page == 'settings')
             const Settings()
           else if (_page == 'home')
-            HomePage(
-              changeState: changeState,
-            )
+            const HomePage()
           else if (_page == 'profile')
-            const Profile()
-          else if (_page == 'patientProfile')
-            PatientProfile(
-              changeState: changeState,
-            )
-          else if (_page == 'patientEditProfile')
-            const PatientEditProfile(),
+            const Profile(),
         ],
       ),
     );

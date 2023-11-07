@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'patient_profile.dart';
+
 class PatientListItem extends StatefulWidget {
   const PatientListItem({
     Key? key,
@@ -7,20 +9,18 @@ class PatientListItem extends StatefulWidget {
     required this.nazwisko,
     required this.dataUrodzenia,
     required this.gender,
-    required this.changeState,
     required this.showDateOfBirth,
     required this.buttonText,
-    required this.buttonAction,
+    required this.id,
   }) : super(key: key);
 
   final String imie;
   final String nazwisko;
   final DateTime dataUrodzenia;
   final String gender;
-  final changeState;
   final bool showDateOfBirth;
   final String buttonText;
-  final String buttonAction;
+  final int id;
 
   @override
   State<PatientListItem> createState() => _PatientListItemState();
@@ -103,8 +103,13 @@ class _PatientListItemState extends State<PatientListItem> {
                   SizedBox(
                     height: 40,
                     child: TextButton(
-                        onPressed: () {
-                          widget.changeState(widget.buttonAction);
+                        onPressed: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PatientProfile(patientId: widget.id),
+                            ),
+                          );
                         },
                         style: IconButton.styleFrom(
                           highlightColor: const Color.fromRGBO(0, 84, 210, 1),
