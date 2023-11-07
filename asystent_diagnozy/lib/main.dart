@@ -35,13 +35,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _page = 'home';
+  int _selectedIndex = 0;
+
+  final List pages = [
+    const HomePage(),
+    const Profile(),
+    const Settings(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     changeState(state) {
       setState(() {
-        _page = state;
+        _selectedIndex = state;
       });
     }
 
@@ -63,9 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     borderRadius: BorderRadius.circular(0),
                   )),
               onPressed: () {
-                setState(() {
-                  if (_page != 'home') _page = 'home';
-                });
+                changeState(0);
               },
               icon: ImageIcon(
                 const AssetImage('assets/cardiologyLogo.png'),
@@ -106,116 +110,56 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Row(
         children: <Widget>[
-          Container(
-            width: 80,
-            color: Colors.white,
-            child: SafeArea(
-                child: Column(
-              children: [
-                Container(
-                    width: 100.0,
-                    height: 80.0,
-                    color: Colors.white,
-                    child: IconButton(
-                      style: IconButton.styleFrom(
-                          elevation: 0,
-                          hoverColor: Theme.of(context).colorScheme.secondary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(0),
-                          )),
-                      onPressed: () {
-                        setState(() {
-                          if (_page != 'home') {
-                            _page = 'home';
-                            debugPrint(_page);
-                          }
-                        });
-                      },
-                      icon: _page == 'home'
-                          ? const ImageIcon(
-                              AssetImage('assets/home_focused.png'),
-                              size: 30,
-                              color: Color.fromRGBO(22, 20, 35, 60),
-                            )
-                          : const ImageIcon(
-                              AssetImage('assets/home.png'),
-                              size: 30,
-                              color: Color.fromRGBO(22, 20, 35, 60),
-                            ),
-                    )),
-                Container(
-                  width: 100.0,
-                  height: 80.0,
-                  color: Colors.white,
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                        elevation: 0,
-                        hoverColor: Theme.of(context).colorScheme.secondary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0),
-                        )),
-                    onPressed: () {
-                      setState(() {
-                        if (_page != 'profile') {
-                          _page = 'profile';
-                          debugPrint(_page);
-                        }
-                      });
-                    },
-                    icon: _page == 'profile'
-                        ? const ImageIcon(
-                            AssetImage('assets/profile_focused.png'),
-                            size: 30,
-                            color: Color.fromRGBO(22, 20, 35, 60),
-                          )
-                        : const ImageIcon(
-                            AssetImage('assets/profile.png'),
-                            size: 30,
-                            color: Color.fromRGBO(22, 20, 35, 60),
-                          ),
-                  ),
+          NavigationRail(
+            selectedIndex: _selectedIndex,
+            onDestinationSelected: (int index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            destinations: const <NavigationRailDestination>[
+              NavigationRailDestination(
+                icon: ImageIcon(
+                  AssetImage('assets/home.png'),
+                  size: 30,
+                  color: Color.fromRGBO(22, 20, 35, 60),
                 ),
-                Container(
-                  width: 100.0,
-                  height: 80.0,
-                  color: Colors.white,
-                  child: IconButton(
-                    style: IconButton.styleFrom(
-                        elevation: 0,
-                        hoverColor: Theme.of(context).colorScheme.secondary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0),
-                        )),
-                    onPressed: () {
-                      setState(() {
-                        if (_page != 'settings') {
-                          _page = 'settings';
-                          debugPrint(_page);
-                        }
-                      });
-                    },
-                    icon: _page == 'settings'
-                        ? const ImageIcon(
-                            AssetImage('assets/settings_focused.png'),
-                            size: 30,
-                            color: Color.fromRGBO(22, 20, 35, 60),
-                          )
-                        : const ImageIcon(
-                            AssetImage('assets/settings.png'),
-                            size: 30,
-                            color: Color.fromRGBO(175, 172, 195, 0.769),
-                          ),
-                  ),
+                selectedIcon: ImageIcon(
+                  AssetImage('assets/home_focused.png'),
+                  size: 30,
+                  color: Color.fromRGBO(22, 20, 35, 60),
                 ),
-              ],
-            )),
+                label: Text('Home'),
+              ),
+              NavigationRailDestination(
+                icon: ImageIcon(
+                  AssetImage('assets/profile.png'),
+                  size: 30,
+                  color: Color.fromRGBO(22, 20, 35, 60),
+                ),
+                selectedIcon: ImageIcon(
+                  AssetImage('assets/profile_focused.png'),
+                  size: 30,
+                  color: Color.fromRGBO(22, 20, 35, 60),
+                ),
+                label: Text('Profile'),
+              ),
+              NavigationRailDestination(
+                icon: ImageIcon(
+                  AssetImage('assets/settings.png'),
+                  size: 30,
+                  color: Color.fromRGBO(22, 20, 35, 60),
+                ),
+                selectedIcon: ImageIcon(
+                  AssetImage('assets/settings_focused.png'),
+                  size: 30,
+                  color: Color.fromRGBO(22, 20, 35, 60),
+                ),
+                label: Text('Settings'),
+              ),
+            ],
           ),
-          if (_page == 'settings')
-            const Settings()
-          else if (_page == 'home')
-            const HomePage()
-          else if (_page == 'profile')
-            const Profile(),
+          pages[_selectedIndex]
         ],
       ),
     );

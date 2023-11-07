@@ -13,18 +13,27 @@ class PatientEditProfile extends StatefulWidget {
 }
 
 class _PatientEditProfileState extends State<PatientEditProfile> {
-
   @override
   Widget build(BuildContext context) {
-
     return Container(
       width: double.infinity,
       color: Theme.of(context).colorScheme.background,
       child: Center(
         child: Column(
           children: [
-            Text('PatientEditProfile'+" PatientId:"+widget.patientId.toString(), style: TextStyle(fontSize: 25, color: Colors.black,)),
-            TextButton(onPressed: (){Navigator.pop(context, widget.patientId);}, child: Text("Powrót"))
+            Text(
+                'PatientEditProfile' +
+                    " PatientId:" +
+                    widget.patientId.toString(),
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.black,
+                )),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context, widget.patientId);
+                },
+                child: Text("Powrót"))
           ],
         ),
       ),
