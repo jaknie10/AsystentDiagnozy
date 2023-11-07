@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'profile.dart';
 import 'settings.dart';
-import 'partient_profile.dart';
+import 'patient_profile.dart';
 
 void main() => runApp(const MyApp());
 
