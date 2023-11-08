@@ -41,7 +41,7 @@ class _PatientProfileState extends State<PatientProfile> {
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: 
           Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+          padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0),
           child: Container(
             width: double.infinity,
             height: 60,
@@ -161,7 +161,7 @@ class _PatientProfileState extends State<PatientProfile> {
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Container(
             width: double.infinity,
-            height: 170,
+            height: 160,
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 color: Colors.white),
@@ -170,21 +170,20 @@ class _PatientProfileState extends State<PatientProfile> {
                 const Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 10.0),
+                      padding: EdgeInsets.only(left: 15.0, top: 10.0),
                       child: Text(
                         "Dodaj nowe badanie",
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 20),
                       ),
                     )),
                 Container(
                   height: 110,
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  padding: const EdgeInsets.only(top: 5.0),
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.0),
+                        padding: EdgeInsets.only(left: 5.0),
                         child: 
                         IconButton(
                           onPressed: () async {
@@ -203,7 +202,7 @@ class _PatientProfileState extends State<PatientProfile> {
                         )
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.0),
+                        padding: EdgeInsets.only(),
                         child: SizedBox(
                             width: 150,
                             child: IconButton(
@@ -232,7 +231,7 @@ class _PatientProfileState extends State<PatientProfile> {
         Align(
           alignment: Alignment.centerRight,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(right: 15.0, top: 10.0, bottom: 10.0),
             child: DecoratedBox(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -260,7 +259,35 @@ class _PatientProfileState extends State<PatientProfile> {
             ),
           ),
         ),
-        const BadanieListItem(),
+
+        Padding(
+      padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+      child: Container(
+        width: double.infinity,
+        height: 60,
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
+            color: Colors.white),
+        child: const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: Row(
+                  children: [],
+                ),
+              ),
+              Row(
+                children: [],
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+    
       ],
     ),
     );

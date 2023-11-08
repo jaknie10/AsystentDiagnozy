@@ -8,12 +8,11 @@ class BadanieListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+      padding: const EdgeInsets.only(left: 15.0, right: 15.0),
       child: Container(
         width: double.infinity,
         height: 60,
         decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
             color: Colors.white),
         child: const Padding(
           padding: EdgeInsets.all(12.0),
