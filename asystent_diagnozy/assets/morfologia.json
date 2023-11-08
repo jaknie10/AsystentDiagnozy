@@ -1,5 +1,5 @@
-[
-  {
+{
+  "BASO":{
     "pk": "BASO",
     "full_name": "bazofile",
     "unit": "G/l",
@@ -10,7 +10,7 @@
     "deficit_int": "",
     "surplus_int": "nowotwory mieloproliferacyjne, ostra białaczka bazofilowa, RZS"
   },
-  {
+  "EOS":{
     "pk": "EOS",
     "full_name": "eozynofile",
     "unit": "G/l",
@@ -21,7 +21,7 @@
     "deficit_int": "",
     "surplus_int": "rozpoznanie rożnicowe"
   },
-  {
+  "HCT":{
     "pk": "HCT",
     "full_name": "hematokryt",
     "unit": "%",
@@ -32,7 +32,7 @@
     "deficit_int": "niedokrwistości, stany przewodnienia",
     "surplus_int": "czerwienica prawdziwa, czerwienice wtórne i rzekome"
   },
-  {
+  "HGB":{
     "pk": "HGB",
     "full_name": "hemoglobina",
     "unit": "g/dl",
@@ -43,7 +43,7 @@
     "deficit_int": "niedokrwistości, stany przewodnienia",
     "surplus_int": "czerwienica prawdziwa, czerwienice wtórne i rzekome"
   },
-  {
+  "LYM":{
     "pk": "LYM",
     "full_name": "limfocyty",
     "unit": "G/l",
@@ -54,7 +54,7 @@
     "deficit_int": "układowe choroby tkanki łącznej, zakażenia wirusowe (m.in. HIV, SARS-CoV-2), sepsa, gruźlica, niewydolność nerek, wątroby, sarkoidoza",
     "surplus_int": "zakażenia wirusowe (mononukleoza zakaźna, świnka, odra, wirusowe zapalenie wątroby i in.), niektóre zakażenia bakteryjne (krztusiec, bruceloza, gruźlica, kiła i in.)"
   },
-  {
+  "MCH":{
     "pk": "MCH",
     "full_name": "średnia masa Hb w ertrocycie",
     "unit": "pg (10^-12 g)",
@@ -65,7 +65,7 @@
     "deficit_int": "hipochromia (najczęściej w niedokrwistości z niedoboru żelaza), zmniejszenie MCH i MCHC jest zwykle równoległe do zmniejszenia MCV (mikrocytozy)",
     "surplus_int": "sferocytoza wrodzona (w ­niedokrwistości autoimmuno­hemolitycznej), choroba zimnych aglutynin"
   },
-  {
+  "MCHC":{
     "pk": "MCHC",
     "full_name": "średnie stężenie Hb w erytrocytach",
     "unit": "g/dl",
@@ -76,7 +76,7 @@
     "deficit_int": "hipochromia (najczęściej w niedokrwistości z niedoboru żelaza), zmniejszenie MCH i MCHC jest zwykle równoległe do zmniejszenia MCV (mikrocytozy)",
     "surplus_int": "sferocytoza wrodzona (w ­niedokrwistości autoimmuno­hemolitycznej), choroba zimnych aglutynin"
   },
-  {
+  "MCV":{
     "pk": "MCV",
     "full_name": "średnia objętość erytrocytu",
     "unit": "fl (10^-15 l)",
@@ -87,7 +87,7 @@
     "deficit_int": "mikrocytoza (najczęściej w niedokrwistościach mikrocytowych)",
     "surplus_int": "makrocytoza (>100 fl, najczęściej w niedokrwistościach makrocytowych), retikulocytoza, rzekoma makro"
   },
-  {
+  "MONO":{
     "pk": "MONO",
     "full_name": "monocyty",
     "unit": "G/l",
@@ -98,7 +98,7 @@
     "deficit_int": "",
     "surplus_int": "zakażenia i faza zdrowienia po ostrym zakażeniu, choroby zapalne i autoimmunologiczne (nieswoiste zapalenia jelit, alkoholowa choroba wątroby"
   },
-  {
+  "MPV":{
     "pk": "MPV",
     "full_name": "średnia objętość płytki",
     "unit": "fl",
@@ -109,7 +109,7 @@
     "deficit_int": "wskazuje na upośledzoną trombopoezę",
     "surplus_int": "przemawia za utratą lub destrukcją płytek, niektórymi małopłytkowościami wrodzonymi lub zespołem mielodysplastycznym"
   },
-  {
+  "NEUT":{
     "pk": "NEUT",
     "full_name": "neutrofile",
     "unit": "G/l",
@@ -120,7 +120,7 @@
     "deficit_int": "niedokrwistość aplastyczna, ostre białaczki, zespoły mielodysplastyczne, włóknienie szpiku, po zakażeniach (zwłaszcza wirusowych i sepsie bakteryjnej)",
     "surplus_int": "ostre zakażenia bakteryjne, niektóre zakażenia wirusowe, nowotwory mieloproliferacyjne, rzadziej chłoniak Hodgkina lub nowotwory lite, nadmiar glikokortykosteroidów"
   },
-  {
+  "PLT":{
     "pk": "PLT",
     "full_name": "płytki krwi",
     "unit": "G/l",
@@ -131,7 +131,7 @@
     "deficit_int": "małopłytkowość",
     "surplus_int": "nadpłytkowość"
   },
-  {
+  "RBC":{
     "pk": "RBC",
     "full_name": "erytrocyty",
     "unit": "T/l",
@@ -142,7 +142,7 @@
     "deficit_int": "niedokrwistości, stany przewodnienia",
     "surplus_int": "czerwienica prawdziwa, czerwienice wtórne i rzekome, talasemia"
   },
-  {
+  "RDW":{
     "pk": "RDW",
     "full_name": "współczynnik zmienności rozkładu objętości erytrocytów",
     "unit": "%",
@@ -153,7 +153,7 @@
     "deficit_int": "",
     "surplus_int": "niedokrwistości niedoborowe, stan po przetoczeniu erytrocytów"
   },
-  {
+  "RET":{
     "pk": "RET",
     "full_name": "retikulocyty",
     "unit": "‰ (promil)",
@@ -164,7 +164,7 @@
     "deficit_int": "ciężkie przypadki niedokrwistości spowodowanych zmniejszonym wytwarzaniem erytrocytów w szpiku, szczególnie niedokrwistości aplastyczne i przełomy aplastyczne w niedokrwistościach hemolitycznych",
     "surplus_int": "niedokrwistości hemolityczne, ostre pokrwotoczne, regeneracja po leczeniu (żelazem, kwasem foliowym, witaminą B12, lekami stymulującymi erytropoezę"
   },
-  {
+  "WBC":{
     "pk": "WBC",
     "full_name": "leukocyty (całkowita liczba leukocytów we krwi)",
     "unit": "G/l",
@@ -175,4 +175,4 @@
     "deficit_int": "zmniejszenie największych subpopulacji leukocytów – neutrofilów lub limfocytów",
     "surplus_int": "zwiększenia subpopulacji leukocytów (→rozdz. 27.1) lub pojawienie się komórek niewystępujących prawidłowo (młodych postaci linii neutrofilów, komórek białaczkowych lub chłoniakowych)"
   }
-]
+}
