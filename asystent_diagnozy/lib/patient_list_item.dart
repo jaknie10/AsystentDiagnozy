@@ -107,7 +107,8 @@ class _PatientListItemState extends State<PatientListItem> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PatientProfile(patientId: widget.id),
+                              builder: (context) =>
+                                  PatientProfile(patientId: widget.id),
                             ),
                           );
                         },
