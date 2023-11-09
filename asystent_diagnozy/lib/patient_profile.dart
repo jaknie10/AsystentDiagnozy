@@ -80,7 +80,8 @@ class _PatientProfileState extends State<PatientProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: 
+      Column(
         children: [
           //tymczasowy powrót
           Padding(

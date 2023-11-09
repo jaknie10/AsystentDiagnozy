@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List pages = [
     const HomePage(),
-    const Profile(),
+    const Profile(doctorId: 1,),
     const Settings(),
   ];
 
