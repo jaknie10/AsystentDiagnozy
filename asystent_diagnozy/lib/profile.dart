@@ -57,7 +57,7 @@ class _ProfileState extends State<Profile> {
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Padding(
-                                  padding: EdgeInsets.all(10.0),
+                                  padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 20.0),
                                   child: Text(
                                     "Statystyki",
                                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -66,12 +66,13 @@ class _ProfileState extends State<Profile> {
                             Row(
                               children: [
                                 Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.only(bottom: 40.0, left: 10.0, right: 10.0, top: 10.0),
                                       child: Row(
                                         children: [
-                                          Text("Wykonanych badań:", style: TextStyle(fontSize: 15),),
+                                          Text("Wykonanych badań:", style: TextStyle(fontSize: 15, color: Color.fromRGBO(99, 99, 99, 1.0)),),
                                           
                                       ],),
                                     ),
@@ -79,7 +80,7 @@ class _ProfileState extends State<Profile> {
                                       padding: EdgeInsets.only(bottom: 40.0, left: 10.0, right: 10.0),
                                       child: Row(
                                         children: [
-                                          Text("Najczęściej wykonywane \nbadanie:", style: TextStyle(fontSize: 15),),
+                                          Text("Najczęściej wykonywane \nbadanie:", style: TextStyle(fontSize: 15, color: Color.fromRGBO(99, 99, 99, 1.0)),),
                                           
                                       ],),
                                     ),
@@ -93,7 +94,9 @@ class _ProfileState extends State<Profile> {
                                     ),
                                   ],
                                 ),
-                                Column(children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                   Padding(
                                             padding: EdgeInsets.only(bottom: 40.0, left: 10.0, right: 10.0, top: 10.0),
                                             child: Text("155", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
@@ -134,7 +137,7 @@ class _ProfileState extends State<Profile> {
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Padding(
-                                  padding: EdgeInsets.all(10.0),
+                                  padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 20.0),
                                   child: Text(
                                     "Podstawowe informacje",
                                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -144,21 +147,23 @@ class _ProfileState extends State<Profile> {
                               Row(
                                 children: [
                                   Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 40.0, left: 10.0, right: 10.0, top: 10.0),
-                                        child: Text("Imię i nazwisko:", style: TextStyle(fontSize: 15,),),
+                                        child: Text("Imię i nazwisko:", style: TextStyle(fontSize: 15, color: Color.fromRGBO(99, 99, 99, 1.0)),),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 40.0, left: 10.0, right: 10.0, top: 10.0),
-                                        child: Text("Data urodzenia:", style: TextStyle(fontSize: 15),),
+                                        child: Text("Data urodzenia:", style: TextStyle(fontSize: 15, color: Color.fromRGBO(99, 99, 99, 1.0)),),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 40.0, left: 10.0, right: 10.0, top: 10.0 ),
-                                        child: Text("Adres email:", style: TextStyle(fontSize: 15),),
+                                        child: Text("Adres email:", style: TextStyle(fontSize: 15, color: Color.fromRGBO(99, 99, 99, 1.0)),),
                                       ),    
                                   ],),
                                   Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                         Padding(
                                           padding: EdgeInsets.only(bottom: 40.0, left: 10.0, right: 10.0, top: 10.0),
@@ -174,18 +179,20 @@ class _ProfileState extends State<Profile> {
                                         ),
                                       ],),
                                   Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 40.0, left: 10.0, right: 10.0, top: 10.0),
-                                        child: Text("Numer PWZ:", style: TextStyle(fontSize: 15),),
+                                        child: Text("Numer PWZ:", style: TextStyle(fontSize: 15, color: Color.fromRGBO(99, 99, 99, 1.0)),),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 40.0, left: 10.0, right: 10.0, top: 10.0),
-                                        child: Text("Numer PESEL:", style: TextStyle(fontSize: 15),),
+                                        child: Text("Numer PESEL:", style: TextStyle(fontSize: 15, color: Color.fromRGBO(99, 99, 99, 1.0)),),
                                       ),
                                         
                                   ],),
                                   Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                         Padding(
                                           padding: EdgeInsets.only(bottom: 40.0, left: 10.0, right: 10.0, top: 10.0),
@@ -219,12 +226,13 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                               child: Container(
-                                width: 100,
+                                width: 110,
                                 child: Text(
                                   "Edytuj profil",
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 15,),
                                       textAlign: TextAlign.center,
+                                      
                                 ),
                               )),
                             ),
