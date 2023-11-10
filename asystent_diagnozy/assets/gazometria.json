@@ -1,58 +1,58 @@
-[
-  {
+{
+  "BE": {
     "pk": "BE",
     "full_name": "nadmiar zasad we krwi",
     "unit": "mEq/l",
     "low": -2.3,
     "high": 2.3
   },
-  {
+  "HCO3akt":{
     "pk": "HCO3akt",
     "full_name": "aktualne stężenie wodorowęglanów w osoczu",
     "unit": "mmol/l",
     "low": 21,
     "high": 27
   },
-  {
+  "HCO3std":{
     "pk": "HCO3std",
     "full_name": "standardowe stężenie wodorowęglanów",
     "unit": "mmol/l",
     "low": 21,
     "high": 25
   },
-  {
+  "PaCO2":{
     "pk": "PaCO2",
     "full_name": "ciśnienie parcjalne dwutlenku węgla we krwi tętniczej",
     "unit": "mm Hg",
     "low": 35,
     "high": 45
   },
-  {
+  "PaO2":{
     "pk": "PaO2",
     "full_name": "ciśnienie parcjalne tlenu we krwi tętniczej",
     "unit": "mm Hg",
     "low": 75,
     "high": 100
   },
-  {
+  "SaO2":{
     "pk": "SaO2",
     "full_name": "wysycenie tlenem hemoglobiny krwi tętniczej",
     "unit": "%",
     "low": 95,
     "high": 98
   },
-  {
+  "ctCO2":{
     "pk": "ctCO2",
     "full_name": "całkowita zawartość dwutlenku węgla w osoczu",
     "unit": "mmol/l",
     "low": 22,
     "high": 28
   },
-  {
+  "pH":{
     "pk": "pH",
     "full_name": "ujemny logarytm dziesiętny ze stężenia jonów wodorowych",
     "unit": "",
     "low": 7.35,
     "high": 7.45
   }
-]
+}
