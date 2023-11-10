@@ -35,15 +35,16 @@ class _MorfologiaState extends State<Morfologia> {
     readJson();
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context, widget.patientId);
-              },
-              child: const Text("Powrót")),
+          BackButton(
+            onPressed: () {
+              Navigator.pop(context, widget.patientId);
+            },
+            // child: const Text("Powrót")),
+          ),
           Expanded(
             child: Container(
-              width: double.infinity,
               color: const Color.fromARGB(255, 255, 255, 255),
               child: Form(
                 key: _formKey,
