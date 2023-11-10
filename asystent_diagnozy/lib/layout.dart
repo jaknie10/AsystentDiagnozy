@@ -18,14 +18,6 @@ class _LayoutState extends State<Layout> {
   var keyProfile = GlobalKey<NavigatorState>();
   var keySettings = GlobalKey<NavigatorState>();
 
-  // final List pages = [
-  //   const HomePage(),
-  //   const Profile(
-  //     doctorId: 1,
-  //   ),
-  //   const Settings(),
-  // ];
-
   @override
   Widget build(BuildContext context) {
     changeState(state) {

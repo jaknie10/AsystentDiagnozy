@@ -7,14 +7,12 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-    child: Container(
+    return Container(
       width: double.infinity,
       color: const Color.fromARGB(255, 21, 0, 255),
       child: const Center(
         child: Text('Settings'),
       ),
-    ),
     );
   }
 }
