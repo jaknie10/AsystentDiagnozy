@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app.dart';
+import 'layout.dart';
 
 void main() => runApp(const MyApp());
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             background: const Color.fromRGBO(238, 238, 238, 1)),
         fontFamily: 'Montserrat',
       ),
-      home: const MyHomePage(),
+      home: const Layout(),
     );
   }
 }

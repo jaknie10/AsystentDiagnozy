@@ -4,14 +4,14 @@ import 'home.dart';
 import 'profile.dart';
 import 'settings.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class Layout extends StatefulWidget {
+  const Layout({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Layout> createState() => _LayoutState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _LayoutState extends State<Layout> {
   int _selectedIndex = 0;
 
   final List pages = [
@@ -21,6 +21,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
     const Settings(),
   ];
+
+  var keyHome = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +140,19 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-          pages[_selectedIndex]
+          Expanded(
+            child: WillPopScope(
+              onWillPop: () async => !await keyHome.currentState!.maybePop(),
+              child: Navigator(
+                key: keyHome,
+                onGenerateRoute: (routeSettings) {
+                  return MaterialPageRoute(
+                    builder: (context) => pages[_selectedIndex],
+                  );
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );

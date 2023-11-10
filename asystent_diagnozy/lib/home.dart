@@ -101,101 +101,85 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         width: double.infinity,
         color: Theme.of(context).colorScheme.background,
-        child: MaterialApp(
-          theme: ThemeData(
-            useMaterial3: true,
-            colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.blue,
-                primary: const Color.fromRGBO(0, 99, 248, 1.0),
-                secondary: const Color.fromRGBO(0, 99, 248, 0.1),
-                background: const Color.fromRGBO(238, 238, 238, 1)),
-            fontFamily: 'Montserrat',
-          ),
-          home: Scaffold(
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
               children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: SizedBox(
-                        height: 40,
-                        width: 220,
-                        child: TextButton(
-                            onPressed: () {},
-                            style: IconButton.styleFrom(
-                              highlightColor:
-                                  const Color.fromRGBO(0, 84, 210, 1),
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.primary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            child: const Text(
-                              "Dodaj nowego pacjenta",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                            )),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: SizedBox(
+                    height: 40,
+                    width: 220,
+                    child: TextButton(
+                        onPressed: () {},
+                        style: IconButton.styleFrom(
+                          highlightColor: const Color.fromRGBO(0, 84, 210, 1),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        child: const Text(
+                          "Dodaj nowego pacjenta",
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        )),
+                  ),
+                ),
+                const SizedBox(width: 200, height: 40, child: SearchBar()),
+                const Spacer(),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 40.0),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50),
                       ),
-                    ),
-                    const SizedBox(width: 200, height: 40, child: SearchBar()),
-                    const Spacer(),
-                    Align(
-                      alignment: Alignment.centerRight,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 40.0),
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                                  dropdownColor: Colors.white,
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      color: Color.fromRGBO(22, 20, 35, 1.0)),
-                                  elevation: 0,
-                                  value: sortingType,
-                                  items: sortingOptions,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      sortingType = val.toString();
-                                    });
-                                    debugPrint(sortingType);
-                                  }),
-                            ),
-                          ),
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                              dropdownColor: Colors.white,
+                              style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Color.fromRGBO(22, 20, 35, 1.0)),
+                              elevation: 0,
+                              value: sortingType,
+                              items: sortingOptions,
+                              onChanged: (val) {
+                                setState(() {
+                                  sortingType = val.toString();
+                                });
+                                debugPrint(sortingType);
+                              }),
                         ),
                       ),
                     ),
-                  ],
-                ),
-                Flexible(
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: patientList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return PatientListItem(
-                        imie: patientList[index].imie,
-                        nazwisko: patientList[index].nazwisko,
-                        dataUrodzenia: patientList[index].dataUrodzenia,
-                        gender: patientList[index].gender,
-                        showDateOfBirth: patientList[index].showDateOfBirth,
-                        buttonText: patientList[index].buttonText,
-                        id: patientList[index].id,
-                      );
-                    },
                   ),
                 ),
               ],
             ),
-          ),
+            Flexible(
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: patientList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return PatientListItem(
+                    imie: patientList[index].imie,
+                    nazwisko: patientList[index].nazwisko,
+                    dataUrodzenia: patientList[index].dataUrodzenia,
+                    gender: patientList[index].gender,
+                    showDateOfBirth: patientList[index].showDateOfBirth,
+                    buttonText: patientList[index].buttonText,
+                    id: patientList[index].id,
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
