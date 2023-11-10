@@ -14,15 +14,17 @@ class Layout extends StatefulWidget {
 class _LayoutState extends State<Layout> {
   int _selectedIndex = 0;
 
-  final List pages = [
-    const HomePage(),
-    const Profile(
-      doctorId: 1,
-    ),
-    const Settings(),
-  ];
-
   var keyHome = GlobalKey<NavigatorState>();
+  var keyProfile = GlobalKey<NavigatorState>();
+  var keySettings = GlobalKey<NavigatorState>();
+
+  // final List pages = [
+  //   const HomePage(),
+  //   const Profile(
+  //     doctorId: 1,
+  //   ),
+  //   const Settings(),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,16 @@ class _LayoutState extends State<Layout> {
         _selectedIndex = state;
       });
     }
+
+    List<Map<String, dynamic>> pages = [
+      {'name': 'Home', 'page': const HomePage(), 'key': keyHome},
+      {
+        'name': 'Profile',
+        'page': const Profile(doctorId: 1),
+        'key': keyProfile
+      },
+      {'name': 'Settings', 'page': const Settings(), 'key': keySettings},
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -142,12 +154,13 @@ class _LayoutState extends State<Layout> {
           ),
           Expanded(
             child: WillPopScope(
-              onWillPop: () async => !await keyHome.currentState!.maybePop(),
+              onWillPop: () async =>
+                  !await pages[_selectedIndex]['key'].currentState!.maybePop(),
               child: Navigator(
-                key: keyHome,
+                key: pages[_selectedIndex]['key'],
                 onGenerateRoute: (routeSettings) {
                   return MaterialPageRoute(
-                    builder: (context) => pages[_selectedIndex],
+                    builder: (context) => pages[_selectedIndex]['page'],
                   );
                 },
               ),
