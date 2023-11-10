@@ -45,7 +45,7 @@ class _PatientListItemState extends State<PatientListItem> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
                 child: Row(
                   children: [
                     Text(
@@ -76,7 +76,7 @@ class _PatientListItemState extends State<PatientListItem> {
                                     widget.dataUrodzenia
                                         .toString()
                                         .substring(0, 10),
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: const TextStyle(fontSize: 18)),
                               )
                             : const Text(""),
                         widget.gender == "M"
@@ -93,7 +93,7 @@ class _PatientListItemState extends State<PatientListItem> {
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Text(
                               age.toString(),
-                              style: const TextStyle(fontSize: 15),
+                              style: const TextStyle(fontSize: 18),
                             ),
                           ),
                         )

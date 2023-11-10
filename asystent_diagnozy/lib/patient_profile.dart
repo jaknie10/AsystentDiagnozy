@@ -133,13 +133,13 @@ class _PatientProfileState extends State<PatientProfile> {
                             Text(
                               "Jan",
                               style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             const Text(" "),
                             Text(
                               "Kowalski",
                               style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -155,7 +155,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 40.0),
                                   child: Text("10-11-2023",
-                                      style: const TextStyle(fontSize: 15)),
+                                      style: const TextStyle(fontSize: 18)),
                                 ),
                                 "M" == "M"
                                     ? const ImageIcon(
@@ -171,7 +171,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                         horizontal: 10.0),
                                     child: Text(
                                       "23",
-                                      style: const TextStyle(fontSize: 15),
+                                      style: const TextStyle(fontSize: 18),
                                     ),
                                   ),
                                 )
@@ -217,6 +217,34 @@ class _PatientProfileState extends State<PatientProfile> {
             ),
           ),
           Padding(
+            padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 10.0),
+            child: Container(
+              width: double.infinity,
+              height: 130,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  color: Colors.white),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Opis pacjenta:", style: TextStyle(fontSize: 20),),
+                    Container(
+                      height: 60,
+                      child: ListView(
+                        padding: EdgeInsets.symmetric(vertical: 5.0),
+                        scrollDirection: Axis.vertical,
+                        children: [
+                      
+                      Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis risus, et tincidunt sapien. Pellentesque mattis, sem sit amet hendrerit aliquet, mauris turpis hendrerit nisi, id iaculis augue erat eget neque. Integer tempor, nibh quis malesuada semper, justo risus tempus eros, eget fringilla elit augue et arcu. ")
+                                    ],),
+                    ),
+                ],)
+              )
+            )
+          ),
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Container(
               width: double.infinity,
@@ -236,8 +264,8 @@ class _PatientProfileState extends State<PatientProfile> {
                         ),
                       )),
                   Container(
-                    height: 110,
-                    padding: const EdgeInsets.only(top: 5.0),
+                    height: 120,
+                    padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
