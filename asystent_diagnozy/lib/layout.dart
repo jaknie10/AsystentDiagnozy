@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'home.dart';
-import 'profile.dart';
-import 'settings.dart';
+import 'pages/home/home.dart';
+import 'pages/profile/profile.dart';
+import 'pages/settings/settings.dart';
 
 class Layout extends StatefulWidget {
   const Layout({super.key});

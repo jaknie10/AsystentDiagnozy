@@ -1,9 +1,9 @@
-import 'package:asystent_diagnozy/badanie_list_item.dart';
-import 'package:asystent_diagnozy/morfologia.dart';
 import 'package:flutter/material.dart';
 
+import 'badanie_list_item.dart';
+import '../../badania/morfologia.dart';
 import 'patient_edit_profile.dart';
-import 'gazometria.dart';
+import '../../badania/gazometria.dart';
 
 class PatientProfile extends StatefulWidget {
   const PatientProfile({Key? key, required this.patientId}) : super(key: key);
@@ -42,74 +42,78 @@ class _PatientProfileState extends State<PatientProfile> {
   ];
 
   final List<Badanie> badanieList = [
-      Badanie(
-          typBadania: "Morfologia",
-          dataBadania: DateTime(2023,11,09),
-          badanieId: 1,),
-      Badanie(
-          typBadania: "Gazometria",
-          dataBadania: DateTime(2020,11,09),
-          badanieId: 2,),
-      Badanie(
-          typBadania: "Gazometria",
-          dataBadania: DateTime(2023,11,09),
-          badanieId: 3,),
-      Badanie(
-          typBadania: "Morfologia",
-          dataBadania: DateTime(2025,11,09),
-          badanieId: 4,),
-      Badanie(
-          typBadania: "Morfologia",
-          dataBadania: DateTime(2027,11,09),
-          badanieId: 5,),
-      Badanie(
-          typBadania: "Morfologia",
-          dataBadania: DateTime(2025,11,09),
-          badanieId: 6,),
-      Badanie(
-          typBadania: "Gazometria",
-          dataBadania: DateTime(2027,11,09),
-          badanieId: 7,),
-      Badanie(
-          typBadania: "Gazometria",
-          dataBadania: DateTime(2025,11,09),
-          badanieId: 8,),
-
+    Badanie(
+      typBadania: "Morfologia",
+      dataBadania: DateTime(2023, 11, 09),
+      badanieId: 1,
+    ),
+    Badanie(
+      typBadania: "Gazometria",
+      dataBadania: DateTime(2020, 11, 09),
+      badanieId: 2,
+    ),
+    Badanie(
+      typBadania: "Gazometria",
+      dataBadania: DateTime(2023, 11, 09),
+      badanieId: 3,
+    ),
+    Badanie(
+      typBadania: "Morfologia",
+      dataBadania: DateTime(2025, 11, 09),
+      badanieId: 4,
+    ),
+    Badanie(
+      typBadania: "Morfologia",
+      dataBadania: DateTime(2027, 11, 09),
+      badanieId: 5,
+    ),
+    Badanie(
+      typBadania: "Morfologia",
+      dataBadania: DateTime(2025, 11, 09),
+      badanieId: 6,
+    ),
+    Badanie(
+      typBadania: "Gazometria",
+      dataBadania: DateTime(2027, 11, 09),
+      badanieId: 7,
+    ),
+    Badanie(
+      typBadania: "Gazometria",
+      dataBadania: DateTime(2025, 11, 09),
+      badanieId: 8,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: 
-      Column(
+      body: Column(
         children: [
           //tymczasowy powrót
           Padding(
             padding: const EdgeInsets.only(left: 15.0, top: 15.0, bottom: 0.0),
-            child: Align( 
+            child: Align(
               alignment: Alignment.centerLeft,
-              child:SizedBox(
-              height: 40,
-              width: 100,
-              child: TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: IconButton.styleFrom(
-                    highlightColor:
-                        const Color.fromRGBO(0, 84, 210, 1),
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+              child: SizedBox(
+                height: 40,
+                width: 100,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: IconButton.styleFrom(
+                      highlightColor: const Color.fromRGBO(0, 84, 210, 1),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
                     ),
-                  ),
-                  child: Text(
-                    "Powrót",
-                    style: const TextStyle(
-                        color: Colors.white, fontSize: 15),
-                  )),
-            ),),
+                    child: Text(
+                      "Powrót",
+                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                    )),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -207,7 +211,6 @@ class _PatientProfileState extends State<PatientProfile> {
                                       color: Colors.white, fontSize: 15),
                                 )),
                           ),
-                          
                         ],
                       ),
                     ],
@@ -217,33 +220,36 @@ class _PatientProfileState extends State<PatientProfile> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 10.0),
-            child: Container(
-              width: double.infinity,
-              height: 130,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  color: Colors.white),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Opis pacjenta:", style: TextStyle(fontSize: 20),),
-                    Container(
-                      height: 60,
-                      child: ListView(
-                        padding: EdgeInsets.symmetric(vertical: 5.0),
-                        scrollDirection: Axis.vertical,
+              padding:
+                  const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 10.0),
+              child: Container(
+                  width: double.infinity,
+                  height: 130,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      color: Colors.white),
+                  child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                      
-                      Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis risus, et tincidunt sapien. Pellentesque mattis, sem sit amet hendrerit aliquet, mauris turpis hendrerit nisi, id iaculis augue erat eget neque. Integer tempor, nibh quis malesuada semper, justo risus tempus eros, eget fringilla elit augue et arcu. ")
-                                    ],),
-                    ),
-                ],)
-              )
-            )
-          ),
+                          Text(
+                            "Opis pacjenta:",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Container(
+                            height: 60,
+                            child: ListView(
+                              padding: EdgeInsets.symmetric(vertical: 5.0),
+                              scrollDirection: Axis.vertical,
+                              children: [
+                                Text(
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis risus, et tincidunt sapien. Pellentesque mattis, sem sit amet hendrerit aliquet, mauris turpis hendrerit nisi, id iaculis augue erat eget neque. Integer tempor, nibh quis malesuada semper, justo risus tempus eros, eget fringilla elit augue et arcu. ")
+                              ],
+                            ),
+                          ),
+                        ],
+                      )))),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Container(
@@ -354,73 +360,120 @@ class _PatientProfileState extends State<PatientProfile> {
           Padding(
             padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 4.0),
             child: Container(
-                  width: double.infinity,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),      
+              width: double.infinity,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5.0),
+                    topRight: Radius.circular(5.0)),
               ),
-                  child: 
-            Row(
-            crossAxisAlignment:CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration( border: Border( right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),),),
-                  child: 
-                  IconButton(
-                    onPressed: (){
-                    },
-                    icon: Image(
-                      image: AssetImage('assets/badanie_logo.png'),                
-                    ),
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                            ),)),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration( border: Border( right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),),),
-                  child: Center(child: Text("Typ badania", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),)))),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration( border: Border( right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),),),
-                  child: Center(child: Text("Data badania", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold,  fontSize: 15),)))),
-              Expanded(
-                flex: 6,
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration( border: Border( right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),),),
-                  child: Center())),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  height: 60,
-                  child: Center(
-                    child: SizedBox(
-                      height: 40,
-                      child: Container(),
-                    ),))),
-            ],),),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                      flex: 1,
+                      child: Container(
+                        height: 60,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            right: BorderSide(
+                                color: Theme.of(context).colorScheme.background,
+                                style: BorderStyle.solid,
+                                width: 4),
+                          ),
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Image(
+                            image: AssetImage('assets/badanie_logo.png'),
+                          ),
+                          highlightColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                        ),
+                      )),
+                  Expanded(
+                      flex: 2,
+                      child: Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              right: BorderSide(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  style: BorderStyle.solid,
+                                  width: 4),
+                            ),
+                          ),
+                          child: Center(
+                              child: Text(
+                            "Typ badania",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 15),
+                          )))),
+                  Expanded(
+                      flex: 2,
+                      child: Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              right: BorderSide(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  style: BorderStyle.solid,
+                                  width: 4),
+                            ),
+                          ),
+                          child: Center(
+                              child: Text(
+                            "Data badania",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 15),
+                          )))),
+                  Expanded(
+                      flex: 6,
+                      child: Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              right: BorderSide(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  style: BorderStyle.solid,
+                                  width: 4),
+                            ),
+                          ),
+                          child: Center())),
+                  Expanded(
+                      flex: 2,
+                      child: Container(
+                          height: 60,
+                          child: Center(
+                            child: SizedBox(
+                              height: 40,
+                              child: Container(),
+                            ),
+                          ))),
+                ],
+              ),
+            ),
           ),
-          Flexible(child: 
-          ListView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: badanieList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return BadanieListItem(
-                    typBadania: badanieList[index].typBadania,
-                    dataBadania: badanieList[index].dataBadania,
-                    badanieId: badanieList[index].badanieId,
-                  );
-                },
-              ),),
+          Flexible(
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: badanieList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return BadanieListItem(
+                  typBadania: badanieList[index].typBadania,
+                  dataBadania: badanieList[index].dataBadania,
+                  badanieId: badanieList[index].badanieId,
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

@@ -113,14 +113,13 @@ class _HomePageState extends State<HomePage> {
                   width: 220,
                   child: TextButton(
                       onPressed: () async {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const AddNewPatient(),
-                            ),
-                          );
-                        },
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AddNewPatient(),
+                          ),
+                        );
+                      },
                       style: IconButton.styleFrom(
                         highlightColor: const Color.fromRGBO(0, 84, 210, 1),
                         backgroundColor: Theme.of(context).colorScheme.primary,
