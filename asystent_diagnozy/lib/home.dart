@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'patient_list_item.dart';
+import 'addNewPatient.dart';
 
 class Patient {
   final String imie;
@@ -111,7 +112,15 @@ class _HomePageState extends State<HomePage> {
                   height: 40,
                   width: 220,
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const AddNewPatient(),
+                            ),
+                          );
+                        },
                       style: IconButton.styleFrom(
                         highlightColor: const Color.fromRGBO(0, 84, 210, 1),
                         backgroundColor: Theme.of(context).colorScheme.primary,
