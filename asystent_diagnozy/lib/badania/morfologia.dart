@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'morfologia_results.dart';
-
 import 'package:flutter/services.dart';
+
+import 'morfologia_results.dart';
 
 class Morfologia extends StatefulWidget {
   const Morfologia({Key? key, required this.patientId}) : super(key: key);
@@ -22,8 +22,7 @@ class _MorfologiaState extends State<Morfologia> {
   var results = {};
 
   Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/morfologia.json');
+    final String response = await rootBundle.loadString('assets/morfologia.json');
     final data = await json.decode(response);
     setState(() {
       items = data;
@@ -33,42 +32,57 @@ class _MorfologiaState extends State<Morfologia> {
   @override
   Widget build(BuildContext context) {
     readJson();
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return SingleChildScrollView(
+      child: Column(
         children: [
           BackButton(
             onPressed: () {
               Navigator.pop(context, widget.patientId);
             },
-            // child: const Text("Powrót")),
           ),
-          Expanded(
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Container(
               color: const Color.fromARGB(255, 255, 255, 255),
               child: Form(
                 key: _formKey,
-                child: ListView(
+                child: Column(
                   children: [
-                    for (var item in items.keys)
-                      TextFormField(
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: InputDecoration(
-                          labelText: item,
+                    for (var entry in items.entries)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: 200,
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                            decoration: InputDecoration(
+                                border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
+                                labelText: entry.value['short'],
+                                suffixIcon: Padding(
+                                  padding: const EdgeInsets.only(right: 5),
+                                  child: Text(
+                                    entry.value['unit'],
+                                    style: const TextStyle(
+                                      color: Color.fromARGB(111, 0, 0, 0),
+                                    ),
+                                  ),
+                                ),
+                                suffixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
+                                isDense: true),
+
+                            // initialValue: '0',
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Podaj prawidłową wartość';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              results[entry.key] = double.parse(value!);
+                            },
+                          ),
                         ),
-                        initialValue: '0',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Podaj prawidłową wartość';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          results[item] = double.parse(value!);
-                        },
                       ),
                   ],
                 ),
@@ -79,7 +93,6 @@ class _MorfologiaState extends State<Morfologia> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-
                 Navigator.push(
                     context,
                     MaterialPageRoute(

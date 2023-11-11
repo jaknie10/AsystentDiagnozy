@@ -20,8 +20,7 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
   var items = {};
 
   Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/gazometria.json');
+    final String response = await rootBundle.loadString('assets/gazometria.json');
     final data = await json.decode(response);
     setState(() {
       items = data;
@@ -31,16 +30,16 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
   @override
   Widget build(BuildContext context) {
     readJson();
-    return Column(
-      children: [
-        TextButton(
-            onPressed: () {
-              Navigator.pop(context, widget.results);
-            },
-            child: const Text("Powrót")),
-        Container(
-          color: Theme.of(context).colorScheme.background,
-          child: DataTable(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context, widget.results);
+              },
+              child: const Text("Powrót")),
+          DataTable(
+            decoration: const BoxDecoration(color: Colors.white),
             columns: const <DataColumn>[
               DataColumn(
                 label: Text('Parametr'),
@@ -59,18 +58,17 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
               ),
             ],
             rows: <DataRow>[
-              for (var item in items.values)
+              for (final entry in items.entries)
                 DataRow(
                   cells: <DataCell>[
-                    DataCell(Text(item['pk'])),
+                    DataCell(Text(entry.value['short'])),
+                    DataCell(Text("${widget.results[entry.key]} ${entry.value['unit']}")),
+                    DataCell(Text(entry.value['low'].toString())),
+                    DataCell(Text(entry.value['high'].toString())),
                     DataCell(
-                        Text("${widget.results[item['pk']]} ${item['unit']}")),
-                    DataCell(Text(item['low'].toString())),
-                    DataCell(Text(item['high'].toString())),
-                    DataCell(
-                      (widget.results[item['pk']] < item['low'])
+                      (widget.results[entry.key] < entry.value['low'])
                           ? const Text('za malo')
-                          : (widget.results[item['pk']] > item['low'])
+                          : (widget.results[entry.key] > entry.value['high'])
                               ? const Text('za duzo')
                               : const Text('w normie'),
                     )
@@ -78,8 +76,8 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                 )
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
