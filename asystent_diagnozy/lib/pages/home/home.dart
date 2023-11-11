@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(15.0),
                 child: SizedBox(
                   height: 40,
                   width: 220,
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 40.0),
+                  padding: const EdgeInsets.only(right: 15.0),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       color: Colors.white,

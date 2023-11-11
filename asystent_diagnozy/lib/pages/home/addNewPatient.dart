@@ -130,34 +130,6 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 18.0),
-                                      child: DropdownButtonHideUnderline(
-                                        child: DropdownButton(
-                                            dropdownColor: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            focusColor: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            style: const TextStyle(
-                                                fontSize: 15,
-                                                color: Color.fromRGBO(
-                                                    22, 20, 35, 1.0)),
-                                            elevation: 0,
-                                            value: gender,
-                                            items: genderOptions,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                gender = val.toString();
-                                                nowyPacjent.gender =
-                                                    val.toString();
-                                              });
-                                              debugPrint(nowyPacjent.gender);
-                                            }),
-                                      ),
-                                    ),
                                     Container(
                                       width: 300,
                                       child: Form(
@@ -169,8 +141,35 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Padding(
+                                              padding: const EdgeInsets.only(top: 20.0),
+                                              child: DropdownButtonHideUnderline(
+                                                                                    child: DropdownButton(
+                                              dropdownColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .background,
+                                              focusColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .background,
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  color: Color.fromRGBO(
+                                                      22, 20, 35, 1.0)),
+                                              elevation: 0,
+                                              value: gender,
+                                              items: genderOptions,
+                                              onChanged: (val) {
+                                                setState(() {
+                                                  gender = val.toString();
+                                                  nowyPacjent.gender =
+                                                      val.toString();
+                                                });
+                                                debugPrint(nowyPacjent.gender);
+                                              }),
+                                                                                  ),
+                                            ),
+                                            Padding(
                                               padding:
-                                                  const EdgeInsets.all(10.0),
+                                                  const EdgeInsets.only(top: 10.0),
                                               child: TextFormField(
                                                 keyboardType:
                                                     TextInputType.number,
@@ -189,11 +188,32 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                   }
                                                   return null;
                                                 },
+                                                decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Theme.of(context)
+                                                .colorScheme
+                                                .background,
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.black)),
+                                          ),
                                               ),
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(10.0),
+                                                  const EdgeInsets.only(top: 10.0),
                                               child: TextFormField(
                                                 onChanged: (val) {
                                                   nowyPacjent.imie =
@@ -207,11 +227,32 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                   }
                                                   return null;
                                                 },
+                                                decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Theme.of(context)
+                                                .colorScheme
+                                                .background,
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.black)),
+                                          ),
                                               ),
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(10.0),
+                                                  const EdgeInsets.only(top: 10.0),
                                               child: TextFormField(
                                                 onChanged: (val) {
                                                   nowyPacjent.nazwisko =
@@ -226,11 +267,32 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                   }
                                                   return null;
                                                 },
+                                                decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Theme.of(context)
+                                                .colorScheme
+                                                .background,
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.black)),
+                                          ),
                                               ),
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(10.0),
+                                                  const EdgeInsets.only(top: 10.0),
                                               child: TextFormField(
                                                 onChanged: (val) {
                                                   nowyPacjent.dataUrodzenia =
@@ -245,6 +307,27 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                   }
                                                   return null;
                                                 },
+                                                decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Theme.of(context)
+                                                .colorScheme
+                                                .background,
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.black)),
+                                          ),
                                               ),
                                             ),
                                           ],
