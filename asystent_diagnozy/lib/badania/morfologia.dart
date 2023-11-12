@@ -6,9 +6,10 @@ import 'package:flutter/services.dart';
 import 'morfologia_results.dart';
 
 class Morfologia extends StatefulWidget {
-  const Morfologia({Key? key, required this.patientId}) : super(key: key);
+  const Morfologia({Key? key, required this.patientId, required this.patientGender}) : super(key: key);
 
   final int patientId;
+  final String patientGender;
 
   @override
   State<Morfologia> createState() => _MorfologiaState();
@@ -19,7 +20,8 @@ class _MorfologiaState extends State<Morfologia> {
 
   var items = {};
 
-  var results = {};
+  List<Map<String, dynamic>> results = [];
+  var interpretations = <dynamic>{};
 
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/morfologia.json');
@@ -32,13 +34,29 @@ class _MorfologiaState extends State<Morfologia> {
   @override
   Widget build(BuildContext context) {
     readJson();
+
+    String? lowerbound;
+    String? upperbound;
+    if (widget.patientGender == 'M') {
+      lowerbound = 'm_low';
+      upperbound = 'm_high';
+    } else if (widget.patientGender == 'K') {
+      lowerbound = 'w_low';
+      upperbound = 'w_high';
+    }
+
     return SingleChildScrollView(
       child: Column(
         children: [
-          BackButton(
-            onPressed: () {
-              Navigator.pop(context, widget.patientId);
-            },
+          Row(
+            children: [
+              BackButton(
+                onPressed: () {
+                  Navigator.pop(context, widget.patientId);
+                },
+              ),
+              Text("patientId: ${widget.patientId}, gender: ${widget.patientGender}")
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -46,7 +64,7 @@ class _MorfologiaState extends State<Morfologia> {
               color: const Color.fromARGB(255, 255, 255, 255),
               child: Form(
                 key: _formKey,
-                child: Column(
+                child: Wrap(
                   children: [
                     for (var entry in items.entries)
                       Padding(
@@ -70,8 +88,6 @@ class _MorfologiaState extends State<Morfologia> {
                                 ),
                                 suffixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
                                 isDense: true),
-
-                            // initialValue: '0',
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Podaj prawidłową wartość';
@@ -79,7 +95,23 @@ class _MorfologiaState extends State<Morfologia> {
                               return null;
                             },
                             onSaved: (value) {
-                              results[entry.key] = double.parse(value!);
+                              results.add({
+                                'short': entry.value['short'],
+                                'value': double.parse(value!),
+                                'lowerbound': entry.value[lowerbound],
+                                'upperbound': entry.value[upperbound],
+                                'unit': entry.value['unit'],
+                                'result': (double.parse(value) < entry.value[lowerbound])
+                                    ? 'lt'
+                                    : (double.parse(value) > entry.value[upperbound])
+                                        ? 'gt'
+                                        : 'eq'
+                              });
+                              if (double.parse(value) < entry.value[lowerbound]) {
+                                interpretations.addAll(entry.value['deficit_int']);
+                              } else if (double.parse(value) > entry.value[upperbound]) {
+                                interpretations.addAll(entry.value['surplus_int']);
+                              }
                             },
                           ),
                         ),
@@ -96,7 +128,7 @@ class _MorfologiaState extends State<Morfologia> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MorfologiaAnaliza(results: results),
+                      builder: (context) => MorfologiaAnaliza(results: results, interpretations: interpretations),
                     ));
               }
             },

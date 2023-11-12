@@ -36,9 +36,7 @@ class _PatientListItemState extends State<PatientListItem> {
       child: Container(
         width: double.infinity,
         height: 60,
-        decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            color: Colors.white),
+        decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Row(
@@ -50,14 +48,12 @@ class _PatientListItemState extends State<PatientListItem> {
                   children: [
                     Text(
                       widget.imie,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     const Text(" "),
                     Text(
                       widget.nazwisko,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -70,12 +66,8 @@ class _PatientListItemState extends State<PatientListItem> {
                       children: [
                         widget.showDateOfBirth
                             ? Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 40.0),
-                                child: Text(
-                                    widget.dataUrodzenia
-                                        .toString()
-                                        .substring(0, 10),
+                                padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                                child: Text(widget.dataUrodzenia.toString().substring(0, 10),
                                     style: const TextStyle(fontSize: 18)),
                               )
                             : const Text(""),
@@ -89,8 +81,7 @@ class _PatientListItemState extends State<PatientListItem> {
                         SizedBox(
                           width: 80,
                           child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Text(
                               age.toString(),
                               style: const TextStyle(fontSize: 18),
@@ -107,23 +98,23 @@ class _PatientListItemState extends State<PatientListItem> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  PatientProfile(patientId: widget.id),
+                              builder: (context) => PatientProfile(
+                                patientId: widget.id,
+                                patientGender: widget.gender,
+                              ),
                             ),
                           );
                         },
                         style: IconButton.styleFrom(
                           highlightColor: const Color.fromRGBO(0, 84, 210, 1),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
+                          backgroundColor: Theme.of(context).colorScheme.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                         ),
                         child: Text(
                           widget.buttonText,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 15),
+                          style: const TextStyle(color: Colors.white, fontSize: 15),
                         )),
                   ),
                 ],

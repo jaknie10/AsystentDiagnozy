@@ -7,8 +7,8 @@
     "m_high": 5.4,
     "w_low": 3.5,
     "w_high": 5.2,
-    "deficit_int": "niedokrwistości, stany przewodnienia",
-    "surplus_int": "czerwienica prawdziwa, czerwienice wtórne i rzekome, talasemia"
+    "deficit_int": ["niedokrwistości, stany przewodnienia"],
+    "surplus_int": ["czerwienica prawdziwa", "czerwienice wtórne i rzekome", "talasemia"]
   },
   "HGB":{
     "short": "HGB",
@@ -18,8 +18,8 @@
     "m_high": 16.5,
     "w_low": 12.0,
     "w_high": 16.0,
-    "deficit_int": "niedokrwistości, stany przewodnienia",
-    "surplus_int": "czerwienica prawdziwa, czerwienice wtórne i rzekome"
+    "deficit_int": ["niedokrwistości, stany przewodnienia"],
+    "surplus_int": ["czerwienica prawdziwa", "czerwienice wtórne i rzekome"]
   },
   "HCT":{
     "short": "HCT",
@@ -29,8 +29,8 @@
     "m_high": 54.0,
     "w_low": 37.0,
     "w_high": 47.0,
-    "deficit_int": "niedokrwistości, stany przewodnienia",
-    "surplus_int": "czerwienica prawdziwa, czerwienice wtórne i rzekome"
+    "deficit_int": ["niedokrwistości, stany przewodnienia"],
+    "surplus_int": ["czerwienica prawdziwa", "czerwienice wtórne i rzekome"]
   },
   "MCH":{
     "short": "MCH",
@@ -40,8 +40,8 @@
     "m_high": 31.0,
     "w_low": 27.0,
     "w_high": 31.0,
-    "deficit_int": "hipochromia (najczęściej w niedokrwistości z niedoboru żelaza), zmniejszenie MCH i MCHC jest zwykle równoległe do zmniejszenia MCV (mikrocytozy)",
-    "surplus_int": "sferocytoza wrodzona (w niedokrwistości autoimmunohemolitycznej), choroba zimnych aglutynin"
+    "deficit_int": ["niedokrwistość z niedoboru żelaza", "hipochromia","zmniejszenie MCH/MCHC jest zwykle równoległe do zmniejszenia MCV (mikrocytozy)"],
+    "surplus_int": ["choroba zimnych aglutynin", "niedokrwistość autoimmunohemolityczna", "sferocytoza wrodzona"]
   },
   "MCHC":{
     "short": "MCHC",
@@ -51,8 +51,8 @@
     "m_high": 36.0,
     "w_low": 32.0,
     "w_high": 36.0,
-    "deficit_int": "hipochromia (najczęściej w niedokrwistości z niedoboru żelaza), zmniejszenie MCH i MCHC jest zwykle równoległe do zmniejszenia MCV (mikrocytozy)",
-    "surplus_int": "sferocytoza wrodzona (w niedokrwistości autoimmunohemolitycznej), choroba zimnych aglutynin"
+    "deficit_int": ["niedokrwistość z niedoboru żelaza", "hipochromia","zmniejszenie MCH/MCHC jest zwykle równoległe do zmniejszenia MCV (mikrocytozy)"],
+    "surplus_int": ["choroba zimnych aglutynin", "niedokrwistość autoimmunohemolityczna", "sferocytoza wrodzona"]
   },
   "MCV":{
     "short": "MCV",
@@ -62,8 +62,8 @@
     "m_high": 92.0,
     "w_low": 82.0,
     "w_high": 92.0,
-    "deficit_int": "mikrocytoza (najczęściej w niedokrwistościach mikrocytowych)",
-    "surplus_int": "makrocytoza (>100 fl, najczęściej w niedokrwistościach makrocytowych →rozdz. 15.1), retikulocytoza, rzekoma makrocytoza (choroba zimnych aglutynin, duża hiperglikemia)"
+    "deficit_int": ["mikrocytoza (najczęściej w niedokrwistościach mikrocytowych)"],
+    "surplus_int": ["choroba zimnych aglutynin", "makrocytoza (>100 fl, najczęściej w niedokrwistościach makrocytowych)","retikulocytoza", "rzekoma makrocytoza (duża hiperglikemia)"]
   },
   "RDW":{
     "short": "RDW",
@@ -73,8 +73,8 @@
     "m_high": 14.5,
     "w_low": 11.5,
     "w_high": 14.5,
-    "deficit_int": "",
-    "surplus_int": "niedokrwistości niedoborowe, stan po przetoczeniu erytrocytów"
+    "deficit_int": [""],
+    "surplus_int": ["niedokrwistości niedoborowe", "stan po przetoczeniu erytrocytów"]
   },
   "RET":{
     "short": "RET",
@@ -84,8 +84,8 @@
     "m_high": 15.0,
     "w_low": 5.0,
     "w_high": 15.0,
-    "deficit_int": "ciężkie przypadki niedokrwistości spowodowanych zmniejszonym wytwarzaniem erytrocytów w szpiku, szczególnie niedokrwistości aplastyczne i przełomy aplastyczne w niedokrwistościach hemolitycznych",
-    "surplus_int": "niedokrwistości hemolityczne, ostre pokrwotoczne, regeneracja po leczeniu (żelazem, kwasem foliowym, witaminą B12, lekami stymulującymi erytropoezę, po przeszczepieniu komórek krwiotwórczych), po splenektomii"
+    "deficit_int": ["ciężkie przypadki niedokrwistości spowodowanych zmniejszonym wytwarzaniem erytrocytów w szpiku, szczególnie niedokrwistości aplastyczne i przełomy aplastyczne w niedokrwistościach hemolitycznych"],
+    "surplus_int": ["po przeszczepieniu komórek krwiotwórczych","niedokrwistości hemolityczne", "ostre pokrwotoczne", "regeneracja po leczeniu (żelazem, kwasem foliowym, witaminą B12, lekami stymulującymi erytropoezę)", "po splenektomii"]
   },
   "WBC":{
     "short": "WBC",
@@ -95,8 +95,8 @@
     "m_high": 10.0,
     "w_low": 4.0,
     "w_high": 10.0,
-    "deficit_int": "zmniejszenie największych subpopulacji leukocytów - neutrofilów lub limfocytów",
-    "surplus_int": "zwiększenia subpopulacji leukocytów lub pojawienie się komórek niewystępujących prawidłowo (młodych postaci linii neutrofilów [przesunięcie obrazu odsetkowego w lewo], komórek białaczkowych lub chłoniakowych)"
+    "deficit_int": ["zmniejszenie największych subpopulacji leukocytów - neutrofilów lub limfocytów"],
+    "surplus_int": ["zwiększenia subpopulacji leukocytów", "pojawienie się komórek niewystępujących prawidłowo (młodych postaci linii neutrofilów [przesunięcie obrazu odsetkowego w lewo], komórek białaczkowych lub chłoniakowych)"]
   },
   "NEUT":{
     "short": "NEUT",
@@ -106,8 +106,8 @@
     "m_high": 8.0,
     "w_low": 1.8,
     "w_high": 8.0,
-    "deficit_int": "niedokrwistość aplastyczna, ostre białaczki, zespoły mielodysplastyczne, włóknienie szpiku, po zakażeniach (zwłaszcza wirusowych i sepsie bakteryjnej), niektóre zakażenia (gruźlica, bruceloza, dur brzuszny), układowe choroby tkanki łącznej, hipersplenizm, leki (m.in. cytostatyki, tyreostatyki, przeciwpadaczkowe, psychotropowe), neutropenie wrodzone i radioterapia, niedobór witaminy B12 lub kwasu foliowego, przewlekła łagodna neutropenia (autoimmunologiczna lub idiopatyczna), liczba neutrofilów związana z fenotypem Duffy-null erytrocytów, tj. Fy(a-b-) (m.in. u osób pochodzenia afrykańskiego)",
-    "surplus_int": "ostre zakażenia bakteryjne, niektóre zakażenia wirusowe, nowotwory mieloproliferacyjne, rzadziej chłoniak Hodgkina lub nowotwory lite, nadmiar glikokortykosteroidów (zespół Cushinga), choroby układowe tkanki łącznej (RZS, choroba Stilla, SLE, układowe zapalenia naczyń), nieswoiste choroby zapalne jelit, ostre zapalenie lub martwica tkanek (napad dny moczanowej, reaktywne zapalenie stawów, oparzenia, zawał serca, gorączka reumatyczna, ostre zapalenie trzustki), urazy, operacja, wstrząs, udar cieplny, drgawki, stan po masywnej utracie krwi, ostra hemoliza, palenie tytoniu, cukrzycowa kwasica ketonowa, przełom tarczycowy, stosowanie czynników wzrostu lub katecholamin, stan po splenektomii, regeneracja szpiku (np. po chemioterapii), niektóre zatrucia (np. metalami ciężkimi), po posiłku, po wysiłku fizycznym, ciąża, poród"
+    "deficit_int": ["układowe choroby tkanki łącznej","niedokrwistość aplastyczna", "ostre białaczki", "zespoły mielodysplastyczne", "włóknienie szpiku", "stan po zakażeniach (zwłaszcza wirusowych i sepsie bakteryjnej)", "niektóre zakażenia (gruźlica, bruceloza, dur brzuszny)", "hipersplenizm, leki (m.in. cytostatyki, tyreostatyki, przeciwpadaczkowe, psychotropowe), neutropenie wrodzone i radioterapia, niedobór witaminy B12 lub kwasu foliowego, przewlekła łagodna neutropenia (autoimmunologiczna lub idiopatyczna), liczba neutrofilów związana z fenotypem Duffy-null erytrocytów, tj. Fy(a-b-) (m.in. u osób pochodzenia afrykańskiego)"],
+    "surplus_int": ["stan po splenektomii", "stosowanie katecholamin","stosowanie czynników wzrostu","układowe choroby tkanki łącznej", "nowotwory mieloproliferacyjne","(RZS, choroba Stilla, SLE, układowe zapalenia naczyń)", "ostre zakażenia bakteryjne", "niektóre zakażenia wirusowe, rzadziej chłoniak Hodgkina lub nowotwory lite, nadmiar glikokortykosteroidów (zespół Cushinga), nieswoiste choroby zapalne jelit, ostre zapalenie lub martwica tkanek (napad dny moczanowej, reaktywne zapalenie stawów, oparzenia, zawał serca, gorączka reumatyczna, ostre zapalenie trzustki), urazy, operacja, wstrząs, udar cieplny, drgawki, stan po masywnej utracie krwi, ostra hemoliza, palenie tytoniu, cukrzycowa kwasica ketonowa, przełom tarczycowy, regeneracja szpiku (np. po chemioterapii), niektóre zatrucia (np. metalami ciężkimi), po posiłku, po wysiłku fizycznym, ciąża, poród"]
   },
   "EOS":{
     "short": "EOS",
@@ -117,8 +117,8 @@
     "m_high": 0.5,
     "w_low": 0.05,
     "w_high": 0.5,
-    "deficit_int": "",
-    "surplus_int": "rozpoznanie rożnicowe"
+    "deficit_int": [""],
+    "surplus_int": ["rozpoznanie rożnicowe"]
   },
   "BASO":{
     "short": "BASO",
@@ -128,8 +128,8 @@
     "m_high": 0.3,
     "w_low": 0.01,
     "w_high": 0.3,
-    "deficit_int": "",
-    "surplus_int": "nowotwory mieloproliferacyjne, ostra białaczka bazofilowa, RZS"
+    "deficit_int": [""],
+    "surplus_int": ["nowotwory mieloproliferacyjne","ostra białaczka bazofilowa, RZS"]
   },
   "LYM":{
     "short": "LYM",
@@ -139,8 +139,8 @@
     "m_high": 5.0,
     "w_low": 1.0,
     "w_high": 5.0,
-    "deficit_int": "układowe choroby tkanki łącznej, zakażenia wirusowe (m.in. HIV, SARS-CoV-2), sepsa, gruźlica, niewydolność nerek, wątroby, sarkoidoza, zespół Cushinga, po leczeniu glikokortykosteroidami, leki immunosupresyjne, chemioterapia i radioterapia, chłoniak Hodgkina, niektóre wrodzone niedobory odporności, stan po przeszczepieniu komórek krwiotwórczych",
-    "surplus_int": "zakażenia wirusowe (mononukleoza zakaźna, świnka, odra, wirusowe zapalenie wątroby i in.), niektóre zakażenia bakteryjne (krztusiec, bruceloza, gruźlica, kiła i in.), toksoplazmoza, białaczki z dojrzałych limfocytów, chłoniaki z zajęciem szpiku, monoklonalna limfocytoza B-komórkowa, RZS, zespół Felty'ego, stan po splenektomii, reakcje polekowe, choroba posurowicza, urazy, operacja, ostra choroba serca"
+    "deficit_int": ["stan po leczeniu glikokortykosteroidami", "po przeszczepieniu komórek krwiotwórczych","układowe choroby tkanki łącznej", "zakażenia wirusowe (m.in. HIV, SARS-CoV-2), sepsa, gruźlica, niewydolność nerek, wątroby, sarkoidoza, zespół Cushinga, leki immunosupresyjne, chemioterapia i radioterapia, chłoniak Hodgkina, niektóre wrodzone niedobory odporności"],
+    "surplus_int": ["stan po splenektomii", "zakażenia wirusowe (mononukleoza zakaźna, świnka, odra, wirusowe zapalenie wątroby i in.), niektóre zakażenia bakteryjne (krztusiec, bruceloza, gruźlica, kiła i in.), toksoplazmoza, białaczki z dojrzałych limfocytów, chłoniaki z zajęciem szpiku, monoklonalna limfocytoza B-komórkowa, RZS, zespół Felty'ego, reakcje polekowe, choroba posurowicza, urazy, operacja, ostra choroba serca"]
   },
   "MONO":{
     "short": "MONO",
@@ -150,8 +150,8 @@
     "m_high": 0.8,
     "w_low": 0.2,
     "w_high": 0.8,
-    "deficit_int": "",
-    "surplus_int": "zakażenia i faza zdrowienia po ostrym zakażeniu, choroby zapalne i autoimmunologiczne (nieswoiste zapalenia jelit, alkoholowa choroba wątroby, choroby układowe tkanki łącznej, sarkoidoza, małopłytkowość immunologiczna, niedokrwistość autoimmunohemolityczna), jatrogenne (leczenie glikokortykosteroidami, stosowanie czynników wzrostu, stan po splenektomii), nowotwory układu krwiotwórczego i chłonnego, nowotwory lite, regeneracja szpiku po chemioterapii lub radioterapii, neutropenia, zawał serca, ciąża"
+    "deficit_int": [""],
+    "surplus_int": ["niedokrwistość autoimmunohemolityczna", "stan po leczeniu glikokortykosteroidami", "stosowanie czynników wzrostu","układowe tkanki łącznej","zakażenia i faza zdrowienia po ostrym zakażeniu", "choroby zapalne i autoimmunologiczne (nieswoiste zapalenia jelit, alkoholowa choroba wątroby, sarkoidoza, małopłytkowość immunologiczna), jatrogenne (stan po splenektomii), nowotwory układu krwiotwórczego i chłonnego, nowotwory lite, regeneracja szpiku po chemioterapii lub radioterapii, neutropenia, zawał serca, ciąża"]
   },
   "PLT":{
     "short": "PLT",
@@ -161,8 +161,8 @@
     "m_high": 450.0,
     "w_low": 150.0,
     "w_high": 450.0,
-    "deficit_int": "małopłytkowość",
-    "surplus_int": "nadpłytkowość"
+    "deficit_int": ["małopłytkowość"],
+    "surplus_int": ["nadpłytkowość"]
   },
   "MPV":{
     "short": "MPV",
@@ -172,7 +172,7 @@
     "m_high": 10.5,
     "w_low": 7.5,
     "w_high": 10.5,
-    "deficit_int": "wskazuje na upośledzoną trombopoezę",
-    "surplus_int": "przemawia za utratą lub destrukcją płytek, niektórymi małopłytkowościami wrodzonymi lub zespołem mielodysplastycznym"
+    "deficit_int": ["wskazuje na upośledzoną trombopoezę"],
+    "surplus_int": ["przemawia za utratą lub destrukcją płytek, niektórymi małopłytkowościami wrodzonymi lub zespołem mielodysplastycznym"]
   }
 }
