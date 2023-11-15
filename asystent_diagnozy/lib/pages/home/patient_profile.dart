@@ -35,7 +35,7 @@ class _PatientProfileState extends State<PatientProfile> {
     const DropdownMenuItem(value: "Z-A", child: Text("Z-A")),
   ];
 
-  final List<Badanie> badanieList = [
+  List<Badanie> badanieList = [
     Badanie(
       typBadania: "Morfologia",
       dataBadania: DateTime(2023, 11, 09),
@@ -222,14 +222,16 @@ class _PatientProfileState extends State<PatientProfile> {
                               style: TextStyle(fontSize: 20),
                             ),
                             Container(
-                              height: 60,
+                              height: 75,
                               child: ListView(
                                 shrinkWrap: true,
                                 padding: EdgeInsets.symmetric(vertical: 5.0),
                                 scrollDirection: Axis.vertical,
                                 children: [
                                   Text(
-                                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis risus, et tincidunt sapien. Pellentesque mattis, sem sit amet hendrerit aliquet, mauris turpis hendrerit nisi, id iaculis augue erat eget neque. Integer tempor, nibh quis malesuada semper, justo risus tempus eros, eget fringilla elit augue et arcu. ")
+                                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis risus, et tincidunt sapien. Pellentesque mattis, sem sit amet hendrerit aliquet, mauris turpis hendrerit nisi, id iaculis augue erat eget neque. Integer tempor, nibh quis malesuada semper, justo risus tempus eros, eget fringilla elit augue et arcu. ",
+                                      style: TextStyle(fontSize: 15),
+                                  )
                                 ],
                               ),
                             ),
@@ -431,9 +433,7 @@ class _PatientProfileState extends State<PatientProfile> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 15.0, right: 10.0),
-              child: SizedBox(
-                height: 400,
-                width: double.infinity,
+              child: Expanded(
                 child: ListView.builder(
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,

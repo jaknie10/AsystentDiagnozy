@@ -31,22 +31,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String sortingType = 'Data urodzenia (rosnąco)';
+  String sortingType = 'Data urodzenia (rosnąco)'; 
 
-  @override
-  Widget build(BuildContext context) {
-    List<DropdownMenuItem<String>> sortingOptions = [
-      const DropdownMenuItem(
-          value: "Data urodzenia (rosnąco)",
-          child: Text("Data urodzenia (rosnąco)")),
-      const DropdownMenuItem(
-          value: "Data urodzenia (malejąco)",
-          child: Text("Data urodzenia (malejąco)")),
-      const DropdownMenuItem(value: "A-Z", child: Text("A-Z")),
-      const DropdownMenuItem(value: "Z-A", child: Text("Z-A")),
-    ];
-
-    final List<Patient> patientList = [
+  List<Patient> patientList = [
       Patient(
         imie: "Jan",
         nazwisko: "Kowalski",
@@ -97,6 +84,31 @@ class _HomePageState extends State<HomePage> {
           buttonText: "Profil",
           id: 6)
     ];
+  List<Patient> filteredPatientList = [];
+
+  @override
+  Widget build(BuildContext context) {
+
+    List<DropdownMenuItem<String>> sortingOptions = [
+      const DropdownMenuItem(
+          value: "Data urodzenia (rosnąco)",
+          child: Text("Data urodzenia (rosnąco)")),
+      const DropdownMenuItem(
+          value: "Data urodzenia (malejąco)",
+          child: Text("Data urodzenia (malejąco)")),
+      const DropdownMenuItem(value: "A-Z", child: Text("A-Z")),
+      const DropdownMenuItem(value: "Z-A", child: Text("Z-A")),
+    ];
+
+    if(filteredPatientList.length == 0){ filteredPatientList = patientList; }
+
+    void filterList(String searchText) {
+      setState(() {  filteredPatientList = patientList
+            .where((logObj) =>
+              (logObj.imie+" "+logObj.nazwisko).toLowerCase().trim().contains(searchText.toLowerCase()) || logObj.id.toString().toLowerCase().trim().contains(searchText) )
+            .toList();
+      });
+    }
 
     return Container(
       width: double.infinity,
@@ -133,7 +145,12 @@ class _HomePageState extends State<HomePage> {
                       )),
                 ),
               ),
-              const SizedBox(width: 200, height: 40, child: SearchBar()),
+              SizedBox(width: 200, height: 40, 
+                child: SearchBar(
+                  onTap: () {filterList("");},
+                  onChanged:(value) => filterList(value),
+                )
+              ),
               const Spacer(),
               Align(
                 alignment: Alignment.centerRight,
@@ -169,18 +186,21 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           Flexible(
-            child: ListView.builder(
+            child: 
+            ListView.builder(
+
+              key: ValueKey(filteredPatientList),
               padding: EdgeInsets.zero,
-              itemCount: patientList.length,
+              itemCount: filteredPatientList.length,
               itemBuilder: (BuildContext context, int index) {
                 return PatientListItem(
-                  imie: patientList[index].imie,
-                  nazwisko: patientList[index].nazwisko,
-                  dataUrodzenia: patientList[index].dataUrodzenia,
-                  gender: patientList[index].gender,
-                  showDateOfBirth: patientList[index].showDateOfBirth,
-                  buttonText: patientList[index].buttonText,
-                  id: patientList[index].id,
+                  imie: filteredPatientList[index].imie,
+                  nazwisko: filteredPatientList[index].nazwisko,
+                  dataUrodzenia: filteredPatientList[index].dataUrodzenia,
+                  gender: filteredPatientList[index].gender,
+                  showDateOfBirth: filteredPatientList[index].showDateOfBirth,
+                  buttonText: filteredPatientList[index].buttonText,
+                  id: filteredPatientList[index].id,
                 );
               },
             ),
