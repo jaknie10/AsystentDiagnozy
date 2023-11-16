@@ -1,58 +1,66 @@
 {
-  "pH":{
-    "short": "pH",
-    "full_name": "ujemny logarytm dziesiętny ze stężenia jonów wodorowych",
-    "unit": "",
-    "low": 7.35,
-    "high": 7.45
+  "norms":{
+    "pH":{
+      "short": "pH",
+      "full_name": "ujemny logarytm dziesiętny ze stężenia jonów wodorowych",
+      "unit": "",
+      "low": 7.35,
+      "high": 7.45
+    },
+    "PaCO2":{
+      "short": "PaCO₂",
+      "full_name": "ciśnienie parcjalne dwutlenku węgla we krwi tętniczej",
+      "unit": "mm Hg",
+      "low": 35,
+      "high": 45
+    },
+    "HCO3akt":{
+      "short": "HCO₃ - akt",
+      "full_name": "aktualne stężenie wodorowęglanów w osoczu",
+      "unit": "mmol/l",
+      "low": 21,
+      "high": 27
+    },
+    "HCO3std":{
+      "short": "HCO₃ - std",
+      "full_name": "standardowe stężenie wodorowęglanów",
+      "unit": "mmol/l",
+      "low": 21,
+      "high": 25
+    },
+    "BE": {
+      "short": "BE",
+      "full_name": "nadmiar zasad we krwi",
+      "unit": "mEq/l",
+      "low": -2.3,
+      "high": 2.3
+    },
+    "PaO2":{
+      "short": "PaO₂",
+      "full_name": "ciśnienie parcjalne tlenu we krwi tętniczej",
+      "unit": "mm Hg",
+      "low": 75,
+      "high": 100
+    },
+    "ctCO2":{
+      "short": "ctCO₂",
+      "full_name": "całkowita zawartość dwutlenku węgla w osoczu",
+      "unit": "mmol/l",
+      "low": 22,
+      "high": 28
+    },
+    "SaO2":{
+      "short": "SaO₂",
+      "full_name": "wysycenie tlenem hemoglobiny krwi tętniczej",
+      "unit": "%",
+      "low": 95,
+      "high": 98
+    }
   },
-  "PaCO2":{
-    "short": "PaCO₂",
-    "full_name": "ciśnienie parcjalne dwutlenku węgla we krwi tętniczej",
-    "unit": "mm Hg",
-    "low": 35,
-    "high": 45
-  },
-  "HCO3akt":{
-    "short": "HCO₃ - akt",
-    "full_name": "aktualne stężenie wodorowęglanów w osoczu",
-    "unit": "mmol/l",
-    "low": 21,
-    "high": 27
-  },
-  "HCO3std":{
-    "short": "HCO₃ - std",
-    "full_name": "standardowe stężenie wodorowęglanów",
-    "unit": "mmol/l",
-    "low": 21,
-    "high": 25
-  },
-  "BE": {
-    "short": "BE",
-    "full_name": "nadmiar zasad we krwi",
-    "unit": "mEq/l",
-    "low": -2.3,
-    "high": 2.3
-  },
-  "PaO2":{
-    "short": "PaO₂",
-    "full_name": "ciśnienie parcjalne tlenu we krwi tętniczej",
-    "unit": "mm Hg",
-    "low": 75,
-    "high": 100
-  },
-  "ctCO2":{
-    "short": "ctCO₂",
-    "full_name": "całkowita zawartość dwutlenku węgla w osoczu",
-    "unit": "mmol/l",
-    "low": 22,
-    "high": 28
-  },
-  "SaO2":{
-    "short": "SaO₂",
-    "full_name": "wysycenie tlenem hemoglobiny krwi tętniczej",
-    "unit": "%",
-    "low": 95,
-    "high": 98
+  "int":{
+    "KM": ["cukrzycowa kwasica ketonowa", "zatrucie: etanol, metanol, glikol etylenowy, salicylany, paracetamol, metformina", "niewydolność nerek", "niewydolność wątroby", "wstrząs", "rabdomioliza", "białaczka", "chłoniak", "biegunka"], 
+    "KO": ["Niedrożność górnych dróg oddechowych", "Wstrząs, Hipowolemia, Sepsa, Zatorowość płucna", "Przedawkowanie opioidów, leków nasennych lub narkotyków", "Zatrucie jadem kiełbasianym", "Obturacja dolnych dróg oddechowych – astma, POChP", "Obrzęk płuc, krwawienie śródpęcherzykowe", "Zapalenie płuc, choroby śródmiąższowe płuc", "Odma opłucnowa", "Niedodma", "bezdech senny", "Urazy i guzy klatki piersiowej", "Znaczna otyłość", "wodobrzusze", "Uszkodzenie pnia mózgu, nerwów przeponowych, szyjnego lub piersiowej odcinka rdzenia kręgowego"],
+    "ZM": ["Hipokaliemia – stosowanie diuretyków, leków przeczyszczających, GKS", "Nadmierna utrata H+ i Cl- - diuretyki, mukowiscydoza, biegunka, wymioty", "Nadmierna podaż NaHCO3 lub cytrynianu/mleczanu sodu"],
+    "ZO": ["Bodźce bólowe", "Zmiany naczyniowe OUN", "Ataki paniki", "Gorączka", "Niedodma, wypełnienie pęcherzyków płynem", "Zatorowość płucna, wstrząs", "Sinicze wady serca i dużych naczyń", "Zmiany śródmiąższowe płuc"]
   }
 }
