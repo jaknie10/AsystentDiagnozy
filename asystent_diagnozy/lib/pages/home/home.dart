@@ -1,7 +1,8 @@
+import 'package:asystent_diagnozy/models/pacjent.dart';
 import 'package:flutter/material.dart';
-
 import 'patient_list_item.dart';
 import 'addNewPatient.dart';
+import 'package:asystent_diagnozy/database/database_service.dart';
 
 class Patient {
   final String imie;
@@ -31,64 +32,71 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String sortingType = 'Data urodzenia (rosnąco)'; 
+  final SQLiteHelper helper = SQLiteHelper();
+  String sortingType = 'Data urodzenia (rosnąco)';
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+    helper.initWinDB();
+  }
 
   List<Patient> patientList = [
-      Patient(
+    Patient(
+      imie: "Jan",
+      nazwisko: "Kowalski",
+      dataUrodzenia: DateTime.utc(2000, 10, 10),
+      gender: "M",
+      showDateOfBirth: false,
+      buttonText: "Profil",
+      id: 1,
+    ),
+    Patient(
+        imie: "Adam",
+        nazwisko: "Nowak",
+        dataUrodzenia: DateTime.utc(2023, 5, 10),
+        gender: "M",
+        showDateOfBirth: false,
+        buttonText: "Profil",
+        id: 2),
+    Patient(
+        imie: "XYZ",
+        nazwisko: "ABC",
+        dataUrodzenia: DateTime.utc(2010, 10, 8),
+        gender: "K",
+        showDateOfBirth: false,
+        buttonText: "Profil",
+        id: 3),
+    Patient(
         imie: "Jan",
         nazwisko: "Kowalski",
         dataUrodzenia: DateTime.utc(2000, 10, 10),
         gender: "M",
         showDateOfBirth: false,
         buttonText: "Profil",
-        id: 1,
-      ),
-      Patient(
-          imie: "Adam",
-          nazwisko: "Nowak",
-          dataUrodzenia: DateTime.utc(2023, 5, 10),
-          gender: "M",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          id: 2),
-      Patient(
-          imie: "XYZ",
-          nazwisko: "ABC",
-          dataUrodzenia: DateTime.utc(2010, 10, 8),
-          gender: "K",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          id: 3),
-      Patient(
-          imie: "Jan",
-          nazwisko: "Kowalski",
-          dataUrodzenia: DateTime.utc(2000, 10, 10),
-          gender: "M",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          id: 4),
-      Patient(
-          imie: "Adam",
-          nazwisko: "Nowak",
-          dataUrodzenia: DateTime.utc(2023, 5, 10),
-          gender: "M",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          id: 5),
-      Patient(
-          imie: "XYZ",
-          nazwisko: "ABC",
-          dataUrodzenia: DateTime.utc(2010, 10, 8),
-          gender: "K",
-          showDateOfBirth: false,
-          buttonText: "Profil",
-          id: 6)
-    ];
+        id: 4),
+    Patient(
+        imie: "Adam",
+        nazwisko: "Nowak",
+        dataUrodzenia: DateTime.utc(2023, 5, 10),
+        gender: "M",
+        showDateOfBirth: false,
+        buttonText: "Profil",
+        id: 5),
+    Patient(
+        imie: "XYZ",
+        nazwisko: "ABC",
+        dataUrodzenia: DateTime.utc(2010, 10, 8),
+        gender: "K",
+        showDateOfBirth: false,
+        buttonText: "Profil",
+        id: 6)
+  ];
   List<Patient> filteredPatientList = [];
 
   @override
   Widget build(BuildContext context) {
-
     List<DropdownMenuItem<String>> sortingOptions = [
       const DropdownMenuItem(
           value: "Data urodzenia (rosnąco)",
@@ -100,12 +108,19 @@ class _HomePageState extends State<HomePage> {
       const DropdownMenuItem(value: "Z-A", child: Text("Z-A")),
     ];
 
-    if(filteredPatientList.length == 0){ filteredPatientList = patientList; }
+    if (filteredPatientList.length == 0) {
+      filteredPatientList = patientList;
+    }
 
     void filterList(String searchText) {
-      setState(() {  filteredPatientList = patientList
+      setState(() {
+        filteredPatientList = patientList
             .where((logObj) =>
-              (logObj.imie+" "+logObj.nazwisko).toLowerCase().trim().contains(searchText.toLowerCase()) || logObj.id.toString().toLowerCase().trim().contains(searchText) )
+                (logObj.imie + " " + logObj.nazwisko)
+                    .toLowerCase()
+                    .trim()
+                    .contains(searchText.toLowerCase()) ||
+                logObj.id.toString().toLowerCase().trim().contains(searchText))
             .toList();
       });
     }
@@ -125,12 +140,14 @@ class _HomePageState extends State<HomePage> {
                   width: 220,
                   child: TextButton(
                       onPressed: () async {
-                        Navigator.push(
+                        /*Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const AddNewPatient(),
                           ),
-                        );
+                        );*/
+                        await helper.batchInsert();
+                        setState(() {});
                       },
                       style: IconButton.styleFrom(
                         highlightColor: const Color.fromRGBO(0, 84, 210, 1),
@@ -145,11 +162,20 @@ class _HomePageState extends State<HomePage> {
                       )),
                 ),
               ),
-              SizedBox(width: 200, height: 40, 
-                child: SearchBar(
+              SizedBox(
+                width: 200,
+                height: 40,
+                /*child: SearchBar(
                   onTap: () {filterList("");},
                   onChanged:(value) => filterList(value),
-                )
+                )*/
+                child: TextButton(
+                  onPressed: () async {
+                    await helper.deleteAllUsers();
+                    setState(() {});
+                  },
+                  child: const Text("DEL"),
+                ),
               ),
               const Spacer(),
               Align(
@@ -186,22 +212,29 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           Flexible(
-            child: 
-            ListView.builder(
-
-              key: ValueKey(filteredPatientList),
-              padding: EdgeInsets.zero,
-              itemCount: filteredPatientList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return PatientListItem(
-                  imie: filteredPatientList[index].imie,
-                  nazwisko: filteredPatientList[index].nazwisko,
-                  dataUrodzenia: filteredPatientList[index].dataUrodzenia,
-                  gender: filteredPatientList[index].gender,
-                  showDateOfBirth: filteredPatientList[index].showDateOfBirth,
-                  buttonText: filteredPatientList[index].buttonText,
-                  id: filteredPatientList[index].id,
-                );
+            child: FutureBuilder<List<Pacjent>>(
+              future: helper.getAllUsers(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(child: Text('No users found.'));
+                } else {
+                  final users = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: users.length,
+                    itemBuilder: (context, index) {
+                      return PatientListItem(
+                        name: users[index].name,
+                        surname: users[index].surname,
+                        sex: users[index].sex,
+                        id: users[index].id,
+                      );
+                    },
+                  );
+                }
               },
             ),
           ),
