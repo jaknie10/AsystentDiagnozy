@@ -1,6 +1,4 @@
-import 'dart:math';
-
-import 'package:asystent_diagnozy/models/pacjent.dart';
+import 'package:asystent_diagnozy/models/patient.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class SQLiteHelper {
@@ -32,12 +30,12 @@ class SQLiteHelper {
             id INTEGER PRIMARY KEY,
             name TEXT,
             surname TEXT,
-            sex TEXT
+            gender TEXT
           )
  """);
   }
 
-  Future<Pacjent> insertUSer(Pacjent user) async {
+  Future<Patient> insertUSer(Patient user) async {
     final db = await database;
     db.insert(
       "pacjenci",
@@ -47,20 +45,19 @@ class SQLiteHelper {
     return user;
   }
 
-  Future<List<Pacjent>> batchInsert() async {
+  Future<List<Patient>> batchInsert() async {
     final db = await database;
     final batch = db.batch();
-    final Random random = Random();
-    final List<Pacjent> userList = List.generate(
+    final List<Patient> userList = List.generate(
       10,
-      (index) => Pacjent(
+      (index) => Patient(
         id: index + 1,
         name: 'Pacjent',
         surname: '$index',
-        sex: 'M',
+        gender: 'M',
       ),
     );
-    for (final Pacjent user in userList) {
+    for (final Patient user in userList) {
       batch.insert(
         'pacjenci',
         user.toMap(),
@@ -71,21 +68,21 @@ class SQLiteHelper {
     return userList;
   }
 
-  Future<List<Pacjent>> getAllUsers() async {
+  Future<List<Patient>> getAllUsers() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('pacjenci');
 
     return List.generate(maps.length, (index) {
-      return Pacjent(
+      return Patient(
         id: maps[index]['id'],
         name: maps[index]['name'],
         surname: maps[index]['surname'],
-        sex: maps[index]['sex'],
+        gender: maps[index]['gender'],
       );
     });
   }
 
-  Future<Pacjent?> getUserById(int userId) async {
+  Future<Patient?> getUserById(int userId) async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       'pacjenci',
@@ -94,11 +91,11 @@ class SQLiteHelper {
     );
 
     if (maps.isNotEmpty) {
-      return Pacjent(
+      return Patient(
         id: maps[0]['id'],
         name: maps[0]['name'],
         surname: maps[0]['surname'],
-        sex: maps[0]['sex'],
+        gender: maps[0]['gender'],
       );
     }
 

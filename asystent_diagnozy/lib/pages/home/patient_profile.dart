@@ -120,8 +120,7 @@ class _PatientProfileState extends State<PatientProfile> {
                 child: Container(
                   width: double.infinity,
                   height: 60,
-                  decoration:
-                      const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
+                  decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Row(
@@ -210,8 +209,7 @@ class _PatientProfileState extends State<PatientProfile> {
                 child: Container(
                     width: double.infinity,
                     height: 140,
-                    decoration:
-                        const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
+                    decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
                     child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Column(
@@ -229,8 +227,8 @@ class _PatientProfileState extends State<PatientProfile> {
                                 scrollDirection: Axis.vertical,
                                 children: [
                                   Text(
-                                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis risus, et tincidunt sapien. Pellentesque mattis, sem sit amet hendrerit aliquet, mauris turpis hendrerit nisi, id iaculis augue erat eget neque. Integer tempor, nibh quis malesuada semper, justo risus tempus eros, eget fringilla elit augue et arcu. ",
-                                      style: TextStyle(fontSize: 15),
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis risus, et tincidunt sapien. Pellentesque mattis, sem sit amet hendrerit aliquet, mauris turpis hendrerit nisi, id iaculis augue erat eget neque. Integer tempor, nibh quis malesuada semper, justo risus tempus eros, eget fringilla elit augue et arcu. ",
+                                    style: TextStyle(fontSize: 15),
                                   )
                                 ],
                               ),
@@ -242,14 +240,16 @@ class _PatientProfileState extends State<PatientProfile> {
               child: Container(
                 width: double.infinity,
                 height: 160,
-                decoration:
-                    const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
+                decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
                 child: Column(
                   children: [
                     const Align(
                         alignment: Alignment.centerLeft,
                         child: Padding(
-                          padding: EdgeInsets.only(left: 15.0, top: 10.0,),
+                          padding: EdgeInsets.only(
+                            left: 15.0,
+                            top: 10.0,
+                          ),
                           child: Text(
                             "Dodaj nowe badanie",
                             style: TextStyle(fontSize: 20),
@@ -268,8 +268,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                   final result = await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          Morfologia(patientId: widget.patientId, patientGender: widget.patientGender),
+                                      builder: (context) => Morfologia(patientId: widget.patientId, patientGender: widget.patientGender),
                                     ),
                                   );
                                   debugPrint("Patient id: " + result.toString());
@@ -351,13 +350,12 @@ class _PatientProfileState extends State<PatientProfile> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      flex: 1,
+                      // flex: 1,
                       child: Container(
                         height: 60,
                         decoration: BoxDecoration(
                           border: Border(
-                            right: BorderSide(
-                                color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
+                            right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
                           ),
                         ),
                         child: IconButton(
@@ -376,8 +374,7 @@ class _PatientProfileState extends State<PatientProfile> {
                           height: 60,
                           decoration: BoxDecoration(
                             border: Border(
-                              right: BorderSide(
-                                  color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
+                              right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
                             ),
                           ),
                           child: Center(
@@ -393,8 +390,7 @@ class _PatientProfileState extends State<PatientProfile> {
                           height: 60,
                           decoration: BoxDecoration(
                             border: Border(
-                              right: BorderSide(
-                                  color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
+                              right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
                             ),
                           ),
                           child: Center(
@@ -410,8 +406,7 @@ class _PatientProfileState extends State<PatientProfile> {
                           height: 60,
                           decoration: BoxDecoration(
                             border: Border(
-                              right: BorderSide(
-                                  color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
+                              right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
                             ),
                           ),
                           child: Center()),
@@ -433,19 +428,17 @@ class _PatientProfileState extends State<PatientProfile> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 15.0, right: 10.0),
-              child: Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  itemCount: badanieList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return BadanieListItem(
-                      typBadania: badanieList[index].typBadania,
-                      dataBadania: badanieList[index].dataBadania,
-                      badanieId: badanieList[index].badanieId,
-                    );
-                  },
-                ),
+              child: ListView.builder(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                itemCount: badanieList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return BadanieListItem(
+                    typBadania: badanieList[index].typBadania,
+                    dataBadania: badanieList[index].dataBadania,
+                    badanieId: badanieList[index].badanieId,
+                  );
+                },
               ),
             ),
           ],
