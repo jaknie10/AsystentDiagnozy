@@ -28,11 +28,7 @@ class _LayoutState extends State<Layout> {
 
     List<Map<String, dynamic>> pages = [
       {'name': 'Home', 'page': const HomePage(), 'key': keyHome},
-      {
-        'name': 'Profile',
-        'page': const Profile(doctorId: 1),
-        'key': keyProfile
-      },
+      {'name': 'Profile', 'page': const Profile(doctorId: 1), 'key': keyProfile},
       {'name': 'Settings', 'page': const Settings(), 'key': keySettings},
     ];
 
@@ -79,17 +75,14 @@ class _LayoutState extends State<Layout> {
             padding: const EdgeInsets.all(20.0),
             child: const Align(
                 alignment: Alignment.centerLeft,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        Icons.people,
-                        size: 30,
-                        color: Colors.black,
-                      ),
-                      Text("Jan Kowalski",
-                          style: TextStyle(fontSize: 20, color: Colors.black))
-                    ])),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                  Icon(
+                    Icons.people,
+                    size: 30,
+                    color: Colors.black,
+                  ),
+                  Text("Jan Kowalski", style: TextStyle(fontSize: 20, color: Colors.black))
+                ])),
           )
         ], // default is 56
       ),
@@ -97,6 +90,7 @@ class _LayoutState extends State<Layout> {
         children: [
           NavigationRail(
             selectedIndex: _selectedIndex,
+            // labelType: NavigationRailLabelType.all,
             onDestinationSelected: (int index) {
               setState(() {
                 _selectedIndex = index;
@@ -114,7 +108,7 @@ class _LayoutState extends State<Layout> {
                   size: 30,
                   color: Color.fromRGBO(22, 20, 35, 60),
                 ),
-                label: Text('Home'),
+                label: Text('Pacjenci'),
               ),
               NavigationRailDestination(
                 icon: ImageIcon(
@@ -127,7 +121,7 @@ class _LayoutState extends State<Layout> {
                   size: 30,
                   color: Color.fromRGBO(22, 20, 35, 60),
                 ),
-                label: Text('Profile'),
+                label: Text('Profil'),
               ),
               NavigationRailDestination(
                 icon: ImageIcon(
@@ -140,22 +134,18 @@ class _LayoutState extends State<Layout> {
                   size: 30,
                   color: Color.fromRGBO(22, 20, 35, 60),
                 ),
-                label: Text('Settings'),
+                label: Text('Ustawienia'),
               ),
             ],
           ),
           Expanded(
-            child: WillPopScope(
-              onWillPop: () async =>
-                  !await pages[_selectedIndex]['key'].currentState!.maybePop(),
-              child: Navigator(
-                key: pages[_selectedIndex]['key'],
-                onGenerateRoute: (routeSettings) {
-                  return MaterialPageRoute(
-                    builder: (context) => pages[_selectedIndex]['page'],
-                  );
-                },
-              ),
+            child: Navigator(
+              key: pages[_selectedIndex]['key'],
+              onGenerateRoute: (routeSettings) {
+                return MaterialPageRoute(
+                  builder: (context) => pages[_selectedIndex]['page'],
+                );
+              },
             ),
           ),
         ],

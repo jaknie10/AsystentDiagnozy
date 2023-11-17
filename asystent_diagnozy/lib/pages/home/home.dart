@@ -40,6 +40,10 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     helper.initWinDB();
+
+    //przykładowi pacjenci na początek
+    helper.insertUSer(const Patient(id: 1, gender: 'K', name: 'Julia', surname: 'Nowak'));
+    helper.insertUSer(const Patient(id: 2, gender: 'M', name: 'Jan', surname: 'Kowalski'));
   }
 
   // List<Patient> patientList = [
@@ -98,12 +102,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> sortingOptions = [
-      const DropdownMenuItem(
-          value: "Data urodzenia (rosnąco)",
-          child: Text("Data urodzenia (rosnąco)")),
-      const DropdownMenuItem(
-          value: "Data urodzenia (malejąco)",
-          child: Text("Data urodzenia (malejąco)")),
+      const DropdownMenuItem(value: "Data urodzenia (rosnąco)", child: Text("Data urodzenia (rosnąco)")),
+      const DropdownMenuItem(value: "Data urodzenia (malejąco)", child: Text("Data urodzenia (malejąco)")),
       const DropdownMenuItem(value: "A-Z", child: Text("A-Z")),
       const DropdownMenuItem(value: "Z-A", child: Text("Z-A")),
     ];
@@ -192,9 +192,7 @@ class _HomePageState extends State<HomePage> {
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
                             dropdownColor: Colors.white,
-                            style: const TextStyle(
-                                fontSize: 15,
-                                color: Color.fromRGBO(22, 20, 35, 1.0)),
+                            style: const TextStyle(fontSize: 15, color: Color.fromRGBO(22, 20, 35, 1.0)),
                             elevation: 0,
                             value: sortingType,
                             items: sortingOptions,
