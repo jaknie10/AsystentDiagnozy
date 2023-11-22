@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 
 class GazometriaAnaliza extends StatefulWidget {
   const GazometriaAnaliza(
-      {Key? key,
-      required this.results,
-      required this.interpretations,
-      required this.clasification})
-      : super(key: key);
+      {super.key, required this.results, required this.interpretations, required this.clasification});
 
   final Map<String, Map<String, dynamic>> results;
   final String clasification;
@@ -32,27 +28,25 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                     },
                     child: const Text("Powrót")),
                 DataTable(
-                  border: const TableBorder(
-                      verticalInside: BorderSide(
-                          width: 2, color: Color.fromRGBO(238, 238, 238, 1))),
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  border:
+                      const TableBorder(verticalInside: BorderSide(width: 2, color: Color.fromRGBO(238, 238, 238, 1))),
+                  decoration:
+                      const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))),
                   columns: const <DataColumn>[
                     DataColumn(
                       label: Text('Parametr'),
                     ),
                     DataColumn(
-                      label: Text('Jednostka'),
+                      label: Text('Wartość'),
                     ),
                     DataColumn(
-                      label: Text('min'),
+                      label: Text('Minimum'),
                     ),
                     DataColumn(
-                      label: Text('max'),
+                      label: Text('Maksimum'),
                     ),
                     DataColumn(
-                      label: Text('flag'),
+                      label: Text('Wynik'),
                     ),
                   ],
                   rows: <DataRow>[
@@ -60,11 +54,23 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text(entry.value['short'])),
-                          DataCell(Text(
-                              "${entry.value['value']} ${entry.value['unit']}")),
+                          DataCell(Text("${entry.value['value']} ${entry.value['unit']}")),
                           DataCell(Text(entry.value['lowerbound'].toString())),
                           DataCell(Text(entry.value['upperbound'].toString())),
-                          DataCell(Text(entry.value['result']))
+                          DataCell((entry.value['result'] == 'gt')
+                              ? const Icon(
+                                  Icons.arrow_upward,
+                                  color: Colors.red,
+                                )
+                              : (entry.value['result'] == 'eq')
+                                  ? const Icon(
+                                      Icons.check,
+                                      color: Colors.green,
+                                    )
+                                  : const Icon(
+                                      Icons.arrow_downward,
+                                      color: Colors.red,
+                                    ))
                         ],
                       )
                   ],
@@ -78,10 +84,9 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 147, 146, 202)),
+                    decoration: const BoxDecoration(color: Color.fromARGB(255, 147, 146, 202)),
                     child: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(widget.clasification),
                     ),
                   ),
@@ -92,8 +97,7 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            color: Colors.white),
+                            borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.white),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(entry),

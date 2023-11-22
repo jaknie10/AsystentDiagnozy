@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'gazometria_results.dart';
 
 class Gazometria extends StatefulWidget {
-  const Gazometria({Key? key, required this.patientId}) : super(key: key);
+  const Gazometria({super.key, required this.patientId});
 
   final int patientId;
 
@@ -25,8 +25,7 @@ class _GazometriaState extends State<Gazometria> {
   String classification = "Podane wyniki badania nie są standardowe";
 
   Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/gazometria.json');
+    final String response = await rootBundle.loadString('assets/gazometria.json');
     final data = await json.decode(response);
     setState(() {
       items = data['norms'];
@@ -37,15 +36,6 @@ class _GazometriaState extends State<Gazometria> {
   @override
   Widget build(BuildContext context) {
     readJson();
-
-    // String? lowerbound;
-    // String? upperbound;
-
-    // lowerbound = 'm_low';
-    // upperbound = 'm_high';
-
-    // lowerbound = 'w_low';
-    // upperbound = 'w_high';
 
     return SingleChildScrollView(
       child: Column(
@@ -75,13 +65,9 @@ class _GazometriaState extends State<Gazometria> {
                           width: 200,
                           child: TextFormField(
                             keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                             decoration: InputDecoration(
-                                border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5))),
+                                border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
                                 labelText: entry.value['short'],
                                 suffixIcon: Padding(
                                   padding: const EdgeInsets.only(right: 5),
@@ -92,8 +78,7 @@ class _GazometriaState extends State<Gazometria> {
                                     ),
                                   ),
                                 ),
-                                suffixIconConstraints: const BoxConstraints(
-                                    minWidth: 0, minHeight: 0),
+                                suffixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
                                 isDense: true),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -107,22 +92,13 @@ class _GazometriaState extends State<Gazometria> {
                               entryMap['value'] = double.parse(value!);
                               entryMap['lowerbound'] = entry.value["low"];
                               entryMap['upperbound'] = entry.value["high"];
-                              entryMap['result'] = (double.parse(value) <
-                                      entry.value["low"])
+                              entryMap['unit'] = entry.value["unit"];
+                              entryMap['result'] = (double.parse(value) < entry.value["low"])
                                   ? 'lt'
                                   : (double.parse(value) > entry.value["high"])
                                       ? 'gt'
                                       : 'eq';
                               results[entryMap['short']] = entryMap;
-                              // if (double.parse(value) <
-                              //     entry.value["low"]) {
-                              //   interpretations
-                              //       .addAll(entry.value['deficit_int']);
-                              // } else if (double.parse(value) >
-                              //     entry.value["high"]) {
-                              //   interpretations
-                              //       .addAll(entry.value['surplus_int']);
-                              // }
                             },
                           ),
                         ),
@@ -136,104 +112,14 @@ class _GazometriaState extends State<Gazometria> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-//logika klasyfikacji i interpretacji
-                // (pH | PaCO₂ | HCO₃ - akt) + BE
-                //
-                var pH = results["pH"]?["result"];
-                var PaCO2 = results["PaCO₂"]?["result"];
-                var HCO3 = results["HCO₃ - akt"]?["result"];
-                var BE = results["BE"]?["result"];
 
-                if (pH == "gt") {
-                  if (PaCO2 == "gt") {
-                    if (HCO3 == "gt") {
-                      classification =
-                          "Zasadowica metaboliczna częściowo skompensowana";
-                    }
-                  } else if (PaCO2 == "eq") {
-                    if (HCO3 == "gt") {
-                      classification =
-                          "Zasadowica metaboliczna nieskompensowana";
-                    }
-                  } else if (PaCO2 == "lt") {
-                    if (HCO3 == "eq") {
-                      classification = "Zasadowica oddechowa nieskompensowana";
-                    } else if (HCO3 == "lt") {
-                      classification =
-                          "Zasadowica oddechowa częściowo skompensowana";
-                    }
-                  }
-                } else if (pH == "lt") {
-                  if (PaCO2 == "gt") {
-                    if (HCO3 == "eq") {
-                      classification = "Kwasica oddechowa nieskompensowana";
-                    } else if (HCO3 == "gt") {
-                      classification =
-                          "Kwasica oddechowa częściowo skompensowana";
-                    }
-                  } else if (PaCO2 == "eq") {
-                    if (HCO3 == "lt") {
-                      classification = "Kwasica metaboliczna nieskompensowana";
-                    }
-                  } else if (PaCO2 == "lt") {
-                    if (HCO3 == "lt") {
-                      classification =
-                          "Kwasica metaboliczna częściowo skompensowana";
-                    }
-                  }
-                } else if (pH == "eq") {
-                  if (PaCO2 == "gt" && HCO3 == "gt") {
-                    //kwasica oddechowa albo zasadowica metaboliczna
-                    if (BE == "eq") {
-                      // "Jeśli BE jest w normie -> mamy całkowicie skompensowane zaburzenie oddechowe"
-                      classification = "Kwasica oddechowa skompensowana";
-                    } else if (BE == "gt") {
-                      //"Jeśli nie jest -> mamy całkowicie skompensowane zaburzenie metaboliczne" + "Dodatnie BE wskazuje, że ilość zasad przekracza norme (zasadowica metaboliczna)"
-                      classification = "Zasadowica metaboliczna skompensowana";
-                    }
-                  } else if (PaCO2 == "lt" && HCO3 == "lt") {
-                    //zasadowica oddechowa albo kwasica metaboliczna
-                    if (BE == "eq") {
-                      // "Jeśli BE jest w normie -> mamy całkowicie skompensowane zaburzenie oddechowe"
-                      classification = "Zasadowica oddechowa skompensowana";
-                    } else if (BE == "gt") {
-                      //"Jeśli nie jest -> mamy całkowicie skompensowane zaburzenie metaboliczne" + "Dodatnie BE wskazuje, że ilość zasad przekracza norme (zasadowica metaboliczna)"
-                      classification = "Kwasica metaboliczna skompensowana";
-                    }
-                  }
-
-                  // if (results?["pH"]?["value"]?.value >= 7.4)
-                }
-                switch (classification) {
-                  case "Kwasica oddechowa nieskompensowana" ||
-                        "Kwasica oddechowa częściowo skompensowana" ||
-                        "Kwasica oddechowa skompensowana":
-                    interpretations = interprets["KO"];
-                    break;
-                  case "Zasadowica oddechowa nieskompensowana" ||
-                        "Zasadowica oddechowa częściowo skompensowana" ||
-                        "Zasadowica oddechowa skompensowana":
-                    interpretations = interprets["ZO"];
-                    break;
-                  case "Kwasica metaboliczna nieskompensowana" ||
-                        "Kwasica metaboliczna częściowo skompensowana" ||
-                        "Kwasica metaboliczna skompensowana":
-                    interpretations = interprets["KO"];
-                    break;
-                  case "Zasadowica metaboliczna nieskompensowana" ||
-                        "Zasadowica metaboliczna częściowo skompensowana" ||
-                        "Zasadowica metaboliczna skompensowana":
-                    interpretations = interprets["ZO"];
-                    break;
-                }
+                gazometriaAnaliza();
 
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => GazometriaAnaliza(
-                          results: results,
-                          interpretations: interpretations,
-                          clasification: classification),
+                          results: results, interpretations: interpretations, clasification: classification),
                     ));
               }
             },
@@ -242,5 +128,93 @@ class _GazometriaState extends State<Gazometria> {
         ],
       ),
     );
+  }
+
+  void gazometriaAnaliza() {
+    //logika klasyfikacji i interpretacji
+    // (pH | PaCO₂ | HCO₃ - akt) + BE
+
+    var pH = results["pH"]?["result"];
+    var paCO2 = results["PaCO₂"]?["result"];
+    var hCO3 = results["HCO₃ - akt"]?["result"];
+    var bE = results["BE"]?["result"];
+
+    if (pH == "gt") {
+      if (paCO2 == "gt") {
+        if (hCO3 == "gt") {
+          classification = "Zasadowica metaboliczna częściowo skompensowana";
+        }
+      } else if (paCO2 == "eq") {
+        if (hCO3 == "gt") {
+          classification = "Zasadowica metaboliczna nieskompensowana";
+        }
+      } else if (paCO2 == "lt") {
+        if (hCO3 == "eq") {
+          classification = "Zasadowica oddechowa nieskompensowana";
+        } else if (hCO3 == "lt") {
+          classification = "Zasadowica oddechowa częściowo skompensowana";
+        }
+      }
+    } else if (pH == "lt") {
+      if (paCO2 == "gt") {
+        if (hCO3 == "eq") {
+          classification = "Kwasica oddechowa nieskompensowana";
+        } else if (hCO3 == "gt") {
+          classification = "Kwasica oddechowa częściowo skompensowana";
+        }
+      } else if (paCO2 == "eq") {
+        if (hCO3 == "lt") {
+          classification = "Kwasica metaboliczna nieskompensowana";
+        }
+      } else if (paCO2 == "lt") {
+        if (hCO3 == "lt") {
+          classification = "Kwasica metaboliczna częściowo skompensowana";
+        }
+      }
+    } else if (pH == "eq") {
+      if (paCO2 == "gt" && hCO3 == "gt") {
+        //kwasica oddechowa albo zasadowica metaboliczna
+        if (bE == "eq") {
+          // "Jeśli BE jest w normie -> mamy całkowicie skompensowane zaburzenie oddechowe"
+          classification = "Kwasica oddechowa skompensowana";
+        } else if (bE == "gt") {
+          //"Jeśli nie jest -> mamy całkowicie skompensowane zaburzenie metaboliczne" + "Dodatnie BE wskazuje, że ilość zasad przekracza norme (zasadowica metaboliczna)"
+          classification = "Zasadowica metaboliczna skompensowana";
+        }
+      } else if (paCO2 == "lt" && hCO3 == "lt") {
+        //zasadowica oddechowa albo kwasica metaboliczna
+        if (bE == "eq") {
+          // "Jeśli BE jest w normie -> mamy całkowicie skompensowane zaburzenie oddechowe"
+          classification = "Zasadowica oddechowa skompensowana";
+        } else if (bE == "gt") {
+          //"Jeśli nie jest -> mamy całkowicie skompensowane zaburzenie metaboliczne" + "Dodatnie BE wskazuje, że ilość zasad przekracza norme (zasadowica metaboliczna)"
+          classification = "Kwasica metaboliczna skompensowana";
+        }
+      }
+
+      // if (results?["pH"]?["value"]?.value >= 7.4)
+    }
+    switch (classification) {
+      case "Kwasica oddechowa nieskompensowana" ||
+            "Kwasica oddechowa częściowo skompensowana" ||
+            "Kwasica oddechowa skompensowana":
+        interpretations = interprets["KO"];
+        break;
+      case "Zasadowica oddechowa nieskompensowana" ||
+            "Zasadowica oddechowa częściowo skompensowana" ||
+            "Zasadowica oddechowa skompensowana":
+        interpretations = interprets["ZO"];
+        break;
+      case "Kwasica metaboliczna nieskompensowana" ||
+            "Kwasica metaboliczna częściowo skompensowana" ||
+            "Kwasica metaboliczna skompensowana":
+        interpretations = interprets["KO"];
+        break;
+      case "Zasadowica metaboliczna nieskompensowana" ||
+            "Zasadowica metaboliczna częściowo skompensowana" ||
+            "Zasadowica metaboliczna skompensowana":
+        interpretations = interprets["ZO"];
+        break;
+    }
   }
 }
