@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class MorfologiaAnaliza extends StatefulWidget {
   const MorfologiaAnaliza({
-    Key? key,
+    super.key,
     required this.results,
     required this.interpretations,
-  }) : super(key: key);
+  });
 
   final List results;
   final Set interpretations;
@@ -34,22 +34,11 @@ class _MorfologiaAnalizaState extends State<MorfologiaAnaliza> {
                       const TableBorder(verticalInside: BorderSide(width: 2, color: Color.fromRGBO(238, 238, 238, 1))),
                   decoration:
                       const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10))),
-                  columns: const <DataColumn>[
-                    DataColumn(
-                      label: Text('Parametr'),
-                    ),
-                    DataColumn(
-                      label: Text('Jednostka'),
-                    ),
-                    DataColumn(
-                      label: Text('min'),
-                    ),
-                    DataColumn(
-                      label: Text('max'),
-                    ),
-                    DataColumn(
-                      label: Text('flag'),
-                    ),
+                  columns: <DataColumn>[
+                    for (final name in ['Parametr', 'Jednostka', 'Min', 'Max', 'Flag'])
+                      DataColumn(
+                        label: Text(name),
+                      ),
                   ],
                   rows: <DataRow>[
                     for (final entry in widget.results)
@@ -68,22 +57,31 @@ class _MorfologiaAnalizaState extends State<MorfologiaAnaliza> {
             ),
           ),
           Expanded(
-            child: Wrap(
-              direction: Axis.horizontal,
-              children: [
-                for (var entry in widget.interpretations)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration:
-                          const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.white),
-                      child: Padding(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration:
+                    const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.white),
+                child: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.end,
+                  direction: Axis.horizontal,
+                  children: [
+                    for (var entry in widget.interpretations)
+                      Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(entry),
-                      ),
-                    ),
-                  )
-              ],
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(Radius.circular(5)),
+                              border: Border.fromBorderSide(BorderSide(color: Theme.of(context).primaryColor))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(entry),
+                          ),
+                        ),
+                      )
+                  ],
+                ),
+              ),
             ),
           )
         ],

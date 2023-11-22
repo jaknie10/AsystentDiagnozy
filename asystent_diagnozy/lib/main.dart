@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'layout.dart';
 
 void main() => runApp(const MyApp());
@@ -23,7 +24,10 @@ class MyApp extends StatelessWidget {
           thumbVisibility: const MaterialStatePropertyAll(true),
           trackVisibility: const MaterialStatePropertyAll(true),
         ),
+        // textTheme: const TextTheme(headlineLarge: TextStyle(fontSize: 30, fontWeight: FontWeight.bold))
       ),
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: const [Locale('pl')],
       home: const Layout(),
     );
   }

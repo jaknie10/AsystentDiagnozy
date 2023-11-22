@@ -73,7 +73,7 @@
     "m_high": 14.5,
     "w_low": 11.5,
     "w_high": 14.5,
-    "deficit_int": [""],
+    "deficit_int": [],
     "surplus_int": ["niedokrwistości niedoborowe", "stan po przetoczeniu erytrocytów"]
   },
   "RET":{
@@ -117,7 +117,7 @@
     "m_high": 0.5,
     "w_low": 0.05,
     "w_high": 0.5,
-    "deficit_int": [""],
+    "deficit_int": [],
     "surplus_int": ["rozpoznanie rożnicowe"]
   },
   "BASO":{
@@ -128,7 +128,7 @@
     "m_high": 0.3,
     "w_low": 0.01,
     "w_high": 0.3,
-    "deficit_int": [""],
+    "deficit_int": [],
     "surplus_int": ["nowotwory mieloproliferacyjne","ostra białaczka bazofilowa, RZS"]
   },
   "LYM":{
@@ -150,7 +150,7 @@
     "m_high": 0.8,
     "w_low": 0.2,
     "w_high": 0.8,
-    "deficit_int": [""],
+    "deficit_int": [],
     "surplus_int": ["niedokrwistość autoimmunohemolityczna", "stan po leczeniu glikokortykosteroidami", "stosowanie czynników wzrostu","układowe tkanki łącznej","zakażenia i faza zdrowienia po ostrym zakażeniu", "choroby zapalne i autoimmunologiczne (nieswoiste zapalenia jelit, alkoholowa choroba wątroby, sarkoidoza, małopłytkowość immunologiczna), jatrogenne (stan po splenektomii), nowotwory układu krwiotwórczego i chłonnego, nowotwory lite, regeneracja szpiku po chemioterapii lub radioterapii, neutropenia, zawał serca, ciąża"]
   },
   "PLT":{

@@ -4,28 +4,8 @@ import 'add_new_patient.dart';
 import 'patient_list_item.dart';
 import 'package:asystent_diagnozy/database/database_service.dart';
 
-// class Patient {
-//   final String imie;
-//   final String nazwisko;
-//   final DateTime dataUrodzenia;
-//   final String gender;
-//   final bool showDateOfBirth;
-//   final String buttonText;
-//   final int id;
-
-//   Patient({
-//     required this.imie,
-//     required this.nazwisko,
-//     required this.dataUrodzenia,
-//     required this.gender,
-//     required this.showDateOfBirth,
-//     required this.buttonText,
-//     required this.id,
-//   });
-// }
-
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -45,59 +25,6 @@ class _HomePageState extends State<HomePage> {
     helper.insertUSer(const Patient(id: 1, gender: 'K', name: 'Julia', surname: 'Nowak'));
     helper.insertUSer(const Patient(id: 2, gender: 'M', name: 'Jan', surname: 'Kowalski'));
   }
-
-  // List<Patient> patientList = [
-  //   Patient(
-  //     imie: "Jan",
-  //     nazwisko: "Kowalski",
-  //     dataUrodzenia: DateTime.utc(2000, 10, 10),
-  //     gender: "M",
-  //     showDateOfBirth: false,
-  //     buttonText: "Profil",
-  //     id: 1,
-  //   ),
-  //   Patient(
-  //       imie: "Adam",
-  //       nazwisko: "Nowak",
-  //       dataUrodzenia: DateTime.utc(2023, 5, 10),
-  //       gender: "M",
-  //       showDateOfBirth: false,
-  //       buttonText: "Profil",
-  //       id: 2),
-  //   Patient(
-  //       imie: "XYZ",
-  //       nazwisko: "ABC",
-  //       dataUrodzenia: DateTime.utc(2010, 10, 8),
-  //       gender: "K",
-  //       showDateOfBirth: false,
-  //       buttonText: "Profil",
-  //       id: 3),
-  //   Patient(
-  //       imie: "Jan",
-  //       nazwisko: "Kowalski",
-  //       dataUrodzenia: DateTime.utc(2000, 10, 10),
-  //       gender: "M",
-  //       showDateOfBirth: false,
-  //       buttonText: "Profil",
-  //       id: 4),
-  //   Patient(
-  //       imie: "Adam",
-  //       nazwisko: "Nowak",
-  //       dataUrodzenia: DateTime.utc(2023, 5, 10),
-  //       gender: "M",
-  //       showDateOfBirth: false,
-  //       buttonText: "Profil",
-  //       id: 5),
-  //   Patient(
-  //       imie: "XYZ",
-  //       nazwisko: "ABC",
-  //       dataUrodzenia: DateTime.utc(2010, 10, 8),
-  //       gender: "K",
-  //       showDateOfBirth: false,
-  //       buttonText: "Profil",
-  //       id: 6)
-  // ];
-  // List<Patient> filteredPatientList = [];
 
   @override
   Widget build(BuildContext context) {
