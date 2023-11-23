@@ -58,8 +58,8 @@
     }
   },
   "int":{
-    "KM": ["cukrzycowa kwasica ketonowa", "zatrucie: etanol, metanol, glikol etylenowy, salicylany, paracetamol, metformina", "niewydolność nerek", "niewydolność wątroby", "wstrząs", "rabdomioliza", "białaczka", "chłoniak", "biegunka"], 
-    "KO": ["Niedrożność górnych dróg oddechowych", "Wstrząs, Hipowolemia, Sepsa, Zatorowość płucna", "Przedawkowanie opioidów, leków nasennych lub narkotyków", "Zatrucie jadem kiełbasianym", "Obturacja dolnych dróg oddechowych – astma, POChP", "Obrzęk płuc, krwawienie śródpęcherzykowe", "Zapalenie płuc, choroby śródmiąższowe płuc", "Odma opłucnowa", "Niedodma", "bezdech senny", "Urazy i guzy klatki piersiowej", "Znaczna otyłość", "wodobrzusze", "Uszkodzenie pnia mózgu, nerwów przeponowych, szyjnego lub piersiowej odcinka rdzenia kręgowego"],
+    "KM": ["Cukrzycowa kwasica ketonowa", "Zatrucie: etanol, metanol, glikol etylenowy, salicylany, paracetamol, metformina", "Niewydolność nerek", "Niewydolność wątroby", "Wstrząs", "Rabdomioliza", "Białaczka", "Chłoniak", "Biegunka"], 
+    "KO": ["Niedrożność górnych dróg oddechowych", "Wstrząs", "Hipowolemia", "Sepsa", "Zatorowość płucna", "Przedawkowanie opioidów, leków nasennych lub narkotyków", "Zatrucie jadem kiełbasianym", "Obturacja dolnych dróg oddechowych – astma, POChP", "Obrzęk płuc, krwawienie śródpęcherzykowe", "Zapalenie płuc, choroby śródmiąższowe płuc", "Odma opłucnowa", "Niedodma", "Bezdech senny", "Urazy i guzy klatki piersiowej", "Znaczna otyłość", "Wodobrzusze", "Uszkodzenie pnia mózgu, nerwów przeponowych, szyjnego lub piersiowej odcinka rdzenia kręgowego"],
     "ZM": ["Hipokaliemia - stosowanie diuretyków, leków przeczyszczających, GKS", "Nadmierna utrata H+ i Cl- - diuretyki, mukowiscydoza, biegunka, wymioty", "Nadmierna podaż NaHCO3 lub cytrynianu/mleczanu sodu"],
     "ZO": ["Bodźce bólowe", "Zmiany naczyniowe OUN", "Ataki paniki", "Gorączka", "Niedodma, wypełnienie pęcherzyków płynem", "Zatorowość płucna, wstrząs", "Sinicze wady serca i dużych naczyń", "Zmiany śródmiąższowe płuc"]
   }

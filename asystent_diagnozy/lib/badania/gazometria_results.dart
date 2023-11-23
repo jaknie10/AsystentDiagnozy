@@ -14,8 +14,10 @@ class GazometriaAnaliza extends StatefulWidget {
 }
 
 class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
+
   @override
   Widget build(BuildContext context) {
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -314,7 +316,7 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                         children: 
                         [ for (var entry in widget.interpretations)
                         Padding(
-                          padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+                          padding: const EdgeInsets.only(left: 10.0, top: 10.0),
                           child: Container(
                             decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.white),
