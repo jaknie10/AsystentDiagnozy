@@ -269,6 +269,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                     onPressed: () async {
                                                       var date = await showDatePicker(
                                                         context: context,
+                                                        initialDate: DateTime.now(),
                                                         firstDate: DateTime(1900),
                                                         lastDate: DateTime.now(),
                                                         builder: (context, child) {
