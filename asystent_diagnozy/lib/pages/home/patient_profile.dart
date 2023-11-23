@@ -310,7 +310,7 @@ class _PatientProfileState extends State<PatientProfile> {
             Align(
               alignment: Alignment.centerRight,
               child: Padding(
-                padding: const EdgeInsets.only(right: 15.0, top: 10.0, bottom: 10.0),
+                padding: const EdgeInsets.only(right: 25.0, top: 10.0, bottom: 10.0),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -345,7 +345,8 @@ class _PatientProfileState extends State<PatientProfile> {
                   color: Colors.white,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
                 ),
-                child: Row(
+                child: 
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -401,28 +402,19 @@ class _PatientProfileState extends State<PatientProfile> {
                           ))),
                     ),
                     Expanded(
-                      flex: 6,
-                      child: Container(
-                          height: 60,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
+                      flex: 8,
+                      child: 
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5.0),),
+                        child:
+                        Container(
+                            height: 60,
+                            decoration: BoxDecoration( 
                             ),
-                          ),
-                          child: Center()),
+                            child: Center()),),
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                          height: 60,
-                          child: Center(
-                            child: SizedBox(
-                              height: 40,
-                              child: Container(),
-                            ),
-                          )),
-                    ),
-                  ],
+                  ]
                 ),
               ),
             ),
