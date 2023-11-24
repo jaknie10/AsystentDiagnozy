@@ -3,18 +3,20 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
-import 'gazometria_results.dart';
+import 'lipidogram_results.dart';
 
-class Gazometria extends StatefulWidget {
-  const Gazometria({super.key, required this.patientId});
+class Lipidogram extends StatefulWidget {
+  const Lipidogram(
+      {super.key, required this.patientId, required this.patientGender});
 
   final int patientId;
+  final String patientGender;
 
   @override
-  State<Gazometria> createState() => _GazometriaState();
+  State<Lipidogram> createState() => _LipidogramState();
 }
 
-class _GazometriaState extends State<Gazometria> {
+class _LipidogramState extends State<Lipidogram> {
   final _formKey = GlobalKey<FormState>();
 
   var items = {};
@@ -26,7 +28,7 @@ class _GazometriaState extends State<Gazometria> {
 
   Future<void> readJson() async {
     final String response =
-        await rootBundle.loadString('assets/gazometria.json');
+        await rootBundle.loadString('assets/lipidogram.json');
     final data = await json.decode(response);
     setState(() {
       items = data['norms'];
@@ -37,6 +39,16 @@ class _GazometriaState extends State<Gazometria> {
   @override
   Widget build(BuildContext context) {
     readJson();
+
+    String? lowerbound;
+    String? upperbound;
+    if (widget.patientGender == 'M') {
+      lowerbound = 'm_low';
+      upperbound = 'm_high';
+    } else if (widget.patientGender == 'K') {
+      lowerbound = 'w_low';
+      upperbound = 'w_high';
+    }
 
     return SingleChildScrollView(
       child: Column(
@@ -96,13 +108,14 @@ class _GazometriaState extends State<Gazometria> {
                               Map<String, dynamic> entryMap = {};
                               entryMap['short'] = entry.value['short'];
                               entryMap['value'] = double.parse(value!);
-                              entryMap['lowerbound'] = entry.value["low"];
-                              entryMap['upperbound'] = entry.value["high"];
+                              entryMap['lowerbound'] = entry.value[lowerbound];
+                              entryMap['upperbound'] = entry.value[upperbound];
                               entryMap['unit'] = entry.value["unit"];
                               entryMap['result'] = (double.parse(value) <
-                                      entry.value["low"])
+                                      entry.value[lowerbound])
                                   ? 'lt'
-                                  : (double.parse(value) > entry.value["high"])
+                                  : (double.parse(value) >
+                                          entry.value[upperbound])
                                       ? 'gt'
                                       : 'eq';
                               results[entryMap['short']] = entryMap;
@@ -120,12 +133,12 @@ class _GazometriaState extends State<Gazometria> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
 
-                gazometriaAnaliza();
+                lipidogramAnaliza();
 
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => GazometriaAnaliza(
+                      builder: (context) => LipidogramAnaliza(
                           results: results,
                           interpretations: interpretations,
                           clasification: classification),
@@ -139,99 +152,58 @@ class _GazometriaState extends State<Gazometria> {
     );
   }
 
-  void gazometriaAnaliza() {
-    //logika klasyfikacji i interpretacji
-    // (pH | PaCO₂ | HCO₃ - akt) + BE
+  void lipidogramAnaliza() {
+    var Chol = results["Chol"]?["result"];
+    var LDL = results["LDL"]?["result"];
+    var HDL = results["HDL"]?["result"];
+    var VLDL = results["VLDL"]?["result"];
+    var TAG = results["TAG"]?["result"];
 
-    var pH = results["pH"]?["result"];
-    var paCO2 = results["PaCO₂"]?["result"];
-    var hCO3 = results["HCO₃ - akt"]?["result"];
-    var bE = results["BE"]?["result"];
-
-    if (pH == "gt") {
-      if (paCO2 == "gt") {
-        if (hCO3 == "gt") {
-          classification = "Zasadowica metaboliczna częściowo skompensowana";
-        }
-      } else if (paCO2 == "eq") {
-        if (hCO3 == "gt") {
-          classification = "Zasadowica metaboliczna nieskompensowana";
-        }
-      } else if (paCO2 == "lt") {
-        if (hCO3 == "eq") {
-          classification = "Zasadowica oddechowa nieskompensowana";
-        } else if (hCO3 == "lt") {
-          classification = "Zasadowica oddechowa częściowo skompensowana";
-        }
+    if ((Chol == "gt" || LDL == "gt") &&
+        ((HDL == "eq" || HDL == "lt") &&
+            (VLDL == "eq" || VLDL == "lt") &&
+            (TAG == "eq" || TAG == "lt"))) {
+      classification = "Hipercholesterolemia prosta";
+    } else if (TAG == "gt" &&
+        ((Chol == "eq" || Chol == "lt") &&
+            (LDL == "eq" || LDL == "lt") &&
+            (HDL == "eq" || HDL == "lt"))) {
+      var value = results?["TAG"]?["value"]?.value;
+      if (value < 400) {
+        classification = "Hipertrójglicerydemia łagodna";
+      } else if (value >= 400 && value < 885) {
+        classification = "Hipertrójglicerydemia umiarkowana";
+      } else if (value >= 885) {
+        classification = "Hipertrójglicerydemia ciężka";
       }
-    } else if (pH == "lt") {
-      if (paCO2 == "gt") {
-        if (hCO3 == "eq") {
-          classification = "Kwasica oddechowa nieskompensowana";
-        } else if (hCO3 == "gt") {
-          classification = "Kwasica oddechowa częściowo skompensowana";
-        }
-      } else if (paCO2 == "eq") {
-        if (hCO3 == "lt") {
-          classification = "Kwasica metaboliczna nieskompensowana";
-        }
-      } else if (paCO2 == "lt") {
-        if (hCO3 == "lt") {
-          classification = "Kwasica metaboliczna częściowo skompensowana";
-        }
-      }
-    } else if (pH == "eq") {
-      if (paCO2 == "gt" && hCO3 == "gt") {
-        //kwasica oddechowa albo zasadowica metaboliczna
-        if (bE == "eq" || bE == "lt") {
-          // "Jeśli BE jest w normie -> mamy całkowicie skompensowane zaburzenie oddechowe"
-          classification = "Kwasica oddechowa skompensowana";
-        } else if (bE == "gt") {
-          //"Jeśli nie jest -> mamy całkowicie skompensowane zaburzenie metaboliczne" + "Dodatnie BE wskazuje, że ilość zasad przekracza norme (zasadowica metaboliczna)"
-          classification = "Zasadowica metaboliczna skompensowana";
-        }
-      } else if (paCO2 == "lt" && hCO3 == "lt") {
-        //zasadowica oddechowa albo kwasica metaboliczna
-        if (bE == "eq" || bE == "lt") {
-          // "Jeśli BE jest w normie -> mamy całkowicie skompensowane zaburzenie oddechowe"
-          classification = "Zasadowica oddechowa skompensowana";
-        } else if (bE == "gt") {
-          //"Jeśli nie jest -> mamy całkowicie skompensowane zaburzenie metaboliczne" + "Dodatnie BE wskazuje, że ilość zasad przekracza norme (zasadowica metaboliczna)"
-          classification = "Kwasica metaboliczna skompensowana";
-        }
-      } else if (pH != "eq" ||
-          paCO2 != "eq" ||
-          hCO3 != "eq" ||
-          bE != "eq" ||
-          results["HCO3std"]?["result"] != "eq" ||
-          results["PaO2"]?["result"] != "eq" ||
-          results["ctCO2"]?["result"] != "eq" ||
-          results["SaO2"]?["result"] != "eq") {
-        classification = "Podane wyniki nie są standardowe";
-      }
-
-      // if (results?["pH"]?["value"]?.value >= 7.4)
+    } else if ((Chol == "gt" || LDL == "gt") &&
+        TAG == "gt" &&
+        (HDL == "eq" || HDL == "lt")) {
+      classification = "Hiperlipidemia mieszana";
+    } else if (HDL == "gt" && TAG == "gt" && VLDL == "gt") {
+      classification = "Dyslipidemia aterogenna";
+    } else if (Chol != "eq" ||
+        LDL != "eq" ||
+        HDL != "eq" ||
+        VLDL != "eq" ||
+        TAG != "eq") {
+      classification = "Podane wyniki nie są standardowe";
     }
+
     switch (classification) {
-      case "Kwasica oddechowa nieskompensowana" ||
-            "Kwasica oddechowa częściowo skompensowana" ||
-            "Kwasica oddechowa skompensowana":
-        interpretations = interprets["KO"];
+      case "Hipercholesterolemia prosta":
+        interpretations = interprets["HCP"];
         break;
-      case "Zasadowica oddechowa nieskompensowana" ||
-            "Zasadowica oddechowa częściowo skompensowana" ||
-            "Zasadowica oddechowa skompensowana":
-        interpretations = interprets["ZO"];
+      case "Hipertrójglicerydemia łagodna" ||
+            "Hipertrójglicerydemia umiarkowana" ||
+            "Hipertrójglicerydemia ciężka":
+        interpretations = interprets["HT"];
         break;
-      case "Kwasica metaboliczna nieskompensowana" ||
-            "Kwasica metaboliczna częściowo skompensowana" ||
-            "Kwasica metaboliczna skompensowana":
-        interpretations = interprets["KO"];
+      case "Hiperlipidemia mieszana":
+        interpretations = interprets["HLM"];
         break;
-      case "Zasadowica metaboliczna nieskompensowana" ||
-            "Zasadowica metaboliczna częściowo skompensowana" ||
-            "Zasadowica metaboliczna skompensowana":
-        interpretations = interprets["ZO"];
+      case "Dyslipidemia aterogenna":
+        interpretations = interprets["DLA"];
         break;
     }
   }

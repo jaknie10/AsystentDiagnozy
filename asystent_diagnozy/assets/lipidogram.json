@@ -1,0 +1,56 @@
+{
+  "norms":{
+    "Chol":{
+      "short": "Chol",
+      "full_name": "cholesterol całkowity ",
+      "unit": "mg/dl",
+      "m_low": 0,
+      "m_high": 190,
+      "w_low": 0,
+      "w_high": 190
+    },
+    "LDL":{
+      "short": "LDL",
+      "full_name": "cholesterol LDL",
+      "unit": "mg/dl",
+      "m_low": 0,
+      "m_high": 115,
+      "w_low": 0,
+      "w_high": 115
+    },
+    "HDL":{
+      "short": "HDL",
+      "full_name": "cholesterol HDL",
+      "unit": "mg/dl",
+      "m_low": 40,
+      "m_high": 90,
+      "w_low": 50,
+      "w_high": 90
+    },
+    "VLDL":{
+      "short": "VLDL",
+      "full_name": "cholesterol VLDL",
+      "unit": "mg/dl",
+      "m_low": 0,
+      "m_high": 30,
+      "w_low": 0,
+      "w_high": 30
+    },
+    "TAG":{
+      "short": "TAG",
+      "full_name": "trój glicerydy",
+      "unit": "mg/dl",
+      "m_low": 0,
+      "m_high": 150,
+      "w_low": 0,
+      "w_high": 150
+    }
+  
+  },
+  "int":{
+    "HCP": ["symptom hipercholesterolemii prostej"],
+    "HT": ["symptom hipertrójglicerydemii"],
+    "HLM": ["symptom hiperlipidemii mieszanej"],
+    "DLA": ["symptom dyslipidemii aterogennej"]
+  }
+}

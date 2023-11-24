@@ -27,19 +27,16 @@ class _BadanieListItemState extends State<BadanieListItem> {
         width: double.infinity,
         height: 60,
         decoration: BoxDecoration(color: Colors.white),
-        child: 
-        GestureDetector(
-          onTap: (){
-          Navigator.push(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    Badanie(badanieId: widget.badanieId),
+                builder: (context) => Badanie(badanieId: widget.badanieId),
               ),
             );
           },
-          child: 
-          Row(
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -63,7 +60,9 @@ class _BadanieListItemState extends State<BadanieListItem> {
                               ? 'assets/badanie_morfologia_logo.png'
                               : (widget.typBadania == "Gazometria"
                                   ? 'assets/badanie_gazometria_logo.png'
-                                  : 'assets/badanie_logo.png'),
+                                  : (widget.typBadania == "Lipidogram"
+                                      ? 'assets/badanie_lipidogram_logo.png'
+                                      : 'assets/badanie_logo.png')),
                         ),
                       ),
                       highlightColor: Colors.transparent,
@@ -120,7 +119,8 @@ class _BadanieListItemState extends State<BadanieListItem> {
                       ),
                       child: Center())),
             ],
-          ),),
+          ),
+        ),
       ),
     );
   }
