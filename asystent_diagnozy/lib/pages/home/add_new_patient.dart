@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:asystent_diagnozy/database/database_service.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/patient.dart';
@@ -78,15 +77,15 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.all(20.0),
-                                    child: Text(
-                                      "ID pacjenta*:",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: EdgeInsets.all(20.0),
+                                  //   child: Text(
+                                  //     "ID pacjenta*:",
+                                  //     style: TextStyle(
+                                  //       fontSize: 18,
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Padding(
                                     padding: EdgeInsets.all(20.0),
                                     child: Text(
@@ -151,47 +150,47 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                   });
                                                 }),
                                           ),
+                                          // Padding(
+                                          //   padding: const EdgeInsets.all(5),
+                                          //   child: TextFormField(
+                                          //     keyboardType: TextInputType.number,
+                                          //     inputFormatters: <TextInputFormatter>[
+                                          //       FilteringTextInputFormatter.digitsOnly
+                                          //     ],
+                                          //     onSaved: (value) {
+                                          //       // newPatient['id'] = int.parse(value!);
+                                          //     },
+                                          //     validator: (value) {
+                                          //       if (value == null || value.isEmpty) {
+                                          //         return 'Podaj prawidłowe ID';
+                                          //       }
+                                          //       return null;
+                                          //     },
+                                          //     decoration: InputDecoration(
+                                          //       filled: true,
+                                          //       fillColor: Theme.of(context).colorScheme.background,
+                                          //       border: OutlineInputBorder(
+                                          //           borderRadius: BorderRadius.circular(5.0),
+                                          //           borderSide: const BorderSide(color: Colors.transparent)),
+                                          //       enabledBorder: OutlineInputBorder(
+                                          //           borderRadius: BorderRadius.circular(5.0),
+                                          //           borderSide: const BorderSide(color: Colors.transparent)),
+                                          //       focusedBorder: OutlineInputBorder(
+                                          //           borderRadius: BorderRadius.circular(5.0),
+                                          //           borderSide: const BorderSide(color: Colors.black)),
+                                          //     ),
+                                          //   ),
+                                          // ),
                                           Padding(
                                             padding: const EdgeInsets.all(5),
                                             child: TextFormField(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                FilteringTextInputFormatter.digitsOnly
-                                              ],
-                                              onSaved: (value) {
-                                                newPatient['id'] = int.parse(value!);
-                                              },
-                                              validator: (value) {
-                                                if (value == null || value.isEmpty) {
-                                                  return 'Podaj prawidłowe ID';
-                                                }
-                                                return null;
-                                              },
-                                              decoration: InputDecoration(
-                                                filled: true,
-                                                fillColor: Theme.of(context).colorScheme.background,
-                                                border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(5.0),
-                                                    borderSide: const BorderSide(color: Colors.transparent)),
-                                                enabledBorder: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(5.0),
-                                                    borderSide: const BorderSide(color: Colors.transparent)),
-                                                focusedBorder: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.circular(5.0),
-                                                    borderSide: const BorderSide(color: Colors.black)),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(5),
-                                            child: TextFormField(
+                                              keyboardType: TextInputType.name,
                                               onSaved: (value) {
                                                 newPatient['name'] = value.toString();
                                               },
                                               validator: (value) {
                                                 if (value == null || value.isEmpty) {
-                                                  // return 'Podaj prawidłowe imię';
-                                                  return null;
+                                                  return 'Podaj prawidłowe imię';
                                                 }
                                                 return null;
                                               },
@@ -218,8 +217,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                               },
                                               validator: (value) {
                                                 if (value == null || value.isEmpty) {
-                                                  // return 'Podaj prawidłowe nazwisko';
-                                                  return null;
+                                                  return 'Podaj prawidłowe nazwisko';
                                                 }
                                                 return null;
                                               },
@@ -241,11 +239,15 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                           Padding(
                                             padding: const EdgeInsets.all(5),
                                             child: TextFormField(
+                                              onSaved: (value) {
+                                                if (value != null && value.isNotEmpty) {
+                                                  newPatient['birthdate'] = value;
+                                                }
+                                              },
                                               controller: dateController,
                                               validator: (value) {
                                                 if (value == null || value.isEmpty) {
-                                                  // return 'Podaj prawidłową datę urodzenia';
-                                                  return null;
+                                                  return 'Podaj prawidłową datę urodzenia';
                                                 }
                                                 return null;
                                               },
@@ -361,11 +363,11 @@ class _AddNewPatientState extends State<AddNewPatient> {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
                                 helper.insertUSer(Patient(
-                                  id: newPatient['id'],
-                                  name: newPatient['name'],
-                                  surname: newPatient['surname'],
-                                  gender: newPatient['gender'],
-                                ));
+                                    id: 0,
+                                    name: newPatient['name'],
+                                    surname: newPatient['surname'],
+                                    gender: newPatient['gender'],
+                                    birthDate: newPatient['birthdate']));
                                 Navigator.pop(context);
                               }
                             },

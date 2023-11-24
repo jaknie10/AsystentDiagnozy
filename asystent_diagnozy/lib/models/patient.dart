@@ -6,19 +6,11 @@ class Patient {
   final String name;
   final String surname;
   final String gender;
+  final String birthDate;
 
-  const Patient({
-    required this.id,
-    required this.name,
-    required this.surname,
-    required this.gender,
-  });
+  const Patient(
+      {required this.id, required this.name, required this.surname, required this.gender, required this.birthDate});
   Map<String, dynamic> toMap() {
-    return {
-      "id": id,
-      "name": name,
-      "surname": surname,
-      "gender": gender,
-    };
+    return {"name": name, "surname": surname, "gender": gender, 'birthdate': birthDate};
   }
 }
