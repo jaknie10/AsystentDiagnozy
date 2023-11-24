@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:asystent_diagnozy/database/database_service.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/patient.dart';
@@ -54,7 +55,8 @@ class _AddNewPatientState extends State<AddNewPatient> {
                     padding: EdgeInsets.only(bottom: 18.0),
                     child: Text(
                       "Wprowadź dane pacjenta:",
-                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
                     ),
                   ),
                   Expanded(
@@ -68,15 +70,6 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(20.0),
-                                    child: Text(
-                                      "Płeć*:",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ),
                                   // Padding(
                                   //   padding: EdgeInsets.all(20.0),
                                   //   child: Text(
@@ -107,6 +100,15 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                   Padding(
                                     padding: EdgeInsets.all(20.0),
                                     child: Text(
+                                      "Płeć*:",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(20.0),
+                                    child: Text(
                                       "Data urodzenia:",
                                       style: TextStyle(
                                         fontSize: 18,
@@ -129,27 +131,6 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(5),
-                                            child: DropdownButtonFormField(
-                                                hint: const Text('Wybierz płeć'),
-                                                decoration: InputDecoration(
-                                                    border: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.circular(5),
-                                                        borderSide: BorderSide.none),
-                                                    filled: true,
-                                                    fillColor: Theme.of(context).colorScheme.background),
-                                                style: const TextStyle(
-                                                    fontSize: 15, color: Color.fromRGBO(22, 20, 35, 1.0)),
-                                                items: genderOptions,
-                                                validator: (value) => value == null ? "Wybierz płeć" : null,
-                                                onChanged: (val) {
-                                                  setState(() {
-                                                    gender = val!;
-                                                    newPatient['gender'] = val;
-                                                  });
-                                                }),
-                                          ),
                                           // Padding(
                                           //   padding: const EdgeInsets.all(5),
                                           //   child: TextFormField(
@@ -185,6 +166,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                             padding: const EdgeInsets.all(5),
                                             child: TextFormField(
                                               keyboardType: TextInputType.name,
+                                              inputFormatters: [UpperCaseTextFormatter()],
                                               onSaved: (value) {
                                                 newPatient['name'] = value.toString();
                                               },
@@ -199,13 +181,16 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                 fillColor: Theme.of(context).colorScheme.background,
                                                 border: OutlineInputBorder(
                                                     borderRadius: BorderRadius.circular(5.0),
-                                                    borderSide: const BorderSide(color: Colors.transparent)),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors.transparent)),
                                                 enabledBorder: OutlineInputBorder(
                                                     borderRadius: BorderRadius.circular(5.0),
-                                                    borderSide: const BorderSide(color: Colors.transparent)),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors.transparent)),
                                                 focusedBorder: OutlineInputBorder(
                                                     borderRadius: BorderRadius.circular(5.0),
-                                                    borderSide: const BorderSide(color: Colors.black)),
+                                                    borderSide:
+                                                        const BorderSide(color: Colors.black)),
                                               ),
                                             ),
                                           ),
@@ -221,20 +206,49 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                 }
                                                 return null;
                                               },
+                                              keyboardType: TextInputType.name,
+                                              inputFormatters: [UpperCaseTextFormatter()],
                                               decoration: InputDecoration(
                                                 filled: true,
                                                 fillColor: Theme.of(context).colorScheme.background,
                                                 border: OutlineInputBorder(
                                                     borderRadius: BorderRadius.circular(5.0),
-                                                    borderSide: const BorderSide(color: Colors.transparent)),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors.transparent)),
                                                 enabledBorder: OutlineInputBorder(
                                                     borderRadius: BorderRadius.circular(5.0),
-                                                    borderSide: const BorderSide(color: Colors.transparent)),
+                                                    borderSide: const BorderSide(
+                                                        color: Colors.transparent)),
                                                 focusedBorder: OutlineInputBorder(
                                                     borderRadius: BorderRadius.circular(5.0),
-                                                    borderSide: const BorderSide(color: Colors.black)),
+                                                    borderSide:
+                                                        const BorderSide(color: Colors.black)),
                                               ),
                                             ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(5),
+                                            child: DropdownButtonFormField(
+                                                hint: const Text('Wybierz płeć'),
+                                                decoration: InputDecoration(
+                                                    border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(5),
+                                                        borderSide: BorderSide.none),
+                                                    filled: true,
+                                                    fillColor:
+                                                        Theme.of(context).colorScheme.background),
+                                                style: const TextStyle(
+                                                    fontSize: 15,
+                                                    color: Color.fromRGBO(22, 20, 35, 1.0)),
+                                                items: genderOptions,
+                                                validator: (value) =>
+                                                    value == null ? "Wybierz płeć" : null,
+                                                onChanged: (val) {
+                                                  setState(() {
+                                                    gender = val!;
+                                                    newPatient['gender'] = val;
+                                                  });
+                                                }),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(5),
@@ -245,6 +259,11 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                 }
                                               },
                                               controller: dateController,
+                                              inputFormatters: [
+                                                DateTextFormatter(),
+                                                FilteringTextInputFormatter.allow(RegExp('[0-9/]')),
+                                                LengthLimitingTextInputFormatter(10)
+                                              ],
                                               validator: (value) {
                                                 if (value == null || value.isEmpty) {
                                                   return 'Podaj prawidłową datę urodzenia';
@@ -254,16 +273,20 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                               keyboardType: TextInputType.datetime,
                                               decoration: InputDecoration(
                                                   filled: true,
-                                                  fillColor: Theme.of(context).colorScheme.background,
+                                                  fillColor:
+                                                      Theme.of(context).colorScheme.background,
                                                   border: OutlineInputBorder(
                                                       borderRadius: BorderRadius.circular(5.0),
-                                                      borderSide: const BorderSide(color: Colors.transparent)),
+                                                      borderSide: const BorderSide(
+                                                          color: Colors.transparent)),
                                                   enabledBorder: OutlineInputBorder(
                                                       borderRadius: BorderRadius.circular(5.0),
-                                                      borderSide: const BorderSide(color: Colors.transparent)),
+                                                      borderSide: const BorderSide(
+                                                          color: Colors.transparent)),
                                                   focusedBorder: OutlineInputBorder(
                                                       borderRadius: BorderRadius.circular(5.0),
-                                                      borderSide: const BorderSide(color: Colors.black)),
+                                                      borderSide:
+                                                          const BorderSide(color: Colors.black)),
                                                   suffixIcon: IconButton(
                                                     icon: const Icon(
                                                       Icons.calendar_month,
@@ -277,16 +300,20 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                         builder: (context, child) {
                                                           return Theme(
                                                             data: Theme.of(context).copyWith(
-                                                                datePickerTheme: const DatePickerThemeData(
-                                                                    shape: RoundedRectangleBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.all(Radius.circular(5))))),
+                                                                datePickerTheme:
+                                                                    const DatePickerThemeData(
+                                                                        shape: RoundedRectangleBorder(
+                                                                            borderRadius:
+                                                                                BorderRadius.all(
+                                                                                    Radius.circular(
+                                                                                        5))))),
                                                             child: child!,
                                                           );
                                                         },
                                                       );
                                                       if (date != null) {
-                                                        dateController.text = DateFormat('dd/MM/yyyy').format(date);
+                                                        dateController.text =
+                                                            DateFormat('dd/MM/yyyy').format(date);
                                                       }
                                                     },
                                                   ),
@@ -427,5 +454,36 @@ class _AddNewPatientState extends State<AddNewPatient> {
             )),
       ),
     );
+  }
+}
+
+class DateTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (oldValue.text.isEmpty || oldValue.text[oldValue.text.length - 1] == '/') {
+      return newValue;
+    }
+    if ([2, 5].contains(newValue.text.length)) {
+      var text = newValue.text;
+      return newValue.copyWith(text: '$text/', selection: updateCursorPosition(text));
+    }
+    return newValue;
+  }
+
+  TextSelection updateCursorPosition(String text) {
+    return TextSelection.fromPosition(TextPosition(offset: text.length + 1));
+  }
+}
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.length == 1) {
+      return TextEditingValue(
+        text: newValue.text[0].toUpperCase(),
+        selection: newValue.selection,
+      );
+    }
+    return newValue;
   }
 }
