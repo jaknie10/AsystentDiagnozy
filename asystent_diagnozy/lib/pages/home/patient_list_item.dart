@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'patient_profile.dart';
 
 class PatientListItem extends StatefulWidget {
-  const PatientListItem({
-    Key? key,
-    required this.name,
-    required this.surname,
-    required this.gender,
-    required this.id,
-  }) : super(key: key);
+  const PatientListItem(
+      {super.key,
+      required this.name,
+      required this.surname,
+      required this.gender,
+      required this.id,
+      required this.birthdate});
 
   final String name;
   final String surname;
   final String gender;
   final int id;
+  final String birthdate;
 
   @override
   State<PatientListItem> createState() => _PatientListItemState();
@@ -23,8 +25,8 @@ class PatientListItem extends StatefulWidget {
 class _PatientListItemState extends State<PatientListItem> {
   @override
   Widget build(BuildContext context) {
-    DateTime dataUrodzenia = DateTime.utc(2000, 10, 10);
-    int age = DateTime.now().difference(dataUrodzenia).inDays ~/ 365;
+    DateTime birthdayDate = DateFormat('dd/MM/yyyy').parse(widget.birthdate);
+    int age = DateTime.now().difference(birthdayDate).inDays ~/ 365;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
@@ -33,7 +35,8 @@ class _PatientListItemState extends State<PatientListItem> {
           child: Ink(
             width: double.infinity,
             height: 60,
-            decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Row(
@@ -44,12 +47,12 @@ class _PatientListItemState extends State<PatientListItem> {
                     child: Row(
                       children: [
                         Text(
-                          widget.name,
+                          widget.surname,
                           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         const Text(" "),
                         Text(
-                          widget.surname,
+                          widget.name,
                           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -63,7 +66,8 @@ class _PatientListItemState extends State<PatientListItem> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                              child: Text(dataUrodzenia.toString().substring(0, 10), style: const TextStyle(fontSize: 18)),
+                              child: Text(birthdayDate.toString().substring(0, 10),
+                                  style: const TextStyle(fontSize: 18)),
                             ),
                             widget.gender == "M"
                                 ? const ImageIcon(
@@ -85,32 +89,6 @@ class _PatientListItemState extends State<PatientListItem> {
                           ],
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 40,
-                      //   child: TextButton(
-                      //       onPressed: () async {
-                      //         Navigator.push(
-                      //           context,
-                      //           MaterialPageRoute(
-                      //             builder: (context) => PatientProfile(
-                      //               patientId: widget.id,
-                      //               patientGender: widget.gender,
-                      //             ),
-                      //           ),
-                      //         );
-                      //       },
-                      //       style: IconButton.styleFrom(
-                      //         highlightColor: const Color.fromRGBO(0, 84, 210, 1),
-                      //         backgroundColor: Theme.of(context).colorScheme.primary,
-                      //         shape: RoundedRectangleBorder(
-                      //           borderRadius: BorderRadius.circular(5.0),
-                      //         ),
-                      //       ),
-                      //       child: const Text(
-                      //         'test',
-                      //         style: TextStyle(color: Colors.white, fontSize: 15),
-                      //       )),
-                      // ),
                     ],
                   ),
                 ],

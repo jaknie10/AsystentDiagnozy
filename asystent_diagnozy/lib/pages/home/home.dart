@@ -22,15 +22,17 @@ class _HomePageState extends State<HomePage> {
     helper.initWinDB();
 
     //przykładowi pacjenci na początek
-    helper.insertUSer(const Patient(id: 1, gender: 'K', name: 'Julia', surname: 'Nowak'));
-    helper.insertUSer(const Patient(id: 2, gender: 'M', name: 'Jan', surname: 'Kowalski'));
+    // helper.insertUSer(const Patient(gender: 'K', name: 'Julia', surname: 'Nowak', birthDate: '12/10/2000'));
+    // helper.insertUSer(const Patient(gender: 'M', name: 'Jan', surname: 'Kowalski', birthDate: '09/05/1996'));
   }
 
   @override
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> sortingOptions = [
-      const DropdownMenuItem(value: "Data urodzenia (rosnąco)", child: Text("Data urodzenia (rosnąco)")),
-      const DropdownMenuItem(value: "Data urodzenia (malejąco)", child: Text("Data urodzenia (malejąco)")),
+      const DropdownMenuItem(
+          value: "Data urodzenia (rosnąco)", child: Text("Data urodzenia (rosnąco)")),
+      const DropdownMenuItem(
+          value: "Data urodzenia (malejąco)", child: Text("Data urodzenia (malejąco)")),
       const DropdownMenuItem(value: "A-Z", child: Text("A-Z")),
       const DropdownMenuItem(value: "Z-A", child: Text("Z-A")),
     ];
@@ -119,7 +121,8 @@ class _HomePageState extends State<HomePage> {
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
                             dropdownColor: Colors.white,
-                            style: const TextStyle(fontSize: 15, color: Color.fromRGBO(22, 20, 35, 1.0)),
+                            style: const TextStyle(
+                                fontSize: 15, color: Color.fromRGBO(22, 20, 35, 1.0)),
                             elevation: 0,
                             value: sortingType,
                             items: sortingOptions,
@@ -152,11 +155,11 @@ class _HomePageState extends State<HomePage> {
                     itemCount: users.length,
                     itemBuilder: (context, index) {
                       return PatientListItem(
-                        name: users[index].name,
-                        surname: users[index].surname,
-                        gender: users[index].gender,
-                        id: users[index].id,
-                      );
+                          name: users[index].name,
+                          surname: users[index].surname,
+                          gender: users[index].gender,
+                          id: users[index].id,
+                          birthdate: users[index].birthDate);
                     },
                   );
                 }

@@ -1,4 +1,5 @@
 import 'package:asystent_diagnozy/models/patient.dart';
+import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class SQLiteHelper {
@@ -13,10 +14,12 @@ class SQLiteHelper {
   }
 
   Future<Database> initWinDB() async {
+    databaseFactoryOrNull = null;
     sqfliteFfiInit();
-    final databaseFactory = databaseFactoryFfi;
+    databaseFactory = databaseFactoryFfi;
     return await databaseFactory.openDatabase(
-      inMemoryDatabasePath,
+      // inMemoryDatabasePath,
+      join(await getDatabasesPath(), 'patient_database.db'),
       options: OpenDatabaseOptions(
         onCreate: _onCreate,
         version: 1,
@@ -27,12 +30,12 @@ class SQLiteHelper {
   Future<void> _onCreate(Database database, int version) async {
     final db = database;
     await db.execute(""" CREATE TABLE IF NOT EXISTS pacjenci(
-            id INTEGER PRIMARY KEY,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             surname TEXT,
-            gender TEXT
-          )
- """);
+            gender TEXT,
+            birthdate TEXT
+          )""");
   }
 
   Future<Patient> insertUSer(Patient user) async {
@@ -51,11 +54,7 @@ class SQLiteHelper {
     final List<Patient> userList = List.generate(
       10,
       (index) => Patient(
-        id: index + 1,
-        name: 'Pacjent',
-        surname: '$index',
-        gender: 'M',
-      ),
+          id: index + 1, name: 'Pacjent', surname: '$index', gender: 'M', birthDate: '01/01/2000'),
     );
     for (final Patient user in userList) {
       batch.insert(
@@ -74,11 +73,11 @@ class SQLiteHelper {
 
     return List.generate(maps.length, (index) {
       return Patient(
-        id: maps[index]['id'],
-        name: maps[index]['name'],
-        surname: maps[index]['surname'],
-        gender: maps[index]['gender'],
-      );
+          id: maps[index]['id'],
+          name: maps[index]['name'],
+          surname: maps[index]['surname'],
+          gender: maps[index]['gender'],
+          birthDate: maps[index]['birthdate']);
     });
   }
 
@@ -96,6 +95,7 @@ class SQLiteHelper {
         name: maps[0]['name'],
         surname: maps[0]['surname'],
         gender: maps[0]['gender'],
+        birthDate: maps[0]['birthdate'],
       );
     }
 
