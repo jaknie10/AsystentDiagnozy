@@ -365,6 +365,38 @@ class _PatientProfileState extends State<PatientProfile> {
                                   hoverColor: Colors.transparent,
                                 )),
                           ),
+                          Padding(
+                            padding: EdgeInsets.only(),
+                            child: SizedBox(
+                                width: 150,
+                                child: IconButton(
+                                  onPressed: () async {
+                                  
+                                  },
+                                  icon: Image(
+                                    image: AssetImage(
+                                        'assets/badanie_uniwersalne_logo.png'),
+                                  ),
+                                  highlightColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                )),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(),
+                            child: SizedBox(
+                                width: 150,
+                                child: IconButton(
+                                  onPressed: () async {
+                                   
+                                  },
+                                  icon: Image(
+                                    image: AssetImage(
+                                        'assets/badanie_uniwersalne_logo.png'),
+                                  ),
+                                  highlightColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                )),
+                          ),
                         ],
                       ),
                     ),
