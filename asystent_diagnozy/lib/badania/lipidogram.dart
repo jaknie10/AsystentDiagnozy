@@ -6,8 +6,7 @@ import 'package:flutter/services.dart';
 import 'lipidogram_results.dart';
 
 class Lipidogram extends StatefulWidget {
-  const Lipidogram(
-      {super.key, required this.patientId, required this.patientGender});
+  const Lipidogram({super.key, required this.patientId, required this.patientGender});
 
   final int patientId;
   final String patientGender;
@@ -27,8 +26,7 @@ class _LipidogramState extends State<Lipidogram> {
   String classification = "Podane wyniki badania wydają się poprawne";
 
   Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/lipidogram.json');
+    final String response = await rootBundle.loadString('assets/lipidogram.json');
     final data = await json.decode(response);
     setState(() {
       items = data['norms'];
@@ -83,8 +81,7 @@ class _LipidogramState extends State<Lipidogram> {
                             ],
                             decoration: InputDecoration(
                                 border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5))),
+                                    borderRadius: BorderRadius.all(Radius.circular(5))),
                                 labelText: entry.value['short'],
                                 suffixIcon: Padding(
                                   padding: const EdgeInsets.only(right: 5),
@@ -95,8 +92,8 @@ class _LipidogramState extends State<Lipidogram> {
                                     ),
                                   ),
                                 ),
-                                suffixIconConstraints: const BoxConstraints(
-                                    minWidth: 0, minHeight: 0),
+                                suffixIconConstraints:
+                                    const BoxConstraints(minWidth: 0, minHeight: 0),
                                 isDense: true),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -111,11 +108,9 @@ class _LipidogramState extends State<Lipidogram> {
                               entryMap['lowerbound'] = entry.value[lowerbound];
                               entryMap['upperbound'] = entry.value[upperbound];
                               entryMap['unit'] = entry.value["unit"];
-                              entryMap['result'] = (double.parse(value) <
-                                      entry.value[lowerbound])
+                              entryMap['result'] = (double.parse(value) < entry.value[lowerbound])
                                   ? 'lt'
-                                  : (double.parse(value) >
-                                          entry.value[upperbound])
+                                  : (double.parse(value) > entry.value[upperbound])
                                       ? 'gt'
                                       : 'eq';
                               results[entryMap['short']] = entryMap;
@@ -168,7 +163,7 @@ class _LipidogramState extends State<Lipidogram> {
         ((Chol == "eq" || Chol == "lt") &&
             (LDL == "eq" || LDL == "lt") &&
             (HDL == "eq" || HDL == "lt"))) {
-      var value = results?["TAG"]?["value"]?.value;
+      var value = results["TAG"]?["value"]?.value;
       if (value < 400) {
         classification = "Hipertrójglicerydemia łagodna";
       } else if (value >= 400 && value < 885) {
@@ -176,17 +171,11 @@ class _LipidogramState extends State<Lipidogram> {
       } else if (value >= 885) {
         classification = "Hipertrójglicerydemia ciężka";
       }
-    } else if ((Chol == "gt" || LDL == "gt") &&
-        TAG == "gt" &&
-        (HDL == "eq" || HDL == "lt")) {
+    } else if ((Chol == "gt" || LDL == "gt") && TAG == "gt" && (HDL == "eq" || HDL == "lt")) {
       classification = "Hiperlipidemia mieszana";
     } else if (HDL == "gt" && TAG == "gt" && VLDL == "gt") {
       classification = "Dyslipidemia aterogenna";
-    } else if (Chol != "eq" ||
-        LDL != "eq" ||
-        HDL != "eq" ||
-        VLDL != "eq" ||
-        TAG != "eq") {
+    } else if (Chol != "eq" || LDL != "eq" || HDL != "eq" || VLDL != "eq" || TAG != "eq") {
       classification = "Podane wyniki nie są standardowe";
     }
 

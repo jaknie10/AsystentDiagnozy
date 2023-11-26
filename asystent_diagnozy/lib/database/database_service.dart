@@ -19,7 +19,7 @@ class SQLiteHelper {
     databaseFactory = databaseFactoryFfi;
     return await databaseFactory.openDatabase(
       // inMemoryDatabasePath,
-      join(await getDatabasesPath(), 'patient_database.db'),
+      join(await getDatabasesPath(), 'database.db'),
       options: OpenDatabaseOptions(
         onCreate: _onCreate,
         version: 1,

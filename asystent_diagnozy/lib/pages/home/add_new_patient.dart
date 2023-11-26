@@ -70,15 +70,6 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  // Padding(
-                                  //   padding: EdgeInsets.all(20.0),
-                                  //   child: Text(
-                                  //     "ID pacjenta*:",
-                                  //     style: TextStyle(
-                                  //       fontSize: 18,
-                                  //     ),
-                                  //   ),
-                                  // ),
                                   Padding(
                                     padding: EdgeInsets.all(20.0),
                                     child: Text(
@@ -131,48 +122,20 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          // Padding(
-                                          //   padding: const EdgeInsets.all(5),
-                                          //   child: TextFormField(
-                                          //     keyboardType: TextInputType.number,
-                                          //     inputFormatters: <TextInputFormatter>[
-                                          //       FilteringTextInputFormatter.digitsOnly
-                                          //     ],
-                                          //     onSaved: (value) {
-                                          //       // newPatient['id'] = int.parse(value!);
-                                          //     },
-                                          //     validator: (value) {
-                                          //       if (value == null || value.isEmpty) {
-                                          //         return 'Podaj prawidłowe ID';
-                                          //       }
-                                          //       return null;
-                                          //     },
-                                          //     decoration: InputDecoration(
-                                          //       filled: true,
-                                          //       fillColor: Theme.of(context).colorScheme.background,
-                                          //       border: OutlineInputBorder(
-                                          //           borderRadius: BorderRadius.circular(5.0),
-                                          //           borderSide: const BorderSide(color: Colors.transparent)),
-                                          //       enabledBorder: OutlineInputBorder(
-                                          //           borderRadius: BorderRadius.circular(5.0),
-                                          //           borderSide: const BorderSide(color: Colors.transparent)),
-                                          //       focusedBorder: OutlineInputBorder(
-                                          //           borderRadius: BorderRadius.circular(5.0),
-                                          //           borderSide: const BorderSide(color: Colors.black)),
-                                          //     ),
-                                          //   ),
-                                          // ),
                                           Padding(
                                             padding: const EdgeInsets.all(5),
                                             child: TextFormField(
                                               keyboardType: TextInputType.name,
-                                              inputFormatters: [UpperCaseTextFormatter()],
+                                              inputFormatters: [
+                                                UpperCaseTextFormatter(),
+                                                LengthLimitingTextInputFormatter(20)
+                                              ],
                                               onSaved: (value) {
                                                 newPatient['name'] = value.toString();
                                               },
                                               validator: (value) {
                                                 if (value == null || value.isEmpty) {
-                                                  return 'Podaj prawidłowe imię';
+                                                  return 'Podaj imię';
                                                 }
                                                 return null;
                                               },
@@ -202,12 +165,15 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                               },
                                               validator: (value) {
                                                 if (value == null || value.isEmpty) {
-                                                  return 'Podaj prawidłowe nazwisko';
+                                                  return 'Podaj nazwisko';
                                                 }
                                                 return null;
                                               },
                                               keyboardType: TextInputType.name,
-                                              inputFormatters: [UpperCaseTextFormatter()],
+                                              inputFormatters: [
+                                                UpperCaseTextFormatter(),
+                                                LengthLimitingTextInputFormatter(20)
+                                              ],
                                               decoration: InputDecoration(
                                                 filled: true,
                                                 fillColor: Theme.of(context).colorScheme.background,
@@ -238,7 +204,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                     fillColor:
                                                         Theme.of(context).colorScheme.background),
                                                 style: const TextStyle(
-                                                    fontSize: 15,
+                                                    fontSize: 18,
                                                     color: Color.fromRGBO(22, 20, 35, 1.0)),
                                                 items: genderOptions,
                                                 validator: (value) =>
@@ -264,12 +230,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                 FilteringTextInputFormatter.allow(RegExp('[0-9/]')),
                                                 LengthLimitingTextInputFormatter(10)
                                               ],
-                                              validator: (value) {
-                                                if (value == null || value.isEmpty) {
-                                                  return 'Podaj prawidłową datę urodzenia';
-                                                }
-                                                return null;
-                                              },
+                                              validator: dateValidator,
                                               keyboardType: TextInputType.datetime,
                                               decoration: InputDecoration(
                                                   filled: true,
@@ -454,6 +415,21 @@ class _AddNewPatientState extends State<AddNewPatient> {
             )),
       ),
     );
+  }
+}
+
+String? dateValidator(value) {
+  DateFormat format = DateFormat("dd/MM/yyyy");
+  if (value == null || value.isEmpty) {
+    return 'Podaj datę urodzenia';
+  }
+  try {
+    if (format.parseStrict(value).isBefore(DateTime.now())) {
+      return null;
+    }
+    return 'Podaj prawidłową datę urodzenia';
+  } catch (error) {
+    return 'Podaj prawidłową datę urodzenia';
   }
 }
 
