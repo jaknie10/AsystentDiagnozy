@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import 'patient_profile.dart';
 
@@ -25,7 +24,7 @@ class PatientListItem extends StatefulWidget {
 class _PatientListItemState extends State<PatientListItem> {
   @override
   Widget build(BuildContext context) {
-    DateTime birthdayDate = DateFormat('dd/MM/yyyy').parse(widget.birthdate);
+    DateTime birthdayDate = DateTime.parse(widget.birthdate);
     int age = DateTime.now().difference(birthdayDate).inDays ~/ 365;
 
     return Padding(

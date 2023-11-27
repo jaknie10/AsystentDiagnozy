@@ -13,28 +13,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final SQLiteHelper helper = SQLiteHelper();
-  String sortingType = 'Data urodzenia (rosnąco)';
+  String sortingType = 'surname';
+  String sortingOrder = 'ASC';
 
   @override
   void initState() {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     helper.initWinDB();
-
-    //przykładowi pacjenci na początek
-    // helper.insertUSer(const Patient(gender: 'K', name: 'Julia', surname: 'Nowak', birthDate: '12/10/2000'));
-    // helper.insertUSer(const Patient(gender: 'M', name: 'Jan', surname: 'Kowalski', birthDate: '09/05/1996'));
   }
 
   @override
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> sortingOptions = [
-      const DropdownMenuItem(
-          value: "Data urodzenia (rosnąco)", child: Text("Data urodzenia (rosnąco)")),
-      const DropdownMenuItem(
-          value: "Data urodzenia (malejąco)", child: Text("Data urodzenia (malejąco)")),
-      const DropdownMenuItem(value: "A-Z", child: Text("A-Z")),
-      const DropdownMenuItem(value: "Z-A", child: Text("Z-A")),
+      const DropdownMenuItem(value: "birthdate", child: Text("Data urodzenia")),
+      const DropdownMenuItem(value: "surname", child: Text("Nazwisko")),
+      const DropdownMenuItem(value: "datecreated", child: Text("Data dodania")),
     ];
 
     // if (filteredPatientList.isEmpty) {
@@ -109,39 +103,58 @@ class _HomePageState extends State<HomePage> {
               const Spacer(),
               Align(
                 alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 15.0),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                            dropdownColor: Colors.white,
-                            style: const TextStyle(
-                                fontSize: 15, color: Color.fromRGBO(22, 20, 35, 1.0)),
-                            elevation: 0,
-                            value: sortingType,
-                            items: sortingOptions,
-                            onChanged: (val) {
-                              setState(() {
-                                sortingType = val.toString();
-                              });
-                              debugPrint(sortingType);
-                            }),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15.0),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                                dropdownColor: Colors.white,
+                                style: const TextStyle(
+                                    fontSize: 15, color: Color.fromRGBO(22, 20, 35, 1.0)),
+                                elevation: 0,
+                                value: sortingType,
+                                items: sortingOptions,
+                                onChanged: (val) {
+                                  setState(() {
+                                    sortingType = val.toString();
+                                  });
+                                  debugPrint(sortingType);
+                                }),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15.0),
+                      child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              if (sortingOrder == 'ASC') {
+                                sortingOrder = 'DESC';
+                              } else {
+                                sortingOrder = 'ASC';
+                              }
+                            });
+                          },
+                          icon: Icon(
+                              (sortingOrder == 'ASC') ? Icons.arrow_downward : Icons.arrow_upward)),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
           Flexible(
             child: FutureBuilder<List<Patient>>(
-              future: helper.getAllUsers(),
+              future: helper.getAllUsers("$sortingType $sortingOrder"),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -158,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                           name: users[index].name,
                           surname: users[index].surname,
                           gender: users[index].gender,
-                          id: users[index].id,
+                          id: users[index].id!,
                           birthdate: users[index].birthDate);
                     },
                   );

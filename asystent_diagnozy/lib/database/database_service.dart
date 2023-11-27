@@ -34,7 +34,8 @@ class SQLiteHelper {
             name TEXT,
             surname TEXT,
             gender TEXT,
-            birthdate TEXT
+            birthdate TEXT,
+            datecreated TEXT
           )""");
   }
 
@@ -48,28 +49,27 @@ class SQLiteHelper {
     return user;
   }
 
-  Future<List<Patient>> batchInsert() async {
-    final db = await database;
-    final batch = db.batch();
-    final List<Patient> userList = List.generate(
-      10,
-      (index) => Patient(
-          id: index + 1, name: 'Pacjent', surname: '$index', gender: 'M', birthDate: '01/01/2000'),
-    );
-    for (final Patient user in userList) {
-      batch.insert(
-        'pacjenci',
-        user.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
-    }
-    await batch.commit();
-    return userList;
-  }
+  // Future<List<Patient>> batchInsert() async {
+  //   final db = await database;
+  //   final batch = db.batch();
+  //   final List<Patient> userList = List.generate(
+  //     10,
+  //     (index) => Patient(name: 'Pacjent', surname: '$index', gender: 'M', birthDate: '01/01/2000'),
+  //   );
+  //   for (final Patient user in userList) {
+  //     batch.insert(
+  //       'pacjenci',
+  //       user.toMap(),
+  //       conflictAlgorithm: ConflictAlgorithm.replace,
+  //     );
+  //   }
+  //   await batch.commit();
+  //   return userList;
+  // }
 
-  Future<List<Patient>> getAllUsers() async {
+  Future<List<Patient>> getAllUsers(order) async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('pacjenci');
+    final List<Map<String, dynamic>> maps = await db.query('pacjenci', orderBy: order);
 
     return List.generate(maps.length, (index) {
       return Patient(

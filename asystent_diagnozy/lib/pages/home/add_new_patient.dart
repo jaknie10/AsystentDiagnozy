@@ -221,7 +221,9 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                             child: TextFormField(
                                               onSaved: (value) {
                                                 if (value != null && value.isNotEmpty) {
-                                                  newPatient['birthdate'] = value;
+                                                  newPatient['birthdate'] = DateFormat('dd/MM/yyyy')
+                                                      .parse(value)
+                                                      .toString();
                                                 }
                                               },
                                               controller: dateController,
@@ -351,7 +353,6 @@ class _AddNewPatientState extends State<AddNewPatient> {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
                                 helper.insertUSer(Patient(
-                                    id: 0,
                                     name: newPatient['name'],
                                     surname: newPatient['surname'],
                                     gender: newPatient['gender'],

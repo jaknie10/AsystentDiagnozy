@@ -1,16 +1,29 @@
-import 'package:flutter/foundation.dart' show immutable;
+// import 'package:flutter/foundation.dart' show immutable;
 
-@immutable
+// @immutable
 class Patient {
-  final int id;
+  final int? id;
   final String name;
   final String surname;
   final String gender;
   final String birthDate;
+  final String datecreated = DateTime.now().toString();
 
-  const Patient(
-      {required this.id, required this.name, required this.surname, required this.gender, required this.birthDate});
+  Patient({
+    this.id,
+    required this.name,
+    required this.surname,
+    required this.gender,
+    required this.birthDate,
+  });
   Map<String, dynamic> toMap() {
-    return {"name": name, "surname": surname, "gender": gender, 'birthdate': birthDate};
+    return {
+      "id": id,
+      "name": name,
+      "surname": surname,
+      "gender": gender,
+      'birthdate': birthDate,
+      "datecreated": datecreated
+    };
   }
 }
