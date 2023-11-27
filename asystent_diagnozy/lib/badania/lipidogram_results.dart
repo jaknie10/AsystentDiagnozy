@@ -1,5 +1,6 @@
 import 'package:asystent_diagnozy/pages/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LipidogramAnaliza extends StatefulWidget {
   const LipidogramAnaliza(
@@ -52,18 +53,16 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
           //logo
           Padding(
             padding: const EdgeInsets.only(left: 5.0, top: 5.0),
-            child: SizedBox(
-                width: 430,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: Image(
-                    image: AssetImage('assets/lipidogram_logo_long.png'),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0, top: 5.0, bottom: 10.0),
+              child: SvgPicture.asset(
+                    'assets/lipidogram_logo_long.svg',
+                    width: 450,
+                    fit: BoxFit.scaleDown,
                   ),
-                  highlightColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                )),
+            ),
           ),
-
+          
           //wyniki analizy
           Padding(
             padding:
