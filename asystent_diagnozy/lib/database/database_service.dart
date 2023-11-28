@@ -67,9 +67,15 @@ class SQLiteHelper {
   //   return userList;
   // }
 
-  Future<List<Patient>> getAllUsers(order) async {
+  Future<List<Patient>> getPatients(String order, String searchValue) async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('pacjenci', orderBy: order);
+    var query = "SELECT * FROM pacjenci";
+    if (searchValue.isNotEmpty) {
+      query = "$query WHERE name LIKE '%$searchValue%' OR surname LIKE '%$searchValue%'";
+    }
+    query = "$query ORDER BY $order";
+    final List<Map<String, dynamic>> maps = await db.rawQuery(query);
+    //final List<Map<String, dynamic>> maps = await db.query('pacjenci', orderBy: order, where: 'name LIKE ?', whereArgs: [searchValue]);
 
     return List.generate(maps.length, (index) {
       return Patient(

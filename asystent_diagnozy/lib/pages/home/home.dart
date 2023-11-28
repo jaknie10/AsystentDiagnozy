@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   final SQLiteHelper helper = SQLiteHelper();
   String sortingType = 'surname';
   String sortingOrder = 'ASC';
+  String searchValue = '';
 
   @override
   void initState() {
@@ -88,17 +89,18 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 width: 200,
                 height: 40,
-                /*child: SearchBar(
-                  onTap: () {filterList("");},
-                  onChanged:(value) => filterList(value),
-                )*/
-                child: TextButton(
-                  onPressed: () async {
-                    await helper.deleteAllUsers();
-                    setState(() {});
-                  },
-                  child: const Text("DEL"),
-                ),
+                child: SearchBar(onChanged: (value) {
+                  setState(() {
+                    searchValue = value;
+                  });
+                }),
+                // child: TextButton(
+                //   onPressed: () async {
+                //     await helper.deleteAllUsers();
+                //     setState(() {});
+                //   },
+                //   child: const Text("DEL"),
+                // ),
               ),
               const Spacer(),
               Align(
@@ -126,7 +128,6 @@ class _HomePageState extends State<HomePage> {
                                   setState(() {
                                     sortingType = val.toString();
                                   });
-                                  debugPrint(sortingType);
                                 }),
                           ),
                         ),
@@ -154,7 +155,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Flexible(
             child: FutureBuilder<List<Patient>>(
-              future: helper.getAllUsers("$sortingType $sortingOrder"),
+              future: helper.getPatients("$sortingType $sortingOrder", searchValue),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
