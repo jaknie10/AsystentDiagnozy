@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 import 'gazometria_results.dart';
 
@@ -41,51 +43,113 @@ class _GazometriaState extends State<Gazometria> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Row(
-            children: [
-              BackButton(
-                onPressed: () {
-                  Navigator.pop(context, widget.patientId);
-                },
-              ),
-              Text("patientId: ${widget.patientId}")
-            ],
-          ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+              padding:
+                  const EdgeInsets.only(left: 15.0, top: 15.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: SizedBox(
+                  height: 40,
+                  width: 100,
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, widget.patientId);
+                      },
+                      style: IconButton.styleFrom(
+                        highlightColor: const Color.fromRGBO(0, 84, 210, 1),
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                      child: Text(
+                        "Powrót",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 15),
+                      )),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              SvgPicture.asset(
+                  'assets/badanie_gazometria_logo.svg',
+                  width: 500,
+                ),
+            ],),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
             child: Container(
-              color: const Color.fromARGB(255, 255, 255, 255),
+              width: 500,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                color: Colors.white),
               child: Form(
                 key: _formKey,
-                child: Wrap(
-                  children: [
+                child: 
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            height: 50,
+                            child: Text("Wprowadź wartości:", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                            ),                    
+                        ],
+                      ),
                     for (var entry in items.entries)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          width: 200,
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                            decoration: InputDecoration(
-                                border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5))),
-                                labelText: entry.value['short'],
-                                suffixIcon: Padding(
-                                  padding: const EdgeInsets.only(right: 5),
-                                  child: Text(
-                                    entry.value['unit'],
-                                    style: const TextStyle(
-                                      color: Color.fromARGB(111, 0, 0, 0),
-                                    ),
-                                  ),
-                                ),
-                                suffixIconConstraints: const BoxConstraints(
-                                    minWidth: 0, minHeight: 0),
-                                isDense: true),
+                      Container(
+                          height: 70,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                child: Container(
+                                  width: 120,
+                                  height: 48,
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: Theme.of(context).colorScheme.background,),
+          
+                                  child: Text(entry.value['short'], style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal)), alignment: Alignment.center),
+                              ),
+                              SizedBox(
+                                width: 200,
+                                child: TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Theme.of(context).colorScheme.background,
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(color: Colors.transparent)),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(color: Colors.transparent)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(color: Colors.black)),
+                                     //labelText: entry.value['short'],
+                                      suffixIcon: Padding(
+                                        padding: const EdgeInsets.only(right: 5),
+                                        child: Text(
+                                          entry.value['unit'],
+                                          style: const TextStyle(
+                                            color: Color.fromARGB(111, 0, 0, 0),
+                                          ),
+                                        ),
+                                      ),
+                                      suffixIconConstraints: const BoxConstraints(
+                                          minWidth: 0, minHeight: 0),
+                                      isDense: true),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Podaj prawidłową wartość';
@@ -106,34 +170,58 @@ class _GazometriaState extends State<Gazometria> {
                                       ? 'gt'
                                       : 'eq';
                               results[entryMap['short']] = entryMap;
-                            },
+                             },
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
+          Padding(
+              padding:
+                  const EdgeInsets.only(bottom: 15.0),
+              child: Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  height: 40,
+                  width: 100,
+                  child: TextButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
 
-                gazometriaAnaliza();
+                          gazometriaAnaliza();
 
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GazometriaAnaliza(
-                          results: results,
-                          interpretations: interpretations,
-                          clasification: classification),
-                    ));
-              }
-            },
-            child: const Text('Analizuj'),
-          )
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GazometriaAnaliza(
+                                    results: results,
+                                    interpretations: interpretations,
+                                    clasification: classification),
+                              ));
+                        }
+                      },
+                      style: IconButton.styleFrom(
+                        highlightColor: const Color.fromRGBO(0, 84, 210, 1),
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                      child: Text(
+                        "Analizuj",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 15),
+                      )),
+                ),
+              ),
+            ),
         ],
       ),
     );

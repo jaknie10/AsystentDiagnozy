@@ -1,5 +1,6 @@
 import 'package:asystent_diagnozy/pages/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class GazometriaAnaliza extends StatefulWidget {
   const GazometriaAnaliza(
@@ -51,16 +52,14 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
           //logo
           Padding(
             padding: const EdgeInsets.only(left: 5.0, top: 5.0),
-            child: SizedBox(
-              width: 430,
-              child: IconButton(
-                onPressed: (){},
-                icon: Image(
-                  image: AssetImage('assets/gazometria_logo_long.png'),
-                ),
-                highlightColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-              )),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0, top: 5.0, bottom: 10.0),
+              child: SvgPicture.asset(
+                    'assets/badanie_gazometria_logo.svg',
+                    width: 450,
+                    fit: BoxFit.scaleDown,
+                  ),
+            ),
           ),
 
           //wyniki analizy
