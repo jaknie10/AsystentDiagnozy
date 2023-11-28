@@ -57,7 +57,7 @@ class _PatientProfileState extends State<PatientProfile> {
       badanieId: 2,
     ),
     Badanie(
-      typBadania: "Gazometria",
+      typBadania: "Lipidogram",
       dataBadania: DateTime(2023, 11, 09),
       badanieId: 3,
     ),
@@ -77,7 +77,7 @@ class _PatientProfileState extends State<PatientProfile> {
       badanieId: 6,
     ),
     Badanie(
-      typBadania: "Gazometria",
+      typBadania: "Lipidogram",
       dataBadania: DateTime(2027, 11, 09),
       badanieId: 7,
     ),
@@ -145,13 +145,13 @@ class _PatientProfileState extends State<PatientProfile> {
                           child: Row(
                             children: [
                               Text(
-                                "Jan",
+                                "Kowalski",
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               const Text(" "),
                               Text(
-                                "Kowalski",
+                                "Jan",
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
