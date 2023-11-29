@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'profile_edit.dart';
 
@@ -26,12 +27,16 @@ class _ProfileState extends State<Profile> {
       color: Theme.of(context).colorScheme.background,
       child: Center(
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(15.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
+                SvgPicture.asset(
+                  'assets/lekarz_logo.svg',
+                  width: 120,
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 40.0, bottom: 40.0),
+                  padding: const EdgeInsets.only(top: 15.0, bottom: 25.0),
                   child: Text(
                     "Cześć, $imie $nazwisko",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -57,7 +62,7 @@ class _ProfileState extends State<Profile> {
                                     alignment: Alignment.topLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(
-                                          left: 10.0, top: 10.0, bottom: 20.0),
+                                          left: 10.0, top: 10.0, bottom: 30.0),
                                       child: Text(
                                         "Statystyki",
                                         style: TextStyle(
@@ -73,7 +78,7 @@ class _ProfileState extends State<Profile> {
                                       children: [
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              bottom: 40.0,
+                                              bottom: 30.0,
                                               left: 10.0,
                                               right: 10.0,
                                               top: 10.0),
@@ -91,7 +96,7 @@ class _ProfileState extends State<Profile> {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              bottom: 40.0,
+                                              bottom: 30.0,
                                               left: 10.0,
                                               right: 10.0),
                                           child: Row(
@@ -108,14 +113,16 @@ class _ProfileState extends State<Profile> {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              bottom: 40.0,
+                                              bottom: 30.0,
                                               left: 10.0,
                                               right: 10.0),
                                           child: Row(
                                             children: [
                                               Text(
                                                 "Liczba pacjentów:",
-                                                style: TextStyle(fontSize: 15),
+                                                style: TextStyle(fontSize: 15,
+                                                color: Color.fromRGBO(
+                                                        99, 99, 99, 1.0)),
                                               ),
                                             ],
                                           ),
@@ -128,7 +135,7 @@ class _ProfileState extends State<Profile> {
                                       children: [
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              bottom: 40.0,
+                                              bottom: 30.0,
                                               left: 10.0,
                                               right: 10.0,
                                               top: 10.0),
@@ -141,7 +148,7 @@ class _ProfileState extends State<Profile> {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              bottom: 40.0,
+                                              bottom: 30.0,
                                               left: 10.0,
                                               right: 10.0,
                                               top: 10.0),
@@ -154,7 +161,7 @@ class _ProfileState extends State<Profile> {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              bottom: 40.0,
+                                              bottom: 30.0,
                                               left: 10.0,
                                               right: 10.0,
                                               top: 10.0),
@@ -193,7 +200,7 @@ class _ProfileState extends State<Profile> {
                                   alignment: Alignment.topLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(
-                                        left: 10.0, top: 10.0, bottom: 20.0),
+                                        left: 10.0, top: 10.0, bottom: 30.0),
                                     child: Text(
                                       "Podstawowe informacje",
                                       style: TextStyle(
@@ -210,12 +217,12 @@ class _ProfileState extends State<Profile> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            bottom: 40.0,
+                                            bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
-                                          "Imię i nazwisko:",
+                                          "Imię:",
                                           style: TextStyle(
                                               fontSize: 15,
                                               color: Color.fromRGBO(
@@ -224,7 +231,21 @@ class _ProfileState extends State<Profile> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            bottom: 40.0,
+                                            bottom: 30.0,
+                                            left: 10.0,
+                                            right: 10.0,
+                                            top: 10.0),
+                                        child: Text(
+                                          "Nazwisko:",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Color.fromRGBO(
+                                                  99, 99, 99, 1.0)),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
@@ -236,20 +257,6 @@ class _ProfileState extends State<Profile> {
                                                   99, 99, 99, 1.0)),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: 40.0,
-                                            left: 10.0,
-                                            right: 10.0,
-                                            top: 10.0),
-                                        child: Text(
-                                          "Adres email:",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromRGBO(
-                                                  99, 99, 99, 1.0)),
-                                        ),
-                                      ),
                                     ],
                                   ),
                                   Column(
@@ -258,12 +265,12 @@ class _ProfileState extends State<Profile> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            bottom: 40.0,
+                                            bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
-                                          "Jan Kowalski",
+                                          "Jan",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15),
@@ -271,7 +278,20 @@ class _ProfileState extends State<Profile> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            bottom: 40.0,
+                                            bottom: 30.0,
+                                            left: 10.0,
+                                            right: 10.0,
+                                            top: 10.0),
+                                        child: Text(
+                                          "Kowalski",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
@@ -282,19 +302,6 @@ class _ProfileState extends State<Profile> {
                                               fontSize: 15),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: 40.0,
-                                            left: 10.0,
-                                            right: 10.0,
-                                            top: 10.0),
-                                        child: Text(
-                                          "jankowalski@gmail.com",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                      ),
                                     ],
                                   ),
                                   Column(
@@ -303,8 +310,8 @@ class _ProfileState extends State<Profile> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            bottom: 40.0,
-                                            left: 10.0,
+                                            bottom: 30.0,
+                                            left: 50.0,
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
@@ -317,8 +324,8 @@ class _ProfileState extends State<Profile> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            bottom: 40.0,
-                                            left: 10.0,
+                                            bottom: 30.0,
+                                            left: 50.0,
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
@@ -337,7 +344,7 @@ class _ProfileState extends State<Profile> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            bottom: 40.0,
+                                            bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
@@ -350,7 +357,7 @@ class _ProfileState extends State<Profile> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            bottom: 40.0,
+                                            bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
@@ -365,39 +372,42 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 40,
-                                child: TextButton(
-                                    onPressed: () async {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProfileEdit(doctorId: 1),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: SizedBox(
+                                  height: 40,
+                                  child: TextButton(
+                                      onPressed: () async {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProfileEdit(doctorId: 1),
+                                          ),
+                                        );
+                                      },
+                                      style: IconButton.styleFrom(
+                                        highlightColor:
+                                            const Color.fromRGBO(0, 84, 210, 1),
+                                        backgroundColor:
+                                            Theme.of(context).colorScheme.primary,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
                                         ),
-                                      );
-                                    },
-                                    style: IconButton.styleFrom(
-                                      highlightColor:
-                                          const Color.fromRGBO(0, 84, 210, 1),
-                                      backgroundColor:
-                                          Theme.of(context).colorScheme.primary,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
                                       ),
-                                    ),
-                                    child: SizedBox(
-                                      width: 110,
-                                      child: Text(
-                                        "Edytuj profil",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
+                                      child: SizedBox(
+                                        width: 110,
+                                        child: Text(
+                                          "Edytuj profil",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                          textAlign: TextAlign.center,
                                         ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    )),
+                                      )),
+                                ),
                               ),
                             ]),
                           ),

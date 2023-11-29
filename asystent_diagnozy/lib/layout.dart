@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'pages/home/home.dart';
 import 'pages/profile/profile.dart';
@@ -29,7 +30,7 @@ class _LayoutState extends State<Layout> {
     List<Map<String, dynamic>> pages = [
       {'name': 'Home', 'page': const HomePage(), 'key': keyHome},
       {'name': 'Profile', 'page': const Profile(doctorId: 1), 'key': keyProfile},
-      {'name': 'Settings', 'page': const Settings(), 'key': keySettings},
+      {'name': 'Settings', 'page': const Settings(doctorId: 1), 'key': keySettings},
     ];
 
     return Scaffold(
@@ -61,28 +62,41 @@ class _LayoutState extends State<Layout> {
         leadingWidth: 80,
         title: const Align(
           alignment: Alignment.centerLeft,
-          child: SizedBox(
-            width: 300,
-            height: 45,
-            child: SearchBar(),
-          ),
+          child: Text("Asystent diagnozy", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30, letterSpacing: 1.5),)
         ),
         actions: [
-          Container(
-            width: 250,
-            height: 80,
-            color: Colors.white,
-            padding: const EdgeInsets.all(20.0),
-            child: const Align(
-                alignment: Alignment.centerLeft,
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                  Icon(
-                    Icons.people,
-                    size: 30,
-                    color: Colors.black,
-                  ),
-                  Text("Jan Kowalski", style: TextStyle(fontSize: 20, color: Colors.black))
-                ])),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 1;
+                });
+              },
+              child: Container(
+                height: 80,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.0), color: Theme.of(context).colorScheme.background,),
+                padding: const EdgeInsets.all(10.0),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                      SvgPicture.asset(
+                      'assets/lekarz_logo.svg',
+                      width: 45,
+                      fit: BoxFit.scaleDown,
+                    ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Text("Jan Kowalski", style: TextStyle(fontSize: 20, color: Color.fromRGBO(22, 20, 35, 1.0))),
+                      ),
+                      IconButton(
+                        onPressed: (){
+                        }, 
+                        icon: Icon(Icons.arrow_drop_down, size: 25,), color: Color.fromRGBO(22, 20, 35, 1.0),)
+                    ])),
+              ),
+            ),
           )
         ], // default is 56
       ),
