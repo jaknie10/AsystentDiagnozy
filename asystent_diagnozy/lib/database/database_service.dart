@@ -71,7 +71,8 @@ class SQLiteHelper {
     final db = await database;
     var query = "SELECT * FROM pacjenci";
     if (searchValue.isNotEmpty) {
-      query = "$query WHERE name LIKE '%$searchValue%' OR surname LIKE '%$searchValue%'";
+      query =
+          "$query WHERE (name || ' ' || surname LIKE '%$searchValue%') OR (surname || ' ' || name LIKE '%$searchValue%')";
     }
     query = "$query ORDER BY $order";
     final List<Map<String, dynamic>> maps = await db.rawQuery(query);

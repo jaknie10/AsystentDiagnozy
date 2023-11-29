@@ -13,8 +13,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final SQLiteHelper helper = SQLiteHelper();
-  String sortingType = 'surname';
-  String sortingOrder = 'ASC';
+  String sortingType = 'datecreated';
+  String sortingOrder = 'DESC';
   String searchValue = '';
 
   @override
@@ -31,23 +31,6 @@ class _HomePageState extends State<HomePage> {
       const DropdownMenuItem(value: "surname", child: Text("Nazwisko")),
       const DropdownMenuItem(value: "datecreated", child: Text("Data dodania")),
     ];
-
-    // if (filteredPatientList.isEmpty) {
-    //   filteredPatientList = patientList;
-    // }
-
-    // void filterList(String searchText) {
-    //   setState(() {
-    //     filteredPatientList = patientList
-    //         .where((logObj) =>
-    //             ("${logObj.imie} ${logObj.nazwisko}")
-    //                 .toLowerCase()
-    //                 .trim()
-    //                 .contains(searchText.toLowerCase()) ||
-    //             logObj.id.toString().toLowerCase().trim().contains(searchText))
-    //         .toList();
-    //   });
-    // }
 
     return Container(
       width: double.infinity,
@@ -70,8 +53,6 @@ class _HomePageState extends State<HomePage> {
                             builder: (context) => const AddNewPatient(),
                           ),
                         ).then((value) => setState(() {}));
-                        // await helper.batchInsert();
-                        // setState(() {});
                       },
                       style: IconButton.styleFrom(
                         highlightColor: const Color.fromRGBO(0, 84, 210, 1),
@@ -94,19 +75,16 @@ class _HomePageState extends State<HomePage> {
                     searchValue = value;
                   });
                 }),
-                // child: TextButton(
-                //   onPressed: () async {
-                //     await helper.deleteAllUsers();
-                //     setState(() {});
-                //   },
-                //   child: const Text("DEL"),
-                // ),
               ),
               const Spacer(),
               Align(
                 alignment: Alignment.centerRight,
                 child: Row(
                   children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Sortuj według:'),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(right: 15.0),
                       child: DecoratedBox(
@@ -157,9 +135,10 @@ class _HomePageState extends State<HomePage> {
             child: FutureBuilder<List<Patient>>(
               future: helper.getPatients("$sortingType $sortingOrder", searchValue),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
+                // if (snapshot.connectionState == ConnectionState.waiting) {
+                //   return const Center(child: CircularProgressIndicator());
+                // } else
+                if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return const Center(child: Text('Brak pacjentów.'));
