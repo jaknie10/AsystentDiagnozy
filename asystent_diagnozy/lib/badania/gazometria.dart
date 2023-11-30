@@ -4,13 +4,12 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 import 'gazometria_results.dart';
 
 class Gazometria extends StatefulWidget {
   const Gazometria({super.key, required this.patientId});
 
-  final int patientId;
+  final int? patientId;
 
   @override
   State<Gazometria> createState() => _GazometriaState();
@@ -44,79 +43,87 @@ class _GazometriaState extends State<Gazometria> {
       child: Column(
         children: [
           Padding(
-              padding:
-                  const EdgeInsets.only(left: 15.0, top: 15.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: SizedBox(
-                  height: 40,
-                  width: 100,
-                  child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, widget.patientId);
-                      },
-                      style: IconButton.styleFrom(
-                        highlightColor: const Color.fromRGBO(0, 84, 210, 1),
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
+            padding: const EdgeInsets.only(left: 15.0, top: 15.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: SizedBox(
+                height: 40,
+                width: 100,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, widget.patientId);
+                    },
+                    style: IconButton.styleFrom(
+                      highlightColor: const Color.fromRGBO(0, 84, 210, 1),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: Text(
-                        "Powrót",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 15),
-                      )),
-                ),
+                    ),
+                    child: Text(
+                      "Powrót",
+                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                    )),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               SvgPicture.asset(
-                  'assets/badanie_gazometria_logo.svg',
-                  width: 500,
-                ),
-            ],),
+                'assets/badanie_gazometria_logo.svg',
+                width: 500,
+              ),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Container(
               width: 500,
               decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                color: Colors.white),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  color: Colors.white),
               child: Form(
                 key: _formKey,
-                child: 
-                Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: [
-                      
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
                             alignment: Alignment.center,
                             height: 50,
-                            child: Text("Wprowadź wartości:", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                            ),                    
+                            child: Text("Wprowadź wartości:",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                          ),
                         ],
                       ),
-                    for (var entry in items.entries)
-                      Container(
+                      for (var entry in items.entries)
+                        Container(
                           height: 70,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
                                 child: Container(
-                                  width: 120,
-                                  height: 48,
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: Theme.of(context).colorScheme.background,),
-          
-                                  child: Text(entry.value['short'], style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal)), alignment: Alignment.center),
+                                    width: 120,
+                                    height: 48,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background,
+                                    ),
+                                    child: Text(entry.value['short'],
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.normal)),
+                                    alignment: Alignment.center),
                               ),
                               SizedBox(
                                 width: 200,
@@ -127,19 +134,28 @@ class _GazometriaState extends State<Gazometria> {
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
-                                      fillColor: Theme.of(context).colorScheme.background,
+                                      fillColor: Theme.of(context)
+                                          .colorScheme
+                                          .background,
                                       border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(color: Colors.transparent)),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent)),
                                       enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(color: Colors.transparent)),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent)),
                                       focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(color: Colors.black)),
-                                     //labelText: entry.value['short'],
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(
+                                              color: Colors.black)),
+                                      //labelText: entry.value['short'],
                                       suffixIcon: Padding(
-                                        padding: const EdgeInsets.only(right: 5),
+                                        padding:
+                                            const EdgeInsets.only(right: 5),
                                         child: Text(
                                           entry.value['unit'],
                                           style: const TextStyle(
@@ -147,30 +163,33 @@ class _GazometriaState extends State<Gazometria> {
                                           ),
                                         ),
                                       ),
-                                      suffixIconConstraints: const BoxConstraints(
-                                          minWidth: 0, minHeight: 0),
+                                      suffixIconConstraints:
+                                          const BoxConstraints(
+                                              minWidth: 0, minHeight: 0),
                                       isDense: true),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Podaj prawidłową wartość';
-                              }
-                              return null;
-                            },
-                            onSaved: (value) {
-                              Map<String, dynamic> entryMap = {};
-                              entryMap['short'] = entry.value['short'];
-                              entryMap['value'] = double.parse(value!);
-                              entryMap['lowerbound'] = entry.value["low"];
-                              entryMap['upperbound'] = entry.value["high"];
-                              entryMap['unit'] = entry.value["unit"];
-                              entryMap['result'] = (double.parse(value) <
-                                      entry.value["low"])
-                                  ? 'lt'
-                                  : (double.parse(value) > entry.value["high"])
-                                      ? 'gt'
-                                      : 'eq';
-                              results[entryMap['short']] = entryMap;
-                             },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Podaj prawidłową wartość';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (value) {
+                                    Map<String, dynamic> entryMap = {};
+                                    entryMap['short'] = entry.value['short'];
+                                    entryMap['value'] = double.parse(value!);
+                                    entryMap['lowerbound'] = entry.value["low"];
+                                    entryMap['upperbound'] =
+                                        entry.value["high"];
+                                    entryMap['unit'] = entry.value["unit"];
+                                    entryMap['result'] = (double.parse(value) <
+                                            entry.value["low"])
+                                        ? 'lt'
+                                        : (double.parse(value) >
+                                                entry.value["high"])
+                                            ? 'gt'
+                                            : 'eq';
+                                    results[entryMap['short']] = entryMap;
+                                  },
                                 ),
                               ),
                             ],
@@ -183,45 +202,43 @@ class _GazometriaState extends State<Gazometria> {
             ),
           ),
           Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 15.0),
-              child: Align(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  height: 40,
-                  width: 100,
-                  child: TextButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
+            padding: const EdgeInsets.only(bottom: 15.0),
+            child: Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                height: 40,
+                width: 100,
+                child: TextButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
 
-                          gazometriaAnaliza();
+                        gazometriaAnaliza();
 
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => GazometriaAnaliza(
-                                    results: results,
-                                    interpretations: interpretations,
-                                    clasification: classification),
-                              ));
-                        }
-                      },
-                      style: IconButton.styleFrom(
-                        highlightColor: const Color.fromRGBO(0, 84, 210, 1),
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => GazometriaAnaliza(
+                                  results: results,
+                                  interpretations: interpretations,
+                                  clasification: classification),
+                            ));
+                      }
+                    },
+                    style: IconButton.styleFrom(
+                      highlightColor: const Color.fromRGBO(0, 84, 210, 1),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: Text(
-                        "Analizuj",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 15),
-                      )),
-                ),
+                    ),
+                    child: Text(
+                      "Analizuj",
+                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                    )),
               ),
             ),
+          ),
         ],
       ),
     );

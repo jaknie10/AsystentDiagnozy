@@ -7,9 +7,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'lipidogram_results.dart';
 
 class Lipidogram extends StatefulWidget {
-  const Lipidogram({super.key, required this.patientId, required this.patientGender});
+  const Lipidogram(
+      {super.key, required this.patientId, required this.patientGender});
 
-  final int patientId;
+  final int? patientId;
   final String patientGender;
 
   @override
@@ -27,7 +28,8 @@ class _LipidogramState extends State<Lipidogram> {
   String classification = "Podane wyniki badania wydają się poprawne";
 
   Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/lipidogram.json');
+    final String response =
+        await rootBundle.loadString('assets/lipidogram.json');
     final data = await json.decode(response);
     setState(() {
       items = data['norms'];
@@ -53,66 +55,64 @@ class _LipidogramState extends State<Lipidogram> {
       child: Column(
         children: [
           Padding(
-              padding:
-                  const EdgeInsets.only(left: 15.0, top: 15.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: SizedBox(
-                  height: 40,
-                  width: 100,
-                  child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, widget.patientId);
-                      },
-                      style: IconButton.styleFrom(
-                        highlightColor: const Color.fromRGBO(0, 84, 210, 1),
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
+            padding: const EdgeInsets.only(left: 15.0, top: 15.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: SizedBox(
+                height: 40,
+                width: 100,
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, widget.patientId);
+                    },
+                    style: IconButton.styleFrom(
+                      highlightColor: const Color.fromRGBO(0, 84, 210, 1),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: Text(
-                        "Powrót",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 15),
-                      )),
-                ),
+                    ),
+                    child: Text(
+                      "Powrót",
+                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                    )),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               SvgPicture.asset(
-                  'assets/lipidogram_logo_long.svg',
-                  width: 500,
-                ),
-            ],),
+                'assets/lipidogram_logo_long.svg',
+                width: 500,
+              ),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Container(
               width: 500,
               decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                color: Colors.white),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  color: Colors.white),
               child: Form(
                 key: _formKey,
-                child: 
-                Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: [
-                      
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
                             alignment: Alignment.center,
                             height: 50,
-                            child: Text("Wprowadź wartości:", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                            ),                    
+                            child: Text("Wprowadź wartości:",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                          ),
                         ],
                       ),
-          
                       for (var entry in items.entries)
                         Container(
                           height: 70,
@@ -120,13 +120,22 @@ class _LipidogramState extends State<Lipidogram> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
                                 child: Container(
-                                  width: 60,
-                                  height: 48,
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: Theme.of(context).colorScheme.background,),
-          
-                                  child: Text(entry.value['short'], style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal)), alignment: Alignment.center),
+                                    width: 60,
+                                    height: 48,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background,
+                                    ),
+                                    child: Text(entry.value['short'],
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.normal)),
+                                    alignment: Alignment.center),
                               ),
                               SizedBox(
                                 width: 200,
@@ -137,19 +146,28 @@ class _LipidogramState extends State<Lipidogram> {
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
-                                      fillColor: Theme.of(context).colorScheme.background,
+                                      fillColor: Theme.of(context)
+                                          .colorScheme
+                                          .background,
                                       border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(color: Colors.transparent)),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent)),
                                       enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(color: Colors.transparent)),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent)),
                                       focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(color: Colors.black)),
-                                     //labelText: entry.value['short'],
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(
+                                              color: Colors.black)),
+                                      //labelText: entry.value['short'],
                                       suffixIcon: Padding(
-                                        padding: const EdgeInsets.only(right: 5),
+                                        padding:
+                                            const EdgeInsets.only(right: 5),
                                         child: Text(
                                           entry.value['unit'],
                                           style: const TextStyle(
@@ -157,8 +175,9 @@ class _LipidogramState extends State<Lipidogram> {
                                           ),
                                         ),
                                       ),
-                                      suffixIconConstraints: const BoxConstraints(
-                                          minWidth: 0, minHeight: 0),
+                                      suffixIconConstraints:
+                                          const BoxConstraints(
+                                              minWidth: 0, minHeight: 0),
                                       isDense: true),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -170,8 +189,10 @@ class _LipidogramState extends State<Lipidogram> {
                                     Map<String, dynamic> entryMap = {};
                                     entryMap['short'] = entry.value['short'];
                                     entryMap['value'] = double.parse(value!);
-                                    entryMap['lowerbound'] = entry.value[lowerbound];
-                                    entryMap['upperbound'] = entry.value[upperbound];
+                                    entryMap['lowerbound'] =
+                                        entry.value[lowerbound];
+                                    entryMap['upperbound'] =
+                                        entry.value[upperbound];
                                     entryMap['unit'] = entry.value["unit"];
                                     entryMap['result'] = (double.parse(value) <
                                             entry.value[lowerbound])
@@ -194,45 +215,43 @@ class _LipidogramState extends State<Lipidogram> {
             ),
           ),
           Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 15.0),
-              child: Align(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  height: 40,
-                  width: 100,
-                  child: TextButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
+            padding: const EdgeInsets.only(bottom: 15.0),
+            child: Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                height: 40,
+                width: 100,
+                child: TextButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
 
-                          lipidogramAnaliza();
+                        lipidogramAnaliza();
 
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LipidogramAnaliza(
-                                    results: results,
-                                    interpretations: interpretations,
-                                    clasification: classification),
-                              ));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LipidogramAnaliza(
+                                  results: results,
+                                  interpretations: interpretations,
+                                  clasification: classification),
+                            ));
                       }
-                      },
-                      style: IconButton.styleFrom(
-                        highlightColor: const Color.fromRGBO(0, 84, 210, 1),
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
+                    },
+                    style: IconButton.styleFrom(
+                      highlightColor: const Color.fromRGBO(0, 84, 210, 1),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: Text(
-                        "Analizuj",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 15),
-                      )),
-                ),
+                    ),
+                    child: Text(
+                      "Analizuj",
+                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                    )),
               ),
             ),
+          ),
         ],
       ),
     );
@@ -262,11 +281,17 @@ class _LipidogramState extends State<Lipidogram> {
       } else if (value >= 885) {
         classification = "Hipertrójglicerydemia ciężka";
       }
-    } else if ((Chol == "gt" || LDL == "gt") && TAG == "gt" && (HDL == "eq" || HDL == "lt")) {
+    } else if ((Chol == "gt" || LDL == "gt") &&
+        TAG == "gt" &&
+        (HDL == "eq" || HDL == "lt")) {
       classification = "Hiperlipidemia mieszana";
     } else if (HDL == "gt" && TAG == "gt" && VLDL == "gt") {
       classification = "Dyslipidemia aterogenna";
-    } else if (Chol != "eq" || LDL != "eq" || HDL != "eq" || VLDL != "eq" || TAG != "eq") {
+    } else if (Chol != "eq" ||
+        LDL != "eq" ||
+        HDL != "eq" ||
+        VLDL != "eq" ||
+        TAG != "eq") {
       classification = "Podane wyniki nie są standardowe";
     }
 

@@ -1,21 +1,12 @@
+import 'package:asystent_diagnozy/models/patient.dart';
 import 'package:flutter/material.dart';
 
 import 'patient_profile.dart';
 
 class PatientListItem extends StatefulWidget {
-  const PatientListItem(
-      {super.key,
-      required this.name,
-      required this.surname,
-      required this.gender,
-      required this.id,
-      required this.birthdate});
+  const PatientListItem({super.key, required this.patient});
 
-  final String name;
-  final String surname;
-  final String gender;
-  final int id;
-  final String birthdate;
+  final Patient patient;
 
   @override
   State<PatientListItem> createState() => _PatientListItemState();
@@ -24,7 +15,7 @@ class PatientListItem extends StatefulWidget {
 class _PatientListItemState extends State<PatientListItem> {
   @override
   Widget build(BuildContext context) {
-    DateTime birthdayDate = DateTime.parse(widget.birthdate);
+    DateTime birthdayDate = DateTime.parse(widget.patient.birthDate);
     int age = DateTime.now().difference(birthdayDate).inDays ~/ 365;
 
     return Padding(
@@ -35,7 +26,8 @@ class _PatientListItemState extends State<PatientListItem> {
             width: double.infinity,
             height: 60,
             decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                color: Colors.white),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Row(
@@ -46,13 +38,15 @@ class _PatientListItemState extends State<PatientListItem> {
                     child: Row(
                       children: [
                         Text(
-                          widget.surname,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          widget.patient.surname,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         const Text(" "),
                         Text(
-                          widget.name,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          widget.patient.name,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -64,11 +58,13 @@ class _PatientListItemState extends State<PatientListItem> {
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                              child: Text(birthdayDate.toString().substring(0, 10),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 40.0),
+                              child: Text(
+                                  birthdayDate.toString().substring(0, 10),
                                   style: const TextStyle(fontSize: 18)),
                             ),
-                            widget.gender == "M"
+                            widget.patient.gender == "M"
                                 ? const ImageIcon(
                                     AssetImage('assets/gender_male.png'),
                                   )
@@ -78,7 +74,8 @@ class _PatientListItemState extends State<PatientListItem> {
                             SizedBox(
                               width: 80,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
                                 child: Text(
                                   age.toString(),
                                   style: const TextStyle(fontSize: 18),
@@ -99,8 +96,7 @@ class _PatientListItemState extends State<PatientListItem> {
               context,
               MaterialPageRoute(
                 builder: (context) => PatientProfile(
-                  patientId: widget.id,
-                  patientGender: widget.gender,
+                  patient: widget.patient,
                 ),
               ),
             );

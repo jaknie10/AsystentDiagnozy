@@ -120,7 +120,8 @@ class _HomePageState extends State<HomePage> {
                             child: DropdownButton(
                                 dropdownColor: Colors.white,
                                 style: const TextStyle(
-                                    fontSize: 15, color: Color.fromRGBO(22, 20, 35, 1.0)),
+                                    fontSize: 15,
+                                    color: Color.fromRGBO(22, 20, 35, 1.0)),
                                 elevation: 0,
                                 value: sortingType,
                                 items: sortingOptions,
@@ -145,8 +146,9 @@ class _HomePageState extends State<HomePage> {
                               }
                             });
                           },
-                          icon: Icon(
-                              (sortingOrder == 'ASC') ? Icons.arrow_downward : Icons.arrow_upward)),
+                          icon: Icon((sortingOrder == 'ASC')
+                              ? Icons.arrow_downward
+                              : Icons.arrow_upward)),
                     ),
                   ],
                 ),
@@ -155,7 +157,8 @@ class _HomePageState extends State<HomePage> {
           ),
           Flexible(
             child: FutureBuilder<List<Patient>>(
-              future: helper.getPatients("$sortingType $sortingOrder", searchValue),
+              future:
+                  helper.getPatients("$sortingType $sortingOrder", searchValue),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -168,12 +171,7 @@ class _HomePageState extends State<HomePage> {
                   return ListView.builder(
                     itemCount: users.length,
                     itemBuilder: (context, index) {
-                      return PatientListItem(
-                          name: users[index].name,
-                          surname: users[index].surname,
-                          gender: users[index].gender,
-                          id: users[index].id!,
-                          birthdate: users[index].birthDate);
+                      return PatientListItem(patient: users[index]);
                     },
                   );
                 }

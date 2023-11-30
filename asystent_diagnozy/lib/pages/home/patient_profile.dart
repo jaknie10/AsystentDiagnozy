@@ -1,3 +1,5 @@
+import 'package:asystent_diagnozy/database/database_service.dart';
+import 'package:asystent_diagnozy/models/patient.dart';
 import 'package:flutter/material.dart';
 
 import 'badanie_list_item.dart';
@@ -7,12 +9,9 @@ import '../../badania/gazometria.dart';
 import '../../badania/lipidogram.dart';
 
 class PatientProfile extends StatefulWidget {
-  const PatientProfile(
-      {Key? key, required this.patientId, required this.patientGender})
-      : super(key: key);
+  const PatientProfile({Key? key, required this.patient}) : super(key: key);
 
-  final int patientId;
-  final String patientGender;
+  final Patient patient;
 
   @override
   State<PatientProfile> createState() => _PatientProfileState();
@@ -30,9 +29,6 @@ class Badanie {
 }
 
 class _PatientProfileState extends State<PatientProfile> {
-  int age =
-      DateTime.now().difference(DateTime(2000, 10, 10, 00, 01)).inDays ~/ 365;
-
   String sortingType = 'Data badania (rosnąco)';
 
   List<DropdownMenuItem<String>> sortingOptions = [
@@ -90,6 +86,9 @@ class _PatientProfileState extends State<PatientProfile> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime birthdayDate = DateTime.parse(widget.patient.birthDate);
+    int age = DateTime.now().difference(birthdayDate).inDays ~/ 365;
+
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -145,13 +144,13 @@ class _PatientProfileState extends State<PatientProfile> {
                           child: Row(
                             children: [
                               Text(
-                                "Kowalski",
+                                widget.patient.surname,
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               const Text(" "),
                               Text(
-                                "Jan",
+                                widget.patient.name,
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
@@ -168,10 +167,13 @@ class _PatientProfileState extends State<PatientProfile> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 40.0),
-                                    child: Text("10-11-2023",
+                                    child: Text(
+                                        birthdayDate
+                                            .toString()
+                                            .substring(0, 10),
                                         style: const TextStyle(fontSize: 18)),
                                   ),
-                                  "M" == "M"
+                                  widget.patient.gender == "M"
                                       ? const ImageIcon(
                                           AssetImage('assets/gender_male.png'),
                                         )
@@ -185,7 +187,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10.0),
                                       child: Text(
-                                        "23",
+                                        age.toString(),
                                         style: const TextStyle(fontSize: 18),
                                       ),
                                     ),
@@ -202,7 +204,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             PatientEditProfile(
-                                                patientId: widget.patientId),
+                                                patient: widget.patient),
                                       ),
                                     );
                                     debugPrint(
@@ -301,8 +303,8 @@ class _PatientProfileState extends State<PatientProfile> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => Morfologia(
-                                          patientId: widget.patientId,
-                                          patientGender: widget.patientGender),
+                                          patientId: widget.patient.id,
+                                          patientGender: widget.patient.gender),
                                     ),
                                   );
                                   debugPrint(
@@ -325,7 +327,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => Gazometria(
-                                            patientId: widget.patientId),
+                                            patientId: widget.patient.id),
                                       ),
                                     );
                                     debugPrint(
@@ -349,9 +351,9 @@ class _PatientProfileState extends State<PatientProfile> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => Lipidogram(
-                                            patientId: widget.patientId,
+                                            patientId: widget.patient.id,
                                             patientGender:
-                                                widget.patientGender),
+                                                widget.patient.gender),
                                       ),
                                     );
                                     debugPrint(
@@ -370,9 +372,7 @@ class _PatientProfileState extends State<PatientProfile> {
                             child: SizedBox(
                                 width: 150,
                                 child: IconButton(
-                                  onPressed: () async {
-                                  
-                                  },
+                                  onPressed: () async {},
                                   icon: Image(
                                     image: AssetImage(
                                         'assets/badanie_uniwersalne_logo.png'),
@@ -386,9 +386,7 @@ class _PatientProfileState extends State<PatientProfile> {
                             child: SizedBox(
                                 width: 150,
                                 child: IconButton(
-                                  onPressed: () async {
-                                   
-                                  },
+                                  onPressed: () async {},
                                   icon: Image(
                                     image: AssetImage(
                                         'assets/badanie_uniwersalne_logo.png'),
