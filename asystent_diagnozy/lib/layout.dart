@@ -121,6 +121,7 @@ class _LayoutState extends State<Layout> {
         children: [
           NavigationRail(
             selectedIndex: _selectedIndex,
+            useIndicator: false,
             // labelType: NavigationRailLabelType.all,
             onDestinationSelected: (int index) {
               setState(() {
@@ -130,40 +131,40 @@ class _LayoutState extends State<Layout> {
             destinations: const <NavigationRailDestination>[
               NavigationRailDestination(
                 icon: ImageIcon(
-                  AssetImage('assets/home.png'),
-                  size: 30,
-                  color: Color.fromRGBO(22, 20, 35, 60),
+                  AssetImage('assets/home2.png'),
+                  size: 55,
+                  color: Color.fromRGBO(22, 20, 35, 0.6),
                 ),
                 selectedIcon: ImageIcon(
-                  AssetImage('assets/home_focused.png'),
-                  size: 30,
-                  color: Color.fromRGBO(22, 20, 35, 60),
+                  AssetImage('assets/home_focused2.png'),
+                  size: 55,
+                  color: Color.fromRGBO(0, 99, 248, 1),
                 ),
                 label: Text('Pacjenci'),
               ),
               NavigationRailDestination(
                 icon: ImageIcon(
-                  AssetImage('assets/profile.png'),
-                  size: 30,
-                  color: Color.fromRGBO(22, 20, 35, 60),
+                  AssetImage('assets/profile2.png'),
+                  size: 55,
+                  color: Color.fromRGBO(22, 20, 35, 0.6),
                 ),
                 selectedIcon: ImageIcon(
-                  AssetImage('assets/profile_focused.png'),
-                  size: 30,
-                  color: Color.fromRGBO(22, 20, 35, 60),
+                  AssetImage('assets/profile_focused2.png'),
+                  size: 55,
+                  color: Color.fromRGBO(0, 99, 248, 1),
                 ),
                 label: Text('Profil'),
               ),
               NavigationRailDestination(
                 icon: ImageIcon(
-                  AssetImage('assets/settings.png'),
-                  size: 30,
-                  color: Color.fromRGBO(22, 20, 35, 60),
+                  AssetImage('assets/settings2.png'),
+                  size: 55,
+                  color: Color.fromRGBO(22, 20, 35, 0.6),
                 ),
                 selectedIcon: ImageIcon(
-                  AssetImage('assets/settings_focused.png'),
-                  size: 30,
-                  color: Color.fromRGBO(22, 20, 35, 60),
+                  AssetImage('assets/settings_focused2.png'),
+                  size: 55,
+                  color: Color.fromRGBO(0, 99, 248, 1),
                 ),
                 label: Text('Ustawienia'),
               ),
