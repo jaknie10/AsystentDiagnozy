@@ -375,7 +375,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                   onPressed: () async {},
                                   icon: Image(
                                     image: AssetImage(
-                                        'assets/badanie_uniwersalne_logo.png'),
+                                        'assets/badanie_tarczyca_logo.png'),
                                   ),
                                   highlightColor: Colors.transparent,
                                   hoverColor: Colors.transparent,
@@ -387,7 +387,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                 width: 150,
                                 child: IconButton(
                                   onPressed: () async {},
-                                  icon: Image(
+                                  icon:  Image(
                                     image: AssetImage(
                                         'assets/badanie_uniwersalne_logo.png'),
                                   ),
