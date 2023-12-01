@@ -54,15 +54,16 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
           Padding(
             padding: const EdgeInsets.only(left: 5.0, top: 5.0),
             child: Padding(
-              padding: const EdgeInsets.only(left: 10.0, top: 5.0, bottom: 10.0),
+              padding:
+                  const EdgeInsets.only(left: 10.0, top: 5.0, bottom: 10.0),
               child: SvgPicture.asset(
-                    'assets/lipidogram_logo_long.svg',
-                    width: 450,
-                    fit: BoxFit.scaleDown,
-                  ),
+                'assets/badanie_lipidogram_logo_long.svg',
+                width: 450,
+                fit: BoxFit.scaleDown,
+              ),
             ),
           ),
-          
+
           //wyniki analizy
           Padding(
             padding:

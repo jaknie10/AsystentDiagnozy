@@ -83,7 +83,7 @@ class _LipidogramState extends State<Lipidogram> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                'assets/lipidogram_logo_long.svg',
+                'assets/badanie_lipidogram_logo_long.svg',
                 width: 500,
               ),
             ],

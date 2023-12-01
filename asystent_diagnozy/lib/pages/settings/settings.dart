@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'change_password.dart';
+import '../login/login.dart';
 
 class Settings extends StatefulWidget {
   const Settings({
@@ -21,7 +22,7 @@ class _SettingsState extends State<Settings> {
       width: double.infinity,
       height: double.infinity,
       color: Theme.of(context).colorScheme.background,
-      child:  Padding(
+      child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
           child: Column(
@@ -30,13 +31,17 @@ class _SettingsState extends State<Settings> {
             children: [
               Padding(
                 padding: EdgeInsets.only(top: 15.0),
-                child: Text("Ustawienia", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                child: Text("Ustawienia",
+                    style:
+                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
                   width: 500,
-                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
@@ -46,40 +51,55 @@ class _SettingsState extends State<Settings> {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ChangePassword(doctorId: widget.doctorId),)
-                              );
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChangePassword(
+                                        doctorId: widget.doctorId),
+                                  ));
                             },
                             child: Container(
                               height: 50,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              color: Theme.of(context).colorScheme.background),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  color:
+                                      Theme.of(context).colorScheme.background),
                               child: Padding(
                                 padding: const EdgeInsets.all(15.0),
-                                child: Text("Zmień hasło", style: TextStyle(fontSize: 15),),
-                              ),),
+                                child: Text(
+                                  "Zmień hasło",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                          GestureDetector(
-                            onTap: (){
-
-                            },
-                            child: Container(
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Login(),
+                                ));
+                          },
+                          child: Container(
                             height: 50,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                            color: Theme.of(context).colorScheme.background),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                color:
+                                    Theme.of(context).colorScheme.background),
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
-                              child: Text("Ekran logowania", style: TextStyle(fontSize: 15),),
-                            ),),
+                              child: Text(
+                                "Ekran logowania",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                            ),
                           ),
+                        ),
                       ],
                     ),
                   ),
@@ -87,7 +107,8 @@ class _SettingsState extends State<Settings> {
               )
             ],
           ),
-        ),),
+        ),
+      ),
     );
   }
 }

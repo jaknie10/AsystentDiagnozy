@@ -58,7 +58,7 @@ class _PatientProfileState extends State<PatientProfile> {
       badanieId: 3,
     ),
     Badanie(
-      typBadania: "Morfologia",
+      typBadania: "Tarczyca",
       dataBadania: DateTime(2025, 11, 09),
       badanieId: 4,
     ),
@@ -361,7 +361,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                   },
                                   icon: Image(
                                     image: AssetImage(
-                                        'assets/lipidogram_logo.png'),
+                                        'assets/badanie_lipidogram_logo.png'),
                                   ),
                                   highlightColor: Colors.transparent,
                                   hoverColor: Colors.transparent,
@@ -387,7 +387,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                 width: 150,
                                 child: IconButton(
                                   onPressed: () async {},
-                                  icon:  Image(
+                                  icon: Image(
                                     image: AssetImage(
                                         'assets/badanie_uniwersalne_logo.png'),
                                   ),
