@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'change_password.dart';
 import '../login/login.dart';
 
@@ -31,17 +30,15 @@ class _SettingsState extends State<Settings> {
             children: [
               Padding(
                 padding: EdgeInsets.only(top: 15.0),
-                child: Text("Ustawienia",
-                    style:
-                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                child:
+                    Text("Ustawienia", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
                   width: 500,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                      color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
@@ -53,18 +50,15 @@ class _SettingsState extends State<Settings> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ChangePassword(
-                                        doctorId: widget.doctorId),
+                                    builder: (context) => ChangePassword(doctorId: widget.doctorId),
                                   ));
                             },
                             child: Container(
                               height: 50,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  color:
-                                      Theme.of(context).colorScheme.background),
+                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                  color: Theme.of(context).colorScheme.background),
                               child: Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Text(
@@ -87,10 +81,8 @@ class _SettingsState extends State<Settings> {
                             height: 50,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                color:
-                                    Theme.of(context).colorScheme.background),
+                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                color: Theme.of(context).colorScheme.background),
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: Text(
