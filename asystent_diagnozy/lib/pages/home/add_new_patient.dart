@@ -278,7 +278,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                 if (value != null &&
                                                     value.isNotEmpty) {
                                                   newPatient['birthdate'] =
-                                                      DateFormat('dd/MM/yyyy')
+                                                      DateFormat('dd-MM-yyyy')
                                                           .parse(value)
                                                           .toString();
                                                 }
@@ -287,7 +287,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                               inputFormatters: [
                                                 DateTextFormatter(),
                                                 FilteringTextInputFormatter
-                                                    .allow(RegExp('[0-9/]')),
+                                                    .allow(RegExp('[0-9-]')),
                                                 LengthLimitingTextInputFormatter(
                                                     10)
                                               ],
@@ -348,12 +348,12 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                                       if (date != null) {
                                                         dateController
                                                             .text = DateFormat(
-                                                                'dd/MM/yyyy')
+                                                                'dd-MM-yyyy')
                                                             .format(date);
                                                       }
                                                     },
                                                   ),
-                                                  hintText: 'dd/mm/rrrr'),
+                                                  hintText: 'dd-mm-rrrr'),
                                             ),
                                           ),
                                         ],
@@ -502,7 +502,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
 }
 
 String? dateValidator(value) {
-  DateFormat format = DateFormat("dd/MM/yyyy");
+  DateFormat format = DateFormat("dd-MM-yyyy");
   if (value == null || value.isEmpty) {
     return 'Podaj datę urodzenia';
   }
@@ -521,13 +521,13 @@ class DateTextFormatter extends TextInputFormatter {
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
     if (oldValue.text.isEmpty ||
-        oldValue.text[oldValue.text.length - 1] == '/') {
+        oldValue.text[oldValue.text.length - 1] == '-') {
       return newValue;
     }
     if ([2, 5].contains(newValue.text.length)) {
       var text = newValue.text;
       return newValue.copyWith(
-          text: '$text/', selection: updateCursorPosition(text));
+          text: '$text-', selection: updateCursorPosition(text));
     }
     return newValue;
   }

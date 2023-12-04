@@ -1,4 +1,3 @@
-import 'package:asystent_diagnozy/database/database_service.dart';
 import 'package:asystent_diagnozy/models/patient.dart';
 import 'package:flutter/material.dart';
 
