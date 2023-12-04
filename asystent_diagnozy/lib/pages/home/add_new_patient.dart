@@ -50,7 +50,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(bottom: 18.0),
@@ -59,11 +59,13 @@ class _AddNewPatientState extends State<AddNewPatient> {
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                          color: Color.fromRGBO(22, 20, 35, 1.0)),
                     ),
                   ),
                   Expanded(
+                    flex: 1,
                     child: ListView(
+                      scrollDirection: Axis.vertical,
                       children: [
                         Row(
                           children: [
@@ -74,7 +76,8 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(20.0),
+                                    padding: const EdgeInsets.only(
+                                        top: 15.0, bottom: 20.0),
                                     child: Text(
                                       "Imię:",
                                       style: TextStyle(
@@ -83,7 +86,8 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(20.0),
+                                    padding: const EdgeInsets.only(
+                                        top: 15.0, bottom: 20.0),
                                     child: Text(
                                       "Nazwisko:",
                                       style: TextStyle(
@@ -92,16 +96,18 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(20.0),
+                                    padding: const EdgeInsets.only(
+                                        top: 15.0, bottom: 20.0),
                                     child: Text(
-                                      "Płeć*:",
+                                      "Płeć:",
                                       style: TextStyle(
                                         fontSize: 18,
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(20.0),
+                                    padding: const EdgeInsets.only(
+                                        top: 15.0, bottom: 20.0),
                                     child: Text(
                                       "Data urodzenia:",
                                       style: TextStyle(
@@ -360,7 +366,8 @@ class _AddNewPatientState extends State<AddNewPatient> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(15.0),
+                          padding:
+                              const EdgeInsets.only(top: 15.0, bottom: 15.0),
                           child: SizedBox(
                             height: 180,
                             child: Column(
@@ -408,13 +415,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const Text(
-                                    "*Wymaga informacje oznaczone gwiazdką:",
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                    ),
-                                  ),
+                                  )
                                 ]),
                           ),
                         )
@@ -448,14 +449,14 @@ class _AddNewPatientState extends State<AddNewPatient> {
                               ),
                             ),
                             child: const SizedBox(
-                              width: 150,
+                              width: 130,
                               height: 40,
                               child: Center(
                                 child: Text(
                                   "Dodaj pacjenta",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize: 15,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -463,7 +464,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                             )),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15.0, left: 10.0),
+                        padding: const EdgeInsets.only(top: 15.0, left: 5.0),
                         child: TextButton(
                             onPressed: () {
                               Navigator.pop(context);
@@ -476,14 +477,14 @@ class _AddNewPatientState extends State<AddNewPatient> {
                               ),
                             ),
                             child: const SizedBox(
-                              width: 80,
+                              width: 60,
                               height: 40,
                               child: Center(
                                 child: Text(
                                   "Anuluj",
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 18,
+                                    fontSize: 15,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),

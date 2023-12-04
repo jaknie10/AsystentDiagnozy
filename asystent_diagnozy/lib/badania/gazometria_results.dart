@@ -4,7 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class GazometriaAnaliza extends StatefulWidget {
   const GazometriaAnaliza(
-      {super.key, required this.results, required this.interpretations, required this.clasification});
+      {super.key,
+      required this.results,
+      required this.interpretations,
+      required this.clasification});
 
   final Map<String, Map<String, dynamic>> results;
   final String clasification;
@@ -15,10 +18,8 @@ class GazometriaAnaliza extends StatefulWidget {
 }
 
 class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
-
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +31,7 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
               alignment: Alignment.centerLeft,
               child: SizedBox(
                 height: 40,
-                width: 100,
+                width: 90,
                 child: TextButton(
                     onPressed: () {
                       Navigator.pop(context, widget.results);
@@ -53,18 +54,20 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
           Padding(
             padding: const EdgeInsets.only(left: 5.0, top: 5.0),
             child: Padding(
-              padding: const EdgeInsets.only(left: 10.0, top: 5.0, bottom: 10.0),
+              padding:
+                  const EdgeInsets.only(left: 10.0, top: 5.0, bottom: 10.0),
               child: SvgPicture.asset(
-                    'assets/badanie_gazometria_logo.svg',
-                    width: 450,
-                    fit: BoxFit.scaleDown,
-                  ),
+                'assets/badanie_gazometria_logo.svg',
+                width: 450,
+                fit: BoxFit.scaleDown,
+              ),
             ),
           ),
 
           //wyniki analizy
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
+            padding:
+                const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -78,42 +81,49 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                         children: [
                           Expanded(
                             flex: 1,
-                            child: 
-                            ClipRRect(
+                            child: ClipRRect(
                               borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5.0),),
+                                topLeft: Radius.circular(5.0),
+                              ),
                               child: Container(
-                                height: 70,
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
-                                  ),
-                                  color: Colors.white
-                                ),
-                                child: Center(
-                                    child: Text(
+                                  height: 70,
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                        right: BorderSide(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .background,
+                                            style: BorderStyle.solid,
+                                            width: 4),
+                                      ),
+                                      color: Colors.white),
+                                  child: Center(
+                                      child: Text(
                                     "Parametr",
                                     textAlign: TextAlign.center,
-                                    style: TextStyle( fontSize: 15),
-                                  ))
+                                    style: TextStyle(fontSize: 15),
+                                  ))),
                             ),
-                          ),
                           ),
                           Expanded(
                             flex: 1,
                             child: Container(
                                 height: 70,
                                 decoration: BoxDecoration(
-                                  border: Border(
-                                    right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
-                                  ),
-                                  color: Colors.white
-                                ),
+                                    border: Border(
+                                      right: BorderSide(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                          style: BorderStyle.solid,
+                                          width: 4),
+                                    ),
+                                    color: Colors.white),
                                 child: Center(
                                     child: Text(
                                   "Wartość",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle( fontSize: 15),
+                                  style: TextStyle(fontSize: 15),
                                 ))),
                           ),
                           Expanded(
@@ -121,16 +131,20 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                             child: Container(
                                 height: 70,
                                 decoration: BoxDecoration(
-                                  border: Border(
-                                    right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
-                                  ),
-                                  color: Colors.white
-                                ),
+                                    border: Border(
+                                      right: BorderSide(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                          style: BorderStyle.solid,
+                                          width: 4),
+                                    ),
+                                    color: Colors.white),
                                 child: Center(
                                     child: Text(
                                   "Minimalna wartość referencyjna",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle( fontSize: 15),
+                                  style: TextStyle(fontSize: 15),
                                 ))),
                           ),
                           Expanded(
@@ -138,158 +152,179 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                             child: Container(
                                 height: 70,
                                 decoration: BoxDecoration(
-                                  border: Border(
-                                    right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
-                                  ),
-                                  color: Colors.white
-                                ),
+                                    border: Border(
+                                      right: BorderSide(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                          style: BorderStyle.solid,
+                                          width: 4),
+                                    ),
+                                    color: Colors.white),
                                 child: Center(
                                     child: Text(
                                   "Maksymalna wartość referencyjna",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle( fontSize: 15),
+                                  style: TextStyle(fontSize: 15),
                                 ))),
                           ),
                           Expanded(
-                            flex: 1,
-                            child: 
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(5.0),),
-                              child: 
-                              Container(
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                    // border: Border(
-                                    //   right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
-                                    // ),
-                                    color: Colors.white
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                    "Flaga",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 15),
-                                  ))),
-                            )
-                          ),
+                              flex: 1,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(5.0),
+                                ),
+                                child: Container(
+                                    height: 70,
+                                    decoration: BoxDecoration(
+                                        // border: Border(
+                                        //   right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
+                                        // ),
+                                        color: Colors.white),
+                                    child: Center(
+                                        child: Text(
+                                      "Flaga",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 15),
+                                    ))),
+                              )),
                         ],
                       ),
-
                       for (final entry in widget.results.entries)
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Container(
+                          child: Row(children: [
+                            Expanded(
+                              flex: 1,
+                              child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    border: Border(
-                                      right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
-                                    ),
-                                    color: Colors.white
-                                  ),
+                                      border: Border(
+                                        right: BorderSide(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .background,
+                                            style: BorderStyle.solid,
+                                            width: 4),
+                                      ),
+                                      color: Colors.white),
                                   child: Center(
                                       child: Text(
                                     entry.value['short'],
                                     textAlign: TextAlign.center,
-                                    style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
                                   ))),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    border: Border(
-                                      right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
-                                    ),
-                                    color: Colors.white
-                                  ),
+                                      border: Border(
+                                        right: BorderSide(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .background,
+                                            style: BorderStyle.solid,
+                                            width: 4),
+                                      ),
+                                      color: Colors.white),
                                   child: Center(
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(right: 2.0),
-                                            child: Text(
-                                              "${entry.value['value']}",
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle( fontSize: 15, fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Text(
-                                            "${entry.value['unit']}",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle( fontSize: 15),
-                                          ),
-                                        ],
-                                      ))),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 2.0),
+                                        child: Text(
+                                          "${entry.value['value']}",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Text(
+                                        "${entry.value['unit']}",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 15),
+                                      ),
+                                    ],
+                                  ))),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    border: Border(
-                                      right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
-                                    ),
-                                    color: Colors.white
-                                  ),
+                                      border: Border(
+                                        right: BorderSide(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .background,
+                                            style: BorderStyle.solid,
+                                            width: 4),
+                                      ),
+                                      color: Colors.white),
                                   child: Center(
                                       child: Text(
                                     entry.value['lowerbound'].toString(),
                                     textAlign: TextAlign.center,
-                                    style: TextStyle( fontSize: 15),
+                                    style: TextStyle(fontSize: 15),
                                   ))),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    border: Border(
-                                    right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
-                                  ),
-                                    color: Colors.white
-                                  ),
+                                      border: Border(
+                                        right: BorderSide(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .background,
+                                            style: BorderStyle.solid,
+                                            width: 4),
+                                      ),
+                                      color: Colors.white),
                                   child: Center(
                                       child: Text(
                                     entry.value['upperbound'].toString(),
                                     textAlign: TextAlign.center,
-                                    style: TextStyle( fontSize: 15),
+                                    style: TextStyle(fontSize: 15),
                                   ))),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Container(
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    color: (entry.value['result'] == 'gt' || entry.value['result'] == 'lt') ? Color.fromRGBO(255, 185, 185, 1.0) : Color.fromRGBO(168, 255, 191, 1.0)
-                                  ),
+                                      color: (entry.value['result'] == 'gt' ||
+                                              entry.value['result'] == 'lt')
+                                          ? Color.fromRGBO(255, 185, 185, 1.0)
+                                          : Color.fromRGBO(168, 255, 191, 1.0)),
                                   child: Center(
                                       child: (entry.value['result'] == 'gt')
-                                    ? const Icon(
-                                        Icons.arrow_upward,
-                                        color: Colors.red,
-                                        size: 30,
-                                      )
-                                    : (entry.value['result'] == 'eq')
-                                        ? const Icon(
-                                            Icons.check,
-                                            color: Colors.green,
-                                            size: 30,
-                                          )
-                                        : const Icon(
-                                            Icons.arrow_downward,
-                                            color: Colors.red,
-                                            size: 30,
-                                          ))),
-                              )
-                            ]
-                          ),
+                                          ? const Icon(
+                                              Icons.arrow_upward,
+                                              color: Colors.red,
+                                              size: 30,
+                                            )
+                                          : (entry.value['result'] == 'eq')
+                                              ? const Icon(
+                                                  Icons.check,
+                                                  color: Colors.green,
+                                                  size: 30,
+                                                )
+                                              : const Icon(
+                                                  Icons.arrow_downward,
+                                                  color: Colors.red,
+                                                  size: 30,
+                                                ))),
+                            )
+                          ]),
                         )
                     ],
                   ),
@@ -300,31 +335,44 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+                        padding: const EdgeInsets.only(
+                            left: 10.0, right: 10.0, bottom: 10.0),
                         child: Container(
                           height: 50,
-                          decoration: const BoxDecoration(color: Color.fromRGBO(191, 232, 255, 1.0), borderRadius: BorderRadius.all(Radius.circular(5)),),
+                          decoration: const BoxDecoration(
+                            color: Color.fromRGBO(191, 232, 255, 1.0),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
                           child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Text(widget.clasification, textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                              child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Text(widget.clasification,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15)),
                           )),
                         ),
                       ),
                       Wrap(
-                        children: 
-                        [ for (var entry in widget.interpretations)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0, top: 10.0),
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.white),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(entry, textAlign: TextAlign.center),
+                        children: [
+                          for (var entry in widget.interpretations)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, top: 10.0),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    color: Colors.white),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child:
+                                      Text(entry, textAlign: TextAlign.center),
+                                ),
+                              ),
                             ),
-                          ),
-                      ),],),
+                        ],
+                      ),
                     ],
                   ),
                 )
@@ -339,8 +387,9 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                 child: TextButton(
                     onPressed: () {
                       //zapisanie wyniku do bazy danych
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-                        builder: (context) => HomePage()), (Route route) => false);
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                          (Route route) => false);
                     },
                     style: IconButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -363,7 +412,6 @@ class _GazometriaAnalizaState extends State<GazometriaAnaliza> {
                       ),
                     )),
               ),
-              
             ],
           )
         ],

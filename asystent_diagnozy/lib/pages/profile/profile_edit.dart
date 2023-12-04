@@ -20,11 +20,12 @@ class Doctor {
   String email;
   int? numerPESEL;
 
-  Doctor(this.numerPWZ, this.imie, this.nazwisko, this.dataUrodzenia, this.email, [this.numerPESEL]);
+  Doctor(
+      this.numerPWZ, this.imie, this.nazwisko, this.dataUrodzenia, this.email,
+      [this.numerPESEL]);
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
-
   final _formKey = GlobalKey<FormState>();
 
   var items = {};
@@ -33,7 +34,8 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   String gender = 'K';
 
-  var doctor =  Doctor(00123456789,"Jan","Kowalski","10-10-2010","jankowalski@gmail.com", 1234567);
+  var doctor = Doctor(00123456789, "Jan", "Kowalski", "10-10-2010",
+      "jankowalski@gmail.com", 1234567);
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +58,13 @@ class _ProfileEditState extends State<ProfileEdit> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0, left: 18.0, top: 18.0),
+                      padding: const EdgeInsets.only(bottom: 18.0),
                       child: Text(
                         "Edytuj dane:",
                         style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                            color: Color.fromRGBO(22, 20, 35, 1.0)),
                       ),
                     ),
                     Expanded(
@@ -78,7 +80,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(20.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Numer PESEL:",
                                         style: TextStyle(
@@ -87,7 +90,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(20.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Numer PWZ:",
                                         style: TextStyle(
@@ -96,7 +100,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(20.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Imię:",
                                         style: TextStyle(
@@ -105,7 +110,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(20.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Nazwisko:",
                                         style: TextStyle(
@@ -114,18 +120,10 @@ class _ProfileEditState extends State<ProfileEdit> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(20.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Data urodzenia:",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Text(
-                                        "Adres email:",
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -148,26 +146,31 @@ class _ProfileEditState extends State<ProfileEdit> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Padding(
-                                      padding:
-                                          const EdgeInsets.only(top: 20.0),
-                                      child:  Text("00123456789", style: TextStyle(
-                                        fontSize: 18, fontWeight: FontWeight.bold,
-                                        ),)
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(top: 40.0),
-                                      child:  Text("1234567", style: TextStyle(
-                                        fontSize: 18, fontWeight: FontWeight.bold,
-                                        ),)
-                                    ),
+                                                padding: const EdgeInsets.only(
+                                                    top: 25.0),
+                                                child: Text(
+                                                  "00123456789",
+                                                  style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                )),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 30.0),
+                                                padding: const EdgeInsets.only(
+                                                    top: 40.0),
+                                                child: Text(
+                                                  "1234567",
+                                                  style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                )),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 30.0),
                                               child: TextFormField(
                                                 onChanged: (val) {
-                                                  doctor.imie =
-                                                      val.toString();
+                                                  doctor.imie = val.toString();
                                                   debugPrint(doctor.imie);
                                                 },
                                                 validator: (value) {
@@ -178,37 +181,47 @@ class _ProfileEditState extends State<ProfileEdit> {
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent)),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent)),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.black)),
-                                          ),
+                                                  filled: true,
+                                                  fillColor: Theme.of(context)
+                                                      .colorScheme
+                                                      .background,
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent)),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .transparent)),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.0),
+                                                          borderSide:
+                                                              BorderSide(
+                                                                  color: Colors
+                                                                      .black)),
+                                                ),
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 10.0),
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0),
                                               child: TextFormField(
                                                 onChanged: (val) {
                                                   doctor.nazwisko =
                                                       val.toString();
-                                                  debugPrint(
-                                                      doctor.nazwisko);
+                                                  debugPrint(doctor.nazwisko);
                                                 },
                                                 validator: (value) {
                                                   if (value == null ||
@@ -218,37 +231,48 @@ class _ProfileEditState extends State<ProfileEdit> {
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent)),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent)),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.black)),
-                                          ),
+                                                  filled: true,
+                                                  fillColor: Theme.of(context)
+                                                      .colorScheme
+                                                      .background,
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent)),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .transparent)),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.0),
+                                                          borderSide:
+                                                              BorderSide(
+                                                                  color: Colors
+                                                                      .black)),
+                                                ),
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 10.0),
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0),
                                               child: TextFormField(
                                                 onChanged: (val) {
                                                   doctor.dataUrodzenia =
                                                       val.toString();
-                                                  debugPrint(doctor
-                                                      .dataUrodzenia);
+                                                  debugPrint(
+                                                      doctor.dataUrodzenia);
                                                 },
                                                 validator: (value) {
                                                   if (value == null ||
@@ -258,66 +282,37 @@ class _ProfileEditState extends State<ProfileEdit> {
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent)),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent)),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.black)),
-                                          ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 10.0),
-                                              child: TextFormField(
-                                                onChanged: (val) {
-                                                  doctor.email =
-                                                      val.toString();
-                                                  debugPrint(doctor
-                                                      .email);
-                                                },
-                                                validator: (value) {
-                                                  if (value == null ||
-                                                      value.isEmpty) {
-                                                    return 'Please enter some text';
-                                                  }
-                                                  return null;
-                                                },
-                                                decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent)),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent)),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.black)),
-                                          ),
+                                                  filled: true,
+                                                  fillColor: Theme.of(context)
+                                                      .colorScheme
+                                                      .background,
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent)),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .transparent)),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.0),
+                                                          borderSide:
+                                                              BorderSide(
+                                                                  color: Colors
+                                                                      .black)),
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -329,7 +324,6 @@ class _ProfileEditState extends State<ProfileEdit> {
                               )
                             ],
                           ),
-                          
                         ],
                       ),
                     ),
@@ -338,7 +332,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                       children: [
                         Padding(
                           padding:
-                              const EdgeInsets.only(top: 18.0, right: 10.0),
+                              const EdgeInsets.only(top: 15.0, right: 10.0),
                           child: TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
@@ -353,14 +347,14 @@ class _ProfileEditState extends State<ProfileEdit> {
                                 ),
                               ),
                               child: SizedBox(
-                                width: 120,
+                                width: 60,
                                 height: 40,
                                 child: Center(
                                   child: Text(
-                                    "Zapisz dane",
+                                    "Zapisz",
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18,
+                                      fontSize: 15,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -368,7 +362,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                               )),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 18.0, left: 10.0),
+                          padding: const EdgeInsets.only(top: 15.0, left: 10.0),
                           child: TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
@@ -381,14 +375,14 @@ class _ProfileEditState extends State<ProfileEdit> {
                                 ),
                               ),
                               child: SizedBox(
-                                width: 80,
+                                width: 60,
                                 height: 40,
                                 child: Center(
                                   child: Text(
                                     "Anuluj",
                                     style: const TextStyle(
                                       color: Colors.black,
-                                      fontSize: 18,
+                                      fontSize: 15,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),

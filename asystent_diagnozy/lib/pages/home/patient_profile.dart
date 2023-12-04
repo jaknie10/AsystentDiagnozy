@@ -30,6 +30,7 @@ class Badanie {
 
 class _PatientProfileState extends State<PatientProfile> {
   String sortingType = 'Data badania (rosnąco)';
+  String sortingOrder = 'DESC';
 
   List<DropdownMenuItem<String>> sortingOptions = [
     const DropdownMenuItem(
@@ -104,7 +105,7 @@ class _PatientProfileState extends State<PatientProfile> {
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
                   height: 40,
-                  width: 100,
+                  width: 90,
                   child: TextButton(
                       onPressed: () {
                         Navigator.pop(context);
@@ -130,32 +131,29 @@ class _PatientProfileState extends State<PatientProfile> {
                 padding: const EdgeInsets.only(left: 15.0, right: 25.0),
                 child: Container(
                   width: double.infinity,
-                  height: 60,
+                  height: 70,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       color: Colors.white),
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                widget.patient.surname,
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              const Text(" "),
-                              Text(
-                                widget.patient.name,
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              widget.patient.surname,
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            const Text(" "),
+                            Text(
+                              widget.patient.name,
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         ),
                         Row(
                           children: [
@@ -248,7 +246,7 @@ class _PatientProfileState extends State<PatientProfile> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Opis pacjenta:",
+                              "Opis pacjenta",
                               style: TextStyle(fontSize: 20),
                             ),
                             Container(
@@ -271,7 +269,7 @@ class _PatientProfileState extends State<PatientProfile> {
               padding: const EdgeInsets.only(left: 15.0, right: 25),
               child: Container(
                 width: double.infinity,
-                height: 160,
+                height: 180,
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     color: Colors.white),
@@ -281,9 +279,7 @@ class _PatientProfileState extends State<PatientProfile> {
                         alignment: Alignment.centerLeft,
                         child: Padding(
                           padding: EdgeInsets.only(
-                            left: 15.0,
-                            top: 10.0,
-                          ),
+                              left: 15.0, top: 15.0, bottom: 5.0),
                           child: Text(
                             "Dodaj nowe badanie",
                             style: TextStyle(fontSize: 20),
@@ -291,109 +287,81 @@ class _PatientProfileState extends State<PatientProfile> {
                         )),
                     Container(
                       height: 120,
-                      padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                      padding: const EdgeInsets.only(left: 10.0),
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.only(left: 5.0),
-                              child: IconButton(
-                                onPressed: () async {
-                                  final result = await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Morfologia(
-                                          patientId: widget.patient.id,
-                                          patientGender: widget.patient.gender),
-                                    ),
-                                  );
-                                  debugPrint(
-                                      "Patient id: " + result.toString());
-                                },
-                                icon: Image(
-                                  image:
-                                      AssetImage('assets/Morfologia_logo.png'),
+                          IconButton(
+                            onPressed: () async {
+                              final result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Morfologia(
+                                      patientId: widget.patient.id,
+                                      patientGender: widget.patient.gender),
                                 ),
-                                highlightColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                              )),
-                          Padding(
-                            padding: EdgeInsets.only(),
-                            child: SizedBox(
-                                width: 150,
-                                child: IconButton(
-                                  onPressed: () async {
-                                    final result = await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Gazometria(
-                                            patientId: widget.patient.id),
-                                      ),
-                                    );
-                                    debugPrint(
-                                        "Patient id: " + result.toString());
-                                  },
-                                  icon: Image(
-                                    image: AssetImage(
-                                        'assets/Gazometria_logo.png'),
-                                  ),
-                                  highlightColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                )),
+                              );
+                              debugPrint("Patient id: " + result.toString());
+                            },
+                            icon: Image(
+                              image: AssetImage('assets/Morfologia_logo.png'),
+                            ),
+                            highlightColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(),
-                            child: SizedBox(
-                                width: 150,
-                                child: IconButton(
-                                  onPressed: () async {
-                                    final result = await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Lipidogram(
-                                            patientId: widget.patient.id,
-                                            patientGender:
-                                                widget.patient.gender),
-                                      ),
-                                    );
-                                    debugPrint(
-                                        "Patient id: " + result.toString());
-                                  },
-                                  icon: Image(
-                                    image: AssetImage(
-                                        'assets/badanie_lipidogram_logo.png'),
-                                  ),
-                                  highlightColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                )),
+                          IconButton(
+                            onPressed: () async {
+                              final result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      Gazometria(patientId: widget.patient.id),
+                                ),
+                              );
+                              debugPrint("Patient id: " + result.toString());
+                            },
+                            icon: Image(
+                              image: AssetImage('assets/Gazometria_logo.png'),
+                            ),
+                            highlightColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(),
-                            child: SizedBox(
-                                width: 150,
-                                child: IconButton(
-                                  onPressed: () async {},
-                                  icon: Image(
-                                    image: AssetImage(
-                                        'assets/badanie_tarczyca_logo.png'),
-                                  ),
-                                  highlightColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                )),
+                          IconButton(
+                            onPressed: () async {
+                              final result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Lipidogram(
+                                      patientId: widget.patient.id,
+                                      patientGender: widget.patient.gender),
+                                ),
+                              );
+                              debugPrint("Patient id: " + result.toString());
+                            },
+                            icon: Image(
+                              image: AssetImage(
+                                  'assets/badanie_lipidogram_logo.png'),
+                            ),
+                            highlightColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(),
-                            child: SizedBox(
-                                width: 150,
-                                child: IconButton(
-                                  onPressed: () async {},
-                                  icon: Image(
-                                    image: AssetImage(
-                                        'assets/badanie_uniwersalne_logo.png'),
-                                  ),
-                                  highlightColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                )),
+                          IconButton(
+                            onPressed: () async {},
+                            icon: Image(
+                              image: AssetImage(
+                                  'assets/badanie_tarczyca_logo.png'),
+                            ),
+                            highlightColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                          ),
+                          IconButton(
+                            onPressed: () async {},
+                            icon: Image(
+                              image: AssetImage(
+                                  'assets/badanie_uniwersalne_logo.png'),
+                            ),
+                            highlightColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
                           ),
                         ],
                       ),
@@ -402,40 +370,68 @@ class _PatientProfileState extends State<PatientProfile> {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding:
-                    const EdgeInsets.only(right: 25.0, top: 10.0, bottom: 10.0),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                          dropdownColor: Colors.white,
-                          style: const TextStyle(
-                              fontSize: 15,
-                              color: Color.fromRGBO(22, 20, 35, 1.0)),
-                          elevation: 0,
-                          value: sortingType,
-                          items: sortingOptions,
-                          onChanged: (val) {
-                            setState(() {
-                              sortingType = val.toString();
-                            });
-                            debugPrint(sortingType);
-                          }),
+            Padding(
+              padding: const EdgeInsets.only(right: 25.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15.0, right: 15.0, top: 10.0, bottom: 10.0),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                              dropdownColor: Colors.white,
+                              style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Color.fromRGBO(22, 20, 35, 1.0)),
+                              elevation: 0,
+                              value: sortingType,
+                              items: sortingOptions,
+                              onChanged: (val) {
+                                setState(() {
+                                  sortingType = val.toString();
+                                });
+                                debugPrint(sortingType);
+                              }),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(100.0),
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          if (sortingOrder == 'ASC') {
+                            sortingOrder = 'DESC';
+                          } else {
+                            sortingOrder = 'ASC';
+                          }
+                        });
+                      },
+                      icon: Icon((sortingOrder == 'ASC')
+                          ? Icons.arrow_downward
+                          : Icons.arrow_upward),
+                      color: Color.fromRGBO(22, 20, 35, 1.0),
+                      highlightColor: Theme.of(context).colorScheme.secondary,
+                      hoverColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 25.0, top: 4.0),
+              padding: const EdgeInsets.only(left: 15.0, right: 25.0),
               child: Container(
                 width: double.infinity,
                 height: 60,

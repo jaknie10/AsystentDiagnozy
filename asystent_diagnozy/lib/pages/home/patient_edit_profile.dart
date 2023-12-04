@@ -61,15 +61,14 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 10.0, left: 18.0, top: 18.0),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 18.0),
                       child: Text(
                         "Edytuj dane pacjenta:",
                         style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                            color: Color.fromRGBO(22, 20, 35, 1.0)),
                       ),
                     ),
                     Expanded(
@@ -83,9 +82,11 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                                 flex: 1,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(18.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Płeć:",
                                         style: TextStyle(
@@ -94,7 +95,8 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(18.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "ID pacjenta:",
                                         style: TextStyle(
@@ -103,7 +105,8 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(18.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Imię:",
                                         style: TextStyle(
@@ -112,7 +115,8 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(18.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Nazwisko:",
                                         style: TextStyle(
@@ -121,7 +125,8 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(18.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Data urodzenia:",
                                         style: TextStyle(
@@ -149,7 +154,7 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                                           children: [
                                             Padding(
                                                 padding: const EdgeInsets.only(
-                                                    top: 20.0),
+                                                    top: 15.0),
                                                 child: Text(
                                                   "Mężczyzna",
                                                   style: TextStyle(
@@ -169,7 +174,7 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                                                 )),
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  top: 30.0),
+                                                  top: 20.0),
                                               child: TextFormField(
                                                 onChanged: (val) {
                                                   nowyPacjent.imie =
@@ -328,71 +333,60 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                               )
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              height: 180,
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.only(
-                                          top: 10.0, bottom: 10.0),
-                                      child: Text(
-                                        "Dodatkowe informacje:",
-                                        style: TextStyle(
-                                          fontSize: 18,
+                          Container(
+                            height: 180,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 10.0, bottom: 10.0),
+                                    child: Text(
+                                      "Dodatkowe informacje:",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5.0),
+                                    child: SizedBox(
+                                      width: 600,
+                                      height: 100,
+                                      child: TextField(
+                                        keyboardType: TextInputType.text,
+                                        onChanged: (val) {
+                                          nowyPacjent.opis = val.toString();
+                                          debugPrint("opis: " +
+                                              nowyPacjent.opis.toString());
+                                        },
+                                        minLines: null,
+                                        maxLines: null,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                              borderSide: BorderSide(
+                                                  color: Colors.transparent)),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                              borderSide: BorderSide(
+                                                  color: Colors.transparent)),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                              borderSide: BorderSide(
+                                                  color: Colors.black)),
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
-                                      child: SizedBox(
-                                        width: 600,
-                                        height: 100,
-                                        child: TextField(
-                                          keyboardType: TextInputType.text,
-                                          onChanged: (val) {
-                                            nowyPacjent.opis = val.toString();
-                                            debugPrint("opis: " +
-                                                nowyPacjent.opis.toString());
-                                          },
-                                          minLines: null,
-                                          maxLines: null,
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent)),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent)),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.black)),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        "*Wymaga informacje oznaczone gwiazdką:",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                            ),
+                                  ),
+                                ]),
                           )
                         ],
                       ),
@@ -417,14 +411,14 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                                 ),
                               ),
                               child: SizedBox(
-                                width: 80,
+                                width: 60,
                                 height: 40,
                                 child: Center(
                                   child: Text(
                                     "Zapisz",
                                     style: const TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18,
+                                      fontSize: 15,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -445,14 +439,14 @@ class _PatientEditProfileState extends State<PatientEditProfile> {
                                 ),
                               ),
                               child: SizedBox(
-                                width: 80,
+                                width: 60,
                                 height: 40,
                                 child: Center(
                                   child: Text(
                                     "Anuluj",
                                     style: const TextStyle(
                                       color: Colors.black,
-                                      fontSize: 18,
+                                      fontSize: 15,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
