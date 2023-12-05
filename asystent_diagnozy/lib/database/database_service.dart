@@ -1,3 +1,4 @@
+import 'package:asystent_diagnozy/models/lipidogram_model.dart';
 import 'package:asystent_diagnozy/models/patient.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -22,14 +23,16 @@ class SQLiteHelper {
       join(await getDatabasesPath(), 'database.db'),
       options: OpenDatabaseOptions(
         onCreate: _onCreate,
-        version: 1,
+        onUpgrade: _onUpgrade,
+        version: 2,
       ),
     );
   }
 
   Future<void> _onCreate(Database database, int version) async {
     final db = database;
-    await db.execute(""" CREATE TABLE IF NOT EXISTS pacjenci(
+    await db.execute(""" 
+            CREATE TABLE IF NOT EXISTS pacjenci(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             surname TEXT,
@@ -37,6 +40,24 @@ class SQLiteHelper {
             birthdate TEXT,
             datecreated TEXT
           )""");
+  }
+
+  Future<void> _onUpgrade(
+      Database database, int oldVersion, int newVersion) async {
+    final db = database;
+    if (oldVersion == 1) {
+      await db.execute(""" CREATE TABLE IF NOT EXISTS lipidogram(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            patientId INTEGER,
+            chol REAL,
+            ldl REAL,
+            hdl REAL,
+            vldl REAL,
+            tag REAL,
+            name TEXT,
+            datecreated TEXT
+          )""");
+    }
   }
 
   Future<Patient> insertUSer(Patient user) async {
@@ -47,6 +68,16 @@ class SQLiteHelper {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
     return user;
+  }
+
+  Future<Lipidogram> insertLipidogram(Lipidogram lipidogram) async {
+    final db = await database;
+    db.insert(
+      "lipidogram",
+      lipidogram.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    return lipidogram;
   }
 
   // Future<List<Patient>> batchInsert() async {
@@ -85,6 +116,23 @@ class SQLiteHelper {
           surname: maps[index]['surname'],
           gender: maps[index]['gender'],
           birthDate: maps[index]['birthdate']);
+    });
+  }
+
+  Future<List<Lipidogram>> getLipidogram() async {
+    final db = await database;
+    var query = "SELECT * FROM lipidogram";
+    final List<Map<String, dynamic>> maps = await db.rawQuery(query);
+
+    return List.generate(maps.length, (index) {
+      return Lipidogram(
+          id: maps[index]['id'],
+          patientId: maps[index]['patientId'],
+          chol: maps[index]['chol'],
+          ldl: maps[index]['ldl'],
+          hdl: maps[index]['hdl'],
+          vldl: maps[index]['vldl'],
+          tag: maps[index]['tag']);
     });
   }
 

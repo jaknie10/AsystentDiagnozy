@@ -232,6 +232,7 @@ class _LipidogramState extends State<Lipidogram> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => LipidogramAnaliza(
+                                  patientId: widget.patientId,
                                   results: results,
                                   interpretations: interpretations,
                                   clasification: classification),

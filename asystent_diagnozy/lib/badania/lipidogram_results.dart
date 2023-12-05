@@ -1,3 +1,5 @@
+import 'package:asystent_diagnozy/database/database_service.dart';
+import 'package:asystent_diagnozy/models/lipidogram_model.dart';
 import 'package:asystent_diagnozy/pages/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,10 +7,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 class LipidogramAnaliza extends StatefulWidget {
   const LipidogramAnaliza(
       {super.key,
+      required this.patientId,
       required this.results,
       required this.interpretations,
       required this.clasification});
 
+  final int? patientId;
   final Map<String, Map<String, dynamic>> results;
   final String clasification;
   final List interpretations;
@@ -18,6 +22,14 @@ class LipidogramAnaliza extends StatefulWidget {
 }
 
 class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
+  final SQLiteHelper helper = SQLiteHelper();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+    helper.initWinDB();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -387,6 +399,14 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                 child: TextButton(
                     onPressed: () {
                       //zapisanie wyniku do bazy danych
+                      var values = widget.results.entries.toList();
+                      helper.insertLipidogram(Lipidogram(
+                          patientId: widget.patientId,
+                          chol: values[0].value['value'],
+                          ldl: values[1].value['value'],
+                          hdl: values[2].value['value'],
+                          vldl: values[3].value['value'],
+                          tag: values[4].value['value']));
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(builder: (context) => HomePage()),
                           (Route route) => false);
