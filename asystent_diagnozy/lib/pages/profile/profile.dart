@@ -39,7 +39,10 @@ class _ProfileState extends State<Profile> {
                   padding: const EdgeInsets.only(top: 15.0, bottom: 25.0),
                   child: Text(
                     "Cześć, $imie $nazwisko",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Row(
@@ -49,7 +52,7 @@ class _ProfileState extends State<Profile> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0),
                         child: Container(
-                          height: 340,
+                          height: 330,
                           decoration: const BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0)),
@@ -120,8 +123,9 @@ class _ProfileState extends State<Profile> {
                                             children: [
                                               Text(
                                                 "Liczba pacjentów:",
-                                                style: TextStyle(fontSize: 15,
-                                                color: Color.fromRGBO(
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Color.fromRGBO(
                                                         99, 99, 99, 1.0)),
                                               ),
                                             ],
@@ -187,7 +191,7 @@ class _ProfileState extends State<Profile> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                         child: Container(
-                          height: 340,
+                          height: 330,
                           decoration: const BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0)),
@@ -389,8 +393,9 @@ class _ProfileState extends State<Profile> {
                                       style: IconButton.styleFrom(
                                         highlightColor:
                                             const Color.fromRGBO(0, 84, 210, 1),
-                                        backgroundColor:
-                                            Theme.of(context).colorScheme.primary,
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(5.0),

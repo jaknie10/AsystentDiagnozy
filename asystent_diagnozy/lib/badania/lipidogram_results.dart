@@ -43,7 +43,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
               alignment: Alignment.centerLeft,
               child: SizedBox(
                 height: 40,
-                width: 100,
+                width: 90,
                 child: TextButton(
                     onPressed: () {
                       Navigator.pop(context, widget.results);

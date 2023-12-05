@@ -39,6 +39,7 @@ class _PatientProfileState extends State<PatientProfile> {
   }
 
   String sortingType = 'Data badania (rosnąco)';
+  String sortingOrder = 'DESC';
 
   List<DropdownMenuItem<String>> sortingOptions = [
     const DropdownMenuItem(
@@ -113,7 +114,7 @@ class _PatientProfileState extends State<PatientProfile> {
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
                   height: 40,
-                  width: 100,
+                  width: 90,
                   child: TextButton(
                       onPressed: () {
                         Navigator.pop(context);
@@ -139,12 +140,12 @@ class _PatientProfileState extends State<PatientProfile> {
                 padding: const EdgeInsets.only(left: 15.0, right: 25.0),
                 child: Container(
                   width: double.infinity,
-                  height: 60,
+                  height: 70,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       color: Colors.white),
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -257,7 +258,7 @@ class _PatientProfileState extends State<PatientProfile> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Opis pacjenta:",
+                              "Opis pacjenta",
                               style: TextStyle(fontSize: 20),
                             ),
                             Container(
@@ -280,7 +281,7 @@ class _PatientProfileState extends State<PatientProfile> {
               padding: const EdgeInsets.only(left: 15.0, right: 25),
               child: Container(
                 width: double.infinity,
-                height: 160,
+                height: 180,
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     color: Colors.white),
@@ -290,9 +291,7 @@ class _PatientProfileState extends State<PatientProfile> {
                         alignment: Alignment.centerLeft,
                         child: Padding(
                           padding: EdgeInsets.only(
-                            left: 15.0,
-                            top: 10.0,
-                          ),
+                              left: 15.0, top: 15.0, bottom: 5.0),
                           child: Text(
                             "Dodaj nowe badanie",
                             style: TextStyle(fontSize: 20),
@@ -300,7 +299,7 @@ class _PatientProfileState extends State<PatientProfile> {
                         )),
                     Container(
                       height: 120,
-                      padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                      padding: const EdgeInsets.only(left: 10.0),
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
@@ -444,7 +443,7 @@ class _PatientProfileState extends State<PatientProfile> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 25.0, top: 4.0),
+              padding: const EdgeInsets.only(left: 15.0, right: 25.0),
               child: Container(
                 width: double.infinity,
                 height: 60,

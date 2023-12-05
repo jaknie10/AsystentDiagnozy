@@ -20,7 +20,7 @@ class _PatientListItemState extends State<PatientListItem> {
     int age = DateTime.now().difference(birthdayDate).inDays ~/ 365;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+      padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 10.0),
       child: Material(
         child: InkWell(
           child: Ink(

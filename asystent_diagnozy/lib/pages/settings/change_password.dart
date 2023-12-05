@@ -31,7 +31,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 alignment: Alignment.topLeft,
                 child: SizedBox(
                   height: 40,
-                  width: 100,
+                  width: 90,
                   child: TextButton(
                       onPressed: () {
                         Navigator.pop(context, widget.doctorId);

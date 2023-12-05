@@ -48,7 +48,7 @@ class _GazometriaState extends State<Gazometria> {
               alignment: Alignment.centerLeft,
               child: SizedBox(
                 height: 40,
-                width: 100,
+                width: 90,
                 child: TextButton(
                     onPressed: () {
                       Navigator.pop(context, widget.patientId);

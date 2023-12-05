@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 child: SearchBar(
                   leading: const Icon(
                     Icons.search,
-                    color: Color.fromRGBO(0, 0, 0, 0.2),
+                    color: Color.fromRGBO(0, 0, 0, 0.15),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -91,66 +91,72 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const Spacer(),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: Text(
-                        'Sortuj według:',
-                        style: TextStyle(fontSize: 15),
-                      ),
+              Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text(
+                      'Sortuj według:',
+                      style: TextStyle(fontSize: 15),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15.0),
-                      child: Container(
-                        height: 40,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                                  dropdownColor: Colors.white,
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      color: Color.fromRGBO(22, 20, 35, 1.0)),
-                                  elevation: 0,
-                                  value: sortingType,
-                                  items: sortingOptions,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      sortingType = val.toString();
-                                    });
-                                  }),
-                            ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: Container(
+                      height: 40,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                                dropdownColor: Colors.white,
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Color.fromRGBO(22, 20, 35, 1.0)),
+                                elevation: 2,
+                                value: sortingType,
+                                items: sortingOptions,
+                                onChanged: (val) {
+                                  setState(() {
+                                    sortingType = val.toString();
+                                  });
+                                }),
                           ),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15.0),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(100.0),
+                      ),
                       child: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              if (sortingOrder == 'ASC') {
-                                sortingOrder = 'DESC';
-                              } else {
-                                sortingOrder = 'ASC';
-                              }
-                            });
-                          },
-                          icon: Icon((sortingOrder == 'ASC')
-                              ? Icons.arrow_downward
-                              : Icons.arrow_upward)),
+                        onPressed: () {
+                          setState(() {
+                            if (sortingOrder == 'ASC') {
+                              sortingOrder = 'DESC';
+                            } else {
+                              sortingOrder = 'ASC';
+                            }
+                          });
+                        },
+                        icon: Icon((sortingOrder == 'ASC')
+                            ? Icons.arrow_downward
+                            : Icons.arrow_upward),
+                        color: Color.fromRGBO(22, 20, 35, 1.0),
+                        highlightColor: Theme.of(context).colorScheme.secondary,
+                        hoverColor: Theme.of(context).colorScheme.secondary,
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
