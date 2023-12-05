@@ -22,27 +22,29 @@ class _SettingsState extends State<Settings> {
       height: double.infinity,
       color: Theme.of(context).colorScheme.background,
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(30.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 15.0),
-                child:
-                    Text("Ustawienia", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-              ),
-              Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
                   width: 500,
                   decoration: BoxDecoration(
-                      color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
                       children: [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 15),
+                          child: Text("Ustawienia",
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold)),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 15.0),
                           child: GestureDetector(
@@ -50,15 +52,18 @@ class _SettingsState extends State<Settings> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ChangePassword(doctorId: widget.doctorId),
+                                    builder: (context) => ChangePassword(
+                                        doctorId: widget.doctorId),
                                   ));
                             },
                             child: Container(
                               height: 50,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  color: Theme.of(context).colorScheme.background),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  color:
+                                      Theme.of(context).colorScheme.background),
                               child: Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Text(
@@ -81,8 +86,10 @@ class _SettingsState extends State<Settings> {
                             height: 50,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                color: Theme.of(context).colorScheme.background),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                color:
+                                    Theme.of(context).colorScheme.background),
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: Text(

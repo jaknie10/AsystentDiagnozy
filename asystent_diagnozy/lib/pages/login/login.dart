@@ -35,12 +35,11 @@ class _LoginState extends State<Login> {
             Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
-                  // width: 400,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   child: Padding(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(30.0),
                     child: Column(
                       children: [
                         SizedBox(
@@ -48,14 +47,24 @@ class _LoginState extends State<Login> {
                           child: Form(
                               key: _formKey,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 15.0),
+                                    child: Text(
+                                      "Zaloguj się",
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         left: 15.0,
                                         right: 15.0,
                                         top: 15.0,
-                                        bottom: 5.0),
+                                        bottom: 10.0),
                                     child: TextFormField(
                                       keyboardType:
                                           TextInputType.visiblePassword,
@@ -66,6 +75,14 @@ class _LoginState extends State<Login> {
                                         return null;
                                       },
                                       decoration: InputDecoration(
+                                        prefixIcon: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Icon(
+                                            Icons.search,
+                                            color: Color.fromRGBO(0, 0, 0, 0.2),
+                                            size: 25,
+                                          ),
+                                        ),
                                         filled: true,
                                         fillColor: Theme.of(context)
                                             .colorScheme
@@ -104,6 +121,14 @@ class _LoginState extends State<Login> {
                                         return null;
                                       },
                                       decoration: InputDecoration(
+                                        prefixIcon: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Icon(
+                                            Icons.lock_outline_rounded,
+                                            color: Color.fromRGBO(0, 0, 0, 0.2),
+                                            size: 25,
+                                          ),
+                                        ),
                                         filled: true,
                                         fillColor: Theme.of(context)
                                             .colorScheme

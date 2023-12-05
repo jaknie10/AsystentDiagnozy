@@ -52,12 +52,6 @@ class _ChangePasswordState extends State<ChangePassword> {
               ),
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 15.0),
-                  child: Text("Wprowadź nowe hasło",
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-                ),
-                Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Container(
                     width: 500,
@@ -68,19 +62,16 @@ class _ChangePasswordState extends State<ChangePassword> {
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
                         children: [
-                          Row(
+                          Padding(
+                            padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                            child: Text("Zmień hasło:",
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold)),
+                          ),
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              // Padding(
-                              //   padding: EdgeInsets.all(15.0),
-                              //   child: Text(
-                              //     "Nowe hasło:",
-                              //     style: TextStyle(
-                              //       fontSize: 18,
-                              //     ),
-                              //   ),
-                              // ),
                               Padding(
                                 padding: const EdgeInsets.only(
                                     top: 15.0,
@@ -95,6 +86,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 5.0, top: 5.0),
+                                            child: Text(
+                                              "Wprowadź stare hasło:",
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ),
                                           TextFormField(
                                             keyboardType:
                                                 TextInputType.visiblePassword,
@@ -106,6 +105,16 @@ class _ChangePasswordState extends State<ChangePassword> {
                                               return null;
                                             },
                                             decoration: InputDecoration(
+                                              prefixIcon: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Icon(
+                                                  Icons.lock_outline_rounded,
+                                                  color: Color.fromRGBO(
+                                                      0, 0, 0, 0.2),
+                                                  size: 25,
+                                                ),
+                                              ),
                                               filled: true,
                                               fillColor: Theme.of(context)
                                                   .colorScheme
@@ -130,6 +139,70 @@ class _ChangePasswordState extends State<ChangePassword> {
                                                           5.0),
                                                   borderSide: const BorderSide(
                                                       color: Colors.black)),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 5.0, top: 15.0),
+                                            child: Text(
+                                              "Wprowadź nowe hasło:",
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 10.0),
+                                            child: TextFormField(
+                                              keyboardType:
+                                                  TextInputType.visiblePassword,
+                                              inputFormatters: [],
+                                              onSaved: (value) {},
+                                              validator: (value) {
+                                                if (value == null ||
+                                                    value.isEmpty) {}
+                                                return null;
+                                              },
+                                              decoration: InputDecoration(
+                                                prefixIcon: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child: Icon(
+                                                    Icons.lock_outline_rounded,
+                                                    color: Color.fromRGBO(
+                                                        0, 0, 0, 0.2),
+                                                    size: 25,
+                                                  ),
+                                                ),
+                                                filled: true,
+                                                fillColor: Theme.of(context)
+                                                    .colorScheme
+                                                    .background,
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                enabledBorder: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color: Colors
+                                                                .transparent)),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5.0),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                                color: Colors
+                                                                    .black)),
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -169,7 +242,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                     height: 40,
                                     child: Center(
                                       child: Text(
-                                        "Zmień hasło",
+                                        "Zapisz hasło",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 15,
