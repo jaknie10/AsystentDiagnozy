@@ -42,6 +42,12 @@ dependencies:
 
   flutter_svg: ^2.0.5
 
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding.git
+      path: plugins/window_size
+      ref: a550668ca25881d154ae54204baa93a41fe5e344
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
