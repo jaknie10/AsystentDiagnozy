@@ -26,170 +26,171 @@ class _ProfileState extends State<Profile> {
       height: double.infinity,
       color: Theme.of(context).colorScheme.background,
       child: Center(
-        child: Padding(
-          padding: EdgeInsets.all(15.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SvgPicture.asset(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 15.0),
+                child: SvgPicture.asset(
                   'assets/lekarz_logo.svg',
                   width: 120,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15.0, bottom: 25.0),
-                  child: Text(
-                    "Cześć, $imie $nazwisko",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 15.0, bottom: 25.0),
+                child: Text(
+                  "Cześć, $imie $nazwisko",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: Container(
-                          height: 330,
-                          decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              color: Colors.white),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: const Column(
-                              children: [
-                                Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 10.0, top: 10.0, bottom: 30.0),
-                                      child: Text(
-                                        "Statystyki",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Wrap(children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 15.0, left: 5.0),
+                      child: Container(
+                        height: 330,
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            color: Colors.white),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: const Column(
+                            children: [
+                              Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 10.0, top: 10.0, bottom: 30.0),
+                                    child: Text(
+                                      "Statystyki",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                              Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: 30.0,
+                                            left: 10.0,
+                                            right: 10.0,
+                                            top: 10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Wykonanych badań:",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Color.fromRGBO(
+                                                      99, 99, 99, 1.0)),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    )),
-                                Row(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: 30.0,
-                                              left: 10.0,
-                                              right: 10.0,
-                                              top: 10.0),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "Wykonanych badań:",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Color.fromRGBO(
-                                                        99, 99, 99, 1.0)),
-                                              ),
-                                            ],
-                                          ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: 30.0,
+                                            left: 10.0,
+                                            right: 10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Najczęściej wykonywane \nbadanie:",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Color.fromRGBO(
+                                                      99, 99, 99, 1.0)),
+                                            ),
+                                          ],
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: 30.0,
-                                              left: 10.0,
-                                              right: 10.0),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "Najczęściej wykonywane \nbadanie:",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Color.fromRGBO(
-                                                        99, 99, 99, 1.0)),
-                                              ),
-                                            ],
-                                          ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: 30.0,
+                                            left: 10.0,
+                                            right: 10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Liczba pacjentów:",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Color.fromRGBO(
+                                                      99, 99, 99, 1.0)),
+                                            ),
+                                          ],
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: 30.0,
-                                              left: 10.0,
-                                              right: 10.0),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "Liczba pacjentów:",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Color.fromRGBO(
-                                                        99, 99, 99, 1.0)),
-                                              ),
-                                            ],
-                                          ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: 30.0,
+                                            left: 10.0,
+                                            right: 10.0,
+                                            top: 10.0),
+                                        child: Text(
+                                          "155",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: 30.0,
-                                              left: 10.0,
-                                              right: 10.0,
-                                              top: 10.0),
-                                          child: Text(
-                                            "155",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15),
-                                          ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: 30.0,
+                                            left: 10.0,
+                                            right: 10.0,
+                                            top: 10.0),
+                                        child: Text(
+                                          "Morfologia",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: 30.0,
-                                              left: 10.0,
-                                              right: 10.0,
-                                              top: 10.0),
-                                          child: Text(
-                                            "Morfologia",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15),
-                                          ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: 30.0,
+                                            left: 10.0,
+                                            right: 10.0,
+                                            top: 10.0),
+                                        child: Text(
+                                          "100",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: 30.0,
-                                              left: 10.0,
-                                              right: 10.0,
-                                              top: 10.0),
-                                          child: Text(
-                                            "100",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                    )
+                  ]),
+                  Wrap(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 15.0),
                         child: Container(
                           height: 330,
                           decoration: const BoxDecoration(
@@ -417,12 +418,12 @@ class _ProfileState extends State<Profile> {
                             ]),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
