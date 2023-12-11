@@ -1,5 +1,5 @@
 import 'package:asystent_diagnozy/database/database_service.dart';
-import 'package:asystent_diagnozy/models/lipidogram_model.dart';
+import 'package:asystent_diagnozy/models/test_result_model.dart';
 import 'package:asystent_diagnozy/pages/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,7 +13,7 @@ class LipidogramAnaliza extends StatefulWidget {
       required this.clasification});
 
   final int? patientId;
-  final Map<String, Map<String, dynamic>> results;
+  final Map<dynamic, dynamic> results;
   final String clasification;
   final List interpretations;
 
@@ -66,8 +66,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
           Padding(
             padding: const EdgeInsets.only(left: 5.0, top: 5.0),
             child: Padding(
-              padding:
-                  const EdgeInsets.only(left: 10.0, top: 5.0, bottom: 10.0),
+              padding: const EdgeInsets.only(left: 10.0, top: 5.0, bottom: 10.0),
               child: SvgPicture.asset(
                 'assets/badanie_lipidogram_logo_long.svg',
                 width: 450,
@@ -78,8 +77,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
 
           //wyniki analizy
           Padding(
-            padding:
-                const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
+            padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -102,9 +100,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                                   decoration: BoxDecoration(
                                       border: Border(
                                         right: BorderSide(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
+                                            color: Theme.of(context).colorScheme.background,
                                             style: BorderStyle.solid,
                                             width: 4),
                                       ),
@@ -124,9 +120,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                                 decoration: BoxDecoration(
                                     border: Border(
                                       right: BorderSide(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .background,
+                                          color: Theme.of(context).colorScheme.background,
                                           style: BorderStyle.solid,
                                           width: 4),
                                     ),
@@ -145,9 +139,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                                 decoration: BoxDecoration(
                                     border: Border(
                                       right: BorderSide(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .background,
+                                          color: Theme.of(context).colorScheme.background,
                                           style: BorderStyle.solid,
                                           width: 4),
                                     ),
@@ -166,9 +158,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                                 decoration: BoxDecoration(
                                     border: Border(
                                       right: BorderSide(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .background,
+                                          color: Theme.of(context).colorScheme.background,
                                           style: BorderStyle.solid,
                                           width: 4),
                                     ),
@@ -213,9 +203,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                                   decoration: BoxDecoration(
                                       border: Border(
                                         right: BorderSide(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
+                                            color: Theme.of(context).colorScheme.background,
                                             style: BorderStyle.solid,
                                             width: 4),
                                       ),
@@ -224,9 +212,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                                       child: Text(
                                     entry.value['short'],
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                   ))),
                             ),
                             Expanded(
@@ -236,9 +222,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                                   decoration: BoxDecoration(
                                       border: Border(
                                         right: BorderSide(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
+                                            color: Theme.of(context).colorScheme.background,
                                             style: BorderStyle.solid,
                                             width: 4),
                                       ),
@@ -248,14 +232,12 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 2.0),
+                                        padding: const EdgeInsets.only(right: 2.0),
                                         child: Text(
                                           "${entry.value['value']}",
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
+                                          style:
+                                              TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                       Text(
@@ -273,9 +255,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                                   decoration: BoxDecoration(
                                       border: Border(
                                         right: BorderSide(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
+                                            color: Theme.of(context).colorScheme.background,
                                             style: BorderStyle.solid,
                                             width: 4),
                                       ),
@@ -294,9 +274,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                                   decoration: BoxDecoration(
                                       border: Border(
                                         right: BorderSide(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
+                                            color: Theme.of(context).colorScheme.background,
                                             style: BorderStyle.solid,
                                             width: 4),
                                       ),
@@ -347,8 +325,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10.0, right: 10.0, bottom: 10.0),
+                        padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
                         child: Container(
                           height: 50,
                           decoration: const BoxDecoration(
@@ -360,8 +337,7 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                             padding: const EdgeInsets.all(5.0),
                             child: Text(widget.clasification,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15)),
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                           )),
                         ),
                       ),
@@ -369,17 +345,14 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                         children: [
                           for (var entry in widget.interpretations)
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10.0, top: 10.0),
+                              padding: const EdgeInsets.only(left: 10.0, top: 10.0),
                               child: Container(
                                 decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
+                                    borderRadius: BorderRadius.all(Radius.circular(5)),
                                     color: Colors.white),
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
-                                  child:
-                                      Text(entry, textAlign: TextAlign.center),
+                                  child: Text(entry, textAlign: TextAlign.center),
                                 ),
                               ),
                             ),
@@ -399,16 +372,17 @@ class _LipidogramAnalizaState extends State<LipidogramAnaliza> {
                 child: TextButton(
                     onPressed: () {
                       //zapisanie wyniku do bazy danych
-                      var values = widget.results.entries.toList();
-                      helper.insertLipidogram(Lipidogram(
-                          patientId: widget.patientId,
-                          chol: values[0].value['value'],
-                          ldl: values[1].value['value'],
-                          hdl: values[2].value['value'],
-                          vldl: values[3].value['value'],
-                          tag: values[4].value['value']));
+                      helper.insertTestResult(TestResult(
+                          patientId: widget.patientId!,
+                          testType: 'Lipidogram',
+                          createdAt: DateTime.now(),
+                          results: {
+                            "results": widget.results,
+                            "interpretations": widget.interpretations,
+                            "clasification": widget.clasification
+                          }));
                       Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => HomePage()),
+                          MaterialPageRoute(builder: (context) => const HomePage()),
                           (Route route) => false);
                     },
                     style: IconButton.styleFrom(

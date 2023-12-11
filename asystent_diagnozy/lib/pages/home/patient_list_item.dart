@@ -1,4 +1,4 @@
-import 'package:asystent_diagnozy/models/patient.dart';
+import 'package:asystent_diagnozy/models/patient_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -16,8 +16,7 @@ class PatientListItem extends StatefulWidget {
 class _PatientListItemState extends State<PatientListItem> {
   @override
   Widget build(BuildContext context) {
-    DateTime birthdayDate = DateTime.parse(widget.patient.birthDate);
-    int age = DateTime.now().difference(birthdayDate).inDays ~/ 365;
+    int age = DateTime.now().difference(widget.patient.birthdate).inDays ~/ 365;
 
     return Padding(
       padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 10.0),
@@ -57,7 +56,7 @@ class _PatientListItemState extends State<PatientListItem> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                              child: Text(DateFormat('dd-MM-yyyy').format(birthdayDate),
+                              child: Text(DateFormat('dd-MM-yyyy').format(widget.patient.birthdate),
                                   style: const TextStyle(fontSize: 18)),
                             ),
                             widget.patient.gender == "M"

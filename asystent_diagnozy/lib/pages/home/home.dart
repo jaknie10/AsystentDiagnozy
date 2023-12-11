@@ -1,4 +1,4 @@
-import 'package:asystent_diagnozy/models/patient.dart';
+import 'package:asystent_diagnozy/models/patient_model.dart';
 import 'package:flutter/material.dart';
 import 'add_new_patient.dart';
 import 'patient_list_item.dart';
@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final SQLiteHelper helper = SQLiteHelper();
-  String sortingType = 'datecreated';
+  String sortingType = 'createdAt';
   String sortingOrder = 'DESC';
   String searchValue = '';
 
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     List<DropdownMenuItem<String>> sortingOptions = [
       const DropdownMenuItem(value: "birthdate", child: Text("Data urodzenia")),
       const DropdownMenuItem(value: "surname", child: Text("Nazwisko")),
-      const DropdownMenuItem(value: "datecreated", child: Text("Data dodania")),
+      const DropdownMenuItem(value: "createdAt", child: Text("Data dodania")),
     ];
 
     return Container(
@@ -81,8 +81,7 @@ class _HomePageState extends State<HomePage> {
                     });
                   },
                   elevation: MaterialStateProperty.all(2.0),
-                  overlayColor: MaterialStateProperty.all(
-                      Theme.of(context).colorScheme.secondary),
+                  overlayColor: MaterialStateProperty.all(Theme.of(context).colorScheme.secondary),
                   shape: MaterialStateProperty.all(
                     const ContinuousRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -102,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 15.0),
-                    child: Container(
+                    child: SizedBox(
                       height: 40,
                       child: DecoratedBox(
                         decoration: BoxDecoration(
@@ -115,8 +114,7 @@ class _HomePageState extends State<HomePage> {
                             child: DropdownButton(
                                 dropdownColor: Colors.white,
                                 style: const TextStyle(
-                                    fontSize: 15,
-                                    color: Color.fromRGBO(22, 20, 35, 1.0)),
+                                    fontSize: 15, color: Color.fromRGBO(22, 20, 35, 1.0)),
                                 elevation: 2,
                                 value: sortingType,
                                 items: sortingOptions,
@@ -147,10 +145,9 @@ class _HomePageState extends State<HomePage> {
                             }
                           });
                         },
-                        icon: Icon((sortingOrder == 'ASC')
-                            ? Icons.arrow_downward
-                            : Icons.arrow_upward),
-                        color: Color.fromRGBO(22, 20, 35, 1.0),
+                        icon: Icon(
+                            (sortingOrder == 'ASC') ? Icons.arrow_downward : Icons.arrow_upward),
+                        color: const Color.fromRGBO(22, 20, 35, 1.0),
                         highlightColor: Theme.of(context).colorScheme.secondary,
                         hoverColor: Theme.of(context).colorScheme.secondary,
                       ),
@@ -162,8 +159,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Flexible(
             child: FutureBuilder<List<Patient>>(
-              future:
-                  helper.getPatients("$sortingType $sortingOrder", searchValue),
+              future: helper.getPatients("$sortingType $sortingOrder", searchValue),
               builder: (context, snapshot) {
                 // if (snapshot.connectionState == ConnectionState.waiting) {
                 //   return const Center(child: CircularProgressIndicator());
