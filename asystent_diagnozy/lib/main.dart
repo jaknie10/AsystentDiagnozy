@@ -31,8 +31,7 @@ class MyApp extends StatelessWidget {
             background: const Color.fromRGBO(238, 238, 238, 1)),
         fontFamily: 'Montserrat',
         scrollbarTheme: const ScrollbarThemeData().copyWith(
-          thumbColor:
-              const MaterialStatePropertyAll(Color.fromRGBO(0, 99, 248, 1)),
+          thumbColor: const MaterialStatePropertyAll(Color.fromRGBO(0, 99, 248, 1)),
           thumbVisibility: const MaterialStatePropertyAll(true),
           trackVisibility: const MaterialStatePropertyAll(true),
         ),

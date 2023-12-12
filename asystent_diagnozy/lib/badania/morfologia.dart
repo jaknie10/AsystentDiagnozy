@@ -7,9 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'morfologia_results.dart';
 
 class Morfologia extends StatefulWidget {
-  const Morfologia(
-      {Key? key, required this.patientId, required this.patientGender})
-      : super(key: key);
+  const Morfologia({super.key, required this.patientId, required this.patientGender});
 
   final int? patientId;
   final String patientGender;
@@ -27,8 +25,7 @@ class _MorfologiaState extends State<Morfologia> {
   var interpretations = <dynamic>{};
 
   Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/morfologia.json');
+    final String response = await rootBundle.loadString('assets/morfologia.json');
     final data = await json.decode(response);
     setState(() {
       items = data;
@@ -91,8 +88,7 @@ class _MorfologiaState extends State<Morfologia> {
             child: Container(
               width: 500,
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  color: Colors.white),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)), color: Colors.white),
               child: Form(
                 key: _formKey,
                 child: Padding(
@@ -106,8 +102,7 @@ class _MorfologiaState extends State<Morfologia> {
                             alignment: Alignment.center,
                             height: 50,
                             child: Text("Wprowadź wartości:",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                           ),
                         ],
                       ),
@@ -118,21 +113,17 @@ class _MorfologiaState extends State<Morfologia> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                 child: Container(
                                     width: 80,
                                     height: 48,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(5.0),
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .background,
+                                      color: Theme.of(context).colorScheme.background,
                                     ),
                                     child: Text(entry.value['short'],
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.normal)),
+                                        style:
+                                            TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
                                     alignment: Alignment.center),
                               ),
                               SizedBox(
@@ -144,28 +135,19 @@ class _MorfologiaState extends State<Morfologia> {
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
-                                      fillColor: Theme.of(context)
-                                          .colorScheme
-                                          .background,
+                                      fillColor: Theme.of(context).colorScheme.background,
                                       border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent)),
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(color: Colors.transparent)),
                                       enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent)),
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(color: Colors.transparent)),
                                       focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.black)),
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(color: Colors.black)),
                                       //labelText: entry.value['short'],
                                       suffixIcon: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 5),
+                                        padding: const EdgeInsets.only(right: 5),
                                         child: Text(
                                           entry.value['unit'],
                                           style: const TextStyle(
@@ -174,8 +156,7 @@ class _MorfologiaState extends State<Morfologia> {
                                         ),
                                       ),
                                       suffixIconConstraints:
-                                          const BoxConstraints(
-                                              minWidth: 0, minHeight: 0),
+                                          const BoxConstraints(minWidth: 0, minHeight: 0),
                                       isDense: true),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -190,22 +171,16 @@ class _MorfologiaState extends State<Morfologia> {
                                       'lowerbound': entry.value[lowerbound],
                                       'upperbound': entry.value[upperbound],
                                       'unit': entry.value['unit'],
-                                      'result': (double.parse(value) <
-                                              entry.value[lowerbound])
+                                      'result': (double.parse(value) < entry.value[lowerbound])
                                           ? 'lt'
-                                          : (double.parse(value) >
-                                                  entry.value[upperbound])
+                                          : (double.parse(value) > entry.value[upperbound])
                                               ? 'gt'
                                               : 'eq'
                                     });
-                                    if (double.parse(value) <
-                                        entry.value[lowerbound]) {
-                                      interpretations
-                                          .addAll(entry.value['deficit_int']);
-                                    } else if (double.parse(value) >
-                                        entry.value[upperbound]) {
-                                      interpretations
-                                          .addAll(entry.value['surplus_int']);
+                                    if (double.parse(value) < entry.value[lowerbound]) {
+                                      interpretations.addAll(entry.value['deficit_int']);
+                                    } else if (double.parse(value) > entry.value[upperbound]) {
+                                      interpretations.addAll(entry.value['surplus_int']);
                                     }
                                   },
                                 ),
@@ -234,6 +209,7 @@ class _MorfologiaState extends State<Morfologia> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => MorfologiaAnaliza(
+                                  patientId: widget.patientId!,
                                   results: results,
                                   interpretations: interpretations),
                             ));

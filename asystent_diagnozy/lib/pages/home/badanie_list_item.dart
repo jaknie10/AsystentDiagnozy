@@ -46,6 +46,7 @@ class _BadanieListItemState extends State<BadanieListItem> {
                                 interpretations: widget.badanie.results["interpretations"],
                                 clasification: widget.badanie.results["clasification"])
                             : MorfologiaAnaliza(
+                                patientId: widget.badanie.patientId,
                                 results: widget.badanie.results["results"],
                                 interpretations: widget.badanie.results["interpretations"])),
               );
