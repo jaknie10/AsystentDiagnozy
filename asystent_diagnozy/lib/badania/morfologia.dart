@@ -1,10 +1,9 @@
+import 'package:asystent_diagnozy/badania/test_results_widget.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'morfologia_results.dart';
 
 class Morfologia extends StatefulWidget {
   const Morfologia({super.key, required this.patientId, required this.patientGender});
@@ -21,7 +20,7 @@ class _MorfologiaState extends State<Morfologia> {
 
   var items = {};
 
-  List<Map<String, dynamic>> results = [];
+  Map<String, dynamic> results = {};
   var interpretations = <dynamic>{};
 
   Future<void> readJson() async {
@@ -78,7 +77,7 @@ class _MorfologiaState extends State<Morfologia> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                'assets/badanie_morfologia_logo.svg',
+                'assets/badanie_morfologia_logo_long.svg',
                 width: 500,
               ),
             ],
@@ -165,7 +164,7 @@ class _MorfologiaState extends State<Morfologia> {
                                     return null;
                                   },
                                   onSaved: (value) {
-                                    results.add({
+                                    results['${entry.value['short']}'] = {
                                       'short': entry.value['short'],
                                       'value': double.parse(value!),
                                       'lowerbound': entry.value[lowerbound],
@@ -176,7 +175,7 @@ class _MorfologiaState extends State<Morfologia> {
                                           : (double.parse(value) > entry.value[upperbound])
                                               ? 'gt'
                                               : 'eq'
-                                    });
+                                    };
                                     if (double.parse(value) < entry.value[lowerbound]) {
                                       interpretations.addAll(entry.value['deficit_int']);
                                     } else if (double.parse(value) > entry.value[upperbound]) {
@@ -208,10 +207,12 @@ class _MorfologiaState extends State<Morfologia> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MorfologiaAnaliza(
-                                  patientId: widget.patientId!,
-                                  results: results,
-                                  interpretations: interpretations),
+                              builder: (context) => TestResultsWidget(
+                                patientId: widget.patientId!,
+                                results: results,
+                                interpretations: interpretations.toList(),
+                                testName: 'Morfologia',
+                              ),
                             ));
                       }
                     },

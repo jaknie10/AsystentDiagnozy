@@ -1,10 +1,9 @@
+import 'package:asystent_diagnozy/badania/test_results_widget.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'gazometria_results.dart';
 
 class Gazometria extends StatefulWidget {
   const Gazometria({super.key, required this.patientId});
@@ -70,7 +69,7 @@ class _GazometriaState extends State<Gazometria> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                'assets/badanie_gazometria_logo.svg',
+                'assets/badanie_gazometria_logo_long.svg',
                 width: 500,
               ),
             ],
@@ -198,11 +197,12 @@ class _GazometriaState extends State<Gazometria> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => GazometriaAnaliza(
+                              builder: (context) => TestResultsWidget(
                                   patientId: widget.patientId!,
                                   results: results,
                                   interpretations: interpretations,
-                                  clasification: classification),
+                                  classification: classification,
+                                  testName: 'Gazometria'),
                             ));
                       }
                     },

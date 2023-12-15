@@ -1,14 +1,14 @@
+import 'dart:developer';
+
+import 'package:asystent_diagnozy/badania/test_results_widget.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'lipidogram_results.dart';
-
 class Lipidogram extends StatefulWidget {
-  const Lipidogram(
-      {super.key, required this.patientId, required this.patientGender});
+  const Lipidogram({super.key, required this.patientId, required this.patientGender});
 
   final int? patientId;
   final String patientGender;
@@ -28,8 +28,7 @@ class _LipidogramState extends State<Lipidogram> {
   String classification = "Podane wyniki badania wydają się poprawne";
 
   Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/lipidogram.json');
+    final String response = await rootBundle.loadString('assets/lipidogram.json');
     final data = await json.decode(response);
     setState(() {
       items = data['norms'];
@@ -93,8 +92,7 @@ class _LipidogramState extends State<Lipidogram> {
             child: Container(
               width: 500,
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  color: Colors.white),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)), color: Colors.white),
               child: Form(
                 key: _formKey,
                 child: Padding(
@@ -108,8 +106,7 @@ class _LipidogramState extends State<Lipidogram> {
                             alignment: Alignment.center,
                             height: 50,
                             child: Text("Wprowadź wartości:",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                           ),
                         ],
                       ),
@@ -120,21 +117,17 @@ class _LipidogramState extends State<Lipidogram> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                 child: Container(
                                     width: 60,
                                     height: 48,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(5.0),
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .background,
+                                      color: Theme.of(context).colorScheme.background,
                                     ),
                                     child: Text(entry.value['short'],
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.normal)),
+                                        style:
+                                            TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
                                     alignment: Alignment.center),
                               ),
                               SizedBox(
@@ -146,28 +139,19 @@ class _LipidogramState extends State<Lipidogram> {
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
-                                      fillColor: Theme.of(context)
-                                          .colorScheme
-                                          .background,
+                                      fillColor: Theme.of(context).colorScheme.background,
                                       border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent)),
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(color: Colors.transparent)),
                                       enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.transparent)),
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(color: Colors.transparent)),
                                       focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(
-                                              color: Colors.black)),
+                                          borderRadius: BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(color: Colors.black)),
                                       //labelText: entry.value['short'],
                                       suffixIcon: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 5),
+                                        padding: const EdgeInsets.only(right: 5),
                                         child: Text(
                                           entry.value['unit'],
                                           style: const TextStyle(
@@ -176,8 +160,7 @@ class _LipidogramState extends State<Lipidogram> {
                                         ),
                                       ),
                                       suffixIconConstraints:
-                                          const BoxConstraints(
-                                              minWidth: 0, minHeight: 0),
+                                          const BoxConstraints(minWidth: 0, minHeight: 0),
                                       isDense: true),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -189,18 +172,15 @@ class _LipidogramState extends State<Lipidogram> {
                                     Map<String, dynamic> entryMap = {};
                                     entryMap['short'] = entry.value['short'];
                                     entryMap['value'] = double.parse(value!);
-                                    entryMap['lowerbound'] =
-                                        entry.value[lowerbound];
-                                    entryMap['upperbound'] =
-                                        entry.value[upperbound];
+                                    entryMap['lowerbound'] = entry.value[lowerbound];
+                                    entryMap['upperbound'] = entry.value[upperbound];
                                     entryMap['unit'] = entry.value["unit"];
-                                    entryMap['result'] = (double.parse(value) <
-                                            entry.value[lowerbound])
-                                        ? 'lt'
-                                        : (double.parse(value) >
-                                                entry.value[upperbound])
-                                            ? 'gt'
-                                            : 'eq';
+                                    entryMap['result'] =
+                                        (double.parse(value) < entry.value[lowerbound])
+                                            ? 'lt'
+                                            : (double.parse(value) > entry.value[upperbound])
+                                                ? 'gt'
+                                                : 'eq';
                                     results[entryMap['short']] = entryMap;
                                   },
                                 ),
@@ -228,14 +208,18 @@ class _LipidogramState extends State<Lipidogram> {
 
                         lipidogramAnaliza();
 
+                        log(results.toString());
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LipidogramAnaliza(
-                                  patientId: widget.patientId,
-                                  results: results,
-                                  interpretations: interpretations,
-                                  clasification: classification),
+                              builder: (context) => TestResultsWidget(
+                                patientId: widget.patientId!,
+                                results: results,
+                                interpretations: interpretations,
+                                classification: classification,
+                                testName: 'Lipidogram',
+                              ),
                             ));
                       }
                     },
@@ -282,17 +266,11 @@ class _LipidogramState extends State<Lipidogram> {
       } else if (value >= 885) {
         classification = "Hipertrójglicerydemia ciężka";
       }
-    } else if ((Chol == "gt" || LDL == "gt") &&
-        TAG == "gt" &&
-        (HDL == "eq" || HDL == "lt")) {
+    } else if ((Chol == "gt" || LDL == "gt") && TAG == "gt" && (HDL == "eq" || HDL == "lt")) {
       classification = "Hiperlipidemia mieszana";
     } else if (HDL == "gt" && TAG == "gt" && VLDL == "gt") {
       classification = "Dyslipidemia aterogenna";
-    } else if (Chol != "eq" ||
-        LDL != "eq" ||
-        HDL != "eq" ||
-        VLDL != "eq" ||
-        TAG != "eq") {
+    } else if (Chol != "eq" || LDL != "eq" || HDL != "eq" || VLDL != "eq" || TAG != "eq") {
       classification = "Podane wyniki nie są standardowe";
     }
 
