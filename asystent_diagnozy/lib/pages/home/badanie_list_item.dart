@@ -34,8 +34,11 @@ class _BadanieListItemState extends State<BadanieListItem> {
                       builder: (context) => TestResultsWidget(
                           patientId: widget.badanie.patientId,
                           results: widget.badanie.results["results"],
-                          interpretations: widget.badanie.results["interpretations"],
-                          classification: widget.badanie.results["clasification"],
+                          interpretations:
+                              widget.badanie.results["interpretations"],
+                          classification:
+                              widget.badanie.results["clasification"],
+                          fromDatabase: true,
                           testName: widget.badanie.testType)));
             },
             child: Row(
@@ -115,8 +118,10 @@ class _BadanieListItemState extends State<BadanieListItem> {
                         height: 60,
                         decoration: const BoxDecoration(
                           border: Border(
-                            right:
-                                BorderSide(color: Colors.white, style: BorderStyle.solid, width: 4),
+                            right: BorderSide(
+                                color: Colors.white,
+                                style: BorderStyle.solid,
+                                width: 4),
                           ),
                         ),
                         child: const Center())),

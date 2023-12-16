@@ -23,7 +23,10 @@ class Badanie {
   final DateTime dataBadania;
   final int badanieId;
 
-  Badanie({required this.typBadania, required this.dataBadania, required this.badanieId});
+  Badanie(
+      {required this.typBadania,
+      required this.dataBadania,
+      required this.badanieId});
 }
 
 class _PatientProfileState extends State<PatientProfile> {
@@ -102,7 +105,8 @@ class _PatientProfileState extends State<PatientProfile> {
           children: [
             //tymczasowy powrót
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, top: 15.0, bottom: 0.0),
+              padding:
+                  const EdgeInsets.only(left: 15.0, top: 15.0, bottom: 0.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
@@ -134,7 +138,8 @@ class _PatientProfileState extends State<PatientProfile> {
                   width: double.infinity,
                   height: 70,
                   decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      color: Colors.white),
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Row(
@@ -146,12 +151,14 @@ class _PatientProfileState extends State<PatientProfile> {
                             children: [
                               Text(
                                 widget.patient.surname,
-                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               const Text(" "),
                               Text(
                                 widget.patient.name,
-                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -159,12 +166,16 @@ class _PatientProfileState extends State<PatientProfile> {
                         Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 25.0),
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                                    child: Text(formatter.format(widget.patient.birthdate),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 40.0),
+                                    child: Text(
+                                        formatter
+                                            .format(widget.patient.birthdate),
                                         style: const TextStyle(fontSize: 18)),
                                   ),
                                   widget.patient.gender == "M"
@@ -172,12 +183,14 @@ class _PatientProfileState extends State<PatientProfile> {
                                           AssetImage('assets/gender_male.png'),
                                         )
                                       : const ImageIcon(
-                                          AssetImage('assets/gender_female.png'),
+                                          AssetImage(
+                                              'assets/gender_female.png'),
                                         ),
                                   SizedBox(
                                     width: 80,
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10.0),
                                       child: Text(
                                         age.toString(),
                                         style: const TextStyle(fontSize: 18),
@@ -195,22 +208,51 @@ class _PatientProfileState extends State<PatientProfile> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            PatientEditProfile(patient: widget.patient),
+                                            PatientEditProfile(
+                                                patient: widget.patient),
                                       ),
                                     );
-                                    debugPrint("Patient id: " + result.toString());
+                                    debugPrint(
+                                        "Patient id: " + result.toString());
                                   },
                                   style: IconButton.styleFrom(
-                                    highlightColor: const Color.fromRGBO(0, 84, 210, 1),
-                                    backgroundColor: Theme.of(context).colorScheme.primary,
+                                    highlightColor:
+                                        const Color.fromRGBO(0, 84, 210, 1),
+                                    backgroundColor:
+                                        Theme.of(context).colorScheme.primary,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5.0),
                                     ),
                                   ),
                                   child: const Text(
                                     "Edytuj profil",
-                                    style: TextStyle(color: Colors.white, fontSize: 15),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 15),
                                   )),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: SizedBox(
+                                height: 40,
+                                child: TextButton(
+                                    onPressed: () async {
+                                      //usuwanie pacjenta
+                                    },
+                                    style: IconButton.styleFrom(
+                                      highlightColor: Colors.red,
+                                      backgroundColor:
+                                          Color.fromRGBO(255, 0, 0, 0.7),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      "Usuń profil",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15),
+                                    )),
+                              ),
                             ),
                           ],
                         ),
@@ -221,12 +263,14 @@ class _PatientProfileState extends State<PatientProfile> {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.only(left: 15.0, right: 25.0, bottom: 10.0),
+                padding: const EdgeInsets.only(
+                    left: 15.0, right: 25.0, bottom: 10.0),
                 child: Container(
                     width: double.infinity,
                     height: 140,
                     decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Colors.white),
                     child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Column(
@@ -258,7 +302,8 @@ class _PatientProfileState extends State<PatientProfile> {
                 width: double.infinity,
                 height: 180,
                 decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    color: Colors.white),
                 child: Column(
                   children: [
                     const Align(
@@ -312,7 +357,8 @@ class _PatientProfileState extends State<PatientProfile> {
                                   debugPrint("Patient id: $result");
                                 },
                                 icon: const Image(
-                                  image: AssetImage('assets/badanie_lipidogram_logo.png'),
+                                  image: AssetImage(
+                                      'assets/badanie_lipidogram_logo.png'),
                                 ),
                                 highlightColor: Colors.transparent,
                                 hoverColor: Colors.transparent,
@@ -324,14 +370,15 @@ class _PatientProfileState extends State<PatientProfile> {
                                   final result = await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          Gazometria(patientId: widget.patient.id),
+                                      builder: (context) => Gazometria(
+                                          patientId: widget.patient.id),
                                     ),
                                   );
                                   debugPrint("Patient id: $result");
                                 },
                                 icon: const Image(
-                                  image: AssetImage('assets/Gazometria_logo.png'),
+                                  image:
+                                      AssetImage('assets/Gazometria_logo.png'),
                                 ),
                                 highlightColor: Colors.transparent,
                                 hoverColor: Colors.transparent,
@@ -341,7 +388,8 @@ class _PatientProfileState extends State<PatientProfile> {
                               child: IconButton(
                                 onPressed: () async {},
                                 icon: const Image(
-                                  image: AssetImage('assets/badanie_tarczyca_logo.png'),
+                                  image: AssetImage(
+                                      'assets/badanie_tarczyca_logo.png'),
                                 ),
                                 highlightColor: Colors.transparent,
                                 hoverColor: Colors.transparent,
@@ -351,7 +399,8 @@ class _PatientProfileState extends State<PatientProfile> {
                               child: IconButton(
                                 onPressed: () async {},
                                 icon: const Image(
-                                  image: AssetImage('assets/badanie_uniwersalne_logo.png'),
+                                  image: AssetImage(
+                                      'assets/badanie_uniwersalne_logo.png'),
                                 ),
                                 highlightColor: Colors.transparent,
                                 hoverColor: Colors.transparent,
@@ -367,7 +416,8 @@ class _PatientProfileState extends State<PatientProfile> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 15.0, top: 10.0, bottom: 10.0),
+                  padding: const EdgeInsets.only(
+                      right: 15.0, top: 10.0, bottom: 10.0),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -379,7 +429,8 @@ class _PatientProfileState extends State<PatientProfile> {
                         child: DropdownButton(
                             dropdownColor: Colors.white,
                             style: const TextStyle(
-                                fontSize: 15, color: Color.fromRGBO(22, 20, 35, 1.0)),
+                                fontSize: 15,
+                                color: Color.fromRGBO(22, 20, 35, 1.0)),
                             elevation: 0,
                             value: sortingType,
                             items: sortingOptions,
@@ -410,8 +461,9 @@ class _PatientProfileState extends State<PatientProfile> {
                           }
                         });
                       },
-                      icon:
-                          Icon((sortingOrder == 'ASC') ? Icons.arrow_downward : Icons.arrow_upward),
+                      icon: Icon((sortingOrder == 'ASC')
+                          ? Icons.arrow_downward
+                          : Icons.arrow_upward),
                       color: Color.fromRGBO(22, 20, 35, 1.0),
                       highlightColor: Theme.of(context).colorScheme.secondary,
                       hoverColor: Theme.of(context).colorScheme.secondary,
@@ -428,7 +480,8 @@ class _PatientProfileState extends State<PatientProfile> {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
+                      topLeft: Radius.circular(5.0),
+                      topRight: Radius.circular(5.0)),
                 ),
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -441,7 +494,8 @@ class _PatientProfileState extends State<PatientProfile> {
                           decoration: BoxDecoration(
                             border: Border(
                               right: BorderSide(
-                                  color: Theme.of(context).colorScheme.background,
+                                  color:
+                                      Theme.of(context).colorScheme.background,
                                   style: BorderStyle.solid,
                                   width: 4),
                             ),
@@ -463,7 +517,9 @@ class _PatientProfileState extends State<PatientProfile> {
                             decoration: BoxDecoration(
                               border: Border(
                                 right: BorderSide(
-                                    color: Theme.of(context).colorScheme.background,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background,
                                     style: BorderStyle.solid,
                                     width: 4),
                               ),
@@ -472,7 +528,8 @@ class _PatientProfileState extends State<PatientProfile> {
                                 child: Text(
                               "Typ badania",
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15),
                             ))),
                       ),
                       Expanded(
@@ -482,7 +539,9 @@ class _PatientProfileState extends State<PatientProfile> {
                             decoration: BoxDecoration(
                               border: Border(
                                 right: BorderSide(
-                                    color: Theme.of(context).colorScheme.background,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .background,
                                     style: BorderStyle.solid,
                                     width: 4),
                               ),
@@ -491,7 +550,8 @@ class _PatientProfileState extends State<PatientProfile> {
                                 child: Text(
                               "Data badania",
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15),
                             ))),
                       ),
                       Expanded(
@@ -501,7 +561,9 @@ class _PatientProfileState extends State<PatientProfile> {
                             topLeft: Radius.circular(5.0),
                           ),
                           child: Container(
-                              height: 60, decoration: const BoxDecoration(), child: const Center()),
+                              height: 60,
+                              decoration: const BoxDecoration(),
+                              child: const Center()),
                         ),
                       ),
                     ]),

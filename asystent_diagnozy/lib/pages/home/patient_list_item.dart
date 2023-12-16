@@ -26,7 +26,8 @@ class _PatientListItemState extends State<PatientListItem> {
             width: double.infinity,
             height: 60,
             decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)), color: Colors.white),
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                color: Colors.white),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Row(
@@ -38,12 +39,14 @@ class _PatientListItemState extends State<PatientListItem> {
                       children: [
                         Text(
                           widget.patient.surname,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         const Text(" "),
                         Text(
                           widget.patient.name,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -55,8 +58,11 @@ class _PatientListItemState extends State<PatientListItem> {
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                              child: Text(DateFormat('dd-MM-yyyy').format(widget.patient.birthdate),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 40.0),
+                              child: Text(
+                                  DateFormat('dd-MM-yyyy')
+                                      .format(widget.patient.birthdate),
                                   style: const TextStyle(fontSize: 18)),
                             ),
                             widget.patient.gender == "M"
@@ -69,7 +75,8 @@ class _PatientListItemState extends State<PatientListItem> {
                             SizedBox(
                               width: 80,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
                                 child: Text(
                                   age.toString(),
                                   style: const TextStyle(fontSize: 18),

@@ -25,7 +25,8 @@ class _GazometriaState extends State<Gazometria> {
   String classification = "Podane wyniki badania wydają się poprawne";
 
   Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/gazometria.json');
+    final String response =
+        await rootBundle.loadString('assets/gazometria.json');
     final data = await json.decode(response);
     setState(() {
       items = data['norms'];
@@ -79,7 +80,8 @@ class _GazometriaState extends State<Gazometria> {
             child: Container(
               width: 500,
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)), color: Colors.white),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  color: Colors.white),
               child: Form(
                 key: _formKey,
                 child: Padding(
@@ -93,7 +95,8 @@ class _GazometriaState extends State<Gazometria> {
                             alignment: Alignment.center,
                             height: 50,
                             child: Text("Wprowadź wartości:",
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
                           ),
                         ],
                       ),
@@ -104,17 +107,21 @@ class _GazometriaState extends State<Gazometria> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
                                 child: Container(
                                     width: 120,
                                     height: 48,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(5.0),
-                                      color: Theme.of(context).colorScheme.background,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background,
                                     ),
                                     child: Text(entry.value['short'],
-                                        style:
-                                            TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.normal)),
                                     alignment: Alignment.center),
                               ),
                               SizedBox(
@@ -126,19 +133,28 @@ class _GazometriaState extends State<Gazometria> {
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
-                                      fillColor: Theme.of(context).colorScheme.background,
+                                      fillColor: Theme.of(context)
+                                          .colorScheme
+                                          .background,
                                       border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(color: Colors.transparent)),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent)),
                                       enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(color: Colors.transparent)),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(
+                                              color: Colors.transparent)),
                                       focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(5.0),
-                                          borderSide: const BorderSide(color: Colors.black)),
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                          borderSide: const BorderSide(
+                                              color: Colors.black)),
                                       //labelText: entry.value['short'],
                                       suffixIcon: Padding(
-                                        padding: const EdgeInsets.only(right: 5),
+                                        padding:
+                                            const EdgeInsets.only(right: 5),
                                         child: Text(
                                           entry.value['unit'],
                                           style: const TextStyle(
@@ -147,7 +163,8 @@ class _GazometriaState extends State<Gazometria> {
                                         ),
                                       ),
                                       suffixIconConstraints:
-                                          const BoxConstraints(minWidth: 0, minHeight: 0),
+                                          const BoxConstraints(
+                                              minWidth: 0, minHeight: 0),
                                       isDense: true),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -160,11 +177,14 @@ class _GazometriaState extends State<Gazometria> {
                                     entryMap['short'] = entry.value['short'];
                                     entryMap['value'] = double.parse(value!);
                                     entryMap['lowerbound'] = entry.value["low"];
-                                    entryMap['upperbound'] = entry.value["high"];
+                                    entryMap['upperbound'] =
+                                        entry.value["high"];
                                     entryMap['unit'] = entry.value["unit"];
-                                    entryMap['result'] = (double.parse(value) < entry.value["low"])
+                                    entryMap['result'] = (double.parse(value) <
+                                            entry.value["low"])
                                         ? 'lt'
-                                        : (double.parse(value) > entry.value["high"])
+                                        : (double.parse(value) >
+                                                entry.value["high"])
                                             ? 'gt'
                                             : 'eq';
                                     results[entryMap['short']] = entryMap;
@@ -202,6 +222,7 @@ class _GazometriaState extends State<Gazometria> {
                                   results: results,
                                   interpretations: interpretations,
                                   classification: classification,
+                                  fromDatabase: false,
                                   testName: 'Gazometria'),
                             ));
                       }
