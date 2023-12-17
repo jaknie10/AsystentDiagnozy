@@ -31,17 +31,9 @@ class _LayoutState extends State<Layout> {
 
     List<Map<String, dynamic>> pages = [
       {'name': 'Home', 'page': const HomePage(), 'key': keyHome},
-      {
-        'name': 'Profile',
-        'page': const Profile(doctorId: 1),
-        'key': keyProfile
-      },
+      {'name': 'Profile', 'page': const Profile(doctorId: 1), 'key': keyProfile},
       {'name': 'Badania', 'page': const Badania(), 'key': keyBadania},
-      {
-        'name': 'Settings',
-        'page': const Settings(doctorId: 1),
-        'key': keySettings
-      },
+      {'name': 'Settings', 'page': const Settings(doctorId: 1), 'key': keySettings},
     ];
 
     return Scaffold(
@@ -64,8 +56,8 @@ class _LayoutState extends State<Layout> {
               onPressed: () {
                 changeState(0);
               },
-              icon: ImageIcon(const AssetImage('assets/cardiologyLogo.png'),
-                  size: 100, color: Theme.of(context).colorScheme.primary),
+              icon: ImageIcon(const AssetImage('assets/logo_new.png'),
+                  size: 50, color: Theme.of(context).colorScheme.primary),
             )),
         leadingWidth: 80,
         title: const Align(
@@ -98,23 +90,19 @@ class _LayoutState extends State<Layout> {
                     padding: const EdgeInsets.all(10.0),
                     child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/lekarz_logo.svg',
-                                width: 45,
-                                fit: BoxFit.scaleDown,
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                                child: Text("Jan Kowalski",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color:
-                                            Color.fromRGBO(22, 20, 35, 1.0))),
-                              ),
-                            ])),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                          SvgPicture.asset(
+                            'assets/lekarz_logo.svg',
+                            width: 45,
+                            fit: BoxFit.scaleDown,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Text("Jan Kowalski",
+                                style: TextStyle(
+                                    fontSize: 20, color: Color.fromRGBO(22, 20, 35, 1.0))),
+                          ),
+                        ])),
                   ),
                 ),
               ))

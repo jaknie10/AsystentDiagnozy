@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'badanie_list_item.dart';
+import 'home.dart';
 import 'patient_edit_profile.dart';
 import '../../badania/morfologia.dart';
 import '../../badania/gazometria.dart';
@@ -48,49 +49,6 @@ class _PatientProfileState extends State<PatientProfile> {
   ];
 
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
-
-  // List<Badanie> badanieList = [
-  //   Badanie(
-  //     typBadania: "Morfologia",
-  //     dataBadania: DateTime(2023, 11, 09),
-  //     badanieId: 1,
-  //   ),
-  //   Badanie(
-  //     typBadania: "Gazometria",
-  //     dataBadania: DateTime(2020, 11, 09),
-  //     badanieId: 2,
-  //   ),
-  //   Badanie(
-  //     typBadania: "Lipidogram",
-  //     dataBadania: DateTime(2023, 11, 09),
-  //     badanieId: 3,
-  //   ),
-  //   Badanie(
-  //     typBadania: "Tarczyca",
-  //     dataBadania: DateTime(2025, 11, 09),
-  //     badanieId: 4,
-  //   ),
-  //   Badanie(
-  //     typBadania: "Morfologia",
-  //     dataBadania: DateTime(2027, 11, 09),
-  //     badanieId: 5,
-  //   ),
-  //   Badanie(
-  //     typBadania: "Morfologia",
-  //     dataBadania: DateTime(2025, 11, 09),
-  //     badanieId: 6,
-  //   ),
-  //   Badanie(
-  //     typBadania: "Lipidogram",
-  //     dataBadania: DateTime(2027, 11, 09),
-  //     badanieId: 7,
-  //   ),
-  //   Badanie(
-  //     typBadania: "Gazometria",
-  //     dataBadania: DateTime(2025, 11, 09),
-  //     badanieId: 8,
-  //   ),
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +194,12 @@ class _PatientProfileState extends State<PatientProfile> {
                                 height: 40,
                                 child: TextButton(
                                     onPressed: () async {
-                                      //usuwanie pacjenta
+                                      helper.deletePatient(widget.patient.id!);
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const HomePage()),
+                                          (Route route) => false);
                                     },
                                     style: IconButton.styleFrom(
                                       highlightColor: Colors.red,

@@ -45,6 +45,15 @@ class SQLiteHelper {
     return patient;
   }
 
+  Future<int> deletePatient(int patientId) async {
+    final db = await database;
+    return db.delete(
+      'patients',
+      where: 'id = ?',
+      whereArgs: [patientId],
+    );
+  }
+
   Future<List<Patient>> getPatients(String order, String searchValue) async {
     final db = await database;
     var query = "SELECT * FROM patients";
@@ -92,7 +101,6 @@ class SQLiteHelper {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       'testResults',
-
     );
 
     return List.generate(maps.length, (index) {
