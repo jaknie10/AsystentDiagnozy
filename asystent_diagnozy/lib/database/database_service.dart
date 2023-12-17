@@ -88,6 +88,23 @@ class SQLiteHelper {
     return null;
   }
 
+  Future<List<TestResult>> getAllTests() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'testResults',
+
+    );
+
+    return List.generate(maps.length, (index) {
+      return TestResult(
+          id: maps[index]['id'],
+          patientId: maps[index]['patientId'],
+          testType: maps[index]['testType'],
+          createdAt: DateTime.parse(maps[index]['createdAt']),
+          results: json.decode(maps[index]['results']));
+    });
+  }
+
   Future<TestResult> insertTestResult(TestResult testResult) async {
     final db = await database;
     db.insert(

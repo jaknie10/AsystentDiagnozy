@@ -1,6 +1,4 @@
-import 'package:asystent_diagnozy/badania/gazometria_results.dart';
-import 'package:asystent_diagnozy/badania/lipidogram_results.dart';
-import 'package:asystent_diagnozy/badania/morfologia_results.dart';
+import 'package:asystent_diagnozy/badania/test_results_widget.dart';
 import 'package:asystent_diagnozy/models/test_result_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -31,24 +29,17 @@ class _BadanieListItemState extends State<BadanieListItem> {
           child: GestureDetector(
             onTap: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => (widget.badanie.testType == "Lipidogram")
-                        ? (LipidogramAnaliza(
-                            patientId: widget.badanie.patientId,
-                            results: widget.badanie.results["results"],
-                            interpretations: widget.badanie.results["interpretations"],
-                            clasification: widget.badanie.results["clasification"]))
-                        : ((widget.badanie.testType == "Gazometria"))
-                            ? GazometriaAnaliza(
-                                patientId: widget.badanie.patientId,
-                                results: widget.badanie.results["results"],
-                                interpretations: widget.badanie.results["interpretations"],
-                                clasification: widget.badanie.results["clasification"])
-                            : MorfologiaAnaliza(
-                                results: widget.badanie.results["results"],
-                                interpretations: widget.badanie.results["interpretations"])),
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TestResultsWidget(
+                          patientId: widget.badanie.patientId,
+                          results: widget.badanie.results["results"],
+                          interpretations:
+                              widget.badanie.results["interpretations"],
+                          classification:
+                              widget.badanie.results["clasification"],
+                          fromDatabase: true,
+                          testName: widget.badanie.testType)));
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,8 +118,10 @@ class _BadanieListItemState extends State<BadanieListItem> {
                         height: 60,
                         decoration: const BoxDecoration(
                           border: Border(
-                            right:
-                                BorderSide(color: Colors.white, style: BorderStyle.solid, width: 4),
+                            right: BorderSide(
+                                color: Colors.white,
+                                style: BorderStyle.solid,
+                                width: 4),
                           ),
                         ),
                         child: const Center())),

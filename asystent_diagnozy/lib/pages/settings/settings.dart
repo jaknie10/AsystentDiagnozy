@@ -1,3 +1,4 @@
+import 'package:asystent_diagnozy/pages/login/login_or_register.dart';
 import 'package:flutter/material.dart';
 import 'change_password.dart';
 import '../login/login.dart';
@@ -79,7 +80,7 @@ class _SettingsState extends State<Settings> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Login(),
+                                  builder: (context) => LoginOrRegister(),
                                 ));
                           },
                           child: Container(
@@ -93,7 +94,7 @@ class _SettingsState extends State<Settings> {
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: Text(
-                                "Ekran logowania",
+                                "System logowania",
                                 style: TextStyle(fontSize: 15),
                               ),
                             ),

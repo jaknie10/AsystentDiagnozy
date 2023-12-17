@@ -5,7 +5,7 @@ class TestResult {
   final int patientId;
   final String testType;
   final DateTime createdAt;
-  Map<dynamic, dynamic> results;
+  final Map<dynamic, dynamic> results;
 
   TestResult({
     this.id,

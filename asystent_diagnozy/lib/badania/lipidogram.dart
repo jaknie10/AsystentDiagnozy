@@ -1,10 +1,11 @@
+import 'dart:developer';
+
+import 'package:asystent_diagnozy/badania/test_results_widget.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'lipidogram_results.dart';
 
 class Lipidogram extends StatefulWidget {
   const Lipidogram(
@@ -228,14 +229,19 @@ class _LipidogramState extends State<Lipidogram> {
 
                         lipidogramAnaliza();
 
+                        log(results.toString());
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LipidogramAnaliza(
-                                  patientId: widget.patientId,
-                                  results: results,
-                                  interpretations: interpretations,
-                                  clasification: classification),
+                              builder: (context) => TestResultsWidget(
+                                patientId: widget.patientId!,
+                                results: results,
+                                interpretations: interpretations,
+                                classification: classification,
+                                fromDatabase: false,
+                                testName: 'Lipidogram',
+                              ),
                             ));
                       }
                     },
