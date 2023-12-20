@@ -12,6 +12,7 @@ class TestResultsWidget extends StatefulWidget {
       required this.results,
       required this.interpretations,
       required this.fromDatabase,
+      required this.createdAt,
       this.classification});
 
   final Map<dynamic, dynamic> results;
@@ -20,6 +21,7 @@ class TestResultsWidget extends StatefulWidget {
   final int patientId;
   final String testName;
   final bool fromDatabase;
+  final String createdAt;
 
   @override
   State<TestResultsWidget> createState() => _TestResultsWidgetState();
@@ -67,7 +69,9 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
             ),
           ),
           //logo
-          Row(
+          Wrap(
+            direction: Axis.horizontal,
+            alignment: WrapAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 5.0, top: 5.0),
@@ -79,6 +83,13 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                     width: 450,
                     fit: BoxFit.scaleDown,
                   ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 15.0, top: 25.0),
+                child: Text(
+                  'Pacjent:',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
               ),
               FutureBuilder(
@@ -94,58 +105,88 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                     } else {
                       final tests = snapshot.data!;
                       return Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Container(
-                            height: 50,
-                            decoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5.0)),
-                                color: Colors.white),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Text(
-                                "${tests.surname} ${tests.name}",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
-                              ),
-                            )),
+                        padding: const EdgeInsets.only(left: 15.0, top: 10.0),
+                        child: Column(
+                          children: [
+                            Container(
+                                height: 50,
+                                decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0)),
+                                    color: Colors.white),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Text(
+                                    "${tests.surname} ${tests.name}",
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                )),
+                          ],
+                        ),
                       );
                     }
                   }),
-              Spacer(),
               widget.fromDatabase
-                  ? Padding(
-                      padding: const EdgeInsets.only(right: 25.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: SizedBox(
-                          height: 50,
-                          width: 120,
-                          child: TextButton(
-                              onPressed: () {
-                                Navigator.pop(context, widget.results);
-                              },
-                              style: IconButton.styleFrom(
-                                highlightColor:
-                                    const Color.fromRGBO(255, 0, 0, 0.7),
-                                backgroundColor:
-                                    const Color.fromRGBO(255, 0, 0, 0.7),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                              ),
-                              child: const Text(
-                                "Usuń wynik",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
-                              )),
-                        ),
+                  ? const Padding(
+                      padding: EdgeInsets.only(left: 15.0, top: 25.0),
+                      child: Text(
+                        'Data badania:',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                     )
-                  : Center(),
+                  : Text(""),
+              widget.fromDatabase
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 15.0, top: 10.0),
+                      child: Column(
+                        children: [
+                          Container(
+                              height: 50,
+                              decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5.0)),
+                                  color: Colors.white),
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Text(
+                                  "${widget.createdAt}".substring(0, 10),
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              )),
+                        ],
+                      ),
+                    )
+                  : Text(""),
+              widget.fromDatabase
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 15.0, top: 10.0),
+                      child: SizedBox(
+                        height: 50,
+                        width: 120,
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.pop(context, widget.results);
+                            },
+                            style: IconButton.styleFrom(
+                              highlightColor:
+                                  const Color.fromRGBO(255, 0, 0, 0.7),
+                              backgroundColor:
+                                  const Color.fromRGBO(255, 0, 0, 0.7),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            child: const Text(
+                              "Usuń wynik",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
+                            )),
+                      ),
+                    )
+                  : Text(""),
             ],
           ),
-
           //wyniki analizy
           Padding(
             padding:
@@ -157,35 +198,53 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                   flex: 3,
                   child: Column(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 5.0, top: 5.0),
+                        child: Container(
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(5.0),
+                              topLeft: Radius.circular(5.0),
+                            ),
+                          ),
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Text("Tabela wyników",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold)),
+                          )),
+                        ),
+                      ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                             flex: 1,
-                            child: ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(5.0),
-                              ),
-                              child: Container(
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                      border: Border(
-                                        right: BorderSide(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .background,
-                                            style: BorderStyle.solid,
-                                            width: 4),
-                                      ),
-                                      color: Colors.white),
-                                  child: const Center(
-                                      child: Text(
-                                    "Parametr",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 15),
-                                  ))),
-                            ),
+                            child: Container(
+                                height: 70,
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                      right: BorderSide(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                          style: BorderStyle.solid,
+                                          width: 4),
+                                    ),
+                                    color: Colors.white),
+                                child: const Center(
+                                    child: Text(
+                                  "Parametr",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ))),
                           ),
                           Expanded(
                             flex: 1,
@@ -252,29 +311,24 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                           ),
                           Expanded(
                               flex: 1,
-                              child: ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                ),
-                                child: Container(
-                                    height: 70,
-                                    decoration: const BoxDecoration(
-                                        // border: Border(
-                                        //   right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
-                                        // ),
-                                        color: Colors.white),
-                                    child: const Center(
-                                        child: Text(
-                                      "Flaga",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 15),
-                                    ))),
-                              )),
+                              child: Container(
+                                  height: 70,
+                                  decoration: const BoxDecoration(
+                                      // border: Border(
+                                      //   right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
+                                      // ),
+                                      color: Colors.white),
+                                  child: const Center(
+                                      child: Text(
+                                    "Flaga",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 15),
+                                  )))),
                         ],
                       ),
                       for (final entry in widget.results.entries)
                         Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
+                          padding: const EdgeInsets.only(top: 5.0),
                           child: Row(children: [
                             Expanded(
                               flex: 1,
@@ -420,45 +474,97 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                     children: [
                       if (widget.classification != null)
                         Padding(
+                          padding: const EdgeInsets.only(bottom: 5.0, top: 5.0),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 10.0, right: 10.0),
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.secondary,
+                                borderRadius: const BorderRadius.only(
+                                  topRight: Radius.circular(5.0),
+                                  topLeft: Radius.circular(5.0),
+                                ),
+                              ),
+                              child: Center(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text("Klasyfikacja schorzenia",
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15)),
+                              )),
+                            ),
+                          ),
+                        ),
+                      if (widget.classification != null)
+                        Padding(
                           padding: const EdgeInsets.only(
                               left: 10.0, right: 10.0, bottom: 10.0),
                           child: Container(
                             height: 50,
-                            decoration: const BoxDecoration(
-                              color: Color.fromRGBO(191, 232, 255, 1.0),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.only(
+                                bottomRight: Radius.circular(5.0),
+                                bottomLeft: Radius.circular(5.0),
+                              ),
                             ),
                             child: Center(
                                 child: Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Text(widget.classification!,
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15)),
+                                  style: const TextStyle(fontSize: 15)),
                             )),
                           ),
                         ),
-                      Wrap(
-                        children: [
-                          for (var entry in widget.interpretations)
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10.0, top: 10.0),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
-                                    color: Colors.white),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child:
-                                      Text(entry, textAlign: TextAlign.center),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10.0, right: 10.0, bottom: 5.0, top: 5.0),
+                        child: Container(
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(5.0),
+                              topLeft: Radius.circular(5.0),
+                            ),
+                          ),
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Text("Potencjalne interpretacje",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15)),
+                          )),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Wrap(
+                          children: [
+                            for (var entry in widget.interpretations)
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 5.0, bottom: 5.0),
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5)),
+                                      color: Colors.white),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(entry,
+                                        textAlign: TextAlign.center),
+                                  ),
                                 ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

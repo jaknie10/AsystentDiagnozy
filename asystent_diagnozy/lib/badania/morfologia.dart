@@ -236,6 +236,7 @@ class _MorfologiaState extends State<Morfologia> {
                                 results: results,
                                 interpretations: interpretations.toList(),
                                 fromDatabase: false,
+                                createdAt: DateTime.now().toString(),
                                 testName: 'Morfologia',
                               ),
                             ));

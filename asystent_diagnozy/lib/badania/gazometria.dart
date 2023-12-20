@@ -223,6 +223,7 @@ class _GazometriaState extends State<Gazometria> {
                                   interpretations: interpretations,
                                   classification: classification,
                                   fromDatabase: false,
+                                  createdAt: DateTime.now().toString(),
                                   testName: 'Gazometria'),
                             ));
                       }

@@ -39,6 +39,7 @@ class _BadanieListItemState extends State<BadanieListItem> {
                           classification:
                               widget.badanie.results["clasification"],
                           fromDatabase: true,
+                          createdAt: widget.badanie.createdAt.toString(),
                           testName: widget.badanie.testType)));
             },
             child: Row(

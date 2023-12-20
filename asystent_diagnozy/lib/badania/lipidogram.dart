@@ -241,6 +241,7 @@ class _LipidogramState extends State<Lipidogram> {
                                 classification: classification,
                                 fromDatabase: false,
                                 testName: 'Lipidogram',
+                                createdAt: DateTime.now().toString(),
                               ),
                             ));
                       }

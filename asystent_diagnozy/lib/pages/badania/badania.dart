@@ -15,6 +15,9 @@ class Badania extends StatefulWidget {
 
 class _BadaniaState extends State<Badania> {
   final SQLiteHelper helper = SQLiteHelper();
+  String sortingType = 'createdAt';
+  String sortingOrder = 'DESC';
+  String searchValue = '';
 
   void initState() {
     super.initState();
@@ -22,17 +25,13 @@ class _BadaniaState extends State<Badania> {
     helper.initWinDB();
   }
 
-  String sortingType = 'Data badania';
-  String sortingOrder = 'DESC';
-
-  List<DropdownMenuItem<String>> sortingOptions = [
-    const DropdownMenuItem(value: "Data badania", child: Text("Data badania")),
-    const DropdownMenuItem(value: "Typ badania", child: Text("Typ badania")),
-    const DropdownMenuItem(value: "Pacjent", child: Text("Pacjent")),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    List<DropdownMenuItem<String>> sortingOptions = [
+      const DropdownMenuItem(value: "createdAt", child: Text("Data badania")),
+      const DropdownMenuItem(value: "testType", child: Text("Typ badania")),
+    ];
+
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -44,54 +43,52 @@ class _BadaniaState extends State<Badania> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 15.0, top: 15.0, bottom: 10.0, right: 15.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 25.0, top: 10.0, bottom: 10.0, right: 25.0),
-                        child: Text("Badania",
-                            style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1.5)),
-                      ),
+                        top: 15.0, bottom: 15.0, right: 15.0),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: Text("Badania",
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.5)),
                     ),
                   ),
                   Spacer(),
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 15.0, top: 15.0, bottom: 10.0, right: 15.0),
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton(
-                              dropdownColor: Colors.white,
-                              style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Color.fromRGBO(22, 20, 35, 1.0)),
-                              elevation: 0,
-                              value: sortingType,
-                              items: sortingOptions,
-                              onChanged: (val) {
-                                setState(() {
-                                  sortingType = val.toString();
-                                });
-                                debugPrint(sortingType);
-                              }),
+                        left: 15.0, top: 15.0, bottom: 15.0, right: 15.0),
+                    child: Container(
+                      height: 50,
+                      width: 140,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton(
+                                dropdownColor: Colors.white,
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Color.fromRGBO(22, 20, 35, 1.0)),
+                                elevation: 0,
+                                value: sortingType,
+                                items: sortingOptions,
+                                onChanged: (val) {
+                                  setState(() {
+                                    sortingType = val.toString();
+                                  });
+                                  debugPrint(sortingType);
+                                }),
+                          ),
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 15.0),
+                    padding: const EdgeInsets.only(right: 25.0),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -119,7 +116,7 @@ class _BadaniaState extends State<Badania> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                padding: const EdgeInsets.only(left: 15.0, right: 25.0),
                 child: Container(
                   width: double.infinity,
                   height: 60,
@@ -228,9 +225,9 @@ class _BadaniaState extends State<Badania> {
                 width: 500,
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 5.0, bottom: 15.0),
+                      left: 15.0, right: 25.0, top: 5.0, bottom: 15.0),
                   child: FutureBuilder(
-                      future: helper.getAllTests(),
+                      future: helper.getTests("$sortingType $sortingOrder"),
                       builder: (context, snapshot) {
                         // if (snapshot.connectionState == ConnectionState.waiting) {
                         //   return const Center(child: CircularProgressIndicator());
