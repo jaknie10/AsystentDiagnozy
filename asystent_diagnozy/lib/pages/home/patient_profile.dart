@@ -51,7 +51,7 @@ class _PatientProfileState extends State<PatientProfile> {
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext pagecontext) {
     int age = DateTime.now().difference(widget.patient.birthdate).inDays ~/ 365;
 
     return Scaffold(
@@ -170,8 +170,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                                 patient: widget.patient),
                                       ),
                                     );
-                                    debugPrint(
-                                        "Patient id: " + result.toString());
+                                    debugPrint("Patient id: $result");
                                   },
                                   style: IconButton.styleFrom(
                                     highlightColor:
@@ -193,13 +192,38 @@ class _PatientProfileState extends State<PatientProfile> {
                               child: SizedBox(
                                 height: 40,
                                 child: TextButton(
-                                    onPressed: () async {
-                                      helper.deletePatient(widget.patient.id!);
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const HomePage()),
-                                          (Route route) => false);
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                                title:
+                                                    Text("Usuwanie Pacjenta"),
+                                                content: Text(
+                                                    "Czy na pewno chcesz usunąć pacjenta ${widget.patient.name} ${widget.patient.surname}?"),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              context),
+                                                      child: Text("ANULUJ")),
+                                                  TextButton(
+                                                      onPressed: () async {
+                                                        Navigator.pop(context);
+                                                        helper.deletePatient(
+                                                            widget.patient.id!);
+                                                        Navigator.of(
+                                                                pagecontext)
+                                                            .pushAndRemoveUntil(
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (pagecontext) =>
+                                                                            const HomePage()),
+                                                                (Route route) =>
+                                                                    false);
+                                                      },
+                                                      child: Text("POTWIERDŹ"))
+                                                ],
+                                              ));
                                     },
                                     style: IconButton.styleFrom(
                                       highlightColor: Colors.red,
@@ -296,7 +320,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                         patientGender: widget.patient.gender),
                                   ),
                                 );
-                                debugPrint("Patient id: " + result.toString());
+                                debugPrint("Patient id: $result");
                               },
                               icon: const Image(
                                 image: AssetImage('assets/Morfologia_logo.png'),

@@ -136,9 +136,12 @@ class _MorfologiaState extends State<Morfologia> {
                               SizedBox(
                                 width: 200,
                                 child: TextFormField(
-                                  keyboardType: TextInputType.number,
+                                  keyboardType:
+                                      const TextInputType.numberWithOptions(
+                                          decimal: true),
                                   inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.digitsOnly
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'^\d+\,|\.?\d*'))
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
@@ -182,6 +185,7 @@ class _MorfologiaState extends State<Morfologia> {
                                     return null;
                                   },
                                   onSaved: (value) {
+                                    value = value!.replaceAll(',', '.');
                                     results['${entry.value['short']}'] = {
                                       'short': entry.value['short'],
                                       'value': double.parse(value!),

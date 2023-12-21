@@ -59,9 +59,9 @@ class _GazometriaState extends State<Gazometria> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Powrót",
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     )),
               ),
             ),
@@ -94,7 +94,7 @@ class _GazometriaState extends State<Gazometria> {
                           Container(
                             alignment: Alignment.center,
                             height: 50,
-                            child: Text("Wprowadź wartości:",
+                            child: const Text("Wprowadź wartości:",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                           ),
@@ -119,7 +119,7 @@ class _GazometriaState extends State<Gazometria> {
                                           .background,
                                     ),
                                     child: Text(entry.value['short'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.normal)),
                                     alignment: Alignment.center),
@@ -127,9 +127,12 @@ class _GazometriaState extends State<Gazometria> {
                               SizedBox(
                                 width: 200,
                                 child: TextFormField(
-                                  keyboardType: TextInputType.number,
+                                  keyboardType:
+                                      const TextInputType.numberWithOptions(
+                                          decimal: true),
                                   inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.digitsOnly
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'^\d+\,|\.?\d*'))
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
@@ -173,6 +176,7 @@ class _GazometriaState extends State<Gazometria> {
                                     return null;
                                   },
                                   onSaved: (value) {
+                                    value = value!.replaceAll(',', '.');
                                     Map<String, dynamic> entryMap = {};
                                     entryMap['short'] = entry.value['short'];
                                     entryMap['value'] = double.parse(value!);
@@ -235,9 +239,9 @@ class _GazometriaState extends State<Gazometria> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Analizuj",
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     )),
               ),
             ),

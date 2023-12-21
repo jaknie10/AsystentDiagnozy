@@ -141,9 +141,12 @@ class _LipidogramState extends State<Lipidogram> {
                               SizedBox(
                                 width: 200,
                                 child: TextFormField(
-                                  keyboardType: TextInputType.number,
+                                  keyboardType:
+                                      const TextInputType.numberWithOptions(
+                                          decimal: true),
                                   inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.digitsOnly
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'^\d+\,|\.?\d*'))
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
@@ -187,6 +190,7 @@ class _LipidogramState extends State<Lipidogram> {
                                     return null;
                                   },
                                   onSaved: (value) {
+                                    value = value!.replaceAll(',', '.');
                                     Map<String, dynamic> entryMap = {};
                                     entryMap['short'] = entry.value['short'];
                                     entryMap['value'] = double.parse(value!);
