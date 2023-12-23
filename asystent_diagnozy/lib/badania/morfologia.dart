@@ -69,9 +69,9 @@ class _MorfologiaState extends State<Morfologia> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Powrót",
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     )),
               ),
             ),
@@ -104,14 +104,14 @@ class _MorfologiaState extends State<Morfologia> {
                           Container(
                             alignment: Alignment.center,
                             height: 50,
-                            child: Text("Wprowadź wartości:",
+                            child: const Text("Wprowadź wartości:",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                           ),
                         ],
                       ),
                       for (var entry in items.entries)
-                        Container(
+                        SizedBox(
                           height: 70,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -128,11 +128,11 @@ class _MorfologiaState extends State<Morfologia> {
                                           .colorScheme
                                           .background,
                                     ),
+                                    alignment: Alignment.center,
                                     child: Text(entry.value['short'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 18,
-                                            fontWeight: FontWeight.normal)),
-                                    alignment: Alignment.center),
+                                            fontWeight: FontWeight.normal))),
                               ),
                               SizedBox(
                                 width: 200,
@@ -189,7 +189,7 @@ class _MorfologiaState extends State<Morfologia> {
                                     value = value!.replaceAll(',', '.');
                                     results['${entry.value['short']}'] = {
                                       'short': entry.value['short'],
-                                      'value': double.parse(value!),
+                                      'value': double.parse(value),
                                       'lowerbound': entry.value[lowerbound],
                                       'upperbound': entry.value[upperbound],
                                       'unit': entry.value['unit'],
@@ -233,7 +233,7 @@ class _MorfologiaState extends State<Morfologia> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        diagnoses!["general"] = interpretations.toList();
+                        diagnoses["general"] = interpretations.toList();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -242,7 +242,7 @@ class _MorfologiaState extends State<Morfologia> {
                                 results: results,
                                 diagnoses: diagnoses,
                                 fromDatabase: false,
-                                createdAt: DateTime.now().toString(),
+                                createdAt: DateTime.now(),
                                 testName: 'Morfologia',
                               ),
                             ));
@@ -255,9 +255,9 @@ class _MorfologiaState extends State<Morfologia> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Analizuj",
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     )),
               ),
             ),

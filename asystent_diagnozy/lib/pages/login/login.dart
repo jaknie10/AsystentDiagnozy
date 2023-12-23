@@ -43,10 +43,9 @@ class _LoginState extends State<Login> {
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           "Powrót",
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 15),
+                          style: TextStyle(color: Colors.white, fontSize: 15),
                         )),
                   ),
                 ),
@@ -60,7 +59,7 @@ class _LoginState extends State<Login> {
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.0))),
@@ -76,9 +75,8 @@ class _LoginState extends State<Login> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 15.0),
+                                      const Padding(
+                                        padding: EdgeInsets.only(bottom: 15.0),
                                         child: Text(
                                           "Zaloguj się",
                                           style: TextStyle(
@@ -95,7 +93,7 @@ class _LoginState extends State<Login> {
                                         child: TextFormField(
                                           keyboardType:
                                               TextInputType.visiblePassword,
-                                          inputFormatters: [],
+                                          inputFormatters: const [],
                                           onSaved: (value) {},
                                           validator: (value) {
                                             if (value == null ||
@@ -103,8 +101,8 @@ class _LoginState extends State<Login> {
                                             return null;
                                           },
                                           decoration: InputDecoration(
-                                            prefixIcon: Padding(
-                                              padding: const EdgeInsets.only(
+                                            prefixIcon: const Padding(
+                                              padding: EdgeInsets.only(
                                                   left: 10.0, right: 10.0),
                                               child: Icon(
                                                 Icons.person_outline_rounded,
@@ -114,7 +112,7 @@ class _LoginState extends State<Login> {
                                               ),
                                             ),
                                             hintText: "Login",
-                                            hintStyle: TextStyle(
+                                            hintStyle: const TextStyle(
                                               color:
                                                   Color.fromRGBO(0, 0, 0, 0.2),
                                               fontSize: 18,
@@ -150,7 +148,7 @@ class _LoginState extends State<Login> {
                                         child: TextFormField(
                                           keyboardType:
                                               TextInputType.visiblePassword,
-                                          inputFormatters: [],
+                                          inputFormatters: const [],
                                           onSaved: (value) {},
                                           validator: (value) {
                                             if (value == null ||
@@ -158,10 +156,9 @@ class _LoginState extends State<Login> {
                                             return null;
                                           },
                                           decoration: InputDecoration(
-                                            prefixIcon: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10.0),
+                                            prefixIcon: const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10.0),
                                               child: Icon(
                                                 Icons.lock_outline_rounded,
                                                 color: Color.fromRGBO(
@@ -170,7 +167,7 @@ class _LoginState extends State<Login> {
                                               ),
                                             ),
                                             hintText: "Hasło",
-                                            hintStyle: TextStyle(
+                                            hintStyle: const TextStyle(
                                               color:
                                                   Color.fromRGBO(0, 0, 0, 0.2),
                                               fontSize: 18,

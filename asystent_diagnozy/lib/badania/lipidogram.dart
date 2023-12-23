@@ -74,9 +74,9 @@ class _LipidogramState extends State<Lipidogram> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Powrót",
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     )),
               ),
             ),
@@ -109,14 +109,14 @@ class _LipidogramState extends State<Lipidogram> {
                           Container(
                             alignment: Alignment.center,
                             height: 50,
-                            child: Text("Wprowadź wartości:",
+                            child: const Text("Wprowadź wartości:",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                           ),
                         ],
                       ),
                       for (var entry in items.entries)
-                        Container(
+                        SizedBox(
                           height: 70,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -133,11 +133,11 @@ class _LipidogramState extends State<Lipidogram> {
                                           .colorScheme
                                           .background,
                                     ),
+                                    alignment: Alignment.center,
                                     child: Text(entry.value['short'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 18,
-                                            fontWeight: FontWeight.normal)),
-                                    alignment: Alignment.center),
+                                            fontWeight: FontWeight.normal))),
                               ),
                               SizedBox(
                                 width: 200,
@@ -194,7 +194,7 @@ class _LipidogramState extends State<Lipidogram> {
                                     value = value!.replaceAll(',', '.');
                                     Map<String, dynamic> entryMap = {};
                                     entryMap['short'] = entry.value['short'];
-                                    entryMap['value'] = double.parse(value!);
+                                    entryMap['value'] = double.parse(value);
                                     entryMap['lowerbound'] =
                                         entry.value[lowerbound];
                                     entryMap['upperbound'] =
@@ -245,7 +245,7 @@ class _LipidogramState extends State<Lipidogram> {
                                 diagnoses: diagnoses,
                                 fromDatabase: false,
                                 testName: 'Lipidogram',
-                                createdAt: DateTime.now().toString(),
+                                createdAt: DateTime.now(),
                               ),
                             ));
                       }
@@ -257,9 +257,9 @@ class _LipidogramState extends State<Lipidogram> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Analizuj",
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     )),
               ),
             ),
@@ -270,21 +270,21 @@ class _LipidogramState extends State<Lipidogram> {
   }
 
   void lipidogramAnaliza() {
-    var Chol = results["Chol"]?["result"];
-    var LDL = results["LDL"]?["result"];
-    var HDL = results["HDL"]?["result"];
-    var VLDL = results["VLDL"]?["result"];
-    var TAG = results["TAG"]?["result"];
+    var chol = results["Chol"]?["result"];
+    var ldl = results["LDL"]?["result"];
+    var hdl = results["HDL"]?["result"];
+    var vldl = results["VLDL"]?["result"];
+    var tag = results["TAG"]?["result"];
 
-    if ((Chol == "gt" || LDL == "gt") &&
-        ((HDL == "eq" || HDL == "lt") &&
-            (VLDL == "eq" || VLDL == "lt") &&
-            (TAG == "eq" || TAG == "lt"))) {
+    if ((chol == "gt" || ldl == "gt") &&
+        ((hdl == "eq" || hdl == "lt") &&
+            (vldl == "eq" || vldl == "lt") &&
+            (tag == "eq" || tag == "lt"))) {
       classification = "Hipercholesterolemia prosta";
-    } else if (TAG == "gt" &&
-        ((Chol == "eq" || Chol == "lt") &&
-            (LDL == "eq" || LDL == "lt") &&
-            (HDL == "eq" || HDL == "lt"))) {
+    } else if (tag == "gt" &&
+        ((chol == "eq" || chol == "lt") &&
+            (ldl == "eq" || ldl == "lt") &&
+            (hdl == "eq" || hdl == "lt"))) {
       var value = results["TAG"]?["value"]?.value;
       if (value < 400) {
         classification = "Hipertrójglicerydemia łagodna";
@@ -293,17 +293,17 @@ class _LipidogramState extends State<Lipidogram> {
       } else if (value >= 885) {
         classification = "Hipertrójglicerydemia ciężka";
       }
-    } else if ((Chol == "gt" || LDL == "gt") &&
-        TAG == "gt" &&
-        (HDL == "eq" || HDL == "lt")) {
+    } else if ((chol == "gt" || ldl == "gt") &&
+        tag == "gt" &&
+        (hdl == "eq" || hdl == "lt")) {
       classification = "Hiperlipidemia mieszana";
-    } else if (HDL == "gt" && TAG == "gt" && VLDL == "gt") {
+    } else if (hdl == "gt" && tag == "gt" && vldl == "gt") {
       classification = "Dyslipidemia aterogenna";
-    } else if (Chol != "eq" ||
-        LDL != "eq" ||
-        HDL != "eq" ||
-        VLDL != "eq" ||
-        TAG != "eq") {
+    } else if (chol != "eq" ||
+        ldl != "eq" ||
+        hdl != "eq" ||
+        vldl != "eq" ||
+        tag != "eq") {
       classification = "Podane wyniki nie są standardowe";
     }
 
@@ -323,6 +323,6 @@ class _LipidogramState extends State<Lipidogram> {
         interpretations = interprets["DLA"];
         break;
     }
-    diagnoses![classification] = interpretations;
+    diagnoses[classification] = interpretations;
   }
 }

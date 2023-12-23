@@ -44,10 +44,9 @@ class _RegisterState extends State<Register> {
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           "Powrót",
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 15),
+                          style: TextStyle(color: Colors.white, fontSize: 15),
                         )),
                   ),
                 ),
@@ -61,7 +60,7 @@ class _RegisterState extends State<Register> {
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.0))),
@@ -69,7 +68,7 @@ class _RegisterState extends State<Register> {
                         padding: const EdgeInsets.all(30.0),
                         child: Column(
                           children: [
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(bottom: 15.0),
                               child: Text("Zarejestruj się",
                                   style: TextStyle(
@@ -84,8 +83,8 @@ class _RegisterState extends State<Register> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
+                                      const Padding(
+                                        padding: EdgeInsets.only(
                                             bottom: 5.0, top: 15.0),
                                         child: Text(
                                           "Imię:",
@@ -98,7 +97,7 @@ class _RegisterState extends State<Register> {
                                         child: TextFormField(
                                           keyboardType:
                                               TextInputType.visiblePassword,
-                                          inputFormatters: [],
+                                          inputFormatters: const [],
                                           onSaved: (value) {},
                                           validator: (value) {
                                             if (value == null ||
@@ -128,8 +127,8 @@ class _RegisterState extends State<Register> {
                                           ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
+                                      const Padding(
+                                        padding: EdgeInsets.only(
                                             bottom: 5.0, top: 15.0),
                                         child: Text(
                                           "Nazwisko:",
@@ -142,7 +141,7 @@ class _RegisterState extends State<Register> {
                                         child: TextFormField(
                                           keyboardType:
                                               TextInputType.visiblePassword,
-                                          inputFormatters: [],
+                                          inputFormatters: const [],
                                           onSaved: (value) {},
                                           validator: (value) {
                                             if (value == null ||
@@ -172,8 +171,8 @@ class _RegisterState extends State<Register> {
                                           ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
+                                      const Padding(
+                                        padding: EdgeInsets.only(
                                             bottom: 5.0, top: 15.0),
                                         child: Text(
                                           "Numer PWZ:",
@@ -186,7 +185,7 @@ class _RegisterState extends State<Register> {
                                         child: TextFormField(
                                           keyboardType:
                                               TextInputType.visiblePassword,
-                                          inputFormatters: [],
+                                          inputFormatters: const [],
                                           onSaved: (value) {},
                                           validator: (value) {
                                             if (value == null ||
@@ -216,8 +215,8 @@ class _RegisterState extends State<Register> {
                                           ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
+                                      const Padding(
+                                        padding: EdgeInsets.only(
                                             bottom: 5.0, top: 15.0),
                                         child: Text(
                                           "Login:",
@@ -230,7 +229,7 @@ class _RegisterState extends State<Register> {
                                         child: TextFormField(
                                           keyboardType:
                                               TextInputType.visiblePassword,
-                                          inputFormatters: [],
+                                          inputFormatters: const [],
                                           onSaved: (value) {},
                                           validator: (value) {
                                             if (value == null ||
@@ -260,8 +259,8 @@ class _RegisterState extends State<Register> {
                                           ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
+                                      const Padding(
+                                        padding: EdgeInsets.only(
                                             bottom: 5.0, top: 15.0),
                                         child: Text(
                                           "Hasło:",
@@ -274,7 +273,7 @@ class _RegisterState extends State<Register> {
                                         child: TextFormField(
                                           keyboardType:
                                               TextInputType.visiblePassword,
-                                          inputFormatters: [],
+                                          inputFormatters: const [],
                                           onSaved: (value) {},
                                           validator: (value) {
                                             if (value == null ||
@@ -304,9 +303,8 @@ class _RegisterState extends State<Register> {
                                           ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 15.0),
+                                      const Padding(
+                                        padding: EdgeInsets.only(bottom: 15.0),
                                         child: Text(
                                           "* Hasło powinno zawierać przynajmniej 10 znaków",
                                           style: TextStyle(
@@ -325,7 +323,7 @@ class _RegisterState extends State<Register> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Login(),
+                                          builder: (context) => const Login(),
                                         ));
                                   },
                                   style: IconButton.styleFrom(

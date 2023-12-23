@@ -39,7 +39,7 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.0))),
@@ -56,13 +56,15 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(bottom: 10.0),
+                                        padding:
+                                            const EdgeInsets.only(bottom: 10.0),
                                         child: TextButton(
                                           onPressed: () {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) => Login(),
+                                                  builder: (context) =>
+                                                      const Login(),
                                                 ));
                                           },
                                           style: IconButton.styleFrom(
@@ -99,7 +101,7 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      Register(),
+                                                      const Register(),
                                                 ));
                                           },
                                           style: IconButton.styleFrom(

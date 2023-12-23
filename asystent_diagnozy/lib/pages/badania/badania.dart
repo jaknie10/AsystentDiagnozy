@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:asystent_diagnozy/database/database_service.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../badania/badanie_list_item_2.dart';
 
@@ -19,6 +18,7 @@ class _BadaniaState extends State<Badania> {
   String sortingOrder = 'DESC';
   String searchValue = '';
 
+  @override
   void initState() {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
@@ -41,11 +41,11 @@ class _BadaniaState extends State<Badania> {
             children: [
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 15.0, bottom: 15.0, right: 15.0),
+                  const Padding(
+                    padding:
+                        EdgeInsets.only(top: 15.0, bottom: 15.0, right: 15.0),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
+                      padding: EdgeInsets.only(left: 15.0),
                       child: Text("Badania",
                           style: TextStyle(
                               fontSize: 30,
@@ -53,11 +53,11 @@ class _BadaniaState extends State<Badania> {
                               letterSpacing: 1.5)),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 15.0, top: 15.0, bottom: 15.0, right: 15.0),
-                    child: Container(
+                    child: SizedBox(
                       height: 50,
                       width: 140,
                       child: DecoratedBox(
@@ -107,7 +107,7 @@ class _BadaniaState extends State<Badania> {
                         icon: Icon((sortingOrder == 'ASC')
                             ? Icons.arrow_downward
                             : Icons.arrow_upward),
-                        color: Color.fromRGBO(22, 20, 35, 1.0),
+                        color: const Color.fromRGBO(22, 20, 35, 1.0),
                         highlightColor: Theme.of(context).colorScheme.secondary,
                         hoverColor: Theme.of(context).colorScheme.secondary,
                       ),
@@ -221,7 +221,7 @@ class _BadaniaState extends State<Badania> {
                       ]),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 500,
                 child: Padding(
                   padding: const EdgeInsets.only(

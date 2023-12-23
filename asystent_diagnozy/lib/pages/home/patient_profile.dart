@@ -197,8 +197,8 @@ class _PatientProfileState extends State<PatientProfile> {
                                       showDialog(
                                           context: context,
                                           builder: (context) => AlertDialog(
-                                                title:
-                                                    Text("Usuwanie Pacjenta"),
+                                                title: const Text(
+                                                    "Usuwanie Pacjenta"),
                                                 content: Text(
                                                     "Czy na pewno chcesz usunąć pacjenta ${widget.patient.name} ${widget.patient.surname}?"),
                                                 actions: [
@@ -206,7 +206,8 @@ class _PatientProfileState extends State<PatientProfile> {
                                                       onPressed: () =>
                                                           Navigator.pop(
                                                               context),
-                                                      child: Text("ANULUJ")),
+                                                      child:
+                                                          const Text("ANULUJ")),
                                                   TextButton(
                                                       onPressed: () async {
                                                         Navigator.pop(context);
@@ -222,14 +223,15 @@ class _PatientProfileState extends State<PatientProfile> {
                                                                 (Route route) =>
                                                                     false);
                                                       },
-                                                      child: Text("POTWIERDŹ"))
+                                                      child: const Text(
+                                                          "POTWIERDŹ"))
                                                 ],
                                               ));
                                     },
                                     style: IconButton.styleFrom(
                                       highlightColor: Colors.red,
                                       backgroundColor:
-                                          Color.fromRGBO(255, 0, 0, 0.7),
+                                          const Color.fromRGBO(255, 0, 0, 0.7),
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(5.0),
@@ -272,7 +274,8 @@ class _PatientProfileState extends State<PatientProfile> {
                               height: 75,
                               child: ListView(
                                 shrinkWrap: true,
-                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
                                 scrollDirection: Axis.vertical,
                                 children: const [
                                   Text(
@@ -305,7 +308,7 @@ class _PatientProfileState extends State<PatientProfile> {
                         )),
                     Container(
                       height: 130,
-                      padding: EdgeInsets.only(left: 5.0),
+                      padding: const EdgeInsets.only(left: 5.0),
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
@@ -462,7 +465,7 @@ class _PatientProfileState extends State<PatientProfile> {
                       icon: Icon((sortingOrder == 'ASC')
                           ? Icons.arrow_downward
                           : Icons.arrow_upward),
-                      color: Color.fromRGBO(22, 20, 35, 1.0),
+                      color: const Color.fromRGBO(22, 20, 35, 1.0),
                       highlightColor: Theme.of(context).colorScheme.secondary,
                       hoverColor: Theme.of(context).colorScheme.secondary,
                     ),

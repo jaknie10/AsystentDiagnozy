@@ -38,7 +38,7 @@ class _UsersState extends State<Users> {
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.0))),
@@ -50,7 +50,7 @@ class _UsersState extends State<Users> {
                               width: 300,
                               child: Form(
                                   key: _formKey,
-                                  child: Column(
+                                  child: const Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [],

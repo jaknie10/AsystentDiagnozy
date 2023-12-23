@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({
@@ -7,7 +6,7 @@ class ChangePassword extends StatefulWidget {
     required this.doctorId,
   });
 
-  final doctorId;
+  final int doctorId;
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -43,10 +42,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Powrót",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 15),
+                        style: TextStyle(color: Colors.white, fontSize: 15),
                       )),
                 ),
               ),
@@ -55,14 +53,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                   padding: const EdgeInsets.all(15.0),
                   child: Container(
                     width: 500,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(10.0))),
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
                         children: [
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
                             child: Text("Zmień hasło:",
                                 style: TextStyle(
@@ -86,8 +84,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
+                                          const Padding(
+                                            padding: EdgeInsets.only(
                                                 bottom: 5.0, top: 5.0),
                                             child: Text(
                                               "Wprowadź stare hasło:",
@@ -97,7 +95,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                           TextFormField(
                                             keyboardType:
                                                 TextInputType.visiblePassword,
-                                            inputFormatters: [],
+                                            inputFormatters: const [],
                                             onSaved: (value) {},
                                             validator: (value) {
                                               if (value == null ||
@@ -105,9 +103,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                                               return null;
                                             },
                                             decoration: InputDecoration(
-                                              prefixIcon: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
+                                              prefixIcon: const Padding(
+                                                padding: EdgeInsets.all(10.0),
                                                 child: Icon(
                                                   Icons.lock_outline_rounded,
                                                   color: Color.fromRGBO(
@@ -141,8 +138,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                                                       color: Colors.black)),
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
+                                          const Padding(
+                                            padding: EdgeInsets.only(
                                                 bottom: 5.0, top: 15.0),
                                             child: Text(
                                               "Wprowadź nowe hasło:",
@@ -155,7 +152,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                             child: TextFormField(
                                               keyboardType:
                                                   TextInputType.visiblePassword,
-                                              inputFormatters: [],
+                                              inputFormatters: const [],
                                               onSaved: (value) {},
                                               validator: (value) {
                                                 if (value == null ||
@@ -163,9 +160,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                                                 return null;
                                               },
                                               decoration: InputDecoration(
-                                                prefixIcon: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
+                                                prefixIcon: const Padding(
+                                                  padding: EdgeInsets.all(10.0),
                                                   child: Icon(
                                                     Icons.lock_outline_rounded,
                                                     color: Color.fromRGBO(
@@ -211,8 +207,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                               ),
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 15.0),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 15.0),
                             child: Text(
                               "* Hasło powinno zawierać przynajmniej 10 znaków",
                               style: TextStyle(

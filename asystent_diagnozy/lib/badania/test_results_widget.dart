@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import '../database/database_service.dart';
 import '../models/test_result_model.dart';
 import 'package:asystent_diagnozy/pages/home/home.dart';
@@ -12,14 +14,16 @@ class TestResultsWidget extends StatefulWidget {
       required this.results,
       required this.diagnoses,
       required this.fromDatabase,
-      required this.createdAt});
+      required this.createdAt,
+      this.testId});
 
   final Map<dynamic, dynamic> results;
   final Map<dynamic, dynamic> diagnoses;
   final int patientId;
   final String testName;
   final bool fromDatabase;
-  final String createdAt;
+  final DateTime createdAt;
+  final int? testId;
 
   @override
   State<TestResultsWidget> createState() => _TestResultsWidgetState();
@@ -27,6 +31,7 @@ class TestResultsWidget extends StatefulWidget {
 
 class _TestResultsWidgetState extends State<TestResultsWidget> {
   final SQLiteHelper helper = SQLiteHelper();
+  final DateFormat formatter = DateFormat('dd-MM-yyyy');
   @override
   void initState() {
     super.initState();
@@ -116,7 +121,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                   padding: const EdgeInsets.all(15.0),
                                   child: Text(
                                     "${tests.surname} ${tests.name}",
-                                    style: TextStyle(fontSize: 15),
+                                    style: const TextStyle(fontSize: 15),
                                   ),
                                 )),
                           ],
@@ -133,7 +138,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                     )
-                  : Text(""),
+                  : const Text(""),
               widget.fromDatabase
                   ? Padding(
                       padding: const EdgeInsets.only(left: 15.0, top: 10.0),
@@ -148,14 +153,14 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                               child: Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Text(
-                                  "${widget.createdAt}".substring(0, 10),
-                                  style: TextStyle(fontSize: 15),
+                                  formatter.format(widget.createdAt),
+                                  style: const TextStyle(fontSize: 15),
                                 ),
                               )),
                         ],
                       ),
                     )
-                  : Text(""),
+                  : const Text(""),
               widget.fromDatabase
                   ? Padding(
                       padding: const EdgeInsets.only(left: 15.0, top: 10.0),
@@ -164,7 +169,11 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                         width: 120,
                         child: TextButton(
                             onPressed: () {
-                              Navigator.pop(context, widget.results);
+                              helper.deleteResultById(widget.testId!);
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) => const HomePage()),
+                                  (Route route) => false);
                             },
                             style: IconButton.styleFrom(
                               highlightColor:
@@ -182,7 +191,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                             )),
                       ),
                     )
-                  : Text(""),
+                  : const Text(""),
             ],
           ),
           //wyniki analizy
@@ -207,12 +216,12 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                               topLeft: Radius.circular(5.0),
                             ),
                           ),
-                          child: Center(
+                          child: const Center(
                               child: Padding(
-                            padding: const EdgeInsets.all(5.0),
+                            padding: EdgeInsets.all(5.0),
                             child: Text("Tabela wyników",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
                           )),
                         ),
@@ -470,134 +479,129 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (widget.diagnoses != null)
-                        ...widget.diagnoses!.entries
-                            .map((entry) => [
-                                  if (entry.key != "general")
-                                    Padding(
+                      ...widget.diagnoses.entries
+                          .map((entry) => [
+                                if (entry.key != "general")
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 5.0, top: 5.0),
+                                    child: Padding(
                                       padding: const EdgeInsets.only(
-                                          bottom: 5.0, top: 5.0),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10.0, right: 10.0),
-                                        child: Container(
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              topRight: Radius.circular(5.0),
-                                              topLeft: Radius.circular(5.0),
-                                            ),
+                                          left: 10.0, right: 10.0),
+                                      child: Container(
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          borderRadius: const BorderRadius.only(
+                                            topRight: Radius.circular(5.0),
+                                            topLeft: Radius.circular(5.0),
                                           ),
-                                          child: Center(
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Text(
-                                                "Klasyfikacja schorzenia",
-                                                textAlign: TextAlign.center,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
-                                                ),
+                                        ),
+                                        child: const Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Text(
+                                              "Klasyfikacja schorzenia",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  if (entry.key != "general")
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10.0,
-                                          right: 10.0,
-                                          bottom: 10.0),
-                                      child: Container(
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: const BorderRadius.only(
-                                            bottomRight: Radius.circular(5.0),
-                                            bottomLeft: Radius.circular(5.0),
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Text(
-                                              entry.key,
-                                              textAlign: TextAlign.center,
-                                              style:
-                                                  const TextStyle(fontSize: 15),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                  ),
+                                if (entry.key != "general")
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 10.0,
-                                        right: 10.0,
-                                        bottom: 5.0,
-                                        top: 5.0),
+                                        left: 10.0, right: 10.0, bottom: 10.0),
                                     child: Container(
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary,
-                                        borderRadius: const BorderRadius.only(
-                                          topRight: Radius.circular(5.0),
-                                          topLeft: Radius.circular(5.0),
+                                      height: 50,
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                          bottomRight: Radius.circular(5.0),
+                                          bottomLeft: Radius.circular(5.0),
                                         ),
                                       ),
                                       child: Center(
                                         child: Padding(
                                           padding: const EdgeInsets.all(5.0),
                                           child: Text(
-                                            "Potencjalne interpretacje",
+                                            entry.key,
                                             textAlign: TextAlign.center,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15,
-                                            ),
+                                            style:
+                                                const TextStyle(fontSize: 15),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 5.0),
-                                    child: Wrap(
-                                      children: [
-                                        for (var entryv in entry.value)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0, bottom: 5.0),
-                                            child: Container(
-                                              decoration: const BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5)),
-                                                color: Colors.white,
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Text(
-                                                  entryv,
-                                                  textAlign: TextAlign.center,
-                                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0,
+                                      right: 10.0,
+                                      bottom: 5.0,
+                                      top: 5.0),
+                                  child: Container(
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                      borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(5.0),
+                                        topLeft: Radius.circular(5.0),
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Text(
+                                          "Potencjalne interpretacje",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5.0),
+                                  child: Wrap(
+                                    children: [
+                                      for (var entryv in entry.value)
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5.0, bottom: 5.0),
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5)),
+                                              color: Colors.white,
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Text(
+                                                entryv,
+                                                textAlign: TextAlign.center,
                                               ),
                                             ),
                                           ),
-                                      ],
-                                    ),
+                                        ),
+                                    ],
                                   ),
-                                ])
-                            .expand((e) => e),
+                                ),
+                              ])
+                          .expand((e) => e),
                     ],
                   ),
                 )
@@ -605,7 +609,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
             ),
           ),
           widget.fromDatabase
-              ? Center()
+              ? const Center()
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -63,9 +63,9 @@ class _TarczycaState extends State<Tarczyca> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Powrót",
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     )),
               ),
             ),
@@ -142,7 +142,7 @@ class _TarczycaState extends State<Tarczyca> {
                                               ? Colors.white
                                               : Colors.black)),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 ElevatedButton(
                                   onPressed: () {
                                     setState(() {
@@ -162,7 +162,7 @@ class _TarczycaState extends State<Tarczyca> {
                                               ? Colors.white
                                               : Colors.black)),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 ElevatedButton(
                                   onPressed: () {
                                     setState(() {
@@ -193,14 +193,14 @@ class _TarczycaState extends State<Tarczyca> {
                           Container(
                             alignment: Alignment.center,
                             height: 50,
-                            child: Text("Wprowadź wartości:",
+                            child: const Text("Wprowadź wartości:",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                           ),
                         ],
                       ),
                       for (var entry in items.entries)
-                        Container(
+                        SizedBox(
                           height: 70,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -217,11 +217,11 @@ class _TarczycaState extends State<Tarczyca> {
                                           .colorScheme
                                           .background,
                                     ),
+                                    alignment: Alignment.center,
                                     child: Text(entry.value['short'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 18,
-                                            fontWeight: FontWeight.normal)),
-                                    alignment: Alignment.center),
+                                            fontWeight: FontWeight.normal))),
                               ),
                               SizedBox(
                                 width: 200,
@@ -293,7 +293,7 @@ class _TarczycaState extends State<Tarczyca> {
                                       upperbound = '3_high';
                                     }
                                     entryMap['short'] = entry.value['short'];
-                                    entryMap['value'] = double.parse(value!);
+                                    entryMap['value'] = double.parse(value);
                                     entryMap['lowerbound'] =
                                         entry.value[lowerbound];
                                     entryMap['upperbound'] =
@@ -343,7 +343,7 @@ class _TarczycaState extends State<Tarczyca> {
                                 results: results,
                                 diagnoses: diagnoses,
                                 fromDatabase: false,
-                                createdAt: DateTime.now().toString(),
+                                createdAt: DateTime.now(),
                                 testName: 'Tarczyca',
                               ),
                             ));
@@ -356,9 +356,9 @@ class _TarczycaState extends State<Tarczyca> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Analizuj",
-                      style: const TextStyle(color: Colors.white, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     )),
               ),
             ),
@@ -374,37 +374,35 @@ class _TarczycaState extends State<Tarczyca> {
     var ft4 = results["fT4"]?["result"];
 
     if (tsh == "eq" && ft3 == "eq" && ft4 == "eq") {
-      diagnoses!["Podane wyniki badania wydają się poprawne (eutyreoza)"] = [
+      diagnoses["Podane wyniki badania wydają się poprawne (eutyreoza)"] = [
         "Objaw"
       ];
     }
     if (tsh == "lt" && ft3 == "gt" && ft4 == "gt") {
-      diagnoses!["Pierwotna nadczynność tarczycy"] = ["Objaw"];
+      diagnoses["Pierwotna nadczynność tarczycy"] = ["Objaw"];
     }
     if ((tsh == "gt" || tsh == "eq") && ft3 == "gt" && ft4 == "gt") {
-      diagnoses!["Wtórna nadczynność tarczycy"] = ["Objaw"];
+      diagnoses["Wtórna nadczynność tarczycy"] = ["Objaw"];
     }
     if (tsh == "lt" && ft3 == "eq" && ft4 == "eq") {
-      diagnoses!["Subkliniczna nadczynność tarczycy"] = ["Objaw"];
+      diagnoses["Subkliniczna nadczynność tarczycy"] = ["Objaw"];
     }
     if (tsh == "lt" && ft3 == "gt" && ft4 == "gt") {
-      diagnoses!["Podostre zapalenie tarczycy w fazie nadczynności"] = [
-        "Objaw"
-      ];
+      diagnoses["Podostre zapalenie tarczycy w fazie nadczynności"] = ["Objaw"];
     }
     if (tsh == "lt" && ft3 == "lt" && ft4 == "lt") {
-      diagnoses!["Przejściowe zapalenie tarczycy w fazie rozwoju"] = ["Objaw"];
+      diagnoses["Przejściowe zapalenie tarczycy w fazie rozwoju"] = ["Objaw"];
     }
     if (tsh == "gt" && ft3 == "lt" && (ft4 == "eq" || ft4 == "lt")) {
-      diagnoses!["Pierwotna niedoczynność tarczycy"] = ["Objaw"];
+      diagnoses["Pierwotna niedoczynność tarczycy"] = ["Objaw"];
     }
     if ((tsh == "lt" || tsh == "eq") &&
         ft3 == "lt" &&
         (ft4 == "eq" || ft4 == "lt")) {
-      diagnoses!["Wtórna niedoczynność tarczycy"] = ["Objaw"];
+      diagnoses["Wtórna niedoczynność tarczycy"] = ["Objaw"];
     }
     if (tsh == "gt" && ft3 == "eq" && ft4 == "eq") {
-      diagnoses!["Subkliniczna niedoczynność tarczycy"] = ["Objaw"];
+      diagnoses["Subkliniczna niedoczynność tarczycy"] = ["Objaw"];
     }
 /*
     switch (classification) {

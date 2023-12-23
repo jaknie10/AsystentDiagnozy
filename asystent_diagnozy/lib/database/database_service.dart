@@ -47,6 +47,8 @@ class SQLiteHelper {
 
   Future<int> deletePatient(int patientId) async {
     final db = await database;
+    db.delete('testResults', where: 'patientId = ?', whereArgs: [patientId]);
+
     return db.delete(
       'patients',
       where: 'id = ?',
@@ -56,13 +58,17 @@ class SQLiteHelper {
 
   Future<List<Patient>> getPatients(String order, String searchValue) async {
     final db = await database;
+    List<Map<String, dynamic>> maps;
     var query = "SELECT * FROM patients";
     if (searchValue.isNotEmpty) {
       query =
-          "$query WHERE (name || ' ' || surname LIKE '%$searchValue%') OR (surname || ' ' || name LIKE '%$searchValue%')";
+          "$query WHERE (name || ' ' || surname LIKE ?) OR (surname || ' ' || name LIKE ?)";
+      query = "$query ORDER BY $order";
+      maps = await db.rawQuery(query, ['%$searchValue%', '%$searchValue%']);
+    } else {
+      query = "$query ORDER BY $order";
+      maps = await db.rawQuery(query);
     }
-    query = "$query ORDER BY $order";
-    final List<Map<String, dynamic>> maps = await db.rawQuery(query);
 
     return List.generate(maps.length, (index) {
       return Patient(
@@ -138,6 +144,15 @@ class SQLiteHelper {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
     return testResult;
+  }
+
+  Future<int> deleteResultById(int testId) async {
+    final db = await database;
+    return db.delete(
+      'testResults',
+      where: 'id = ?',
+      whereArgs: [testId],
+    );
   }
 
   Future<List<TestResult>> getTestsByPatientId(int patientId) async {

@@ -9,7 +9,7 @@ class Settings extends StatefulWidget {
     required this.doctorId,
   });
 
-  final doctorId;
+  final int doctorId;
 
   @override
   State<Settings> createState() => _SettingsState();
@@ -33,14 +33,14 @@ class _SettingsState extends State<Settings> {
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
                   width: 500,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(bottom: 15),
                           child: Text("Ustawienia",
                               style: TextStyle(
@@ -61,12 +61,12 @@ class _SettingsState extends State<Settings> {
                               height: 50,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10.0)),
                                   color:
                                       Theme.of(context).colorScheme.background),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
+                              child: const Padding(
+                                padding: EdgeInsets.all(15.0),
                                 child: Text(
                                   "Zmień hasło",
                                   style: TextStyle(fontSize: 15),
@@ -80,19 +80,19 @@ class _SettingsState extends State<Settings> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => LoginOrRegister(),
+                                  builder: (context) => const LoginOrRegister(),
                                 ));
                           },
                           child: Container(
                             height: 50,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(10.0)),
                                 color:
                                     Theme.of(context).colorScheme.background),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(15.0),
                               child: Text(
                                 "System logowania",
                                 style: TextStyle(fontSize: 15),

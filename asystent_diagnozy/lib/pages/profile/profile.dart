@@ -9,7 +9,7 @@ class Profile extends StatefulWidget {
     required this.doctorId,
   });
 
-  final doctorId;
+  final int doctorId;
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -30,14 +30,14 @@ class _ProfileState extends State<Profile> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 15.0),
+                padding: const EdgeInsets.only(top: 15.0),
                 child: SvgPicture.asset(
                   'assets/lekarz_logo.svg',
                   width: 120,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0, bottom: 25.0),
+              const Padding(
+                padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
                 child: Text(
                   "Cześć, $imie $nazwisko",
                   style: TextStyle(
@@ -51,16 +51,16 @@ class _ProfileState extends State<Profile> {
                 children: [
                   Wrap(children: [
                     Padding(
-                      padding: EdgeInsets.only(right: 15.0, left: 5.0),
+                      padding: const EdgeInsets.only(right: 15.0, left: 5.0),
                       child: Container(
                         height: 330,
                         decoration: const BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)),
                             color: Colors.white),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: const Column(
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Column(
                             children: [
                               Align(
                                   alignment: Alignment.topLeft,
@@ -190,7 +190,7 @@ class _ProfileState extends State<Profile> {
                   Wrap(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(right: 15.0),
+                        padding: const EdgeInsets.only(right: 15.0),
                         child: Container(
                           height: 330,
                           decoration: const BoxDecoration(
@@ -201,7 +201,7 @@ class _ProfileState extends State<Profile> {
                             padding: const EdgeInsets.all(10.0),
                             child: Column(children: [
                               //podstawowe informacje
-                              Align(
+                              const Align(
                                   alignment: Alignment.topLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(
@@ -214,7 +214,7 @@ class _ProfileState extends State<Profile> {
                                     ),
                                   )),
                               //dane
-                              Row(
+                              const Row(
                                 children: [
                                   Column(
                                     crossAxisAlignment:
@@ -387,7 +387,7 @@ class _ProfileState extends State<Profile> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                ProfileEdit(doctorId: 1),
+                                                const ProfileEdit(doctorId: 1),
                                           ),
                                         );
                                       },
@@ -402,11 +402,11 @@ class _ProfileState extends State<Profile> {
                                               BorderRadius.circular(5.0),
                                         ),
                                       ),
-                                      child: SizedBox(
+                                      child: const SizedBox(
                                         width: 110,
                                         child: Text(
                                           "Edytuj profil",
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 15,
                                           ),

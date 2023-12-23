@@ -32,12 +32,14 @@ class _BadanieListItemState extends State<BadanieListItem> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => TestResultsWidget(
-                          patientId: widget.badanie.patientId,
-                          results: widget.badanie.results["results"],
-                          diagnoses: widget.badanie.results["diagnoses"],
-                          fromDatabase: true,
-                          createdAt: widget.badanie.createdAt.toString(),
-                          testName: widget.badanie.testType)));
+                            patientId: widget.badanie.patientId,
+                            results: widget.badanie.results["results"],
+                            diagnoses: widget.badanie.results["diagnoses"],
+                            fromDatabase: true,
+                            createdAt: widget.badanie.createdAt,
+                            testName: widget.badanie.testType,
+                            testId: widget.badanie.id,
+                          )));
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,

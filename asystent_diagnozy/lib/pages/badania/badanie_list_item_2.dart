@@ -21,6 +21,7 @@ class _BadanieListItem2State extends State<BadanieListItem2> {
 
   final SQLiteHelper helper = SQLiteHelper();
 
+  @override
   void initState() {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
@@ -141,12 +142,14 @@ class _BadanieListItem2State extends State<BadanieListItem2> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => TestResultsWidget(
-                          patientId: widget.badanie.patientId,
-                          results: widget.badanie.results["results"],
-                          diagnoses: widget.badanie.results["diagnoses"],
-                          fromDatabase: true,
-                          createdAt: DateTime.now().toString(),
-                          testName: widget.badanie.testType)));
+                            patientId: widget.badanie.patientId,
+                            results: widget.badanie.results["results"],
+                            diagnoses: widget.badanie.results["diagnoses"],
+                            fromDatabase: true,
+                            createdAt: DateTime.now(),
+                            testName: widget.badanie.testType,
+                            testId: widget.badanie.id,
+                          )));
             },
           ),
         ));

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class ProfileEdit extends StatefulWidget {
   const ProfileEdit({
-    Key? key,
+    super.key,
     required this.doctorId,
-  }) : super(key: key);
+  });
 
   final int doctorId;
 
@@ -57,8 +57,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 18.0),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 18.0),
                       child: Text(
                         "Edytuj dane:",
                         style: TextStyle(
@@ -74,13 +74,13 @@ class _ProfileEditState extends State<ProfileEdit> {
                         children: [
                           Row(
                             children: [
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(
+                                      padding: EdgeInsets.only(
                                           top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Numer PESEL:",
@@ -90,7 +90,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(
+                                      padding: EdgeInsets.only(
                                           top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Numer PWZ:",
@@ -100,7 +100,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(
+                                      padding: EdgeInsets.only(
                                           top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Imię:",
@@ -110,7 +110,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(
+                                      padding: EdgeInsets.only(
                                           top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Nazwisko:",
@@ -120,7 +120,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(
+                                      padding: EdgeInsets.only(
                                           top: 15.0, bottom: 20.0),
                                       child: Text(
                                         "Data urodzenia:",
@@ -137,7 +137,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: 300,
                                       child: Form(
                                         key: _formKey,
@@ -145,9 +145,9 @@ class _ProfileEditState extends State<ProfileEdit> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 25.0),
+                                            const Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 25.0),
                                                 child: Text(
                                                   "00123456789",
                                                   style: TextStyle(
@@ -155,9 +155,9 @@ class _ProfileEditState extends State<ProfileEdit> {
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 )),
-                                            Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 40.0),
+                                            const Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 40.0),
                                                 child: Text(
                                                   "1234567",
                                                   style: TextStyle(
@@ -189,16 +189,16 @@ class _ProfileEditState extends State<ProfileEdit> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               5.0),
-                                                      borderSide: BorderSide(
-                                                          color: Colors
-                                                              .transparent)),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.0),
-                                                          borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .transparent)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                      borderSide:
+                                                          const BorderSide(
                                                               color: Colors
                                                                   .transparent)),
                                                   focusedBorder:
@@ -208,7 +208,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                                                   .circular(
                                                                       5.0),
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                                   color: Colors
                                                                       .black)),
                                                 ),
@@ -239,16 +239,16 @@ class _ProfileEditState extends State<ProfileEdit> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               5.0),
-                                                      borderSide: BorderSide(
-                                                          color: Colors
-                                                              .transparent)),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.0),
-                                                          borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .transparent)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                      borderSide:
+                                                          const BorderSide(
                                                               color: Colors
                                                                   .transparent)),
                                                   focusedBorder:
@@ -258,7 +258,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                                                   .circular(
                                                                       5.0),
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                                   color: Colors
                                                                       .black)),
                                                 ),
@@ -290,16 +290,16 @@ class _ProfileEditState extends State<ProfileEdit> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               5.0),
-                                                      borderSide: BorderSide(
-                                                          color: Colors
-                                                              .transparent)),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.0),
-                                                          borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .transparent)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0),
+                                                      borderSide:
+                                                          const BorderSide(
                                                               color: Colors
                                                                   .transparent)),
                                                   focusedBorder:
@@ -309,7 +309,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                                                   .circular(
                                                                       5.0),
                                                           borderSide:
-                                                              BorderSide(
+                                                              const BorderSide(
                                                                   color: Colors
                                                                       .black)),
                                                 ),
@@ -346,13 +346,13 @@ class _ProfileEditState extends State<ProfileEdit> {
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
                               ),
-                              child: SizedBox(
+                              child: const SizedBox(
                                 width: 60,
                                 height: 40,
                                 child: Center(
                                   child: Text(
                                     "Zapisz",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 15,
                                     ),
@@ -374,13 +374,13 @@ class _ProfileEditState extends State<ProfileEdit> {
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
                               ),
-                              child: SizedBox(
+                              child: const SizedBox(
                                 width: 60,
                                 height: 40,
                                 child: Center(
                                   child: Text(
                                     "Anuluj",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
                                     ),

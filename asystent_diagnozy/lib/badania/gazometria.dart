@@ -102,7 +102,7 @@ class _GazometriaState extends State<Gazometria> {
                         ],
                       ),
                       for (var entry in items.entries)
-                        Container(
+                        SizedBox(
                           height: 70,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -119,11 +119,11 @@ class _GazometriaState extends State<Gazometria> {
                                           .colorScheme
                                           .background,
                                     ),
+                                    alignment: Alignment.center,
                                     child: Text(entry.value['short'],
                                         style: const TextStyle(
                                             fontSize: 18,
-                                            fontWeight: FontWeight.normal)),
-                                    alignment: Alignment.center),
+                                            fontWeight: FontWeight.normal))),
                               ),
                               SizedBox(
                                 width: 200,
@@ -180,7 +180,7 @@ class _GazometriaState extends State<Gazometria> {
                                     value = value!.replaceAll(',', '.');
                                     Map<String, dynamic> entryMap = {};
                                     entryMap['short'] = entry.value['short'];
-                                    entryMap['value'] = double.parse(value!);
+                                    entryMap['value'] = double.parse(value);
                                     entryMap['lowerbound'] = entry.value["low"];
                                     entryMap['upperbound'] =
                                         entry.value["high"];
@@ -227,7 +227,7 @@ class _GazometriaState extends State<Gazometria> {
                                   results: results,
                                   diagnoses: diagnoses,
                                   fromDatabase: false,
-                                  createdAt: DateTime.now().toString(),
+                                  createdAt: DateTime.now(),
                                   testName: 'Gazometria'),
                             ));
                       }
@@ -346,6 +346,6 @@ class _GazometriaState extends State<Gazometria> {
         interpretations = interprets["ZO"];
         break;
     }
-    diagnoses![classification] = interpretations;
+    diagnoses[classification] = interpretations;
   }
 }
