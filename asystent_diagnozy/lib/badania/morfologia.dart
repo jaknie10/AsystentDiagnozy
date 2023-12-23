@@ -23,6 +23,7 @@ class _MorfologiaState extends State<Morfologia> {
 
   Map<String, dynamic> results = {};
   var interpretations = <dynamic>{};
+  Map<String, List> diagnoses = {};
 
   Future<void> readJson() async {
     final String response =
@@ -232,13 +233,14 @@ class _MorfologiaState extends State<Morfologia> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
+                        diagnoses!["general"] = interpretations.toList();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => TestResultsWidget(
                                 patientId: widget.patientId!,
                                 results: results,
-                                interpretations: interpretations.toList(),
+                                diagnoses: diagnoses,
                                 fromDatabase: false,
                                 createdAt: DateTime.now().toString(),
                                 testName: 'Morfologia',

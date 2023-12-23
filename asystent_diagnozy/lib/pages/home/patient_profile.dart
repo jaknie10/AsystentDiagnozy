@@ -9,6 +9,7 @@ import 'patient_edit_profile.dart';
 import '../../badania/morfologia.dart';
 import '../../badania/gazometria.dart';
 import '../../badania/lipidogram.dart';
+import '../../badania/tarczyca.dart';
 
 class PatientProfile extends StatefulWidget {
   const PatientProfile({super.key, required this.patient});
@@ -373,7 +374,17 @@ class _PatientProfileState extends State<PatientProfile> {
                           SizedBox(
                               width: 150,
                               child: IconButton(
-                                onPressed: () async {},
+                                onPressed: () async {
+                                  final result = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Tarczyca(
+                                          patientId: widget.patient.id,
+                                          patientGender: widget.patient.gender),
+                                    ),
+                                  );
+                                  debugPrint("Patient id: $result");
+                                },
                                 icon: const Image(
                                   image: AssetImage(
                                       'assets/badanie_tarczyca_logo.png'),

@@ -23,6 +23,7 @@ class _GazometriaState extends State<Gazometria> {
   Map<String, Map<String, dynamic>> results = {};
   var interpretations = []; // wybrane interpretacje dla klasyfikacji
   String classification = "Podane wyniki badania wydają się poprawne";
+  Map<String, List> diagnoses = {};
 
   Future<void> readJson() async {
     final String response =
@@ -224,8 +225,7 @@ class _GazometriaState extends State<Gazometria> {
                               builder: (context) => TestResultsWidget(
                                   patientId: widget.patientId!,
                                   results: results,
-                                  interpretations: interpretations,
-                                  classification: classification,
+                                  diagnoses: diagnoses,
                                   fromDatabase: false,
                                   createdAt: DateTime.now().toString(),
                                   testName: 'Gazometria'),
@@ -346,5 +346,6 @@ class _GazometriaState extends State<Gazometria> {
         interpretations = interprets["ZO"];
         break;
     }
+    diagnoses![classification] = interpretations;
   }
 }

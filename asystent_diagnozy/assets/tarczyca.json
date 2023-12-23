@@ -1,0 +1,53 @@
+{
+    "norms":{
+      "TSH":{
+        "short": "TSH",
+        "full_name": "hormon tyreotropowy",
+        "unit": "mIU/l",
+        "g_low": 0.4,
+        "g_high": 4.2,
+        "1_low": 0.009,
+        "1_high": 3.18,
+        "2_low": 0.05,
+        "2_high": 3.44,
+        "3_low": 0.11,
+        "3_high": 3.53       
+      },
+      "fT3":{
+        "short": "fT3",
+        "full_name": "wolna tyroksyna",
+        "unit": "pmol/l",
+        "g_low": 2.25,
+        "g_high": 6,
+        "1_low": 3.63,
+        "1_high": 6.55,
+        "2_low": 3.29,
+        "2_high": 5.45,
+        "3_low": 3.1,
+        "3_high": 5.37   
+      },
+      "fT4":{
+        "short": "fT4",
+        "full_name": "wolna trójjodotyronina",
+        "unit": "pmol/l",
+        "g_low": 9,
+        "g_high": 22,
+        "1_low": 11.99,
+        "1_high": 21.89,
+        "2_low": 10.46,
+        "2_high": 16.67,
+        "3_low": 8.96,
+        "3_high": 17.23
+      }
+    },
+    "int":{
+      "E": ["Brak symptomów"],
+      "PNT": ["Symptom pierwotna nadczynności tarczycy"],
+      "WNT": ["Symptom wtónej nadczzynności tarczycy"],
+      "SNT": ["Symptom subklinicznej nadczynności tarczycy"],
+      "PDN": ["Symptom podostrego zapalenienia tarczycy w fazie nadcynności"],
+      "PRR": ["Symptom przejściowego zapalenia tarczycy w fazie rozwoju"],
+      "PNIT": ["Symptom pierwotnej niedoczynności tarczycy"],
+      "SNIT": ["Symptom subklinicznej niedoczynnośc tarczycy"]
+    }
+  }

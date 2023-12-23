@@ -34,10 +34,7 @@ class _BadanieListItemState extends State<BadanieListItem> {
                       builder: (context) => TestResultsWidget(
                           patientId: widget.badanie.patientId,
                           results: widget.badanie.results["results"],
-                          interpretations:
-                              widget.badanie.results["interpretations"],
-                          classification:
-                              widget.badanie.results["clasification"],
+                          diagnoses: widget.badanie.results["diagnoses"],
                           fromDatabase: true,
                           createdAt: widget.badanie.createdAt.toString(),
                           testName: widget.badanie.testType)));

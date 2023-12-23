@@ -7,31 +7,30 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Lipidogram extends StatefulWidget {
-  const Lipidogram(
+class Tarczyca extends StatefulWidget {
+  const Tarczyca(
       {super.key, required this.patientId, required this.patientGender});
 
   final int? patientId;
   final String patientGender;
 
   @override
-  State<Lipidogram> createState() => _LipidogramState();
+  State<Tarczyca> createState() => _TarczycaState();
 }
 
-class _LipidogramState extends State<Lipidogram> {
+class _TarczycaState extends State<Tarczyca> {
   final _formKey = GlobalKey<FormState>();
 
   var items = {};
   var interprets = {}; // pobrane interpretacje z JSON
+  int? selectedTrimester; // null - brak ciąży; 1 - I trymestr itd.
 
   Map<String, Map<String, dynamic>> results = {};
   var interpretations = []; // wybrane interpretacje dla klasyfikacji
-  String classification = "Podane wyniki badania wydają się poprawne";
   Map<String, List> diagnoses = {};
 
   Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/lipidogram.json');
+    final String response = await rootBundle.loadString('assets/tarczyca.json');
     final data = await json.decode(response);
     setState(() {
       items = data['norms'];
@@ -42,16 +41,6 @@ class _LipidogramState extends State<Lipidogram> {
   @override
   Widget build(BuildContext context) {
     readJson();
-
-    String? lowerbound;
-    String? upperbound;
-    if (widget.patientGender == 'M') {
-      lowerbound = 'm_low';
-      upperbound = 'm_high';
-    } else if (widget.patientGender == 'K') {
-      lowerbound = 'w_low';
-      upperbound = 'w_high';
-    }
 
     return SingleChildScrollView(
       child: Column(
@@ -85,7 +74,7 @@ class _LipidogramState extends State<Lipidogram> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                'assets/badanie_lipidogram_logo_long.svg',
+                'assets/badanie_tarczyca_logo_long.svg',
                 width: 500,
               ),
             ],
@@ -103,6 +92,101 @@ class _LipidogramState extends State<Lipidogram> {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: [
+                      if (widget.patientGender == "K") ...[
+                        Wrap(
+                          alignment: WrapAlignment.center,
+                          spacing: 10.0,
+                          runSpacing: 10.0,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  selectedTrimester =
+                                      null; // Ustaw "Brak ciąży" jako wybrane
+                                });
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: selectedTrimester == null
+                                    ? Theme.of(context)
+                                        .colorScheme
+                                        .primary // Kolor po wybraniu
+                                    : Theme.of(context)
+                                        .colorScheme
+                                        .background, // Kolor domyślny
+                              ),
+                              child: Text('Brak ciąży',
+                                  style: TextStyle(
+                                      color: selectedTrimester == null
+                                          ? Colors.white
+                                          : Colors.black)),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedTrimester = 1;
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: selectedTrimester == 1
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                  ),
+                                  child: Text('I trymestr',
+                                      style: TextStyle(
+                                          color: selectedTrimester == 1
+                                              ? Colors.white
+                                              : Colors.black)),
+                                ),
+                                SizedBox(width: 10),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedTrimester = 2;
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: selectedTrimester == 2
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                  ),
+                                  child: Text('II trymestr',
+                                      style: TextStyle(
+                                          color: selectedTrimester == 2
+                                              ? Colors.white
+                                              : Colors.black)),
+                                ),
+                                SizedBox(width: 10),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedTrimester = 3;
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: selectedTrimester == 3
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                  ),
+                                  child: Text('III trymestr',
+                                      style: TextStyle(
+                                          color: selectedTrimester == 3
+                                              ? Colors.white
+                                              : Colors.black)),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -142,12 +226,9 @@ class _LipidogramState extends State<Lipidogram> {
                               SizedBox(
                                 width: 200,
                                 child: TextFormField(
-                                  keyboardType:
-                                      const TextInputType.numberWithOptions(
-                                          decimal: true),
+                                  keyboardType: TextInputType.number,
                                   inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\,|\.?\d*'))
+                                    FilteringTextInputFormatter.digitsOnly
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
@@ -191,8 +272,22 @@ class _LipidogramState extends State<Lipidogram> {
                                     return null;
                                   },
                                   onSaved: (value) {
-                                    value = value!.replaceAll(',', '.');
                                     Map<String, dynamic> entryMap = {};
+                                    String? lowerbound;
+                                    String? upperbound;
+                                    if (selectedTrimester == null) {
+                                      lowerbound = 'g_low';
+                                      upperbound = 'g_high';
+                                    } else if (selectedTrimester == 1) {
+                                      lowerbound = '1_low';
+                                      upperbound = '1_high';
+                                    } else if (selectedTrimester == 2) {
+                                      lowerbound = '2_low';
+                                      upperbound = '2_high';
+                                    } else if (selectedTrimester == 3) {
+                                      lowerbound = '3_low';
+                                      upperbound = '3_high';
+                                    }
                                     entryMap['short'] = entry.value['short'];
                                     entryMap['value'] = double.parse(value!);
                                     entryMap['lowerbound'] =
@@ -232,7 +327,7 @@ class _LipidogramState extends State<Lipidogram> {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
 
-                        lipidogramAnaliza();
+                        tarczycaAnaliza();
 
                         log(results.toString());
 
@@ -244,8 +339,8 @@ class _LipidogramState extends State<Lipidogram> {
                                 results: results,
                                 diagnoses: diagnoses,
                                 fromDatabase: false,
-                                testName: 'Lipidogram',
                                 createdAt: DateTime.now().toString(),
+                                testName: 'Tarczyca',
                               ),
                             ));
                       }
@@ -269,60 +364,50 @@ class _LipidogramState extends State<Lipidogram> {
     );
   }
 
-  void lipidogramAnaliza() {
-    var Chol = results["Chol"]?["result"];
-    var LDL = results["LDL"]?["result"];
-    var HDL = results["HDL"]?["result"];
-    var VLDL = results["VLDL"]?["result"];
-    var TAG = results["TAG"]?["result"];
+  void tarczycaAnaliza() {
+    var tsh = results["TSH"]?["result"];
+    var ft3 = results["fT3"]?["result"];
+    var ft4 = results["fT4"]?["result"];
 
-    if ((Chol == "gt" || LDL == "gt") &&
-        ((HDL == "eq" || HDL == "lt") &&
-            (VLDL == "eq" || VLDL == "lt") &&
-            (TAG == "eq" || TAG == "lt"))) {
-      classification = "Hipercholesterolemia prosta";
-    } else if (TAG == "gt" &&
-        ((Chol == "eq" || Chol == "lt") &&
-            (LDL == "eq" || LDL == "lt") &&
-            (HDL == "eq" || HDL == "lt"))) {
-      var value = results["TAG"]?["value"]?.value;
-      if (value < 400) {
-        classification = "Hipertrójglicerydemia łagodna";
-      } else if (value >= 400 && value < 885) {
-        classification = "Hipertrójglicerydemia umiarkowana";
-      } else if (value >= 885) {
-        classification = "Hipertrójglicerydemia ciężka";
-      }
-    } else if ((Chol == "gt" || LDL == "gt") &&
-        TAG == "gt" &&
-        (HDL == "eq" || HDL == "lt")) {
-      classification = "Hiperlipidemia mieszana";
-    } else if (HDL == "gt" && TAG == "gt" && VLDL == "gt") {
-      classification = "Dyslipidemia aterogenna";
-    } else if (Chol != "eq" ||
-        LDL != "eq" ||
-        HDL != "eq" ||
-        VLDL != "eq" ||
-        TAG != "eq") {
-      classification = "Podane wyniki nie są standardowe";
+    if (tsh == "eq" && ft3 == "eq" && ft4 == "eq") {
+      diagnoses!["Podane wyniki badania wydają się poprawne (eutyreoza)"] = [
+        "Objaw"
+      ];
     }
-
+    if (tsh == "lt" && ft3 == "gt" && ft4 == "gt") {
+      diagnoses!["Pierwotna nadczynność tarczycy"] = ["Objaw"];
+    }
+    if ((tsh == "gt" || tsh == "eq") && ft3 == "gt" && ft4 == "gt") {
+      diagnoses!["Wtórna nadczynność tarczycy"] = ["Objaw"];
+    }
+    if (tsh == "lt" && ft3 == "eq" && ft4 == "eq") {
+      diagnoses!["Subkliniczna nadczynność tarczycy"] = ["Objaw"];
+    }
+    if (tsh == "lt" && ft3 == "gt" && ft4 == "gt") {
+      diagnoses!["Podostre zapalenie tarczycy w fazie nadczynności"] = [
+        "Objaw"
+      ];
+    }
+    if (tsh == "lt" && ft3 == "lt" && ft4 == "lt") {
+      diagnoses!["Przejściowe zapalenie tarczycy w fazie rozwoju"] = ["Objaw"];
+    }
+    if (tsh == "gt" && ft3 == "lt" && (ft4 == "eq" || ft4 == "lt")) {
+      diagnoses!["Pierwotna niedoczynność tarczycy"] = ["Objaw"];
+    }
+    if ((tsh == "lt" || tsh == "eq") &&
+        ft3 == "lt" &&
+        (ft4 == "eq" || ft4 == "lt")) {
+      diagnoses!["Wtórna niedoczynność tarczycy"] = ["Objaw"];
+    }
+    if (tsh == "gt" && ft3 == "eq" && ft4 == "eq") {
+      diagnoses!["Subkliniczna niedoczynność tarczycy"] = ["Objaw"];
+    }
+/*
     switch (classification) {
       case "Hipercholesterolemia prosta":
         interpretations = interprets["HCP"];
         break;
-      case "Hipertrójglicerydemia łagodna" ||
-            "Hipertrójglicerydemia umiarkowana" ||
-            "Hipertrójglicerydemia ciężka":
-        interpretations = interprets["HT"];
-        break;
-      case "Hiperlipidemia mieszana":
-        interpretations = interprets["HLM"];
-        break;
-      case "Dyslipidemia aterogenna":
-        interpretations = interprets["DLA"];
-        break;
-    }
-    diagnoses![classification] = interpretations;
+    }  */
+    //  interpretations = ["Objaw"];
   }
 }
