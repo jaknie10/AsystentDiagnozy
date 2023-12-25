@@ -49,14 +49,7 @@ class _SettingsState extends State<Settings> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 15.0),
                           child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ChangePassword(
-                                        doctorId: widget.doctorId),
-                                  ));
-                            },
+                            onTap: () {},
                             child: Container(
                               height: 50,
                               width: double.infinity,
@@ -77,11 +70,11 @@ class _SettingsState extends State<Settings> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const LoginOrRegister(),
-                                ));
+                                    builder: (_) => LoginOrRegister()),
+                                (route) => false);
                           },
                           child: Container(
                             height: 50,
@@ -94,7 +87,7 @@ class _SettingsState extends State<Settings> {
                             child: const Padding(
                               padding: EdgeInsets.all(15.0),
                               child: Text(
-                                "System logowania",
+                                "Wyloguj",
                                 style: TextStyle(fontSize: 15),
                               ),
                             ),

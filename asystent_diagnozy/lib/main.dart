@@ -1,3 +1,4 @@
+import 'package:asystent_diagnozy/pages/login/login_or_register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'layout.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
             background: const Color.fromRGBO(238, 238, 238, 1)),
         fontFamily: 'Montserrat',
         scrollbarTheme: const ScrollbarThemeData().copyWith(
-          thumbColor: const MaterialStatePropertyAll(Color.fromRGBO(0, 99, 248, 1)),
+          thumbColor:
+              const MaterialStatePropertyAll(Color.fromRGBO(0, 99, 248, 1)),
           thumbVisibility: const MaterialStatePropertyAll(true),
           trackVisibility: const MaterialStatePropertyAll(true),
         ),
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
       ),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [Locale('pl')],
-      home: const Layout(),
+      home: const LoginOrRegister(),
     );
   }
 }
