@@ -66,10 +66,12 @@ class _BadanieListItemState extends State<BadanieListItem> {
                                 : (widget.badanie.testType == "Gazometria"
                                     ? 'assets/badanie_gazometria_logo.png'
                                     : (widget.badanie.testType == "Lipidogram"
-                                        ? 'assets/badanie_lipidogram_logo_small.png'
+                                        ? 'assets/badanie_lipidogram_small.png'
                                         : (widget.badanie.testType == 'Tarczyca'
                                             ? 'assets/badanie_tarczyca_logo_small.png'
-                                            : 'assets/badanie_logo.png'))),
+                                            : (widget.badanie.testType == 'Mocz'
+                                                ? 'assets/badanie_mocz_small.png'
+                                                : 'assets/badanie_logo.png')))),
                           ),
                         ),
                         highlightColor: Colors.transparent,
@@ -77,7 +79,7 @@ class _BadanieListItemState extends State<BadanieListItem> {
                       ),
                     )),
                 Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: Container(
                         height: 60,
                         decoration: BoxDecoration(
@@ -95,7 +97,7 @@ class _BadanieListItemState extends State<BadanieListItem> {
                           style: const TextStyle(fontWeight: FontWeight.normal),
                         )))),
                 Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: Container(
                         height: 60,
                         decoration: BoxDecoration(
