@@ -173,6 +173,17 @@ class SQLiteHelper {
           results: json.decode(maps[index]['results']));
     });
   }
+
+  Future<List<List<Map<String, Object?>>>> getDoctorStatistics() async {
+    final db = await database;
+    final List<Map<String, Object?>> liczbaBadan =
+        await db.rawQuery("SELECT COUNT(id) FROM testResults LIMIT 1");
+    final List<Map<String, Object?>> najczestszeBadanie = await db.rawQuery(
+        "SELECT testType, COUNT(id) FROM testResults ORDER BY COUNT(id) desc");
+    final List<Map<String, Object?>> liczbaPacjentow =
+        await db.rawQuery("SELECT COUNT(id) FROM patients");
+    return [liczbaBadan, najczestszeBadanie, liczbaPacjentow];
+  }
 }
 
 String sqlInitValues = """

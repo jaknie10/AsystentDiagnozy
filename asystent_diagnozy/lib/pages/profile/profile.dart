@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:asystent_diagnozy/database/database_service.dart';
 
 import 'profile_edit.dart';
 
@@ -20,6 +21,15 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     const String imie = "Jan";
     const String nazwisko = 'Kowalski';
+
+    final SQLiteHelper helper = SQLiteHelper();
+
+    @override
+    void initState() {
+      super.initState();
+      WidgetsFlutterBinding.ensureInitialized();
+      helper.initWinDB();
+    }
 
     return Container(
       width: double.infinity,
@@ -51,14 +61,14 @@ class _ProfileState extends State<Profile> {
                 children: [
                   Wrap(children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 15.0, left: 5.0),
+                      padding: EdgeInsets.only(right: 15.0, left: 5.0),
                       child: Container(
                         height: 330,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)),
                             color: Colors.white),
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.all(10.0),
                           child: Column(
                             children: [
@@ -144,12 +154,35 @@ class _ProfileState extends State<Profile> {
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
-                                        child: Text(
-                                          "155",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
+                                        child: FutureBuilder(
+                                            future:
+                                                helper.getDoctorStatistics(),
+                                            builder: (context, snapshot) {
+                                              // if (snapshot.connectionState == ConnectionState.waiting) {
+                                              //   return const Center(child: CircularProgressIndicator());
+                                              // } else
+                                              if (snapshot.hasError) {
+                                                return Center(
+                                                    child: Text(
+                                                        'Error: ${snapshot.error}'));
+                                              } else if (!snapshot.hasData ||
+                                                  snapshot.data!.isEmpty) {
+                                                return Center(
+                                                    child: Text('Brak badań.'));
+                                              } else {
+                                                final tests = snapshot.data!;
+                                                return Text(
+                                                  tests[0][0]
+                                                      .values
+                                                      .first
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15),
+                                                );
+                                              }
+                                            }),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
@@ -157,12 +190,35 @@ class _ProfileState extends State<Profile> {
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
-                                        child: Text(
-                                          "Morfologia",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
+                                        child: FutureBuilder(
+                                            future:
+                                                helper.getDoctorStatistics(),
+                                            builder: (context, snapshot) {
+                                              // if (snapshot.connectionState == ConnectionState.waiting) {
+                                              //   return const Center(child: CircularProgressIndicator());
+                                              // } else
+                                              if (snapshot.hasError) {
+                                                return Center(
+                                                    child: Text(
+                                                        'Error: ${snapshot.error}'));
+                                              } else if (!snapshot.hasData ||
+                                                  snapshot.data!.isEmpty) {
+                                                return Center(
+                                                    child: Text('Brak badań.'));
+                                              } else {
+                                                final tests = snapshot.data!;
+                                                return Text(
+                                                  tests[1][0]
+                                                      .values
+                                                      .first
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15),
+                                                );
+                                              }
+                                            }),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
@@ -170,12 +226,35 @@ class _ProfileState extends State<Profile> {
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
-                                        child: Text(
-                                          "100",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
+                                        child: FutureBuilder(
+                                            future:
+                                                helper.getDoctorStatistics(),
+                                            builder: (context, snapshot) {
+                                              // if (snapshot.connectionState == ConnectionState.waiting) {
+                                              //   return const Center(child: CircularProgressIndicator());
+                                              // } else
+                                              if (snapshot.hasError) {
+                                                return Center(
+                                                    child: Text(
+                                                        'Error: ${snapshot.error}'));
+                                              } else if (!snapshot.hasData ||
+                                                  snapshot.data!.isEmpty) {
+                                                return Center(
+                                                    child: Text('Brak badań.'));
+                                              } else {
+                                                final tests = snapshot.data!;
+                                                return Text(
+                                                  tests[2][0]
+                                                      .values
+                                                      .first
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15),
+                                                );
+                                              }
+                                            }),
                                       ),
                                     ],
                                   ),
