@@ -1,18 +1,39 @@
+import 'package:asystent_diagnozy/database/database_service.dart';
 import 'package:asystent_diagnozy/layout.dart';
+import 'package:asystent_diagnozy/models/user_model.dart';
+import 'package:asystent_diagnozy/pages/login/encryption_decryption_system.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Login extends StatefulWidget {
-  const Login({
+class LoginUser extends StatefulWidget {
+  const LoginUser({
     super.key,
+    required this.userName,
+    required this.userSurname,
+    required this.userLogin,
   });
 
+  final userName;
+  final userSurname;
+  final userLogin;
+
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginUser> createState() => _LoginUserState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginUserState extends State<LoginUser> {
   final _formKey = GlobalKey<FormState>();
+  var password = '';
+
+  final SQLiteHelper helper = SQLiteHelper();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+    helper.initWinDB();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,60 +112,12 @@ class _LoginState extends State<Login> {
                                           padding: const EdgeInsets.only(
                                               left: 15.0,
                                               right: 15.0,
-                                              top: 15.0,
-                                              bottom: 10.0),
-                                          child: TextFormField(
-                                            keyboardType:
-                                                TextInputType.visiblePassword,
-                                            inputFormatters: const [],
-                                            onSaved: (value) {},
-                                            validator: (value) {
-                                              if (value == null ||
-                                                  value.isEmpty) {}
-                                              return null;
-                                            },
-                                            decoration: InputDecoration(
-                                              prefixIcon: const Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 10.0, right: 10.0),
-                                                child: Icon(
-                                                  Icons.person_outline_rounded,
-                                                  color: Color.fromRGBO(
-                                                      0, 0, 0, 0.2),
-                                                  size: 25,
-                                                ),
-                                              ),
-                                              hintText: "Login",
-                                              hintStyle: const TextStyle(
-                                                color: Color.fromRGBO(
-                                                    0, 0, 0, 0.2),
-                                                fontSize: 18,
-                                              ),
-                                              filled: true,
-                                              fillColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .background,
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                            ),
+                                              bottom: 15.0),
+                                          child: Text(
+                                            "${widget.userName} ${widget.userSurname}",
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.normal),
                                           ),
                                         ),
                                         Padding(
@@ -156,12 +129,22 @@ class _LoginState extends State<Login> {
                                           child: TextFormField(
                                             keyboardType:
                                                 TextInputType.visiblePassword,
-                                            inputFormatters: const [],
-                                            onSaved: (value) {},
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'^.+$'))
+                                            ],
                                             validator: (value) {
                                               if (value == null ||
-                                                  value.isEmpty) {}
+                                                  value.isEmpty ||
+                                                  value.length < 10) {
+                                                return "Hasło powinno zawierać co najmniej 10 znaków";
+                                              }
                                               return null;
+                                            },
+                                            onChanged: (value) {
+                                              setState(() {
+                                                password = value;
+                                              });
                                             },
                                             decoration: InputDecoration(
                                               prefixIcon: const Padding(
@@ -217,12 +200,39 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Layout(),
-                              ));
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            User userData =
+                                await helper.getUserLoginData(widget.userLogin);
+
+                            if (login(userData.saltOne, userData.saltTwo,
+                                        userData.encryptedPrivateKey, password)
+                                    .privateKey
+                                    .toString()
+                                    .length ==
+                                0) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        content: const Text("Podano złe hasło"),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: const Text("Ok")),
+                                        ],
+                                      ));
+                            } else {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Layout(
+                                      doctorName:
+                                          "${widget.userName} ${widget.userSurname}",
+                                    ),
+                                  ));
+                            }
+                          }
                         },
                         style: IconButton.styleFrom(
                           highlightColor: const Color.fromRGBO(0, 84, 210, 1),

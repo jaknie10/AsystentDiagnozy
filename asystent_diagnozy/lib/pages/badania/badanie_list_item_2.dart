@@ -63,11 +63,14 @@ class _BadanieListItem2State extends State<BadanieListItem2> {
                                   : (widget.badanie.testType == "Gazometria"
                                       ? 'assets/badanie_gazometria_logo.png'
                                       : (widget.badanie.testType == "Lipidogram"
-                                          ? 'assets/badanie_lipidogram_logo_small.png'
+                                          ? 'assets/badanie_lipidogram_small.png'
                                           : (widget.badanie.testType ==
                                                   'Tarczyca'
                                               ? 'assets/badanie_tarczyca_logo_small.png'
-                                              : 'assets/badanie_logo.png'))),
+                                              : (widget.badanie.testType ==
+                                                      'Mocz'
+                                                  ? 'assets/badanie_mocz_small.png'
+                                                  : 'assets/badanie_logo.png')))),
                             ),
                           ),
                           highlightColor: Colors.transparent,

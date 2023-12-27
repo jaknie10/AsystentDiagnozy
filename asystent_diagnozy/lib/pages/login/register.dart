@@ -1,6 +1,12 @@
-import 'package:asystent_diagnozy/pages/login/login.dart';
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:asystent_diagnozy/database/database_service.dart';
+import 'package:asystent_diagnozy/pages/login/choose_user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'encryption_decryption_system.dart';
 
 class Register extends StatefulWidget {
   const Register({
@@ -11,8 +17,47 @@ class Register extends StatefulWidget {
   State<Register> createState() => _RegisterState();
 }
 
+class NewUser {
+  String name;
+  String surname;
+  String login;
+  String RSApublicKey;
+  String encryptedPrivateKey;
+  String saltOne;
+  String saltTwo;
+
+  NewUser(
+      {required this.name,
+      required this.surname,
+      required this.login,
+      required this.RSApublicKey,
+      required this.encryptedPrivateKey,
+      required this.saltOne,
+      required this.saltTwo});
+}
+
 class _RegisterState extends State<Register> {
+  final SQLiteHelper helper = SQLiteHelper();
+
+  var password = '';
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+    helper.initWinDB();
+  }
+
   final _formKey = GlobalKey<FormState>();
+
+  NewUser newUser = NewUser(
+      name: '',
+      surname: '',
+      login: '',
+      RSApublicKey: '',
+      encryptedPrivateKey: '',
+      saltOne: '',
+      saltTwo: '');
 
   @override
   Widget build(BuildContext context) {
@@ -96,10 +141,17 @@ class _RegisterState extends State<Register> {
                                           padding: const EdgeInsets.only(
                                               right: 15.0, bottom: 10.0),
                                           child: TextFormField(
-                                            keyboardType:
-                                                TextInputType.visiblePassword,
-                                            inputFormatters: const [],
-                                            onSaved: (value) {},
+                                            //keyboardType: TextInputType.name,
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(
+                                                      r'^[A-Z]?[a-zżźćńółęąś]*'))
+                                            ],
+                                            onChanged: (value) {
+                                              setState(() {
+                                                newUser.name = value.toString();
+                                              });
+                                            },
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty) {}
@@ -145,59 +197,18 @@ class _RegisterState extends State<Register> {
                                           padding: const EdgeInsets.only(
                                               right: 15.0, bottom: 10.0),
                                           child: TextFormField(
-                                            keyboardType:
-                                                TextInputType.visiblePassword,
-                                            inputFormatters: const [],
-                                            onSaved: (value) {},
-                                            validator: (value) {
-                                              if (value == null ||
-                                                  value.isEmpty) {}
-                                              return null;
+                                            //keyboardType: TextInputType.name,
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(
+                                                      r'^[A-ZŻŹĆĄŚĘŁÓŃ]?[a-zżźćńółęąś]*(-[A-ZŻŹĆĄŚĘŁÓŃ]?[a-zżźćńółęąś]*)?$'))
+                                            ],
+                                            onChanged: (value) {
+                                              setState(() {
+                                                newUser.surname =
+                                                    value.toString();
+                                              });
                                             },
-                                            decoration: InputDecoration(
-                                              filled: true,
-                                              fillColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .background,
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                            ),
-                                          ),
-                                        ),
-                                        const Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: 5.0, top: 15.0),
-                                          child: Text(
-                                            "Numer PWZ:",
-                                            style: TextStyle(fontSize: 18),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 15.0, bottom: 10.0),
-                                          child: TextFormField(
-                                            keyboardType:
-                                                TextInputType.visiblePassword,
-                                            inputFormatters: const [],
-                                            onSaved: (value) {},
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty) {}
@@ -243,13 +254,23 @@ class _RegisterState extends State<Register> {
                                           padding: const EdgeInsets.only(
                                               right: 15.0, bottom: 10.0),
                                           child: TextFormField(
-                                            keyboardType:
-                                                TextInputType.visiblePassword,
-                                            inputFormatters: const [],
-                                            onSaved: (value) {},
+                                            keyboardType: TextInputType.text,
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'^[a-z0-9]+$'))
+                                            ],
+                                            onChanged: (value) {
+                                              setState(() {
+                                                newUser.login =
+                                                    value.toString();
+                                              });
+                                            },
                                             validator: (value) {
                                               if (value == null ||
-                                                  value.isEmpty) {}
+                                                  value.isEmpty ||
+                                                  value.length < 6) {
+                                                return "Login powinien zawierać co najmniej 6 znaków";
+                                              }
                                               return null;
                                             },
                                             decoration: InputDecoration(
@@ -294,11 +315,21 @@ class _RegisterState extends State<Register> {
                                           child: TextFormField(
                                             keyboardType:
                                                 TextInputType.visiblePassword,
-                                            inputFormatters: const [],
-                                            onSaved: (value) {},
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'^.+$'))
+                                            ],
+                                            onChanged: (value) {
+                                              setState(() {
+                                                password = value.toString();
+                                              });
+                                            },
                                             validator: (value) {
                                               if (value == null ||
-                                                  value.isEmpty) {}
+                                                  value.isEmpty ||
+                                                  value.length < 10) {
+                                                return "Hasło powinno zawierać co najmniej 10 znaków";
+                                              }
                                               return null;
                                             },
                                             decoration: InputDecoration(
@@ -333,7 +364,7 @@ class _RegisterState extends State<Register> {
                                           padding:
                                               EdgeInsets.only(bottom: 15.0),
                                           child: Text(
-                                            "* Hasło powinno zawierać przynajmniej 10 znaków",
+                                            "* Hasło powinno zawierać co najmniej 10 znaków",
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 color: Color.fromRGBO(
@@ -346,12 +377,50 @@ class _RegisterState extends State<Register> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 15.0),
                                 child: TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => const Login(),
-                                          ));
+                                    onPressed: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        var check =
+                                            await helper.checkIfUserInDatabase(
+                                                newUser.login);
+
+                                        if (int.parse(check) != 0) {
+                                          debugPrint(
+                                              "taki yztkownik juz jest w bazie");
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) => AlertDialog(
+                                                    content: const Text(
+                                                        "Użytkownik o takim loginie znajduje się już w bazie danych. Podaj inny login."),
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  context),
+                                                          child:
+                                                              const Text("Ok")),
+                                                    ],
+                                                  ));
+                                        } else {
+                                          PrivateKeyEncryptionResult
+                                              signUpResult = signUp(password);
+
+                                          helper.addUserToDatabase(
+                                              newUser.name,
+                                              newUser.surname,
+                                              newUser.login,
+                                              signUpResult.publicKey,
+                                              signUpResult.encryptedPrivateKey,
+                                              signUpResult.randomSaltOne,
+                                              signUpResult.randomSaltTwo);
+
+                                          await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ChooseUser(),
+                                              ));
+                                        }
+                                      }
                                     },
                                     style: IconButton.styleFrom(
                                       highlightColor:

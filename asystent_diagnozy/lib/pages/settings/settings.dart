@@ -1,7 +1,7 @@
 import 'package:asystent_diagnozy/pages/login/login_or_register.dart';
 import 'package:flutter/material.dart';
 import 'change_password.dart';
-import '../login/login.dart';
+import '../login/choose_user.dart';
 
 class Settings extends StatefulWidget {
   const Settings({
@@ -49,7 +49,14 @@ class _SettingsState extends State<Settings> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 15.0),
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ChangePassword()),
+                              );
+                            },
                             child: Container(
                               height: 50,
                               width: double.infinity,
@@ -69,13 +76,7 @@ class _SettingsState extends State<Settings> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => LoginOrRegister()),
-                                (route) => false);
-                          },
+                          onTap: () {},
                           child: Container(
                             height: 50,
                             width: double.infinity,

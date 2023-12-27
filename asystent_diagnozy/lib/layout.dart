@@ -1,4 +1,5 @@
 import 'package:asystent_diagnozy/pages/badania/badania.dart';
+import 'package:asystent_diagnozy/pages/profile/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -7,7 +8,9 @@ import 'pages/profile/profile.dart';
 import 'pages/settings/settings.dart';
 
 class Layout extends StatefulWidget {
-  const Layout({super.key});
+  const Layout({super.key, required this.doctorName});
+
+  final doctorName;
 
   @override
   State<Layout> createState() => _LayoutState();
@@ -106,9 +109,9 @@ class _LayoutState extends State<Layout> {
                                 width: 45,
                                 fit: BoxFit.scaleDown,
                               ),
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 15.0),
-                                child: Text("Jan Kowalski",
+                                child: Text("${widget.doctorName}",
                                     style: TextStyle(
                                         fontSize: 20,
                                         color:

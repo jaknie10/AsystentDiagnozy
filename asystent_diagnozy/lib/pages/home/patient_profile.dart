@@ -546,7 +546,26 @@ class _PatientProfileState extends State<PatientProfile> {
                     if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return const Center(child: Text('Brak badań.'));
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15.0, right: 15.0, bottom: 15.0, top: 5.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(5.0),
+                              bottomRight: Radius.circular(5.0),
+                            ),
+                            color: Colors.white,
+                          ),
+                          child: Center(
+                              child: Text(
+                            "Brak badań",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
+                        ),
+                      );
                     } else {
                       final tests = snapshot.data!;
                       // print(badania.length);

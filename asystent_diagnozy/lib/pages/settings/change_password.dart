@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class ChangePassword extends StatefulWidget {
   const ChangePassword({
     super.key,
-    required this.doctorId,
   });
-
-  final int doctorId;
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -33,7 +30,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   width: 90,
                   child: TextButton(
                       onPressed: () {
-                        Navigator.pop(context, widget.doctorId);
+                        Navigator.pop(context);
                       },
                       style: IconButton.styleFrom(
                         highlightColor: const Color.fromRGBO(0, 84, 210, 1),
@@ -222,7 +219,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                   bottom: 15.0, top: 15.0),
                               child: TextButton(
                                   onPressed: () {
-                                    Navigator.pop(context, widget.doctorId);
+                                    Navigator.pop(context);
                                   },
                                   style: IconButton.styleFrom(
                                     highlightColor:

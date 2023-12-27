@@ -207,16 +207,24 @@ class _ProfileState extends State<Profile> {
                                                     child: Text('Brak badań.'));
                                               } else {
                                                 final tests = snapshot.data!;
-                                                return Text(
-                                                  tests[1][0]
-                                                      .values
-                                                      .first
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 15),
-                                                );
+                                                var badanie =
+                                                    tests[1][0].values.first;
+
+                                                return badanie == null
+                                                    ? Text(
+                                                        "brak",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 15),
+                                                      )
+                                                    : Text(
+                                                        badanie.toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 15),
+                                                      );
                                               }
                                             }),
                                       ),
