@@ -1,6 +1,5 @@
-import 'package:asystent_diagnozy/pages/login/login.dart';
+import 'package:asystent_diagnozy/pages/login/choose_user.dart';
 import 'package:asystent_diagnozy/pages/login/register.dart';
-import 'package:asystent_diagnozy/pages/login/users.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -64,7 +63,7 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const Login(),
+                                                      const ChooseUser(),
                                                 ));
                                           },
                                           style: IconButton.styleFrom(

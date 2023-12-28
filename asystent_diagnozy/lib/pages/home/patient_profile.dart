@@ -253,41 +253,6 @@ class _PatientProfileState extends State<PatientProfile> {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.only(
-                    left: 15.0, right: 25.0, bottom: 10.0),
-                child: Container(
-                    width: double.infinity,
-                    height: 140,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        color: Colors.white),
-                    child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Opis pacjenta",
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            SizedBox(
-                              height: 75,
-                              child: ListView(
-                                shrinkWrap: true,
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5.0),
-                                scrollDirection: Axis.vertical,
-                                children: const [
-                                  Text(
-                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis risus, et tincidunt sapien. Pellentesque mattis, sem sit amet hendrerit aliquet, mauris turpis hendrerit nisi, id iaculis augue erat eget neque. Integer tempor, nibh quis malesuada semper, justo risus tempus eros, eget fringilla elit augue et arcu. ",
-                                    style: TextStyle(fontSize: 15),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        )))),
-            Padding(
               padding: const EdgeInsets.only(left: 15.0, right: 25),
               child: Container(
                 width: double.infinity,
@@ -401,7 +366,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                 onPressed: () async {},
                                 icon: const Image(
                                   image: AssetImage(
-                                      'assets/badanie_uniwersalne_logo.png'),
+                                      'assets/badanie_mocz_logo.png'),
                                 ),
                                 highlightColor: Colors.transparent,
                                 hoverColor: Colors.transparent,
@@ -489,7 +454,7 @@ class _PatientProfileState extends State<PatientProfile> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
-                        // flex: 1,
+                        flex: 1,
                         child: Container(
                           height: 60,
                           decoration: BoxDecoration(
@@ -512,7 +477,7 @@ class _PatientProfileState extends State<PatientProfile> {
                         ),
                       ),
                       Expanded(
-                        flex: 2,
+                        flex: 3,
                         child: Container(
                             height: 60,
                             decoration: BoxDecoration(
@@ -534,7 +499,7 @@ class _PatientProfileState extends State<PatientProfile> {
                             ))),
                       ),
                       Expanded(
-                        flex: 2,
+                        flex: 3,
                         child: Container(
                             height: 60,
                             decoration: BoxDecoration(
@@ -581,7 +546,26 @@ class _PatientProfileState extends State<PatientProfile> {
                     if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return const Center(child: Text('Brak badań.'));
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15.0, right: 15.0, bottom: 15.0, top: 5.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(5.0),
+                              bottomRight: Radius.circular(5.0),
+                            ),
+                            color: Colors.white,
+                          ),
+                          child: Center(
+                              child: Text(
+                            "Brak badań",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
+                        ),
+                      );
                     } else {
                       final tests = snapshot.data!;
                       // print(badania.length);

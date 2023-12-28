@@ -1,7 +1,11 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:asystent_diagnozy/models/patient_model.dart';
 import 'package:asystent_diagnozy/models/test_result_model.dart';
+import 'package:asystent_diagnozy/models/user_model.dart';
+import 'package:crypton/crypton.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -173,14 +177,102 @@ class SQLiteHelper {
           results: json.decode(maps[index]['results']));
     });
   }
+
+  Future<List<List<Map<String, Object?>>>> getDoctorStatistics() async {
+    final db = await database;
+    final List<Map<String, Object?>> liczbaBadan =
+        await db.rawQuery("SELECT COUNT(id) FROM testResults LIMIT 1");
+    final List<Map<String, Object?>> najczestszeBadanie = await db.rawQuery(
+        "SELECT testType, COUNT(id) FROM testResults ORDER BY COUNT(id) desc");
+    final List<Map<String, Object?>> liczbaPacjentow =
+        await db.rawQuery("SELECT COUNT(id) FROM patients");
+    return [liczbaBadan, najczestszeBadanie, liczbaPacjentow];
+  }
+
+  Future<String> checkIfUserInDatabase(String login) async {
+    final db = await database;
+    final odp = await db.rawQuery(
+        "SELECT COUNT(id) FROM users WHERE login=? LIMIT 1", ["$login"]);
+    return odp[0].values.first.toString();
+  }
+
+  Future<List<User>> getAllUsers() async {
+    final db = await database;
+    List<Map<String, dynamic>> maps = await db.rawQuery("SELECT * FROM users");
+    return List.generate(maps.length, (index) {
+      return User(
+          name: maps[index]['name'],
+          surname: maps[index]['surname'],
+          login: maps[index]['login'],
+          RSApublicKey: maps[index]['RSApublicKey'],
+          encryptedPrivateKey: maps[index]['encryptedPrivateKey'],
+          saltOne: maps[index]['saltOne'],
+          saltTwo: maps[index]['saltTwo']);
+    });
+  }
+
+  Future<void> addUserToDatabase(
+      String name,
+      String surname,
+      String login,
+      String publicKey,
+      String privateKey,
+      String saltOne,
+      String saltTwo) async {
+    final db = await database;
+
+    var user = {
+      'name': name,
+      'surname': surname,
+      'login': login,
+      'RSApublicKey': publicKey,
+      'encryptedPrivateKey': privateKey,
+      'saltOne': saltOne,
+      'saltTwo': saltTwo,
+    };
+
+    db.insert(
+      "users",
+      user,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<User> getUserLoginData(String login) async {
+    final db = await database;
+    List<Map<String, dynamic>> ans = await db
+        .rawQuery("SELECT * FROM users WHERE login=? LIMIT 1", ["$login"]);
+
+    return User(
+        name: ans[0]['name'],
+        surname: ans[0]['surname'],
+        login: ans[0]["login"],
+        RSApublicKey: ans[0]['RSApublicKey'],
+        encryptedPrivateKey: ans[0]['encryptedPrivateKey'],
+        saltOne: ans[0]['saltOne'],
+        saltTwo: ans[0]['saltTwo']);
+  }
+
+  Future<void> updateUserPassword(String publicKey, String privateKey,
+      String saltOne, String saltTwo, String login) async {
+    final db = await database;
+
+    await db.rawUpdate(
+        "UPDATE users SET RSApublicKey=?, encryptedPrivateKey=?, saltOne=?, saltTwo=? WHERE login=?",
+        [publicKey, privateKey, saltOne, saltTwo, login]);
+  }
 }
 
 String sqlInitValues = """
   CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT,
-    password TEXT,
-    createdAt TEXT
+    name TEXT,
+    surname TEXT,
+    login TEXT,
+    RSApublicKey TEXT,
+    encryptedPrivateKey TEXT,
+    saltOne TEXT,
+    saltTwo TEXT
   );
 
   CREATE TABLE IF NOT EXISTS patients(

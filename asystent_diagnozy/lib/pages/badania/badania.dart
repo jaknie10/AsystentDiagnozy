@@ -237,7 +237,22 @@ class _BadaniaState extends State<Badania> {
                               child: Text('Error: ${snapshot.error}'));
                         } else if (!snapshot.hasData ||
                             snapshot.data!.isEmpty) {
-                          return const Center(child: Text('Brak badań.'));
+                          return Container(
+                            width: double.infinity,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(5.0),
+                                bottomRight: Radius.circular(5.0),
+                              ),
+                              color: Colors.white,
+                            ),
+                            child: Center(
+                                child: Text(
+                              "Brak badań",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )),
+                          );
                         } else {
                           final tests = snapshot.data!;
                           // print(badania.length);

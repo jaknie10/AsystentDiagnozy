@@ -1,15 +1,17 @@
+import 'package:asystent_diagnozy/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:asystent_diagnozy/database/database_service.dart';
 
 import 'profile_edit.dart';
 
 class Profile extends StatefulWidget {
   const Profile({
     super.key,
-    required this.doctorId,
+    required this.user,
   });
 
-  final int doctorId;
+  final User user;
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -18,8 +20,14 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    const String imie = "Jan";
-    const String nazwisko = 'Kowalski';
+    final SQLiteHelper helper = SQLiteHelper();
+
+    @override
+    void initState() {
+      super.initState();
+      WidgetsFlutterBinding.ensureInitialized();
+      helper.initWinDB();
+    }
 
     return Container(
       width: double.infinity,
@@ -36,10 +44,10 @@ class _ProfileState extends State<Profile> {
                   width: 120,
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
                 child: Text(
-                  "Cześć, $imie $nazwisko",
+                  "Cześć, ${widget.user.name} ${widget.user.surname}",
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -51,14 +59,14 @@ class _ProfileState extends State<Profile> {
                 children: [
                   Wrap(children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 15.0, left: 5.0),
+                      padding: EdgeInsets.only(right: 15.0, left: 5.0),
                       child: Container(
                         height: 330,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)),
                             color: Colors.white),
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.all(10.0),
                           child: Column(
                             children: [
@@ -144,12 +152,35 @@ class _ProfileState extends State<Profile> {
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
-                                        child: Text(
-                                          "155",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
+                                        child: FutureBuilder(
+                                            future:
+                                                helper.getDoctorStatistics(),
+                                            builder: (context, snapshot) {
+                                              // if (snapshot.connectionState == ConnectionState.waiting) {
+                                              //   return const Center(child: CircularProgressIndicator());
+                                              // } else
+                                              if (snapshot.hasError) {
+                                                return Center(
+                                                    child: Text(
+                                                        'Error: ${snapshot.error}'));
+                                              } else if (!snapshot.hasData ||
+                                                  snapshot.data!.isEmpty) {
+                                                return Center(
+                                                    child: Text('Brak badań.'));
+                                              } else {
+                                                final tests = snapshot.data!;
+                                                return Text(
+                                                  tests[0][0]
+                                                      .values
+                                                      .first
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15),
+                                                );
+                                              }
+                                            }),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
@@ -157,12 +188,43 @@ class _ProfileState extends State<Profile> {
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
-                                        child: Text(
-                                          "Morfologia",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
+                                        child: FutureBuilder(
+                                            future:
+                                                helper.getDoctorStatistics(),
+                                            builder: (context, snapshot) {
+                                              // if (snapshot.connectionState == ConnectionState.waiting) {
+                                              //   return const Center(child: CircularProgressIndicator());
+                                              // } else
+                                              if (snapshot.hasError) {
+                                                return Center(
+                                                    child: Text(
+                                                        'Error: ${snapshot.error}'));
+                                              } else if (!snapshot.hasData ||
+                                                  snapshot.data!.isEmpty) {
+                                                return Center(
+                                                    child: Text('Brak badań.'));
+                                              } else {
+                                                final tests = snapshot.data!;
+                                                var badanie =
+                                                    tests[1][0].values.first;
+
+                                                return badanie == null
+                                                    ? Text(
+                                                        "brak",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 15),
+                                                      )
+                                                    : Text(
+                                                        badanie.toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 15),
+                                                      );
+                                              }
+                                            }),
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
@@ -170,12 +232,35 @@ class _ProfileState extends State<Profile> {
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
-                                        child: Text(
-                                          "100",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
+                                        child: FutureBuilder(
+                                            future:
+                                                helper.getDoctorStatistics(),
+                                            builder: (context, snapshot) {
+                                              // if (snapshot.connectionState == ConnectionState.waiting) {
+                                              //   return const Center(child: CircularProgressIndicator());
+                                              // } else
+                                              if (snapshot.hasError) {
+                                                return Center(
+                                                    child: Text(
+                                                        'Error: ${snapshot.error}'));
+                                              } else if (!snapshot.hasData ||
+                                                  snapshot.data!.isEmpty) {
+                                                return Center(
+                                                    child: Text('Brak badań.'));
+                                              } else {
+                                                final tests = snapshot.data!;
+                                                return Text(
+                                                  tests[2][0]
+                                                      .values
+                                                      .first
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 15),
+                                                );
+                                              }
+                                            }),
                                       ),
                                     ],
                                   ),
@@ -214,7 +299,7 @@ class _ProfileState extends State<Profile> {
                                     ),
                                   )),
                               //dane
-                              const Row(
+                              Row(
                                 children: [
                                   Column(
                                     crossAxisAlignment:
@@ -255,7 +340,7 @@ class _ProfileState extends State<Profile> {
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
-                                          "Data urodzenia:",
+                                          "Login:",
                                           style: TextStyle(
                                               fontSize: 15,
                                               color: Color.fromRGBO(
@@ -275,7 +360,7 @@ class _ProfileState extends State<Profile> {
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
-                                          "Jan",
+                                          "${widget.user.name}",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15),
@@ -288,7 +373,7 @@ class _ProfileState extends State<Profile> {
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
-                                          "Kowalski",
+                                          "${widget.user.surname}",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15),
@@ -301,73 +386,7 @@ class _ProfileState extends State<Profile> {
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
-                                          "10-10-2010",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: 30.0,
-                                            left: 50.0,
-                                            right: 10.0,
-                                            top: 10.0),
-                                        child: Text(
-                                          "Numer PWZ:",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromRGBO(
-                                                  99, 99, 99, 1.0)),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: 30.0,
-                                            left: 50.0,
-                                            right: 10.0,
-                                            top: 10.0),
-                                        child: Text(
-                                          "Numer PESEL:",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromRGBO(
-                                                  99, 99, 99, 1.0)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: 30.0,
-                                            left: 10.0,
-                                            right: 10.0,
-                                            top: 10.0),
-                                        child: Text(
-                                          "1234567",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: 30.0,
-                                            left: 10.0,
-                                            right: 10.0,
-                                            top: 10.0),
-                                        child: Text(
-                                          "00123456789",
+                                          "${widget.user.login}",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15),

@@ -1,4 +1,6 @@
+import 'package:asystent_diagnozy/models/user_model.dart';
 import 'package:asystent_diagnozy/pages/badania/badania.dart';
+import 'package:asystent_diagnozy/pages/profile/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -7,7 +9,9 @@ import 'pages/profile/profile.dart';
 import 'pages/settings/settings.dart';
 
 class Layout extends StatefulWidget {
-  const Layout({super.key});
+  const Layout({super.key, required this.user});
+
+  final User user;
 
   @override
   State<Layout> createState() => _LayoutState();
@@ -33,13 +37,13 @@ class _LayoutState extends State<Layout> {
       {'name': 'Home', 'page': const HomePage(), 'key': keyHome},
       {
         'name': 'Profile',
-        'page': const Profile(doctorId: 1),
+        'page': Profile(user: widget.user),
         'key': keyProfile
       },
       {'name': 'Badania', 'page': const Badania(), 'key': keyBadania},
       {
         'name': 'Settings',
-        'page': const Settings(doctorId: 1),
+        'page': Settings(user: widget.user),
         'key': keySettings
       },
     ];
@@ -106,9 +110,10 @@ class _LayoutState extends State<Layout> {
                                 width: 45,
                                 fit: BoxFit.scaleDown,
                               ),
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 15.0),
-                                child: Text("Jan Kowalski",
+                                child: Text(
+                                    "${widget.user.name} ${widget.user.surname}",
                                     style: TextStyle(
                                         fontSize: 20,
                                         color:

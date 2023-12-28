@@ -1,12 +1,15 @@
+import 'package:asystent_diagnozy/database/database_service.dart';
+import 'package:asystent_diagnozy/models/user_model.dart';
 import 'package:flutter/material.dart';
+import '../login/encryption_decryption_system.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({
     super.key,
-    required this.doctorId,
+    required this.user,
   });
 
-  final int doctorId;
+  final User user;
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -14,6 +17,18 @@ class ChangePassword extends StatefulWidget {
 
 class _ChangePasswordState extends State<ChangePassword> {
   final _formKey = GlobalKey<FormState>();
+
+  final SQLiteHelper helper = SQLiteHelper();
+
+  String currentPass = '';
+  String newPass = '';
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+    helper.initWinDB();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +48,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   width: 90,
                   child: TextButton(
                       onPressed: () {
-                        Navigator.pop(context, widget.doctorId);
+                        Navigator.pop(context);
                       },
                       style: IconButton.styleFrom(
                         highlightColor: const Color.fromRGBO(0, 84, 210, 1),
@@ -97,9 +112,17 @@ class _ChangePasswordState extends State<ChangePassword> {
                                                 TextInputType.visiblePassword,
                                             inputFormatters: const [],
                                             onSaved: (value) {},
+                                            onChanged: (value) {
+                                              setState(() {
+                                                currentPass = value;
+                                              });
+                                            },
                                             validator: (value) {
                                               if (value == null ||
-                                                  value.isEmpty) {}
+                                                  value.isEmpty ||
+                                                  value.length < 10) {
+                                                return "Hasło powinno zawierać co najmniej 10 znaków";
+                                              }
                                               return null;
                                             },
                                             decoration: InputDecoration(
@@ -154,9 +177,17 @@ class _ChangePasswordState extends State<ChangePassword> {
                                                   TextInputType.visiblePassword,
                                               inputFormatters: const [],
                                               onSaved: (value) {},
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  newPass = value;
+                                                });
+                                              },
                                               validator: (value) {
                                                 if (value == null ||
-                                                    value.isEmpty) {}
+                                                    value.isEmpty ||
+                                                    value.length < 10) {
+                                                  return "Hasło powinno zawierać co najmniej 10 znaków";
+                                                }
                                                 return null;
                                               },
                                               decoration: InputDecoration(
@@ -221,8 +252,46 @@ class _ChangePasswordState extends State<ChangePassword> {
                               padding: const EdgeInsets.only(
                                   bottom: 15.0, top: 15.0),
                               child: TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context, widget.doctorId);
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      var newData = resetPassword(
+                                          widget.user.encryptedPrivateKey,
+                                          widget.user.RSApublicKey,
+                                          widget.user.saltOne,
+                                          widget.user.saltTwo,
+                                          currentPass,
+                                          newPass);
+
+                                      if (newData.encryptedPrivateKey.length ==
+                                              0 ||
+                                          newData.encryptedPrivateKey ==
+                                              widget.user.encryptedPrivateKey) {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                                  content: const Text(
+                                                      "Błąd we wprowadzonych danych"),
+                                                  actions: [
+                                                    TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                context),
+                                                        child:
+                                                            const Text("Ok")),
+                                                  ],
+                                                ));
+                                      } else {
+                                        await helper.updateUserPassword(
+                                            newData.publicKey,
+                                            newData.encryptedPrivateKey,
+                                            newData.randomSaltOne,
+                                            newData.randomSaltTwo,
+                                            widget.user.login);
+
+                                        Navigator.pop(context);
+                                      }
+                                    }
+                                    ;
                                   },
                                   style: IconButton.styleFrom(
                                     highlightColor:

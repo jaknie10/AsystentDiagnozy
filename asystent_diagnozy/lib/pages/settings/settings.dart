@@ -1,15 +1,16 @@
+import 'package:asystent_diagnozy/models/user_model.dart';
 import 'package:asystent_diagnozy/pages/login/login_or_register.dart';
 import 'package:flutter/material.dart';
 import 'change_password.dart';
-import '../login/login.dart';
+import '../login/choose_user.dart';
 
 class Settings extends StatefulWidget {
   const Settings({
     super.key,
-    required this.doctorId,
+    required this.user,
   });
 
-  final int doctorId;
+  final User user;
 
   @override
   State<Settings> createState() => _SettingsState();
@@ -51,11 +52,11 @@ class _SettingsState extends State<Settings> {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ChangePassword(
-                                        doctorId: widget.doctorId),
-                                  ));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChangePassword(user: widget.user)),
+                              );
                             },
                             child: Container(
                               height: 50,
@@ -76,13 +77,7 @@ class _SettingsState extends State<Settings> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginOrRegister(),
-                                ));
-                          },
+                          onTap: () {},
                           child: Container(
                             height: 50,
                             width: double.infinity,
@@ -94,7 +89,7 @@ class _SettingsState extends State<Settings> {
                             child: const Padding(
                               padding: EdgeInsets.all(15.0),
                               child: Text(
-                                "System logowania",
+                                "Wyloguj",
                                 style: TextStyle(fontSize: 15),
                               ),
                             ),
