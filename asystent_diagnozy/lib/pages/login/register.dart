@@ -40,6 +40,7 @@ class _RegisterState extends State<Register> {
   final SQLiteHelper helper = SQLiteHelper();
 
   var password = '';
+  bool passwordVisible = false;
 
   @override
   void initState() {
@@ -141,11 +142,11 @@ class _RegisterState extends State<Register> {
                                           padding: const EdgeInsets.only(
                                               right: 15.0, bottom: 10.0),
                                           child: TextFormField(
-                                            //keyboardType: TextInputType.name,
-                                            inputFormatters: <TextInputFormatter>[
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp(
-                                                      r'^[A-Z]?[a-zżźćńółęąś]*'))
+                                            keyboardType: TextInputType.name,
+                                            inputFormatters: [
+                                              UpperCaseTextFormatter(),
+                                              LengthLimitingTextInputFormatter(
+                                                  20)
                                             ],
                                             onChanged: (value) {
                                               setState(() {
@@ -197,11 +198,11 @@ class _RegisterState extends State<Register> {
                                           padding: const EdgeInsets.only(
                                               right: 15.0, bottom: 10.0),
                                           child: TextFormField(
-                                            //keyboardType: TextInputType.name,
-                                            inputFormatters: <TextInputFormatter>[
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp(
-                                                      r'^[A-ZŻŹĆĄŚĘŁÓŃ]?[a-zżźćńółęąś]*(-[A-ZŻŹĆĄŚĘŁÓŃ]?[a-zżźćńółęąś]*)?$'))
+                                            keyboardType: TextInputType.name,
+                                            inputFormatters: [
+                                              UpperCaseTextFormatter(),
+                                              LengthLimitingTextInputFormatter(
+                                                  20)
                                             ],
                                             onChanged: (value) {
                                               setState(() {
@@ -257,7 +258,7 @@ class _RegisterState extends State<Register> {
                                             keyboardType: TextInputType.text,
                                             inputFormatters: <TextInputFormatter>[
                                               FilteringTextInputFormatter.allow(
-                                                  RegExp(r'^[a-z0-9]+$'))
+                                                  RegExp(r'^[A-Za-z0-9]+$'))
                                             ],
                                             onChanged: (value) {
                                               setState(() {
@@ -313,6 +314,7 @@ class _RegisterState extends State<Register> {
                                           padding: const EdgeInsets.only(
                                               right: 15.0, bottom: 15.0),
                                           child: TextFormField(
+                                            obscureText: passwordVisible,
                                             keyboardType:
                                                 TextInputType.visiblePassword,
                                             inputFormatters: <TextInputFormatter>[
@@ -333,6 +335,23 @@ class _RegisterState extends State<Register> {
                                               return null;
                                             },
                                             decoration: InputDecoration(
+                                              suffixIcon: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 5.0),
+                                                child: IconButton(
+                                                  icon: Icon(passwordVisible
+                                                      ? Icons.visibility_off
+                                                      : Icons.visibility),
+                                                  onPressed: () {
+                                                    setState(
+                                                      () {
+                                                        passwordVisible =
+                                                            !passwordVisible;
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                              ),
                                               filled: true,
                                               fillColor: Theme.of(context)
                                                   .colorScheme
@@ -456,5 +475,19 @@ class _RegisterState extends State<Register> {
             )),
       ),
     );
+  }
+}
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.length == 1) {
+      return TextEditingValue(
+        text: newValue.text[0].toUpperCase(),
+        selection: newValue.selection,
+      );
+    }
+    return newValue;
   }
 }

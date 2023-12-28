@@ -252,6 +252,15 @@ class SQLiteHelper {
         saltOne: ans[0]['saltOne'],
         saltTwo: ans[0]['saltTwo']);
   }
+
+  Future<void> updateUserPassword(String publicKey, String privateKey,
+      String saltOne, String saltTwo, String login) async {
+    final db = await database;
+
+    await db.rawUpdate(
+        "UPDATE users SET RSApublicKey=?, encryptedPrivateKey=?, saltOne=?, saltTwo=? WHERE login=?",
+        [publicKey, privateKey, saltOne, saltTwo, login]);
+  }
 }
 
 String sqlInitValues = """

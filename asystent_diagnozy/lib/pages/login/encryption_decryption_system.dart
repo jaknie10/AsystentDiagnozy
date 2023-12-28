@@ -94,34 +94,49 @@ class LoginResult {
 }
 
 PrivateKeyEncryptionResult resetPassword(
-    PrivateKeyEncryptionResult dataInDB, String currentPass, String newPass) {
+    String encryptedPrivateKey,
+    String publicKey,
+    String randomSaltOne,
+    String randomSaltTwo,
+    String currentPass,
+    String newPass) {
   final Uint8List pbkdfKey =
-      CryptoService.generatePBKDFKey(currentPass, dataInDB.randomSaltOne);
+      CryptoService.generatePBKDFKey(currentPass, randomSaltOne);
 
   // decrypt private key
-  Uint8List decryptedPrivateKey = CryptoService.symetricDecrypt(
-    pbkdfKey,
-    Uint8List.fromList(dataInDB.randomSaltTwo.codeUnits),
-    Uint8List.fromList(dataInDB.encryptedPrivateKey.codeUnits),
-  );
+  try {
+    Uint8List decryptedPrivateKey = CryptoService.symetricDecrypt(
+      pbkdfKey,
+      Uint8List.fromList(randomSaltTwo.codeUnits),
+      Uint8List.fromList(encryptedPrivateKey.codeUnits),
+    );
 
-  // generate pbkdf key using new password
-  final Uint8List newPbkdfKey =
-      CryptoService.generatePBKDFKey(newPass, dataInDB.randomSaltOne);
+    // generate pbkdf key using new password
+    final Uint8List newPbkdfKey =
+        CryptoService.generatePBKDFKey(newPass, randomSaltOne);
 
-  // encrypt private key with new pbkdf key
-  final encryptedPrivateKey = CryptoService.symetricEncrypt(
-    newPbkdfKey,
-    Uint8List.fromList(dataInDB.randomSaltTwo.codeUnits),
-    decryptedPrivateKey,
-  );
+    // encrypt private key with new pbkdf key
+    final encryptedPrivateKey1 = CryptoService.symetricEncrypt(
+      newPbkdfKey,
+      Uint8List.fromList(randomSaltTwo.codeUnits),
+      decryptedPrivateKey,
+    );
+
+    return PrivateKeyEncryptionResult(
+      publicKey: publicKey,
+      encryptedPrivateKey: String.fromCharCodes(encryptedPrivateKey1),
+      randomSaltOne: randomSaltOne,
+      randomSaltTwo: randomSaltTwo,
+    );
+  } on ArgumentError catch (e) {
+    print("Exception $e");
+  }
 
   return PrivateKeyEncryptionResult(
-    publicKey: dataInDB.publicKey,
-    encryptedPrivateKey: String.fromCharCodes(encryptedPrivateKey),
-    randomSaltOne: dataInDB.randomSaltOne,
-    randomSaltTwo: dataInDB.randomSaltTwo,
-  );
+      publicKey: "",
+      encryptedPrivateKey: "",
+      randomSaltOne: "",
+      randomSaltTwo: "");
 }
 
 class CryptoResult {

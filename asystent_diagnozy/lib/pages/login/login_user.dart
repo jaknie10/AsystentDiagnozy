@@ -25,6 +25,7 @@ class LoginUser extends StatefulWidget {
 class _LoginUserState extends State<LoginUser> {
   final _formKey = GlobalKey<FormState>();
   var password = '';
+  bool passwordVisible = false;
 
   final SQLiteHelper helper = SQLiteHelper();
 
@@ -91,7 +92,7 @@ class _LoginUserState extends State<LoginUser> {
                           child: Column(
                             children: [
                               SizedBox(
-                                width: 300,
+                                width: 400,
                                 child: Form(
                                     key: _formKey,
                                     child: Column(
@@ -127,6 +128,7 @@ class _LoginUserState extends State<LoginUser> {
                                               top: 5.0,
                                               bottom: 15.0),
                                           child: TextFormField(
+                                            obscureText: passwordVisible,
                                             keyboardType:
                                                 TextInputType.visiblePassword,
                                             inputFormatters: <TextInputFormatter>[
@@ -147,6 +149,23 @@ class _LoginUserState extends State<LoginUser> {
                                               });
                                             },
                                             decoration: InputDecoration(
+                                              suffixIcon: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 5.0),
+                                                child: IconButton(
+                                                  icon: Icon(passwordVisible
+                                                      ? Icons.visibility_off
+                                                      : Icons.visibility),
+                                                  onPressed: () {
+                                                    setState(
+                                                      () {
+                                                        passwordVisible =
+                                                            !passwordVisible;
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                              ),
                                               prefixIcon: const Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 10.0),
@@ -227,8 +246,7 @@ class _LoginUserState extends State<LoginUser> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Layout(
-                                      doctorName:
-                                          "${widget.userName} ${widget.userSurname}",
+                                      user: userData,
                                     ),
                                   ));
                             }
