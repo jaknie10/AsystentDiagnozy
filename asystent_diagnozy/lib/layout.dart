@@ -31,9 +31,17 @@ class _LayoutState extends State<Layout> {
 
     List<Map<String, dynamic>> pages = [
       {'name': 'Home', 'page': const HomePage(), 'key': keyHome},
-      {'name': 'Profile', 'page': const Profile(doctorId: 1), 'key': keyProfile},
+      {
+        'name': 'Profile',
+        'page': const Profile(doctorId: 1),
+        'key': keyProfile
+      },
       {'name': 'Badania', 'page': const Badania(), 'key': keyBadania},
-      {'name': 'Settings', 'page': const Settings(doctorId: 1), 'key': keySettings},
+      {
+        'name': 'Settings',
+        'page': const Settings(doctorId: 1),
+        'key': keySettings
+      },
     ];
 
     return Scaffold(
@@ -90,19 +98,23 @@ class _LayoutState extends State<Layout> {
                     padding: const EdgeInsets.all(10.0),
                     child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                          SvgPicture.asset(
-                            'assets/lekarz_logo.svg',
-                            width: 45,
-                            fit: BoxFit.scaleDown,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Text("Jan Kowalski",
-                                style: TextStyle(
-                                    fontSize: 20, color: Color.fromRGBO(22, 20, 35, 1.0))),
-                          ),
-                        ])),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/lekarz_logo.svg',
+                                width: 45,
+                                fit: BoxFit.scaleDown,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                                child: Text("Jan Kowalski",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color:
+                                            Color.fromRGBO(22, 20, 35, 1.0))),
+                              ),
+                            ])),
                   ),
                 ),
               ))
@@ -147,16 +159,15 @@ class _LayoutState extends State<Layout> {
                 label: Text('Profil'),
               ),
               NavigationRailDestination(
-                icon: Icon(
-                  Icons.list,
-                  weight: 0.8,
+                icon: ImageIcon(
+                  AssetImage('assets/list.png'),
+                  size: 55,
                   color: Color.fromRGBO(22, 20, 35, 0.6),
-                  size: 55,
                 ),
-                selectedIcon: Icon(
-                  Icons.list,
-                  color: Color.fromRGBO(0, 99, 248, 1),
+                selectedIcon: ImageIcon(
+                  AssetImage('assets/list_focused.png'),
                   size: 55,
+                  color: Color.fromRGBO(0, 99, 248, 1),
                 ),
                 label: Text('Badania'),
               ),
