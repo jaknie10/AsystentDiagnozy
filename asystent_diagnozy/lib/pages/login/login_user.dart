@@ -9,13 +9,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 class LoginUser extends StatefulWidget {
   const LoginUser({
     super.key,
-    required this.userName,
-    required this.userSurname,
+    // required this.userName,
+    // required this.userSurname,
     required this.userLogin,
   });
 
-  final String userName;
-  final String userSurname;
+  // final String userName;
+  // final String userSurname;
   final String userLogin;
 
   @override
@@ -115,7 +115,7 @@ class _LoginUserState extends State<LoginUser> {
                                               right: 15.0,
                                               bottom: 15.0),
                                           child: Text(
-                                            "${widget.userName} ${widget.userSurname}",
+                                            widget.userLogin,
                                             style: const TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.normal),
@@ -128,7 +128,7 @@ class _LoginUserState extends State<LoginUser> {
                                               top: 5.0,
                                               bottom: 15.0),
                                           child: TextFormField(
-                                            obscureText: passwordVisible,
+                                            obscureText: !passwordVisible,
                                             keyboardType:
                                                 TextInputType.visiblePassword,
                                             inputFormatters: <TextInputFormatter>[

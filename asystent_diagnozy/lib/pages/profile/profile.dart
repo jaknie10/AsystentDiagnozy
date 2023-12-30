@@ -47,7 +47,7 @@ class _ProfileState extends State<Profile> {
               Padding(
                 padding: const EdgeInsets.only(top: 15.0, bottom: 25.0),
                 child: Text(
-                  "Cześć, ${widget.user.name} ${widget.user.surname}",
+                  "Cześć, ${widget.user.login}",
                   style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -305,34 +305,34 @@ class _ProfileState extends State<Profile> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: 30.0,
-                                            left: 10.0,
-                                            right: 10.0,
-                                            top: 10.0),
-                                        child: Text(
-                                          "Imię:",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromRGBO(
-                                                  99, 99, 99, 1.0)),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: 30.0,
-                                            left: 10.0,
-                                            right: 10.0,
-                                            top: 10.0),
-                                        child: Text(
-                                          "Nazwisko:",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color.fromRGBO(
-                                                  99, 99, 99, 1.0)),
-                                        ),
-                                      ),
+                                      // Padding(
+                                      //   padding: EdgeInsets.only(
+                                      //       bottom: 30.0,
+                                      //       left: 10.0,
+                                      //       right: 10.0,
+                                      //       top: 10.0),
+                                      //   child: Text(
+                                      //     "Imię:",
+                                      //     style: TextStyle(
+                                      //         fontSize: 15,
+                                      //         color: Color.fromRGBO(
+                                      //             99, 99, 99, 1.0)),
+                                      //   ),
+                                      // ),
+                                      // Padding(
+                                      //   padding: EdgeInsets.only(
+                                      //       bottom: 30.0,
+                                      //       left: 10.0,
+                                      //       right: 10.0,
+                                      //       top: 10.0),
+                                      //   child: Text(
+                                      //     "Nazwisko:",
+                                      //     style: TextStyle(
+                                      //         fontSize: 15,
+                                      //         color: Color.fromRGBO(
+                                      //             99, 99, 99, 1.0)),
+                                      //   ),
+                                      // ),
                                       Padding(
                                         padding: EdgeInsets.only(
                                             bottom: 30.0,
@@ -353,32 +353,32 @@ class _ProfileState extends State<Profile> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 30.0,
-                                            left: 10.0,
-                                            right: 10.0,
-                                            top: 10.0),
-                                        child: Text(
-                                          widget.user.name,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 30.0,
-                                            left: 10.0,
-                                            right: 10.0,
-                                            top: 10.0),
-                                        child: Text(
-                                          widget.user.surname,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                      ),
+                                      // Padding(
+                                      //   padding: const EdgeInsets.only(
+                                      //       bottom: 30.0,
+                                      //       left: 10.0,
+                                      //       right: 10.0,
+                                      //       top: 10.0),
+                                      //   child: Text(
+                                      //     widget.user.name,
+                                      //     style: const TextStyle(
+                                      //         fontWeight: FontWeight.bold,
+                                      //         fontSize: 15),
+                                      //   ),
+                                      // ),
+                                      // Padding(
+                                      //   padding: const EdgeInsets.only(
+                                      //       bottom: 30.0,
+                                      //       left: 10.0,
+                                      //       right: 10.0,
+                                      //       top: 10.0),
+                                      //   child: Text(
+                                      //     widget.user.surname,
+                                      //     style: const TextStyle(
+                                      //         fontWeight: FontWeight.bold,
+                                      //         fontSize: 15),
+                                      //   ),
+                                      // ),
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             bottom: 30.0,

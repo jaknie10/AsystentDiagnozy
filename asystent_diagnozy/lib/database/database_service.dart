@@ -205,8 +205,8 @@ class SQLiteHelper {
     List<Map<String, dynamic>> maps = await db.rawQuery("SELECT * FROM users");
     return List.generate(maps.length, (index) {
       return User(
-          name: maps[index]['name'],
-          surname: maps[index]['surname'],
+          // name: maps[index]['name'],
+          // surname: maps[index]['surname'],
           login: maps[index]['login'],
           rsaPublicKey: maps[index]['RSApublicKey'],
           encryptedPrivateKey: maps[index]['encryptedPrivateKey'],
@@ -216,8 +216,8 @@ class SQLiteHelper {
   }
 
   Future<void> addUserToDatabase(
-      String name,
-      String surname,
+      // String name,
+      // String surname,
       String login,
       String publicKey,
       String privateKey,
@@ -226,8 +226,8 @@ class SQLiteHelper {
     final db = await database;
 
     var user = {
-      'name': name,
-      'surname': surname,
+      // 'name': name,
+      // 'surname': surname,
       'login': login,
       'RSApublicKey': publicKey,
       'encryptedPrivateKey': privateKey,
@@ -248,8 +248,8 @@ class SQLiteHelper {
         await db.rawQuery("SELECT * FROM users WHERE login=? LIMIT 1", [login]);
 
     return User(
-        name: ans[0]['name'],
-        surname: ans[0]['surname'],
+        // name: ans[0]['name'],
+        // surname: ans[0]['surname'],
         login: ans[0]["login"],
         rsaPublicKey: ans[0]['RSApublicKey'],
         encryptedPrivateKey: ans[0]['encryptedPrivateKey'],
@@ -270,8 +270,6 @@ class SQLiteHelper {
 String sqlInitValues = """
   CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    surname TEXT,
     login TEXT,
     RSApublicKey TEXT,
     encryptedPrivateKey TEXT,

@@ -113,7 +113,7 @@ class _ChooseUserState extends State<ChooseUser> {
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(5.0),
-                                                child: GestureDetector(
+                                                child: InkWell(
                                                   child: Row(
                                                     children: [
                                                       Padding(
@@ -128,8 +128,7 @@ class _ChooseUserState extends State<ChooseUser> {
                                                           fit: BoxFit.scaleDown,
                                                         ),
                                                       ),
-                                                      Text(
-                                                          "${tests[index].name} ${tests[index].surname}")
+                                                      Text(tests[index].login)
                                                     ],
                                                   ),
                                                   onTap: () {
@@ -139,12 +138,12 @@ class _ChooseUserState extends State<ChooseUser> {
                                                             builder:
                                                                 (context) =>
                                                                     LoginUser(
-                                                                      userName:
-                                                                          tests[index]
-                                                                              .name,
-                                                                      userSurname:
-                                                                          tests[index]
-                                                                              .surname,
+                                                                      // userName:
+                                                                      //     tests[index]
+                                                                      //         .name,
+                                                                      // userSurname:
+                                                                      //     tests[index]
+                                                                      //         .surname,
                                                                       userLogin:
                                                                           tests[index]
                                                                               .login,

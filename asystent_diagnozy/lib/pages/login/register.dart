@@ -15,8 +15,8 @@ class Register extends StatefulWidget {
 }
 
 class NewUser {
-  String name;
-  String surname;
+  // String name;
+  // String surname;
   String login;
   String rsaPublicKey;
   String encryptedPrivateKey;
@@ -24,9 +24,9 @@ class NewUser {
   String saltTwo;
 
   NewUser(
-      {required this.name,
-      required this.surname,
-      required this.login,
+      {required this.login,
+      // required this.name,
+      // required this.surname,
       required this.rsaPublicKey,
       required this.encryptedPrivateKey,
       required this.saltOne,
@@ -49,8 +49,8 @@ class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
 
   NewUser newUser = NewUser(
-      name: '',
-      surname: '',
+      // name: '',
+      // surname: '',
       login: '',
       rsaPublicKey: '',
       encryptedPrivateKey: '',
@@ -127,119 +127,119 @@ class _RegisterState extends State<Register> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: 5.0, top: 15.0),
-                                          child: Text(
-                                            "Imię:",
-                                            style: TextStyle(fontSize: 18),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 15.0, bottom: 10.0),
-                                          child: TextFormField(
-                                            keyboardType: TextInputType.name,
-                                            inputFormatters: [
-                                              UpperCaseTextFormatter(),
-                                              LengthLimitingTextInputFormatter(
-                                                  20)
-                                            ],
-                                            onChanged: (value) {
-                                              setState(() {
-                                                newUser.name = value.toString();
-                                              });
-                                            },
-                                            validator: (value) {
-                                              if (value == null ||
-                                                  value.isEmpty) {}
-                                              return null;
-                                            },
-                                            decoration: InputDecoration(
-                                              filled: true,
-                                              fillColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .background,
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                            ),
-                                          ),
-                                        ),
-                                        const Padding(
-                                          padding: EdgeInsets.only(
-                                              bottom: 5.0, top: 15.0),
-                                          child: Text(
-                                            "Nazwisko:",
-                                            style: TextStyle(fontSize: 18),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 15.0, bottom: 10.0),
-                                          child: TextFormField(
-                                            keyboardType: TextInputType.name,
-                                            inputFormatters: [
-                                              UpperCaseTextFormatter(),
-                                              LengthLimitingTextInputFormatter(
-                                                  20)
-                                            ],
-                                            onChanged: (value) {
-                                              setState(() {
-                                                newUser.surname =
-                                                    value.toString();
-                                              });
-                                            },
-                                            validator: (value) {
-                                              if (value == null ||
-                                                  value.isEmpty) {}
-                                              return null;
-                                            },
-                                            decoration: InputDecoration(
-                                              filled: true,
-                                              fillColor: Theme.of(context)
-                                                  .colorScheme
-                                                  .background,
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color:
-                                                          Colors.transparent)),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.black)),
-                                            ),
-                                          ),
-                                        ),
+                                        // const Padding(
+                                        //   padding: EdgeInsets.only(
+                                        //       bottom: 5.0, top: 15.0),
+                                        //   child: Text(
+                                        //     "Imię:",
+                                        //     style: TextStyle(fontSize: 18),
+                                        //   ),
+                                        // ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.only(
+                                        //       right: 15.0, bottom: 10.0),
+                                        //   child: TextFormField(
+                                        //     keyboardType: TextInputType.name,
+                                        //     inputFormatters: [
+                                        //       UpperCaseTextFormatter(),
+                                        //       LengthLimitingTextInputFormatter(
+                                        //           20)
+                                        //     ],
+                                        //     onChanged: (value) {
+                                        //       setState(() {
+                                        //         newUser.name = value.toString();
+                                        //       });
+                                        //     },
+                                        //     validator: (value) {
+                                        //       if (value == null ||
+                                        //           value.isEmpty) {}
+                                        //       return null;
+                                        //     },
+                                        //     decoration: InputDecoration(
+                                        //       filled: true,
+                                        //       fillColor: Theme.of(context)
+                                        //           .colorScheme
+                                        //           .background,
+                                        //       border: OutlineInputBorder(
+                                        //           borderRadius:
+                                        //               BorderRadius.circular(
+                                        //                   5.0),
+                                        //           borderSide: const BorderSide(
+                                        //               color:
+                                        //                   Colors.transparent)),
+                                        //       enabledBorder: OutlineInputBorder(
+                                        //           borderRadius:
+                                        //               BorderRadius.circular(
+                                        //                   5.0),
+                                        //           borderSide: const BorderSide(
+                                        //               color:
+                                        //                   Colors.transparent)),
+                                        //       focusedBorder: OutlineInputBorder(
+                                        //           borderRadius:
+                                        //               BorderRadius.circular(
+                                        //                   5.0),
+                                        //           borderSide: const BorderSide(
+                                        //               color: Colors.black)),
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                        // const Padding(
+                                        //   padding: EdgeInsets.only(
+                                        //       bottom: 5.0, top: 15.0),
+                                        //   child: Text(
+                                        //     "Nazwisko:",
+                                        //     style: TextStyle(fontSize: 18),
+                                        //   ),
+                                        // ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.only(
+                                        //       right: 15.0, bottom: 10.0),
+                                        //   child: TextFormField(
+                                        //     keyboardType: TextInputType.name,
+                                        //     inputFormatters: [
+                                        //       UpperCaseTextFormatter(),
+                                        //       LengthLimitingTextInputFormatter(
+                                        //           20)
+                                        //     ],
+                                        //     onChanged: (value) {
+                                        //       setState(() {
+                                        //         newUser.surname =
+                                        //             value.toString();
+                                        //       });
+                                        //     },
+                                        //     validator: (value) {
+                                        //       if (value == null ||
+                                        //           value.isEmpty) {}
+                                        //       return null;
+                                        //     },
+                                        //     decoration: InputDecoration(
+                                        //       filled: true,
+                                        //       fillColor: Theme.of(context)
+                                        //           .colorScheme
+                                        //           .background,
+                                        //       border: OutlineInputBorder(
+                                        //           borderRadius:
+                                        //               BorderRadius.circular(
+                                        //                   5.0),
+                                        //           borderSide: const BorderSide(
+                                        //               color:
+                                        //                   Colors.transparent)),
+                                        //       enabledBorder: OutlineInputBorder(
+                                        //           borderRadius:
+                                        //               BorderRadius.circular(
+                                        //                   5.0),
+                                        //           borderSide: const BorderSide(
+                                        //               color:
+                                        //                   Colors.transparent)),
+                                        //       focusedBorder: OutlineInputBorder(
+                                        //           borderRadius:
+                                        //               BorderRadius.circular(
+                                        //                   5.0),
+                                        //           borderSide: const BorderSide(
+                                        //               color: Colors.black)),
+                                        //     ),
+                                        //   ),
+                                        // ),
                                         const Padding(
                                           padding: EdgeInsets.only(
                                               bottom: 5.0, top: 15.0),
@@ -311,7 +311,7 @@ class _RegisterState extends State<Register> {
                                           padding: const EdgeInsets.only(
                                               right: 15.0, bottom: 15.0),
                                           child: TextFormField(
-                                            obscureText: passwordVisible,
+                                            obscureText: !passwordVisible,
                                             keyboardType:
                                                 TextInputType.visiblePassword,
                                             inputFormatters: <TextInputFormatter>[
@@ -421,8 +421,8 @@ class _RegisterState extends State<Register> {
                                               signUpResult = signUp(password);
 
                                           helper.addUserToDatabase(
-                                              newUser.name,
-                                              newUser.surname,
+                                              // newUser.name,
+                                              // newUser.surname,
                                               newUser.login,
                                               signUpResult.publicKey,
                                               signUpResult.encryptedPrivateKey,

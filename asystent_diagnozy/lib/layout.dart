@@ -84,43 +84,39 @@ class _LayoutState extends State<Layout> {
         actions: [
           Padding(
               padding: const EdgeInsets.all(10.0),
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _selectedIndex = 1;
-                    });
-                  },
-                  child: Container(
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      color: Theme.of(context).colorScheme.background,
-                    ),
-                    padding: const EdgeInsets.all(10.0),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/lekarz_logo.svg',
-                                width: 45,
-                                fit: BoxFit.scaleDown,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 15.0),
-                                child: Text(
-                                    "${widget.user.name} ${widget.user.surname}",
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        color:
-                                            Color.fromRGBO(22, 20, 35, 1.0))),
-                              ),
-                            ])),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(15),
+                onTap: () {
+                  setState(() {
+                    _selectedIndex = 1;
+                  });
+                },
+                child: Ink(
+                  height: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    color: Theme.of(context).colorScheme.background,
                   ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/lekarz_logo.svg',
+                              width: 45,
+                              fit: BoxFit.scaleDown,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Text(widget.user.login,
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      color: Color.fromRGBO(22, 20, 35, 1.0))),
+                            ),
+                          ])),
                 ),
               ))
         ], // default is 56
