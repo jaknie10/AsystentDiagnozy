@@ -166,9 +166,8 @@ class _PatientProfileState extends State<PatientProfile> {
                                     final result = await Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            PatientEditProfile(
-                                                patient: widget.patient),
+                                        builder: (context) => EditPatient(
+                                            patientId: widget.patient.id!),
                                       ),
                                     );
                                     debugPrint("Patient id: $result");

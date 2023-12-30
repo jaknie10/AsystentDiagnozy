@@ -1,11 +1,7 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:asystent_diagnozy/models/patient_model.dart';
 import 'package:asystent_diagnozy/models/test_result_model.dart';
 import 'package:asystent_diagnozy/models/user_model.dart';
-import 'package:crypton/crypton.dart';
-import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -60,6 +56,18 @@ class SQLiteHelper {
     );
   }
 
+  Future<int> updatePatient(int patientId, Map<String, Object?> patient) async {
+    final db = await database;
+    db.delete('testResults', where: 'patientId = ?', whereArgs: [patientId]);
+
+    return db.update(
+      'patients',
+      patient,
+      where: 'id = ?',
+      whereArgs: [patientId],
+    );
+  }
+
   Future<List<Patient>> getPatients(String order, String searchValue) async {
     final db = await database;
     List<Map<String, dynamic>> maps;
@@ -85,7 +93,7 @@ class SQLiteHelper {
     });
   }
 
-  Future<Patient?> getPatientById(int patientId) async {
+  Future<Patient> getPatientById(int patientId) async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       'patients',
@@ -93,18 +101,14 @@ class SQLiteHelper {
       whereArgs: [patientId],
     );
 
-    if (maps.isNotEmpty) {
-      return Patient(
-        id: maps[0]['id'],
-        name: maps[0]['name'],
-        surname: maps[0]['surname'],
-        gender: maps[0]['gender'],
-        birthdate: DateTime.parse(maps[0]['birthdate']),
-        createdAt: DateTime.parse(maps[0]['createdAt']),
-      );
-    }
-
-    return null;
+    return Patient(
+      id: maps[0]['id'],
+      name: maps[0]['name'],
+      surname: maps[0]['surname'],
+      gender: maps[0]['gender'],
+      birthdate: DateTime.parse(maps[0]['birthdate']),
+      createdAt: DateTime.parse(maps[0]['createdAt']),
+    );
   }
 
   Future<List<TestResult>> getAllTests() async {
@@ -191,8 +195,8 @@ class SQLiteHelper {
 
   Future<String> checkIfUserInDatabase(String login) async {
     final db = await database;
-    final odp = await db.rawQuery(
-        "SELECT COUNT(id) FROM users WHERE login=? LIMIT 1", ["$login"]);
+    final odp = await db
+        .rawQuery("SELECT COUNT(id) FROM users WHERE login=? LIMIT 1", [login]);
     return odp[0].values.first.toString();
   }
 
@@ -240,8 +244,8 @@ class SQLiteHelper {
 
   Future<User> getUserLoginData(String login) async {
     final db = await database;
-    List<Map<String, dynamic>> ans = await db
-        .rawQuery("SELECT * FROM users WHERE login=? LIMIT 1", ["$login"]);
+    List<Map<String, dynamic>> ans =
+        await db.rawQuery("SELECT * FROM users WHERE login=? LIMIT 1", [login]);
 
     return User(
         name: ans[0]['name'],

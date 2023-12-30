@@ -364,60 +364,6 @@ class _AddNewPatientState extends State<AddNewPatient> {
                             )
                           ],
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(top: 15.0, bottom: 15.0),
-                          child: SizedBox(
-                            height: 180,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.only(
-                                        top: 10.0, bottom: 10.0),
-                                    child: const Text(
-                                      "Dodatkowe informacje:",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5.0),
-                                    child: SizedBox(
-                                      width: 600,
-                                      height: 100,
-                                      child: TextField(
-                                        keyboardType: TextInputType.text,
-                                        minLines: null,
-                                        maxLines: null,
-                                        decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: Theme.of(context)
-                                              .colorScheme
-                                              .background,
-                                          border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
-                                          enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.transparent)),
-                                          focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.black)),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ]),
-                          ),
-                        )
                       ],
                     ),
                   ),
