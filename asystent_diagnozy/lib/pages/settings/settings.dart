@@ -1,8 +1,6 @@
 import 'package:asystent_diagnozy/models/user_model.dart';
-import 'package:asystent_diagnozy/pages/login/login_or_register.dart';
 import 'package:flutter/material.dart';
 import 'change_password.dart';
-import '../login/choose_user.dart';
 
 class Settings extends StatefulWidget {
   const Settings({

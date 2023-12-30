@@ -3,7 +3,7 @@ class User {
   String name;
   String surname;
   String login;
-  String RSApublicKey;
+  String rsaPublicKey;
   String encryptedPrivateKey;
   String saltOne;
   String saltTwo;
@@ -13,7 +13,7 @@ class User {
       required this.name,
       required this.surname,
       required this.login,
-      required this.RSApublicKey,
+      required this.rsaPublicKey,
       required this.encryptedPrivateKey,
       required this.saltOne,
       required this.saltTwo});
@@ -24,7 +24,7 @@ class User {
       'name': name,
       'surname': surname,
       'login': login,
-      'RSApublicKey': RSApublicKey,
+      'RSApublicKey': rsaPublicKey,
       'encyrptedPrivateKey': encryptedPrivateKey,
       'saltOne': saltOne,
       'saltTwo': saltTwo,

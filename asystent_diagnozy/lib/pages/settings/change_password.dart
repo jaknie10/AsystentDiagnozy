@@ -256,14 +256,13 @@ class _ChangePasswordState extends State<ChangePassword> {
                                     if (_formKey.currentState!.validate()) {
                                       var newData = resetPassword(
                                           widget.user.encryptedPrivateKey,
-                                          widget.user.RSApublicKey,
+                                          widget.user.rsaPublicKey,
                                           widget.user.saltOne,
                                           widget.user.saltTwo,
                                           currentPass,
                                           newPass);
 
-                                      if (newData.encryptedPrivateKey.length ==
-                                              0 ||
+                                      if (newData.encryptedPrivateKey.isEmpty ||
                                           newData.encryptedPrivateKey ==
                                               widget.user.encryptedPrivateKey) {
                                         showDialog(
@@ -287,11 +286,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                                             newData.randomSaltOne,
                                             newData.randomSaltTwo,
                                             widget.user.login);
-
+                                        if (!context.mounted) return;
                                         Navigator.pop(context);
                                       }
                                     }
-                                    ;
                                   },
                                   style: IconButton.styleFrom(
                                     highlightColor:

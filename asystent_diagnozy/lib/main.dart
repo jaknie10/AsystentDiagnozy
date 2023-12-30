@@ -1,7 +1,6 @@
 import 'package:asystent_diagnozy/pages/login/login_or_register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'layout.dart';
 import 'package:window_size/window_size.dart';
 import 'dart:io';
 

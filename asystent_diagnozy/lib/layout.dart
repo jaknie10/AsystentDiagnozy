@@ -1,6 +1,5 @@
 import 'package:asystent_diagnozy/models/user_model.dart';
 import 'package:asystent_diagnozy/pages/badania/badania.dart';
-import 'package:asystent_diagnozy/pages/profile/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -111,10 +110,11 @@ class _LayoutState extends State<Layout> {
                                 fit: BoxFit.scaleDown,
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
                                 child: Text(
                                     "${widget.user.name} ${widget.user.surname}",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         color:
                                             Color.fromRGBO(22, 20, 35, 1.0))),

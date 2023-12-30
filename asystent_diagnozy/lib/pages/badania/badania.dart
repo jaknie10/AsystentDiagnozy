@@ -240,14 +240,14 @@ class _BadaniaState extends State<Badania> {
                           return Container(
                             width: double.infinity,
                             height: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(5.0),
                                 bottomRight: Radius.circular(5.0),
                               ),
                               color: Colors.white,
                             ),
-                            child: Center(
+                            child: const Center(
                                 child: Text(
                               "Brak badań",
                               style: TextStyle(fontWeight: FontWeight.bold),

@@ -14,9 +14,9 @@ class LoginUser extends StatefulWidget {
     required this.userLogin,
   });
 
-  final userName;
-  final userSurname;
-  final userLogin;
+  final String userName;
+  final String userSurname;
+  final String userLogin;
 
   @override
   State<LoginUser> createState() => _LoginUserState();
@@ -116,7 +116,7 @@ class _LoginUserState extends State<LoginUser> {
                                               bottom: 15.0),
                                           child: Text(
                                             "${widget.userName} ${widget.userSurname}",
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.normal),
                                           ),
@@ -223,13 +223,13 @@ class _LoginUserState extends State<LoginUser> {
                           if (_formKey.currentState!.validate()) {
                             User userData =
                                 await helper.getUserLoginData(widget.userLogin);
+                            if (!context.mounted) return;
 
                             if (login(userData.saltOne, userData.saltTwo,
-                                        userData.encryptedPrivateKey, password)
-                                    .privateKey
-                                    .toString()
-                                    .length ==
-                                0) {
+                                    userData.encryptedPrivateKey, password)
+                                .privateKey
+                                .toString()
+                                .isEmpty) {
                               showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(

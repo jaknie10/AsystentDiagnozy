@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:asystent_diagnozy/database/database_service.dart';
 import 'package:asystent_diagnozy/pages/login/choose_user.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +18,7 @@ class NewUser {
   String name;
   String surname;
   String login;
-  String RSApublicKey;
+  String rsaPublicKey;
   String encryptedPrivateKey;
   String saltOne;
   String saltTwo;
@@ -30,7 +27,7 @@ class NewUser {
       {required this.name,
       required this.surname,
       required this.login,
-      required this.RSApublicKey,
+      required this.rsaPublicKey,
       required this.encryptedPrivateKey,
       required this.saltOne,
       required this.saltTwo});
@@ -55,7 +52,7 @@ class _RegisterState extends State<Register> {
       name: '',
       surname: '',
       login: '',
-      RSApublicKey: '',
+      rsaPublicKey: '',
       encryptedPrivateKey: '',
       saltOne: '',
       saltTwo: '');
@@ -401,10 +398,10 @@ class _RegisterState extends State<Register> {
                                         var check =
                                             await helper.checkIfUserInDatabase(
                                                 newUser.login);
-
+                                        if (!context.mounted) return;
                                         if (int.parse(check) != 0) {
                                           debugPrint(
-                                              "taki yztkownik juz jest w bazie");
+                                              "taki użytkownik juz jest w bazie");
                                           showDialog(
                                               context: context,
                                               builder: (context) => AlertDialog(

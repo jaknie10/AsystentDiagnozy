@@ -4,8 +4,9 @@
 //Kod pochodzi z repozytorium:
 //https://gist.github.com/rishi-singh26/4d02a6900820b0e6bfc6e2a208061a87
 
-import 'dart:math';
+import 'dart:math' hide log;
 import 'dart:typed_data';
+import 'dart:developer';
 
 import 'package:crypton/crypton.dart';
 import 'package:pointycastle/block/aes.dart';
@@ -75,7 +76,7 @@ LoginResult login(String randomSaltOne, String randomSaltTwo,
       randomSaltTwo: randomSaltTwo,
     );
   } on ArgumentError catch (e) {
-    print("Exception $e");
+    log("Exception $e");
   }
 
   return LoginResult(privateKey: "", randomSaltOne: "", randomSaltTwo: "");
@@ -129,7 +130,7 @@ PrivateKeyEncryptionResult resetPassword(
       randomSaltTwo: randomSaltTwo,
     );
   } on ArgumentError catch (e) {
-    print("Exception $e");
+    log("Exception $e");
   }
 
   return PrivateKeyEncryptionResult(
@@ -156,7 +157,7 @@ class CryptoService {
       String encrypted = pubKey.encrypt(text);
       return CryptoResult(data: encrypted, status: true);
     } catch (err) {
-      print(err.toString());
+      log(err.toString());
       return CryptoResult(data: err.toString(), status: false);
     }
   }

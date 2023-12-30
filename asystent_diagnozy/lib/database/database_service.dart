@@ -208,7 +208,7 @@ class SQLiteHelper {
           name: maps[index]['name'],
           surname: maps[index]['surname'],
           login: maps[index]['login'],
-          RSApublicKey: maps[index]['RSApublicKey'],
+          rsaPublicKey: maps[index]['RSApublicKey'],
           encryptedPrivateKey: maps[index]['encryptedPrivateKey'],
           saltOne: maps[index]['saltOne'],
           saltTwo: maps[index]['saltTwo']);
@@ -251,7 +251,7 @@ class SQLiteHelper {
         name: ans[0]['name'],
         surname: ans[0]['surname'],
         login: ans[0]["login"],
-        RSApublicKey: ans[0]['RSApublicKey'],
+        rsaPublicKey: ans[0]['RSApublicKey'],
         encryptedPrivateKey: ans[0]['encryptedPrivateKey'],
         saltOne: ans[0]['saltOne'],
         saltTwo: ans[0]['saltTwo']);

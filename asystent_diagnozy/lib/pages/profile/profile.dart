@@ -18,17 +18,17 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final SQLiteHelper helper = SQLiteHelper();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+    helper.initWinDB();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final SQLiteHelper helper = SQLiteHelper();
-
-    @override
-    void initState() {
-      super.initState();
-      WidgetsFlutterBinding.ensureInitialized();
-      helper.initWinDB();
-    }
-
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -45,10 +45,10 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 15.0, bottom: 25.0),
+                padding: const EdgeInsets.only(top: 15.0, bottom: 25.0),
                 child: Text(
                   "Cześć, ${widget.user.name} ${widget.user.surname}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
@@ -59,18 +59,18 @@ class _ProfileState extends State<Profile> {
                 children: [
                   Wrap(children: [
                     Padding(
-                      padding: EdgeInsets.only(right: 15.0, left: 5.0),
+                      padding: const EdgeInsets.only(right: 15.0, left: 5.0),
                       child: Container(
                         height: 330,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0)),
                             color: Colors.white),
                         child: Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Column(
                             children: [
-                              Align(
+                              const Align(
                                   alignment: Alignment.topLeft,
                                   child: Padding(
                                     padding: EdgeInsets.only(
@@ -84,7 +84,7 @@ class _ProfileState extends State<Profile> {
                                   )),
                               Row(
                                 children: [
-                                  Column(
+                                  const Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -147,7 +147,7 @@ class _ProfileState extends State<Profile> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(
+                                        padding: const EdgeInsets.only(
                                             bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
@@ -165,7 +165,7 @@ class _ProfileState extends State<Profile> {
                                                         'Error: ${snapshot.error}'));
                                               } else if (!snapshot.hasData ||
                                                   snapshot.data!.isEmpty) {
-                                                return Center(
+                                                return const Center(
                                                     child: Text('Brak badań.'));
                                               } else {
                                                 final tests = snapshot.data!;
@@ -174,7 +174,7 @@ class _ProfileState extends State<Profile> {
                                                       .values
                                                       .first
                                                       .toString(),
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 15),
@@ -183,7 +183,7 @@ class _ProfileState extends State<Profile> {
                                             }),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(
+                                        padding: const EdgeInsets.only(
                                             bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
@@ -201,7 +201,7 @@ class _ProfileState extends State<Profile> {
                                                         'Error: ${snapshot.error}'));
                                               } else if (!snapshot.hasData ||
                                                   snapshot.data!.isEmpty) {
-                                                return Center(
+                                                return const Center(
                                                     child: Text('Brak badań.'));
                                               } else {
                                                 final tests = snapshot.data!;
@@ -209,7 +209,7 @@ class _ProfileState extends State<Profile> {
                                                     tests[1][0].values.first;
 
                                                 return badanie == null
-                                                    ? Text(
+                                                    ? const Text(
                                                         "brak",
                                                         style: TextStyle(
                                                             fontWeight:
@@ -218,7 +218,7 @@ class _ProfileState extends State<Profile> {
                                                       )
                                                     : Text(
                                                         badanie.toString(),
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontSize: 15),
@@ -227,7 +227,7 @@ class _ProfileState extends State<Profile> {
                                             }),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(
+                                        padding: const EdgeInsets.only(
                                             bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
@@ -245,7 +245,7 @@ class _ProfileState extends State<Profile> {
                                                         'Error: ${snapshot.error}'));
                                               } else if (!snapshot.hasData ||
                                                   snapshot.data!.isEmpty) {
-                                                return Center(
+                                                return const Center(
                                                     child: Text('Brak badań.'));
                                               } else {
                                                 final tests = snapshot.data!;
@@ -254,7 +254,7 @@ class _ProfileState extends State<Profile> {
                                                       .values
                                                       .first
                                                       .toString(),
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 15),
@@ -301,7 +301,7 @@ class _ProfileState extends State<Profile> {
                               //dane
                               Row(
                                 children: [
-                                  Column(
+                                  const Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -354,40 +354,40 @@ class _ProfileState extends State<Profile> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.only(
+                                        padding: const EdgeInsets.only(
                                             bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
-                                          "${widget.user.name}",
-                                          style: TextStyle(
+                                          widget.user.name,
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15),
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(
+                                        padding: const EdgeInsets.only(
                                             bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
-                                          "${widget.user.surname}",
-                                          style: TextStyle(
+                                          widget.user.surname,
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15),
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(
+                                        padding: const EdgeInsets.only(
                                             bottom: 30.0,
                                             left: 10.0,
                                             right: 10.0,
                                             top: 10.0),
                                         child: Text(
-                                          "${widget.user.login}",
-                                          style: TextStyle(
+                                          widget.user.login,
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 15),
                                         ),
