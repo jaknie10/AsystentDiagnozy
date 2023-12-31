@@ -22,25 +22,12 @@ class _BadanieListItemState extends State<BadanieListItem> {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 4.0),
-        child: Container(
-          width: double.infinity,
-          height: 60,
-          decoration: const BoxDecoration(color: Colors.white),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TestResultsWidget(
-                            patientId: widget.badanie.patientId,
-                            results: widget.badanie.results["results"],
-                            diagnoses: widget.badanie.results["diagnoses"],
-                            fromDatabase: true,
-                            createdAt: widget.badanie.createdAt,
-                            testName: widget.badanie.testType,
-                            testId: widget.badanie.id,
-                          )));
-            },
+        child: Material(
+            child: InkWell(
+          child: Ink(
+            width: double.infinity,
+            height: 60,
+            decoration: const BoxDecoration(color: Colors.white),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -130,6 +117,20 @@ class _BadanieListItemState extends State<BadanieListItem> {
               ],
             ),
           ),
-        ));
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TestResultsWidget(
+                          patientId: widget.badanie.patientId,
+                          results: widget.badanie.results["results"],
+                          diagnoses: widget.badanie.results["diagnoses"],
+                          fromDatabase: true,
+                          createdAt: widget.badanie.createdAt,
+                          testName: widget.badanie.testType,
+                          testId: widget.badanie.id,
+                        )));
+          },
+        )));
   }
 }

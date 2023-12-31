@@ -185,7 +185,12 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                                 Navigator.pop(context);
                                                 helper.deleteResultById(
                                                     widget.testId!);
-                                                Navigator.pop(context1);
+                                                Navigator.of(context1)
+                                                    .pushAndRemoveUntil(
+                                                        MaterialPageRoute(
+                                                            builder: (context1) =>
+                                                                const HomePage()),
+                                                        (Route route) => false);
                                               },
                                               child: const Text("POTWIERDŹ"))
                                         ],

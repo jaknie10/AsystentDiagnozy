@@ -1,5 +1,6 @@
 import 'package:asystent_diagnozy/database/database_service.dart';
 import 'package:asystent_diagnozy/models/patient_model.dart';
+import 'package:asystent_diagnozy/pages/badania/badanie_list_item_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
