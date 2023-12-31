@@ -40,7 +40,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context1) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,11 +55,11 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                 width: 90,
                 child: TextButton(
                     onPressed: () {
-                      Navigator.pop(context, widget.results);
+                      Navigator.pop(context1, widget.results);
                     },
                     style: IconButton.styleFrom(
                       highlightColor: const Color.fromRGBO(0, 84, 210, 1),
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      backgroundColor: Theme.of(context1).colorScheme.primary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -97,7 +97,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
               ),
               FutureBuilder(
                   future: helper.getPatientById(widget.patientId),
-                  builder: (context, snapshot) {
+                  builder: (context1, snapshot) {
                     // if (snapshot.connectionState == ConnectionState.waiting) {
                     //   return const Center(child: CircularProgressIndicator());
                     // } else
@@ -169,11 +169,27 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                         width: 120,
                         child: TextButton(
                             onPressed: () {
-                              helper.deleteResultById(widget.testId!);
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => const HomePage()),
-                                  (Route route) => false);
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: const Text("Usuwanie Badania"),
+                                        content: Text(
+                                            "Czy na pewno chcesz usunąć badanie ${widget.testName}?"),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: const Text("ANULUJ")),
+                                          TextButton(
+                                              onPressed: () async {
+                                                Navigator.pop(context);
+                                                helper.deleteResultById(
+                                                    widget.testId!);
+                                                Navigator.pop(context1);
+                                              },
+                                              child: const Text("POTWIERDŹ"))
+                                        ],
+                                      ));
                             },
                             style: IconButton.styleFrom(
                               highlightColor:
@@ -210,7 +226,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                         child: Container(
                           height: 30,
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: Theme.of(context1).colorScheme.secondary,
                             borderRadius: const BorderRadius.only(
                               topRight: Radius.circular(5.0),
                               topLeft: Radius.circular(5.0),
@@ -237,7 +253,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                 decoration: BoxDecoration(
                                     border: Border(
                                       right: BorderSide(
-                                          color: Theme.of(context)
+                                          color: Theme.of(context1)
                                               .colorScheme
                                               .background,
                                           style: BorderStyle.solid,
@@ -260,7 +276,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                 decoration: BoxDecoration(
                                     border: Border(
                                       right: BorderSide(
-                                          color: Theme.of(context)
+                                          color: Theme.of(context1)
                                               .colorScheme
                                               .background,
                                           style: BorderStyle.solid,
@@ -281,7 +297,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                 decoration: BoxDecoration(
                                     border: Border(
                                       right: BorderSide(
-                                          color: Theme.of(context)
+                                          color: Theme.of(context1)
                                               .colorScheme
                                               .background,
                                           style: BorderStyle.solid,
@@ -302,7 +318,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                 decoration: BoxDecoration(
                                     border: Border(
                                       right: BorderSide(
-                                          color: Theme.of(context)
+                                          color: Theme.of(context1)
                                               .colorScheme
                                               .background,
                                           style: BorderStyle.solid,
@@ -322,7 +338,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                   height: 70,
                                   decoration: const BoxDecoration(
                                       // border: Border(
-                                      //   right: BorderSide(color: Theme.of(context).colorScheme.background, style: BorderStyle.solid, width: 4),
+                                      //   right: BorderSide(color: Theme.of(context1).colorScheme.background, style: BorderStyle.solid, width: 4),
                                       // ),
                                       color: Colors.white),
                                   child: const Center(
@@ -344,7 +360,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                   decoration: BoxDecoration(
                                       border: Border(
                                         right: BorderSide(
-                                            color: Theme.of(context)
+                                            color: Theme.of(context1)
                                                 .colorScheme
                                                 .background,
                                             style: BorderStyle.solid,
@@ -367,7 +383,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                   decoration: BoxDecoration(
                                       border: Border(
                                         right: BorderSide(
-                                            color: Theme.of(context)
+                                            color: Theme.of(context1)
                                                 .colorScheme
                                                 .background,
                                             style: BorderStyle.solid,
@@ -404,7 +420,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                   decoration: BoxDecoration(
                                       border: Border(
                                         right: BorderSide(
-                                            color: Theme.of(context)
+                                            color: Theme.of(context1)
                                                 .colorScheme
                                                 .background,
                                             style: BorderStyle.solid,
@@ -425,7 +441,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                   decoration: BoxDecoration(
                                       border: Border(
                                         right: BorderSide(
-                                            color: Theme.of(context)
+                                            color: Theme.of(context1)
                                                 .colorScheme
                                                 .background,
                                             style: BorderStyle.solid,
@@ -491,7 +507,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                       child: Container(
                                         height: 30,
                                         decoration: BoxDecoration(
-                                          color: Theme.of(context)
+                                          color: Theme.of(context1)
                                               .colorScheme
                                               .secondary,
                                           borderRadius: const BorderRadius.only(
@@ -550,7 +566,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                   child: Container(
                                     height: 30,
                                     decoration: BoxDecoration(
-                                      color: Theme.of(context)
+                                      color: Theme.of(context1)
                                           .colorScheme
                                           .secondary,
                                       borderRadius: const BorderRadius.only(
@@ -626,14 +642,14 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                   "results": widget.results,
                                   "diagnoses": widget.diagnoses,
                                 }));
-                            Navigator.of(context).pushAndRemoveUntil(
+                            Navigator.of(context1).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                    builder: (context) => const HomePage()),
+                                    builder: (context1) => const HomePage()),
                                 (Route route) => false);
                           },
                           style: IconButton.styleFrom(
                             backgroundColor:
-                                Theme.of(context).colorScheme.primary,
+                                Theme.of(context1).colorScheme.primary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
@@ -662,9 +678,28 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                           width: 120,
                           child: TextButton(
                               onPressed: () {
-                                int count = 0;
-                                Navigator.of(context)
-                                    .popUntil((_) => count++ >= 2);
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                          title: const Text("Usuwanie Badania"),
+                                          content: Text(
+                                              "Czy na pewno chcesz usunąć badanie ${widget.testName}?"),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                                child: const Text("ANULUJ")),
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  int count = 0;
+                                                  Navigator.of(context1)
+                                                      .popUntil(
+                                                          (_) => count++ >= 2);
+                                                },
+                                                child: const Text("POTWIERDŹ"))
+                                          ],
+                                        ));
                               },
                               style: IconButton.styleFrom(
                                 highlightColor:

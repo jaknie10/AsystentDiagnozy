@@ -8,7 +8,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle('Asystent diagnozy');
-    setWindowMinSize(const Size(1576, 768));
+    setWindowMinSize(const Size(1280, 720));
     setWindowMaxSize(Size.infinite);
   }
 
