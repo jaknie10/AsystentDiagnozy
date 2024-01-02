@@ -3,6 +3,7 @@ import 'package:asystent_diagnozy/models/patient_model.dart';
 import 'package:asystent_diagnozy/models/test_result_model.dart';
 import 'package:asystent_diagnozy/models/user_model.dart';
 import 'package:path/path.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class SQLiteHelper {
@@ -70,20 +71,24 @@ class SQLiteHelper {
   Future<List<Patient>> getPatients(String order, String searchValue) async {
     final db = await database;
     List<Map<String, dynamic>> maps;
-    var query = "SELECT * FROM patients";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var query =
+        "SELECT * FROM patients LEFT JOIN users ON patients.userId = users.id WHERE";
     if (searchValue.isNotEmpty) {
       query =
-          "$query WHERE (name || ' ' || surname LIKE ?) OR (surname || ' ' || name LIKE ?)";
+          "$query ((name || ' ' || surname LIKE ?) OR (surname || ' ' || name LIKE ?)) AND users.id = ?";
       query = "$query ORDER BY $order";
-      maps = await db.rawQuery(query, ['%$searchValue%', '%$searchValue%']);
+      maps = await db.rawQuery(query,
+          ['%$searchValue%', '%$searchValue%', prefs.getInt('LOGGED_USER')]);
     } else {
-      query = "$query ORDER BY $order";
-      maps = await db.rawQuery(query);
+      query = "$query users.id = ? ORDER BY $order";
+      maps = await db.rawQuery(query, [prefs.getInt('LOGGED_USER')]);
     }
 
     return List.generate(maps.length, (index) {
       return Patient(
           id: maps[index]['id'],
+          userId: maps[index]['userId'],
           name: maps[index]['name'],
           surname: maps[index]['surname'],
           gender: maps[index]['gender'],
@@ -102,6 +107,7 @@ class SQLiteHelper {
 
     return Patient(
       id: maps[0]['id'],
+      userId: maps[0]['userId'],
       name: maps[0]['name'],
       surname: maps[0]['surname'],
       gender: maps[0]['gender'],
@@ -110,25 +116,10 @@ class SQLiteHelper {
     );
   }
 
-  Future<List<TestResult>> getAllTests() async {
-    final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(
-      'testResults',
-    );
-
-    return List.generate(maps.length, (index) {
-      return TestResult(
-          id: maps[index]['id'],
-          patientId: maps[index]['patientId'],
-          testType: maps[index]['testType'],
-          createdAt: DateTime.parse(maps[index]['createdAt']),
-          results: json.decode(maps[index]['results']));
-    });
-  }
-
   Future<List<TestResult>> getTests(String order) async {
     final db = await database;
-    var query = "SELECT * FROM testResults";
+    var query =
+        "SELECT * FROM testResults LEFT JOIN patients ON patients.id = testResults.patientId LEFT JOIN users ON users.id = patients.userId";
 
     query = "$query ORDER BY $order";
     final List<Map<String, dynamic>> maps = await db.rawQuery(query);
@@ -204,8 +195,7 @@ class SQLiteHelper {
     List<Map<String, dynamic>> maps = await db.rawQuery("SELECT * FROM users");
     return List.generate(maps.length, (index) {
       return User(
-          // name: maps[index]['name'],
-          // surname: maps[index]['surname'],
+          id: maps[index]['id'],
           login: maps[index]['login'],
           rsaPublicKey: maps[index]['RSApublicKey'],
           encryptedPrivateKey: maps[index]['encryptedPrivateKey'],
@@ -214,19 +204,11 @@ class SQLiteHelper {
     });
   }
 
-  Future<void> addUserToDatabase(
-      // String name,
-      // String surname,
-      String login,
-      String publicKey,
-      String privateKey,
-      String saltOne,
-      String saltTwo) async {
+  Future<void> addUserToDatabase(String login, String publicKey,
+      String privateKey, String saltOne, String saltTwo) async {
     final db = await database;
 
     var user = {
-      // 'name': name,
-      // 'surname': surname,
       'login': login,
       'RSApublicKey': publicKey,
       'encryptedPrivateKey': privateKey,
@@ -247,8 +229,6 @@ class SQLiteHelper {
         await db.rawQuery("SELECT * FROM users WHERE login=? LIMIT 1", [login]);
 
     return User(
-        // name: ans[0]['name'],
-        // surname: ans[0]['surname'],
         login: ans[0]["login"],
         rsaPublicKey: ans[0]['RSApublicKey'],
         encryptedPrivateKey: ans[0]['encryptedPrivateKey'],
@@ -278,6 +258,7 @@ String sqlInitValues = """
 
   CREATE TABLE IF NOT EXISTS patients(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userId INTEGER REFERENCES users(id),
     name TEXT,
     surname TEXT,
     gender TEXT,

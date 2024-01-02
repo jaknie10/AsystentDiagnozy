@@ -80,14 +80,18 @@ class _ChooseUserState extends State<ChooseUser> {
                           FutureBuilder(
                               future: helper.getAllUsers(),
                               builder: (context, snapshot) {
-                                if (snapshot.hasError) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                } else if (snapshot.hasError) {
                                   return Center(
                                       child: Text('Error: ${snapshot.error}'));
                                 } else if (!snapshot.hasData ||
                                     snapshot.data!.isEmpty) {
                                   return const Center(
                                       child: Text(
-                                          'Brak zarejestrowanych użtkowników'));
+                                          'Brak zarejestrowanych użytkowników'));
                                 } else {
                                   final tests = snapshot.data!;
 
@@ -135,19 +139,13 @@ class _ChooseUserState extends State<ChooseUser> {
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    LoginUser(
-                                                                      // userName:
-                                                                      //     tests[index]
-                                                                      //         .name,
-                                                                      // userSurname:
-                                                                      //     tests[index]
-                                                                      //         .surname,
-                                                                      userLogin:
-                                                                          tests[index]
-                                                                              .login,
-                                                                    )));
+                                                            builder: (context) => LoginUser(
+                                                                userLogin:
+                                                                    tests[index]
+                                                                        .login,
+                                                                userId:
+                                                                    tests[index]
+                                                                        .id!)));
                                                   },
                                                 ),
                                               ),

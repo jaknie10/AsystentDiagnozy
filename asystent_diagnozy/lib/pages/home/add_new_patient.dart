@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:asystent_diagnozy/database/database_service.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/patient_model.dart';
 
@@ -373,15 +374,19 @@ class _AddNewPatientState extends State<AddNewPatient> {
                       Padding(
                         padding: const EdgeInsets.only(top: 15.0, right: 10.0),
                         child: TextButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
                                 helper.insertPatient(Patient(
                                     name: newPatient['name'],
+                                    userId: prefs.getInt('LOGGED_USER')!,
                                     surname: newPatient['surname'],
                                     gender: newPatient['gender'],
                                     birthdate: newPatient['birthdate'],
                                     createdAt: DateTime.now()));
+                                if (!context.mounted) return;
                                 Navigator.pop(context);
                               }
                             },

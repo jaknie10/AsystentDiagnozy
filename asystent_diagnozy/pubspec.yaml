@@ -38,6 +38,7 @@ dependencies:
   crypton: ^2.2.1
   pointycastle: ^3.7.3
   flutter_phoenix: ^1.1.1
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

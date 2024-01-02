@@ -5,18 +5,17 @@ import 'package:asystent_diagnozy/pages/login/encryption_decryption_system.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginUser extends StatefulWidget {
   const LoginUser({
     super.key,
-    // required this.userName,
-    // required this.userSurname,
     required this.userLogin,
+    required this.userId,
   });
 
-  // final String userName;
-  // final String userSurname;
   final String userLogin;
+  final int userId;
 
   @override
   State<LoginUser> createState() => _LoginUserState();
@@ -287,6 +286,10 @@ class _LoginUserState extends State<LoginUser> {
                                         ],
                                       ));
                             } else {
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setInt('LOGGED_USER', widget.userId);
+                              if (!context.mounted) return;
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
