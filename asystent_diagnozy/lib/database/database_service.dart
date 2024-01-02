@@ -58,7 +58,6 @@ class SQLiteHelper {
 
   Future<int> updatePatient(int patientId, Map<String, Object?> patient) async {
     final db = await database;
-    db.delete('testResults', where: 'patientId = ?', whereArgs: [patientId]);
 
     return db.update(
       'patients',
