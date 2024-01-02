@@ -148,6 +148,51 @@ class _LoginUserState extends State<LoginUser> {
                                                 password = value;
                                               });
                                             },
+                                            onFieldSubmitted: (value) async {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                User userData = await helper
+                                                    .getUserLoginData(
+                                                        widget.userLogin);
+                                                if (!context.mounted) return;
+
+                                                if (login(
+                                                        userData.saltOne,
+                                                        userData.saltTwo,
+                                                        userData
+                                                            .encryptedPrivateKey,
+                                                        password)
+                                                    .privateKey
+                                                    .toString()
+                                                    .isEmpty) {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          AlertDialog(
+                                                            content: const Text(
+                                                                "Podano złe hasło"),
+                                                            actions: [
+                                                              TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          context),
+                                                                  child:
+                                                                      const Text(
+                                                                          "Ok")),
+                                                            ],
+                                                          ));
+                                                } else {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Layout(
+                                                          user: userData,
+                                                        ),
+                                                      ));
+                                                }
+                                              }
+                                            },
                                             decoration: InputDecoration(
                                               suffixIcon: Padding(
                                                 padding: const EdgeInsets.only(
