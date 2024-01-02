@@ -1,6 +1,7 @@
 import 'package:asystent_diagnozy/pages/login/login_or_register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:window_size/window_size.dart';
 import 'dart:io';
 
@@ -12,7 +13,11 @@ void main() {
     setWindowMaxSize(Size.infinite);
   }
 
-  runApp(const MyApp());
+  runApp(
+    Phoenix(
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

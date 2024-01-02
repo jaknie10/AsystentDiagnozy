@@ -1,5 +1,7 @@
 import 'package:asystent_diagnozy/models/user_model.dart';
+import 'package:asystent_diagnozy/pages/login/login_or_register.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'change_password.dart';
 
 class Settings extends StatefulWidget {
@@ -75,7 +77,9 @@ class _SettingsState extends State<Settings> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Phoenix.rebirth(context);
+                          },
                           child: Container(
                             height: 50,
                             width: double.infinity,

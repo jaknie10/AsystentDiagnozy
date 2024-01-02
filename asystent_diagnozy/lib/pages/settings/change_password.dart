@@ -23,6 +23,9 @@ class _ChangePasswordState extends State<ChangePassword> {
   String currentPass = '';
   String newPass = '';
 
+  bool passwordVisible1 = true;
+  bool passwordVisible2 = true;
+
   @override
   void initState() {
     super.initState();
@@ -108,6 +111,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                             ),
                                           ),
                                           TextFormField(
+                                            obscureText: passwordVisible1,
                                             keyboardType:
                                                 TextInputType.visiblePassword,
                                             inputFormatters: const [],
@@ -126,6 +130,23 @@ class _ChangePasswordState extends State<ChangePassword> {
                                               return null;
                                             },
                                             decoration: InputDecoration(
+                                              suffixIcon: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 5.0),
+                                                child: IconButton(
+                                                  icon: Icon(passwordVisible1
+                                                      ? Icons.visibility_off
+                                                      : Icons.visibility),
+                                                  onPressed: () {
+                                                    setState(
+                                                      () {
+                                                        passwordVisible1 =
+                                                            !passwordVisible1;
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                              ),
                                               prefixIcon: const Padding(
                                                 padding: EdgeInsets.all(10.0),
                                                 child: Icon(
@@ -173,6 +194,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                             padding: const EdgeInsets.only(
                                                 bottom: 10.0),
                                             child: TextFormField(
+                                              obscureText: passwordVisible2,
                                               keyboardType:
                                                   TextInputType.visiblePassword,
                                               inputFormatters: const [],
@@ -191,6 +213,24 @@ class _ChangePasswordState extends State<ChangePassword> {
                                                 return null;
                                               },
                                               decoration: InputDecoration(
+                                                suffixIcon: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 5.0),
+                                                  child: IconButton(
+                                                    icon: Icon(passwordVisible2
+                                                        ? Icons.visibility_off
+                                                        : Icons.visibility),
+                                                    onPressed: () {
+                                                      setState(
+                                                        () {
+                                                          passwordVisible2 =
+                                                              !passwordVisible2;
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
                                                 prefixIcon: const Padding(
                                                   padding: EdgeInsets.all(10.0),
                                                   child: Icon(

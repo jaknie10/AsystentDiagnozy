@@ -48,6 +48,7 @@ dependencies:
       ref: a550668ca25881d154ae54204baa93a41fe5e344
   crypton: ^2.2.1
   pointycastle: ^3.7.3
+  flutter_phoenix: ^1.1.1
 
 dev_dependencies:
   flutter_test:

@@ -25,7 +25,7 @@ class LoginUser extends StatefulWidget {
 class _LoginUserState extends State<LoginUser> {
   final _formKey = GlobalKey<FormState>();
   var password = '';
-  bool passwordVisible = false;
+  bool passwordVisible = true;
 
   final SQLiteHelper helper = SQLiteHelper();
 
@@ -128,7 +128,7 @@ class _LoginUserState extends State<LoginUser> {
                                               top: 5.0,
                                               bottom: 15.0),
                                           child: TextFormField(
-                                            obscureText: !passwordVisible,
+                                            obscureText: passwordVisible,
                                             keyboardType:
                                                 TextInputType.visiblePassword,
                                             inputFormatters: <TextInputFormatter>[
