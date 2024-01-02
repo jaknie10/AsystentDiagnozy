@@ -44,13 +44,13 @@ class _RegisterState extends State<Register> {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     helper.initWinDB();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
               title: const Center(child: Text("UWAGA")),
               content: const Text(
-                  '''Aplikacja \"Asystent Diagnozy\" jest tylko i wyłącznie pomocą przy stawianiu diagnozy. Aplikacja bazuje jedynie na wynikach badań, a ostatecznej diagnozy opartej na analizie wszystkich czynników i objawów pacjenta dokonuje lekarz.
+                  '''Aplikacja "Asystent Diagnozy" jest tylko i wyłącznie pomocą przy stawianiu diagnozy. Aplikacja bazuje jedynie na wynikach badań, a ostatecznej diagnozy opartej na analizie wszystkich czynników i objawów pacjenta dokonuje lekarz.
 Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z podanych w aplikacji danych nie jest nigdzie wysyłana ani dalej przetwarzana.'''),
               actions: [
                 TextButton(
