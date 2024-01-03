@@ -338,10 +338,10 @@ class _GazometriaState extends State<Gazometria> {
           paCO2 != "eq" ||
           hCO3 != "eq" ||
           bE != "eq" ||
-          results["HCO3std"]?["result"] != "eq" ||
-          results["PaO2"]?["result"] != "eq" ||
-          results["ctCO2"]?["result"] != "eq" ||
-          results["SaO2"]?["result"] != "eq") {
+          results["HCO₃ - std"]?["result"] != "eq" ||
+          results["PaO₂"]?["result"] != "eq" ||
+          results["ctCO₂"]?["result"] != "eq" ||
+          results["SaO₂"]?["result"] != "eq") {
         classification = "Podane wyniki nie są standardowe";
       }
 

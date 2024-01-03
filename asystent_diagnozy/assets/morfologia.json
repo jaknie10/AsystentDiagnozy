@@ -63,7 +63,7 @@
     "w_low": 82.0,
     "w_high": 92.0,
     "deficit_int": ["mikrocytoza (najczęściej w niedokrwistościach mikrocytowych)"],
-    "surplus_int": ["choroba zimnych aglutynin", "makrocytoza (>100 fl, najczęściej w niedokrwistościach makrocytowych)","retikulocytoza", "rzekoma makrocytoza (duża hiperglikemia)"]
+    "surplus_int": ["choroba zimnych aglutynin", "makrocytoza (>100 fl, najczęściej w niedokrwistościach makrocytowych)", "rzekoma makrocytoza (duża hiperglikemia)"]
   },
   "RDW":{
     "short": "RDW",
@@ -85,7 +85,7 @@
     "w_low": 5.0,
     "w_high": 15.0,
     "deficit_int": ["ciężkie przypadki niedokrwistości spowodowanych zmniejszonym wytwarzaniem erytrocytów w szpiku, szczególnie niedokrwistości aplastyczne i przełomy aplastyczne w niedokrwistościach hemolitycznych"],
-    "surplus_int": ["po przeszczepieniu komórek krwiotwórczych","niedokrwistości hemolityczne", "ostre pokrwotoczne", "regeneracja po leczeniu (żelazem, kwasem foliowym, witaminą B12, lekami stymulującymi erytropoezę)", "po splenektomii"]
+    "surplus_int": ["retikulocytoza", "stan po przeszczepieniu komórek krwiotwórczych","niedokrwistości hemolityczne", "ostre pokrwotoczne", "regeneracja po leczeniu (żelazem, kwasem foliowym, witaminą B12, lekami stymulującymi erytropoezę)", "po splenektomii"]
   },
   "WBC":{
     "short": "WBC",

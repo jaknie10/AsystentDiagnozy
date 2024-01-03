@@ -308,7 +308,7 @@ class _LipidogramState extends State<Lipidogram> {
         ((chol == "eq" || chol == "lt") &&
             (ldl == "eq" || ldl == "lt") &&
             (hdl == "eq" || hdl == "lt"))) {
-      var value = results["TAG"]?["value"]?.value;
+      var value = results["TAG"]?["value"];
       if (value < 400) {
         classification = "Hipertrójglicerydemia łagodna";
       } else if (value >= 400 && value < 885) {
