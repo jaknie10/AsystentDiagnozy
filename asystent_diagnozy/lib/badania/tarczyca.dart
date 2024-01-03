@@ -226,6 +226,29 @@ class _TarczycaState extends State<Tarczyca> {
                               SizedBox(
                                 width: 200,
                                 child: TextFormField(
+                                  onFieldSubmitted: (value) {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+
+                                      tarczycaAnaliza();
+
+                                      log(results.toString());
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                TestResultsWidget(
+                                              patientId: widget.patientId!,
+                                              results: results,
+                                              diagnoses: diagnoses,
+                                              fromDatabase: false,
+                                              createdAt: DateTime.now(),
+                                              testName: 'Tarczyca',
+                                            ),
+                                          ));
+                                    }
+                                  },
                                   keyboardType:
                                       const TextInputType.numberWithOptions(
                                           decimal: true),
@@ -374,9 +397,7 @@ class _TarczycaState extends State<Tarczyca> {
     var ft4 = results["fT4"]?["result"];
 
     if (tsh == "eq" && ft3 == "eq" && ft4 == "eq") {
-      diagnoses["Podane wyniki badania wydają się poprawne (eutyreoza)"] = [
-        "Objaw"
-      ];
+      diagnoses["Podane wyniki są prawidłowe (eutyreoza)"] = ["Objaw"];
     }
     if (tsh == "lt" && ft3 == "gt" && ft4 == "gt") {
       diagnoses["Pierwotna nadczynność tarczycy"] = ["Objaw"];

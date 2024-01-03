@@ -137,6 +137,26 @@ class _MorfologiaState extends State<Morfologia> {
                               SizedBox(
                                 width: 200,
                                 child: TextFormField(
+                                  onFieldSubmitted: (value) {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+                                      diagnoses["general"] =
+                                          interpretations.toList();
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                TestResultsWidget(
+                                              patientId: widget.patientId!,
+                                              results: results,
+                                              diagnoses: diagnoses,
+                                              fromDatabase: false,
+                                              createdAt: DateTime.now(),
+                                              testName: 'Morfologia',
+                                            ),
+                                          ));
+                                    }
+                                  },
                                   keyboardType:
                                       const TextInputType.numberWithOptions(
                                           decimal: true),

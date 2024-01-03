@@ -221,6 +221,56 @@ Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z pod
                                                 password = value.toString();
                                               });
                                             },
+                                            onFieldSubmitted: (value) async {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                var check = await helper
+                                                    .checkIfUserInDatabase(
+                                                        newUser.login);
+                                                if (!context.mounted) return;
+                                                if (int.parse(check) != 0) {
+                                                  debugPrint(
+                                                      "taki użytkownik juz jest w bazie");
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          AlertDialog(
+                                                            content: const Text(
+                                                                "Użytkownik o takim loginie znajduje się już w bazie danych. Podaj inny login."),
+                                                            actions: [
+                                                              TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          context),
+                                                                  child:
+                                                                      const Text(
+                                                                          "Ok")),
+                                                            ],
+                                                          ));
+                                                } else {
+                                                  PrivateKeyEncryptionResult
+                                                      signUpResult =
+                                                      signUp(password);
+
+                                                  helper.addUserToDatabase(
+                                                      newUser.login,
+                                                      signUpResult.publicKey,
+                                                      signUpResult
+                                                          .encryptedPrivateKey,
+                                                      signUpResult
+                                                          .randomSaltOne,
+                                                      signUpResult
+                                                          .randomSaltTwo);
+
+                                                  await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const ChooseUser(),
+                                                      ));
+                                                }
+                                              }
+                                            },
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty ||

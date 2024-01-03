@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:asystent_diagnozy/models/user_model.dart';
 import 'package:asystent_diagnozy/pages/badania/badania.dart';
 import 'package:context_menus/context_menus.dart';
@@ -10,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'pages/home/home.dart';
 import 'pages/profile/profile.dart';
-import 'pages/settings/settings.dart';
 
 class Layout extends StatefulWidget {
   const Layout({super.key, required this.user});
@@ -107,9 +104,9 @@ class _LayoutState extends State<Layout> {
                     child: const Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: const Text("Wyloguj",
-                            style: const TextStyle(
+                        padding: EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Text("Wyloguj",
+                            style: TextStyle(
                                 fontSize: 15,
                                 color: Color.fromRGBO(22, 20, 35, 1.0))),
                       ),

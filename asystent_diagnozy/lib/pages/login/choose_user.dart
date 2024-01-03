@@ -65,7 +65,7 @@ class _ChooseUserState extends State<ChooseUser> {
                   child: Container(
                     height: 120.0,
                     width: 120.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/logo_new.png'),
                         fit: BoxFit.fill,
