@@ -147,7 +147,7 @@ class _LipidogramState extends State<Lipidogram> {
                                           decimal: true),
                                   inputFormatters: <TextInputFormatter>[
                                     FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\,|\.?\d*'))
+                                        RegExp(r'^\d+([\,\.])?\d*'))
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,

@@ -142,7 +142,7 @@ class _MorfologiaState extends State<Morfologia> {
                                           decimal: true),
                                   inputFormatters: <TextInputFormatter>[
                                     FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\,|\.?\d*'))
+                                        RegExp(r'^\d+([\,\.])?\d*'))
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,

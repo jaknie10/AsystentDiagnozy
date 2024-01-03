@@ -133,7 +133,7 @@ class _GazometriaState extends State<Gazometria> {
                                           decimal: true),
                                   inputFormatters: <TextInputFormatter>[
                                     FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\,|\.?\d*'))
+                                        RegExp(r'^\-?\d*([\,\.])?\d*$'))
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
@@ -171,7 +171,9 @@ class _GazometriaState extends State<Gazometria> {
                                               minWidth: 0, minHeight: 0),
                                       isDense: true),
                                   validator: (value) {
-                                    if (value == null || value.isEmpty) {
+                                    if (value == null ||
+                                        value.isEmpty ||
+                                        value == "-") {
                                       return 'Podaj prawidłową wartość';
                                     }
                                     return null;

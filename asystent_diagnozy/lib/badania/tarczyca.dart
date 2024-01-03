@@ -231,7 +231,7 @@ class _TarczycaState extends State<Tarczyca> {
                                           decimal: true),
                                   inputFormatters: <TextInputFormatter>[
                                     FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\,|\.?\d*'))
+                                        RegExp(r'^\d+([\,\.])?\d*'))
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
