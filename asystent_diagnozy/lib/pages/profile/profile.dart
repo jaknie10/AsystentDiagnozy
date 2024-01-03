@@ -1,9 +1,11 @@
 import 'package:asystent_diagnozy/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:asystent_diagnozy/database/database_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'profile_edit.dart';
+import '../settings/change_password.dart';
 
 class Profile extends StatefulWidget {
   const Profile({
@@ -396,6 +398,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ],
                               ),
+                              const Spacer(),
                               Padding(
                                 padding: const EdgeInsets.all(5.0),
                                 child: SizedBox(
@@ -405,10 +408,49 @@ class _ProfileState extends State<Profile> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ProfileEdit(doctorId: 1),
-                                          ),
+                                              builder: (context) =>
+                                                  ChangePassword(
+                                                      user: widget.user)),
                                         );
+                                      },
+                                      style: IconButton.styleFrom(
+                                        highlightColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                      ),
+                                      child: const SizedBox(
+                                        width: 110,
+                                        child: Text(
+                                          "Zmień hasło",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      )),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: SizedBox(
+                                  height: 40,
+                                  child: TextButton(
+                                      onPressed: () async {
+                                        SharedPreferences prefs =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        prefs.remove('LOGGED_USER');
+                                        prefs.remove('REMEMBER_USER');
+                                        if (!context.mounted) return;
+                                        Phoenix.rebirth(context);
                                       },
                                       style: IconButton.styleFrom(
                                         highlightColor:
@@ -424,7 +466,7 @@ class _ProfileState extends State<Profile> {
                                       child: const SizedBox(
                                         width: 110,
                                         child: Text(
-                                          "Edytuj profil",
+                                          "Wyloguj",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 15,

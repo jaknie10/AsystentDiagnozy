@@ -61,14 +61,19 @@ class _ChooseUserState extends State<ChooseUser> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
-                child: SvgPicture.asset(
-                  'assets/asystent_diagnozy_logo.svg',
-                  width: 160,
-                ),
-              ),
+                  padding: const EdgeInsets.only(bottom: 30.0, top: 100),
+                  child: Container(
+                    height: 120.0,
+                    width: 120.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/logo_new.png'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  )),
               Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 350.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 300.0),
                   child: Container(
                     decoration: const BoxDecoration(
                         color: Colors.white,

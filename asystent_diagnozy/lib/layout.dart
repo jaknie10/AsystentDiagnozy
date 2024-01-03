@@ -40,11 +40,6 @@ class _LayoutState extends State<Layout> {
         'key': keyProfile
       },
       {'name': 'Badania', 'page': const Badania(), 'key': keyBadania},
-      {
-        'name': 'Settings',
-        'page': Settings(user: widget.user),
-        'key': keySettings
-      },
     ];
 
     return Scaffold(
@@ -171,19 +166,6 @@ class _LayoutState extends State<Layout> {
                   color: Color.fromRGBO(0, 99, 248, 1),
                 ),
                 label: Text('Badania'),
-              ),
-              NavigationRailDestination(
-                icon: ImageIcon(
-                  AssetImage('assets/settings2.png'),
-                  size: 55,
-                  color: Color.fromRGBO(22, 20, 35, 0.6),
-                ),
-                selectedIcon: ImageIcon(
-                  AssetImage('assets/settings_focused2.png'),
-                  size: 55,
-                  color: Color.fromRGBO(0, 99, 248, 1),
-                ),
-                label: Text('Ustawienia'),
               ),
             ],
           ),
