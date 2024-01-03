@@ -229,6 +229,21 @@ class SQLiteHelper {
         await db.rawQuery("SELECT * FROM users WHERE login=? LIMIT 1", [login]);
 
     return User(
+        id: ans[0]["id"],
+        login: ans[0]["login"],
+        rsaPublicKey: ans[0]['RSApublicKey'],
+        encryptedPrivateKey: ans[0]['encryptedPrivateKey'],
+        saltOne: ans[0]['saltOne'],
+        saltTwo: ans[0]['saltTwo']);
+  }
+
+  Future<User> getUserById(int userId) async {
+    final db = await database;
+    List<Map<String, dynamic>> ans =
+        await db.query("users", where: 'id = ?', whereArgs: [userId]);
+
+    return User(
+        id: ans[0]["id"],
         login: ans[0]["login"],
         rsaPublicKey: ans[0]['RSApublicKey'],
         encryptedPrivateKey: ans[0]['encryptedPrivateKey'],

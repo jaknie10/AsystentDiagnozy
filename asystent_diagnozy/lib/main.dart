@@ -1,4 +1,4 @@
-import 'package:asystent_diagnozy/pages/login/login_or_register.dart';
+import 'package:asystent_diagnozy/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       ),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [Locale('pl')],
-      home: const LoginOrRegister(),
+      home: const SplashScreen(),
     );
   }
 }

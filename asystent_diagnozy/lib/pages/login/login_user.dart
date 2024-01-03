@@ -28,11 +28,18 @@ class _LoginUserState extends State<LoginUser> {
 
   final SQLiteHelper helper = SQLiteHelper();
 
+  bool rememberUser = false;
+
   @override
   void initState() {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     helper.initWinDB();
+  }
+
+  asyncMethod() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    rememberUser = prefs.getBool('REMEMBER_USER')!;
   }
 
   @override
@@ -253,6 +260,20 @@ class _LoginUserState extends State<LoginUser> {
                                             ),
                                           ),
                                         ),
+                                        CheckboxListTile(
+                                          title: const Text('Zapamiętaj mnie'),
+                                          value: rememberUser,
+                                          onChanged: (value) async {
+                                            setState(() {
+                                              rememberUser = value!;
+                                            });
+                                            SharedPreferences prefs =
+                                                await SharedPreferences
+                                                    .getInstance();
+                                            prefs.setBool(
+                                                'REMEMBER_USER', value!);
+                                          },
+                                        )
                                       ],
                                     )),
                               ),
