@@ -143,9 +143,8 @@ class _LoginUserState extends State<LoginUser> {
                                             ],
                                             validator: (value) {
                                               if (value == null ||
-                                                  value.isEmpty ||
-                                                  value.length < 10) {
-                                                return "Hasło powinno zawierać co najmniej 10 znaków";
+                                                  value.isEmpty) {
+                                                return "Podaj hasło";
                                               }
                                               return null;
                                             },

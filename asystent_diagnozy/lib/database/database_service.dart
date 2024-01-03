@@ -73,7 +73,7 @@ class SQLiteHelper {
     List<Map<String, dynamic>> maps;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var query =
-        "SELECT * FROM patients LEFT JOIN users ON patients.userId = users.id WHERE";
+        "SELECT patients.* FROM patients LEFT JOIN users ON patients.userId = users.id WHERE";
     if (searchValue.isNotEmpty) {
       query =
           "$query ((name || ' ' || surname LIKE ?) OR (surname || ' ' || name LIKE ?)) AND users.id = ?";
@@ -118,11 +118,15 @@ class SQLiteHelper {
 
   Future<List<TestResult>> getTests(String order) async {
     final db = await database;
-    var query =
-        "SELECT * FROM testResults LEFT JOIN patients ON patients.id = testResults.patientId LEFT JOIN users ON users.id = patients.userId";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var query = """SELECT testResults.* FROM testResults 
+        LEFT JOIN patients ON patients.id = testResults.patientId 
+        LEFT JOIN users ON users.id = patients.userId
+        WHERE users.id = ?""";
 
     query = "$query ORDER BY $order";
-    final List<Map<String, dynamic>> maps = await db.rawQuery(query);
+    final List<Map<String, dynamic>> maps =
+        await db.rawQuery(query, [prefs.getInt('LOGGED_USER')]);
 
     return List.generate(maps.length, (index) {
       return TestResult(
@@ -153,13 +157,15 @@ class SQLiteHelper {
     );
   }
 
-  Future<List<TestResult>> getTestsByPatientId(int patientId) async {
+  Future<List<TestResult>> getTestsByPatientId(
+      int patientId, String order) async {
     final db = await database;
 
     final List<Map<String, dynamic>> maps = await db.query(
       'testResults',
       where: 'patientId = ?',
       whereArgs: [patientId],
+      orderBy: order,
     );
 
     return List.generate(maps.length, (index) {
