@@ -11,6 +11,7 @@ import '../../badania/morfologia.dart';
 import '../../badania/gazometria.dart';
 import '../../badania/lipidogram.dart';
 import '../../badania/tarczyca.dart';
+import '../../badania/mocz.dart';
 
 class PatientProfile extends StatefulWidget {
   const PatientProfile({super.key, required this.patient});
@@ -363,7 +364,17 @@ class _PatientProfileState extends State<PatientProfile> {
                           SizedBox(
                               width: 150,
                               child: IconButton(
-                                onPressed: () async {},
+                                onPressed: () async {
+                                  final result = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Mocz(
+                                        patientId: widget.patient.id,
+                                      ),
+                                    ),
+                                  );
+                                  debugPrint("Patient id: $result");
+                                },
                                 icon: const Image(
                                   image: AssetImage(
                                       'assets/badanie_mocz_logo.png'),

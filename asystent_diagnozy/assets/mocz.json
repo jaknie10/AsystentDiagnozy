@@ -1,0 +1,96 @@
+{
+    "pH":{
+        "short": "pH",
+        "full_name": "ujemny logarytm dziesiętny ze stężenia jonów wodorowych?",
+        "unit": "",
+        "low": 4.5,
+        "high": 8,
+        "deficit_int": ["głodzenie", "gorączka", "biegunki", "nadużywanie cukru, alkoholu, mięsa, aspiryny", "choroby płuc", "cukrzyca"],
+        "surplus_int": ["przewlekłe ZUM", "nadczyność tarczycy", "odwodnienie","wymioty", "leki: diuretyki pętlowe, moczopędne", "dieta wegetariańska lub z dużą ilością nabiału"]
+        },
+    "barwa":{
+        "short": "barwa",
+        "full_name": "barwa",
+        "unit": "",
+        "good": ["żółty"],
+        "bad": ["czerwony", "brązowy", "jaskrawożółty", "inny kolor"],
+        "bad_int": [["krwiomocz", "obecność hemoglobiny", "mioglobiny", "spożycie buraków", "leczenie ryfampicyną"], ["żółtaczka mechaniczna"], ["suplementacja wit. B12"], ["odwodnienie"], ["niprawidłowe składniki"]]
+        },
+    "przejrzystość":{
+        "short": "przejrzystość",
+        "full_name": "przejrzystość",
+        "unit": "",
+        "good": ["przejrzysty"],
+        "bad": ["mętny"],
+        "bad_int": [["obecność bakterii, elementów komórkowych, składników mineralnych (fosforany, moczany), śluzu, ropy"]]
+    },
+    "SG":{
+        "short": "SG",
+        "full_name": "ciężar właściwy",
+        "unit": "N/m3",
+        "low": 1.015,
+        "high": 1.030,
+        "deficit_int": ["przewlekła niewydolność nerek", "moczówka prosta", "moczówka nefrogenna", "stosowanie diuretyków", "zwiększona podaż płynów", "hipotermia"],
+        "surplus_int": ["znaczne odwodnienie", "niedostateczna podaż płynów", "ciężki wysiłek fizyczny", "gorączka", "wymioty", "białkomocz", "glukozuria"]
+    },
+    "białko":{
+        "short": "białko",
+        "full_name": "białko",
+        "unit": "",
+        "good": ["nieobecne"],
+        "bad": ["występuje"],
+        "bad_int": [["KZN", "cukrzycowa choroba nerek", "nefropatia nadciśnieniowa", "stan przedrzucawkowy", "ZUM", "zapalenie gruczołu krokowego", "niewydolność serca", "nadciśnienie tętnicze", "gorączka", "szpiczak", "ciężki wysiłek fizyczny"]]
+    },
+    "glukoza":{
+        "short": "glukoza",
+        "full_name": "glukoza",
+        "unit": "",
+        "good": ["nieobecne"],
+        "bad": ["występuje"],
+        "bad_int": [["cukrzyca", "uszkodzenie cewek nerkowych", "ciąża (prawidłowo przebiegająca lub cukrzyca ciążowa)"]]
+    },
+    "bilirubina ":{
+        "short": "bilirubina",
+        "full_name": "bilirubina",
+        "unit": "",
+        "good": ["nieobecne"],
+        "bad": ["występuje"],
+        "bad_int": [["żółtaczka mechaniczna", "wirusowe zapalenie wątroby", "niedrożność dróg żółciowych", "przewlekłe choroby miąższowe wątroby", "zespół Dubin-Johnsona i Rotora"]]
+    },
+    "ketony ":{
+        "short": "ketony",
+        "full_name": "ketony",
+        "unit": "",
+        "good": ["nieobecne"],
+        "bad": ["występują"],
+        "bad_int": [["żółtaczka mechaniczna", "wirusowe zapalenie wątroby", "niedrożność dróg żółciowych", "przewlekłe choroby miąższowe wątroby", "zespół Dubin-Johnsona i Rotora"]],
+        "false_positive_by": "bilirubina"
+    },
+    "urobilinogen":{
+        "short": "urobilinogen",
+        "full_name": "urobilinogen",
+        "unit": "",
+        "good": ["nieobecny (do 1 mg/dl)"],
+        "bad": ["występuje"],
+        "bad_int": [["żółtaczka hemolityczna", "powikłanie poprzetoczeniowe", "choroby miąższowe wątroby", "niedrożność jelit", "czerwienica prawdziwa", "niedrożność żyły wrotnej", "zapalenie jelit"]],
+        "false_positive_by": "bilirubina"
+    },
+    "erytrocyty":{
+        "short": "erytrocyty",
+        "full_name": "erytrocyty",
+        "unit": "",
+        "low": 0,
+        "high": 3,
+        "deficit_int": [],
+        "surplus_int": ["zakażenia np. ZUM", "kamica moczowa", "torbiel nerki", "nowotwory", "ciała obce", "urazy", "zawał nerki", "endometrioza", "zaburzenia krzepnięcia krwi", "intensywny wysiłek fizyczny", "wysoka gorączka"]
+        },
+    "leukocyty":{
+        "short": "leukocyty",
+        "full_name": "leukocyty",
+        "unit": "",
+        "low": 0,
+        "high": 5,
+        "deficit_int": [],
+        "surplus_int": ["ZUM", "zapalenie gruczołu krokowego", "śródmiąższowe zapalenie nerek", "nieprawidłowe pobranie moczu do badania"]
+        }
+  }

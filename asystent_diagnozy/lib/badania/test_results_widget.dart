@@ -418,59 +418,100 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                     ],
                                   ))),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
+                            if (entry.value.containsKey('lowerbound')) ...[
+                              Expanded(
+                                flex: 1,
+                                child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                      border: Border(
-                                        right: BorderSide(
-                                            color: Theme.of(context1)
-                                                .colorScheme
-                                                .background,
-                                            style: BorderStyle.solid,
-                                            width: 4),
+                                    border: Border(
+                                      right: BorderSide(
+                                        color: Theme.of(context1)
+                                            .colorScheme
+                                            .background,
+                                        style: BorderStyle.solid,
+                                        width: 4,
                                       ),
-                                      color: Colors.white),
+                                    ),
+                                    color: Colors.white,
+                                  ),
                                   child: Center(
-                                      child: Text(
-                                    entry.value['lowerbound'].toString(),
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(fontSize: 15),
-                                  ))),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
+                                    child: Text(
+                                      entry.value['lowerbound'].toString(),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(fontSize: 15),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                      border: Border(
-                                        right: BorderSide(
-                                            color: Theme.of(context1)
-                                                .colorScheme
-                                                .background,
-                                            style: BorderStyle.solid,
-                                            width: 4),
+                                    border: Border(
+                                      right: BorderSide(
+                                        color: Theme.of(context1)
+                                            .colorScheme
+                                            .background,
+                                        style: BorderStyle.solid,
+                                        width: 4,
                                       ),
-                                      color: Colors.white),
+                                    ),
+                                    color: Colors.white,
+                                  ),
                                   child: Center(
-                                      child: Text(
-                                    entry.value['upperbound'].toString(),
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(fontSize: 15),
-                                  ))),
-                            ),
+                                    child: Text(
+                                      entry.value['upperbound'].toString(),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(fontSize: 15),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ] else ...[
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      right: BorderSide(
+                                        color: Theme.of(context1)
+                                            .colorScheme
+                                            .background,
+                                        style: BorderStyle.solid,
+                                        width: 4,
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      entry.value["good"][0].toString(),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(fontSize: 15),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                             Expanded(
                               flex: 1,
                               child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
                                       color: (entry.value['result'] == 'gt' ||
-                                              entry.value['result'] == 'lt')
+                                              entry.value['result'] == 'lt' ||
+                                              entry.value['result'] == 'bd')
                                           ? const Color.fromRGBO(
                                               255, 185, 185, 1.0)
-                                          : const Color.fromRGBO(
-                                              168, 255, 191, 1.0)),
+                                          : (entry.value['result'] == 'eq' ||
+                                                  entry.value['result'] == 'gd')
+                                              ? const Color.fromRGBO(
+                                                  168, 255, 191, 1.0)
+                                              : Color.fromARGB(
+                                                  255, 202, 202, 202)),
                                   child: Center(
                                       child: (entry.value['result'] == 'gt')
                                           ? const Icon(
@@ -478,17 +519,48 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                               color: Colors.red,
                                               size: 30,
                                             )
-                                          : (entry.value['result'] == 'eq')
+                                          : (entry.value['result'] == 'eq' ||
+                                                  entry.value['result'] == 'gd')
                                               ? const Icon(
                                                   Icons.check,
                                                   color: Colors.green,
                                                   size: 30,
                                                 )
-                                              : const Icon(
-                                                  Icons.arrow_downward,
-                                                  color: Colors.red,
-                                                  size: 30,
-                                                ))),
+                                              : (entry.value['result'] == 'lt')
+                                                  ? const Icon(
+                                                      Icons.arrow_downward,
+                                                      color: Colors.red,
+                                                      size: 30,
+                                                    )
+                                                  : (entry.value['result'] ==
+                                                          'bd')
+                                                      ? const Icon(
+                                                          Icons.close,
+                                                          color: Colors.red,
+                                                          size: 30,
+                                                        )
+                                                      : const Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              "FP ",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 20),
+                                                            ),
+                                                            Icon(
+                                                              Icons
+                                                                  .question_mark,
+                                                              color:
+                                                                  Colors.black,
+                                                              size: 30,
+                                                            ),
+                                                          ],
+                                                        ))),
                             )
                           ]),
                         )
