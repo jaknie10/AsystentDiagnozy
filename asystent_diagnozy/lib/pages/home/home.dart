@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(15.0),
                 child: SizedBox(
                   height: 40,
-                  width: 220,
+                  width: 150,
                   child: TextButton(
                       onPressed: () async {
                         Navigator.push(
@@ -62,13 +62,13 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       child: const Text(
-                        "Dodaj nowego pacjenta",
+                        "Dodaj pacjenta",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       )),
                 ),
               ),
               SizedBox(
-                width: 220,
+                width: 180,
                 height: 40,
                 child: SearchBar(
                   leading: const Icon(
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   const Padding(
                     padding: EdgeInsets.all(15.0),
                     child: Text(
-                      'Sortuj według:',
+                      'Sortuj wg:',
                       style: TextStyle(fontSize: 15),
                     ),
                   ),

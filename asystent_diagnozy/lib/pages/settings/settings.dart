@@ -1,7 +1,7 @@
 import 'package:asystent_diagnozy/models/user_model.dart';
-import 'package:asystent_diagnozy/pages/login/login_or_register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'change_password.dart';
 
 class Settings extends StatefulWidget {
@@ -49,7 +49,7 @@ class _SettingsState extends State<Settings> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 15.0),
-                          child: GestureDetector(
+                          child: InkWell(
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -76,8 +76,13 @@ class _SettingsState extends State<Settings> {
                             ),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
+                        InkWell(
+                          onTap: () async {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.remove('LOGGED_USER');
+                            prefs.remove('REMEMBER_USER');
+                            if (!context.mounted) return;
                             Phoenix.rebirth(context);
                           },
                           child: Container(

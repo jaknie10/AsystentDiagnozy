@@ -5,18 +5,17 @@ import 'package:asystent_diagnozy/pages/login/encryption_decryption_system.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginUser extends StatefulWidget {
   const LoginUser({
     super.key,
-    // required this.userName,
-    // required this.userSurname,
     required this.userLogin,
+    required this.userId,
   });
 
-  // final String userName;
-  // final String userSurname;
   final String userLogin;
+  final int userId;
 
   @override
   State<LoginUser> createState() => _LoginUserState();
@@ -29,11 +28,18 @@ class _LoginUserState extends State<LoginUser> {
 
   final SQLiteHelper helper = SQLiteHelper();
 
+  bool rememberUser = false;
+
   @override
   void initState() {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     helper.initWinDB();
+  }
+
+  asyncMethod() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    rememberUser = prefs.getBool('REMEMBER_USER')!;
   }
 
   @override
@@ -137,9 +143,8 @@ class _LoginUserState extends State<LoginUser> {
                                             ],
                                             validator: (value) {
                                               if (value == null ||
-                                                  value.isEmpty ||
-                                                  value.length < 10) {
-                                                return "Hasło powinno zawierać co najmniej 10 znaków";
+                                                  value.isEmpty) {
+                                                return "Podaj hasło";
                                               }
                                               return null;
                                             },
@@ -254,6 +259,20 @@ class _LoginUserState extends State<LoginUser> {
                                             ),
                                           ),
                                         ),
+                                        CheckboxListTile(
+                                          title: const Text('Zapamiętaj mnie'),
+                                          value: rememberUser,
+                                          onChanged: (value) async {
+                                            setState(() {
+                                              rememberUser = value!;
+                                            });
+                                            SharedPreferences prefs =
+                                                await SharedPreferences
+                                                    .getInstance();
+                                            prefs.setBool(
+                                                'REMEMBER_USER', value!);
+                                          },
+                                        )
                                       ],
                                     )),
                               ),
@@ -287,6 +306,10 @@ class _LoginUserState extends State<LoginUser> {
                                         ],
                                       ));
                             } else {
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setInt('LOGGED_USER', widget.userId);
+                              if (!context.mounted) return;
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

@@ -26,7 +26,7 @@ class _LipidogramState extends State<Lipidogram> {
 
   Map<String, Map<String, dynamic>> results = {};
   var interpretations = []; // wybrane interpretacje dla klasyfikacji
-  String classification = "Podane wyniki badania wydają się poprawne";
+  String classification = "Podane wyniki są prawidłowe";
   Map<String, List> diagnoses = {};
 
   Future<void> readJson() async {
@@ -142,12 +142,35 @@ class _LipidogramState extends State<Lipidogram> {
                               SizedBox(
                                 width: 200,
                                 child: TextFormField(
+                                  onFieldSubmitted: (value) {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+
+                                      lipidogramAnaliza();
+
+                                      log(results.toString());
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                TestResultsWidget(
+                                              patientId: widget.patientId!,
+                                              results: results,
+                                              diagnoses: diagnoses,
+                                              fromDatabase: false,
+                                              testName: 'Lipidogram',
+                                              createdAt: DateTime.now(),
+                                            ),
+                                          ));
+                                    }
+                                  },
                                   keyboardType:
                                       const TextInputType.numberWithOptions(
                                           decimal: true),
                                   inputFormatters: <TextInputFormatter>[
                                     FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\,|\.?\d*'))
+                                        RegExp(r'^\d+([\,\.])?\d*'))
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,

@@ -1,7 +1,5 @@
 class User {
   final int? id;
-  // String name;
-  // String surname;
   String login;
   String rsaPublicKey;
   String encryptedPrivateKey;
@@ -10,8 +8,6 @@ class User {
 
   User(
       {this.id,
-      // required this.name,
-      // required this.surname,
       required this.login,
       required this.rsaPublicKey,
       required this.encryptedPrivateKey,
@@ -21,8 +17,6 @@ class User {
   Map<String, dynamic> toMap() {
     return {
       "id": id,
-      // 'name': name,
-      // 'surname': surname,
       'login': login,
       'RSApublicKey': rsaPublicKey,
       'encyrptedPrivateKey': encryptedPrivateKey,

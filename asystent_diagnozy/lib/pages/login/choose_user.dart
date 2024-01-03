@@ -61,14 +61,19 @@ class _ChooseUserState extends State<ChooseUser> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
-                child: SvgPicture.asset(
-                  'assets/asystent_diagnozy_logo.svg',
-                  width: 160,
-                ),
-              ),
+                  padding: const EdgeInsets.only(bottom: 30.0, top: 100),
+                  child: Container(
+                    height: 120.0,
+                    width: 120.0,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/logo_new.png'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  )),
               Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 350.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 300.0),
                   child: Container(
                     decoration: const BoxDecoration(
                         color: Colors.white,
@@ -80,14 +85,18 @@ class _ChooseUserState extends State<ChooseUser> {
                           FutureBuilder(
                               future: helper.getAllUsers(),
                               builder: (context, snapshot) {
-                                if (snapshot.hasError) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                } else if (snapshot.hasError) {
                                   return Center(
                                       child: Text('Error: ${snapshot.error}'));
                                 } else if (!snapshot.hasData ||
                                     snapshot.data!.isEmpty) {
                                   return const Center(
                                       child: Text(
-                                          'Brak zarejestrowanych użtkowników'));
+                                          'Brak zarejestrowanych użytkowników'));
                                 } else {
                                   final tests = snapshot.data!;
 
@@ -135,19 +144,13 @@ class _ChooseUserState extends State<ChooseUser> {
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    LoginUser(
-                                                                      // userName:
-                                                                      //     tests[index]
-                                                                      //         .name,
-                                                                      // userSurname:
-                                                                      //     tests[index]
-                                                                      //         .surname,
-                                                                      userLogin:
-                                                                          tests[index]
-                                                                              .login,
-                                                                    )));
+                                                            builder: (context) => LoginUser(
+                                                                userLogin:
+                                                                    tests[index]
+                                                                        .login,
+                                                                userId:
+                                                                    tests[index]
+                                                                        .id!)));
                                                   },
                                                 ),
                                               ),

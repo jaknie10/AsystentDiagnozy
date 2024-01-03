@@ -15,8 +15,6 @@ class Register extends StatefulWidget {
 }
 
 class NewUser {
-  // String name;
-  // String surname;
   String login;
   String rsaPublicKey;
   String encryptedPrivateKey;
@@ -25,8 +23,6 @@ class NewUser {
 
   NewUser(
       {required this.login,
-      // required this.name,
-      // required this.surname,
       required this.rsaPublicKey,
       required this.encryptedPrivateKey,
       required this.saltOne,
@@ -44,13 +40,13 @@ class _RegisterState extends State<Register> {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     helper.initWinDB();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
               title: const Center(child: Text("UWAGA")),
               content: const Text(
-                  '''Aplikacja \"Asystent Diagnozy\" jest tylko i wyłącznie pomocą przy stawianiu diagnozy. Aplikacja bazuje jedynie na wynikach badań, a ostatecznej diagnozy opartej na analizie wszystkich czynników i objawów pacjenta dokonuje lekarz.
+                  '''Aplikacja "Asystent Diagnozy" jest tylko i wyłącznie pomocą przy stawianiu diagnozy. Aplikacja bazuje jedynie na wynikach badań, a ostatecznej diagnozy opartej na analizie wszystkich czynników i objawów pacjenta dokonuje lekarz.
 Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z podanych w aplikacji danych nie jest nigdzie wysyłana ani dalej przetwarzana.'''),
               actions: [
                 TextButton(
@@ -66,8 +62,6 @@ Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z pod
   final _formKey = GlobalKey<FormState>();
 
   NewUser newUser = NewUser(
-      // name: '',
-      // surname: '',
       login: '',
       rsaPublicKey: '',
       encryptedPrivateKey: '',
@@ -144,119 +138,6 @@ Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z pod
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        // const Padding(
-                                        //   padding: EdgeInsets.only(
-                                        //       bottom: 5.0, top: 15.0),
-                                        //   child: Text(
-                                        //     "Imię:",
-                                        //     style: TextStyle(fontSize: 18),
-                                        //   ),
-                                        // ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.only(
-                                        //       right: 15.0, bottom: 10.0),
-                                        //   child: TextFormField(
-                                        //     keyboardType: TextInputType.name,
-                                        //     inputFormatters: [
-                                        //       UpperCaseTextFormatter(),
-                                        //       LengthLimitingTextInputFormatter(
-                                        //           20)
-                                        //     ],
-                                        //     onChanged: (value) {
-                                        //       setState(() {
-                                        //         newUser.name = value.toString();
-                                        //       });
-                                        //     },
-                                        //     validator: (value) {
-                                        //       if (value == null ||
-                                        //           value.isEmpty) {}
-                                        //       return null;
-                                        //     },
-                                        //     decoration: InputDecoration(
-                                        //       filled: true,
-                                        //       fillColor: Theme.of(context)
-                                        //           .colorScheme
-                                        //           .background,
-                                        //       border: OutlineInputBorder(
-                                        //           borderRadius:
-                                        //               BorderRadius.circular(
-                                        //                   5.0),
-                                        //           borderSide: const BorderSide(
-                                        //               color:
-                                        //                   Colors.transparent)),
-                                        //       enabledBorder: OutlineInputBorder(
-                                        //           borderRadius:
-                                        //               BorderRadius.circular(
-                                        //                   5.0),
-                                        //           borderSide: const BorderSide(
-                                        //               color:
-                                        //                   Colors.transparent)),
-                                        //       focusedBorder: OutlineInputBorder(
-                                        //           borderRadius:
-                                        //               BorderRadius.circular(
-                                        //                   5.0),
-                                        //           borderSide: const BorderSide(
-                                        //               color: Colors.black)),
-                                        //     ),
-                                        //   ),
-                                        // ),
-                                        // const Padding(
-                                        //   padding: EdgeInsets.only(
-                                        //       bottom: 5.0, top: 15.0),
-                                        //   child: Text(
-                                        //     "Nazwisko:",
-                                        //     style: TextStyle(fontSize: 18),
-                                        //   ),
-                                        // ),
-                                        // Padding(
-                                        //   padding: const EdgeInsets.only(
-                                        //       right: 15.0, bottom: 10.0),
-                                        //   child: TextFormField(
-                                        //     keyboardType: TextInputType.name,
-                                        //     inputFormatters: [
-                                        //       UpperCaseTextFormatter(),
-                                        //       LengthLimitingTextInputFormatter(
-                                        //           20)
-                                        //     ],
-                                        //     onChanged: (value) {
-                                        //       setState(() {
-                                        //         newUser.surname =
-                                        //             value.toString();
-                                        //       });
-                                        //     },
-                                        //     validator: (value) {
-                                        //       if (value == null ||
-                                        //           value.isEmpty) {}
-                                        //       return null;
-                                        //     },
-                                        //     decoration: InputDecoration(
-                                        //       filled: true,
-                                        //       fillColor: Theme.of(context)
-                                        //           .colorScheme
-                                        //           .background,
-                                        //       border: OutlineInputBorder(
-                                        //           borderRadius:
-                                        //               BorderRadius.circular(
-                                        //                   5.0),
-                                        //           borderSide: const BorderSide(
-                                        //               color:
-                                        //                   Colors.transparent)),
-                                        //       enabledBorder: OutlineInputBorder(
-                                        //           borderRadius:
-                                        //               BorderRadius.circular(
-                                        //                   5.0),
-                                        //           borderSide: const BorderSide(
-                                        //               color:
-                                        //                   Colors.transparent)),
-                                        //       focusedBorder: OutlineInputBorder(
-                                        //           borderRadius:
-                                        //               BorderRadius.circular(
-                                        //                   5.0),
-                                        //           borderSide: const BorderSide(
-                                        //               color: Colors.black)),
-                                        //     ),
-                                        //   ),
-                                        // ),
                                         const Padding(
                                           padding: EdgeInsets.only(
                                               bottom: 5.0, top: 15.0),
@@ -283,8 +164,8 @@ Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z pod
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty ||
-                                                  value.length < 6) {
-                                                return "Login powinien zawierać co najmniej 6 znaków";
+                                                  value.length < 4) {
+                                                return "Login powinien zawierać co najmniej 4 znaków";
                                               }
                                               return null;
                                             },
@@ -340,11 +221,61 @@ Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z pod
                                                 password = value.toString();
                                               });
                                             },
+                                            onFieldSubmitted: (value) async {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                var check = await helper
+                                                    .checkIfUserInDatabase(
+                                                        newUser.login);
+                                                if (!context.mounted) return;
+                                                if (int.parse(check) != 0) {
+                                                  debugPrint(
+                                                      "taki użytkownik juz jest w bazie");
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          AlertDialog(
+                                                            content: const Text(
+                                                                "Użytkownik o takim loginie znajduje się już w bazie danych. Podaj inny login."),
+                                                            actions: [
+                                                              TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          context),
+                                                                  child:
+                                                                      const Text(
+                                                                          "Ok")),
+                                                            ],
+                                                          ));
+                                                } else {
+                                                  PrivateKeyEncryptionResult
+                                                      signUpResult =
+                                                      signUp(password);
+
+                                                  helper.addUserToDatabase(
+                                                      newUser.login,
+                                                      signUpResult.publicKey,
+                                                      signUpResult
+                                                          .encryptedPrivateKey,
+                                                      signUpResult
+                                                          .randomSaltOne,
+                                                      signUpResult
+                                                          .randomSaltTwo);
+
+                                                  await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const ChooseUser(),
+                                                      ));
+                                                }
+                                              }
+                                            },
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty ||
-                                                  value.length < 10) {
-                                                return "Hasło powinno zawierać co najmniej 10 znaków";
+                                                  value.length < 8) {
+                                                return "Hasło powinno zawierać co najmniej 8 znaków";
                                               }
                                               return null;
                                             },
@@ -397,7 +328,7 @@ Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z pod
                                           padding:
                                               EdgeInsets.only(bottom: 15.0),
                                           child: Text(
-                                            "* Hasło powinno zawierać co najmniej 10 znaków",
+                                            "* Hasło powinno zawierać co najmniej 8 znaków",
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 color: Color.fromRGBO(
@@ -438,8 +369,6 @@ Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z pod
                                               signUpResult = signUp(password);
 
                                           helper.addUserToDatabase(
-                                              // newUser.name,
-                                              // newUser.surname,
                                               newUser.login,
                                               signUpResult.publicKey,
                                               signUpResult.encryptedPrivateKey,
@@ -489,19 +418,5 @@ Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z pod
             )),
       ),
     );
-  }
-}
-
-class UpperCaseTextFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.length == 1) {
-      return TextEditingValue(
-        text: newValue.text[0].toUpperCase(),
-        selection: newValue.selection,
-      );
-    }
-    return newValue;
   }
 }

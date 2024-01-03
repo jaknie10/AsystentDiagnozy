@@ -1,6 +1,5 @@
 import 'package:asystent_diagnozy/database/database_service.dart';
 import 'package:asystent_diagnozy/models/patient_model.dart';
-import 'package:asystent_diagnozy/pages/badania/badanie_list_item_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -43,12 +42,12 @@ class _PatientProfileState extends State<PatientProfile> {
     helper.initWinDB();
   }
 
-  String sortingType = 'Data badania';
+  String sortingType = 'createdAt';
   String sortingOrder = 'DESC';
 
   List<DropdownMenuItem<String>> sortingOptions = [
-    const DropdownMenuItem(value: "Data badania", child: Text("Data badania")),
-    const DropdownMenuItem(value: "Typ badania", child: Text("Typ badania")),
+    const DropdownMenuItem(value: "createdAt", child: Text("Data badania")),
+    const DropdownMenuItem(value: "testType", child: Text("Typ badania")),
   ];
 
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
@@ -549,7 +548,8 @@ class _PatientProfileState extends State<PatientProfile> {
             Padding(
               padding: const EdgeInsets.only(bottom: 15.0, right: 10.0),
               child: FutureBuilder(
-                  future: helper.getTestsByPatientId(widget.patient.id!),
+                  future: helper.getTestsByPatientId(
+                      widget.patient.id!, "$sortingType $sortingOrder"),
                   builder: (context, snapshot) {
                     // if (snapshot.connectionState == ConnectionState.waiting) {
                     //   return const Center(child: CircularProgressIndicator());

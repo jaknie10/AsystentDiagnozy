@@ -1,7 +1,6 @@
 import 'package:asystent_diagnozy/pages/login/choose_user.dart';
 import 'package:asystent_diagnozy/pages/login/register.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginOrRegister extends StatefulWidget {
   const LoginOrRegister({
@@ -29,12 +28,17 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 15.0, top: 50),
-                  child: SvgPicture.asset(
-                    'assets/asystent_diagnozy_logo.svg',
-                    width: 160,
-                  ),
-                ),
+                    padding: const EdgeInsets.only(bottom: 15.0, top: 150),
+                    child: Container(
+                      height: 120.0,
+                      width: 120.0,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/logo_new.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    )),
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(

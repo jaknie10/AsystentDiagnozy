@@ -1,11 +1,13 @@
 import 'package:asystent_diagnozy/models/user_model.dart';
 import 'package:asystent_diagnozy/pages/badania/badania.dart';
+import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'pages/home/home.dart';
 import 'pages/profile/profile.dart';
-import 'pages/settings/settings.dart';
 
 class Layout extends StatefulWidget {
   const Layout({super.key, required this.user});
@@ -40,14 +42,10 @@ class _LayoutState extends State<Layout> {
         'key': keyProfile
       },
       {'name': 'Badania', 'page': const Badania(), 'key': keyBadania},
-      {
-        'name': 'Settings',
-        'page': Settings(user: widget.user),
-        'key': keySettings
-      },
     ];
 
-    return Scaffold(
+    return ContextMenuOverlay(
+        child: Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         foregroundColor: Colors.white,
@@ -82,43 +80,80 @@ class _LayoutState extends State<Layout> {
                   letterSpacing: 1.5),
             )),
         actions: [
-          Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(15),
-                onTap: () {
-                  setState(() {
-                    _selectedIndex = 1;
-                  });
-                },
-                child: Ink(
-                  height: 80,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: Theme.of(context).colorScheme.background,
-                  ),
-                  padding: const EdgeInsets.all(10.0),
-                  child: Align(
+          ContextMenuRegion(
+            contextMenu: Container(
+              height: 60,
+              width: 170,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(5)),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: InkWell(
+                  onTap: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.remove('LOGGED_USER');
+                    prefs.remove('REMEMBER_USER');
+                    if (!context.mounted) return;
+                    Phoenix.rebirth(context);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.background,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: const Align(
                       alignment: Alignment.centerLeft,
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/lekarz_logo.svg',
-                              width: 45,
-                              fit: BoxFit.scaleDown,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15.0),
-                              child: Text(widget.user.login,
-                                  style: const TextStyle(
-                                      fontSize: 20,
-                                      color: Color.fromRGBO(22, 20, 35, 1.0))),
-                            ),
-                          ])),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Text("Wyloguj",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Color.fromRGBO(22, 20, 35, 1.0))),
+                      ),
+                    ),
+                  ),
                 ),
-              ))
+              ),
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(15),
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 1;
+                    });
+                  },
+                  child: Ink(
+                    height: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      color: Theme.of(context).colorScheme.background,
+                    ),
+                    padding: const EdgeInsets.all(10.0),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/lekarz_logo.svg',
+                                width: 45,
+                                fit: BoxFit.scaleDown,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
+                                child: Text(widget.user.login,
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        color:
+                                            Color.fromRGBO(22, 20, 35, 1.0))),
+                              ),
+                            ])),
+                  ),
+                )),
+          )
         ], // default is 56
       ),
       body: Row(
@@ -172,19 +207,6 @@ class _LayoutState extends State<Layout> {
                 ),
                 label: Text('Badania'),
               ),
-              NavigationRailDestination(
-                icon: ImageIcon(
-                  AssetImage('assets/settings2.png'),
-                  size: 55,
-                  color: Color.fromRGBO(22, 20, 35, 0.6),
-                ),
-                selectedIcon: ImageIcon(
-                  AssetImage('assets/settings_focused2.png'),
-                  size: 55,
-                  color: Color.fromRGBO(0, 99, 248, 1),
-                ),
-                label: Text('Ustawienia'),
-              ),
             ],
           ),
           Expanded(
@@ -199,6 +221,6 @@ class _LayoutState extends State<Layout> {
           ),
         ],
       ),
-    );
+    ));
   }
 }

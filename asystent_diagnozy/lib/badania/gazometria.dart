@@ -22,7 +22,7 @@ class _GazometriaState extends State<Gazometria> {
 
   Map<String, Map<String, dynamic>> results = {};
   var interpretations = []; // wybrane interpretacje dla klasyfikacji
-  String classification = "Podane wyniki badania wydają się poprawne";
+  String classification = "Podane wyniki są prawidłowe";
   Map<String, List> diagnoses = {};
 
   Future<void> readJson() async {
@@ -128,12 +128,33 @@ class _GazometriaState extends State<Gazometria> {
                               SizedBox(
                                 width: 200,
                                 child: TextFormField(
+                                  onFieldSubmitted: (value) {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+
+                                      gazometriaAnaliza();
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                TestResultsWidget(
+                                                    patientId:
+                                                        widget.patientId!,
+                                                    results: results,
+                                                    diagnoses: diagnoses,
+                                                    fromDatabase: false,
+                                                    createdAt: DateTime.now(),
+                                                    testName: 'Gazometria'),
+                                          ));
+                                    }
+                                  },
                                   keyboardType:
                                       const TextInputType.numberWithOptions(
                                           decimal: true),
                                   inputFormatters: <TextInputFormatter>[
                                     FilteringTextInputFormatter.allow(
-                                        RegExp(r'^\d+\,|\.?\d*'))
+                                        RegExp(r'^\-?\d*([\,\.])?\d*$'))
                                   ],
                                   decoration: InputDecoration(
                                       filled: true,
@@ -171,7 +192,9 @@ class _GazometriaState extends State<Gazometria> {
                                               minWidth: 0, minHeight: 0),
                                       isDense: true),
                                   validator: (value) {
-                                    if (value == null || value.isEmpty) {
+                                    if (value == null ||
+                                        value.isEmpty ||
+                                        value == "-") {
                                       return 'Podaj prawidłową wartość';
                                     }
                                     return null;
