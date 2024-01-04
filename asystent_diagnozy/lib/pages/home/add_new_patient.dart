@@ -379,7 +379,7 @@ class _AddNewPatientState extends State<AddNewPatient> {
                                 _formKey.currentState!.save();
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();
-                                helper.insertPatient(Patient(
+                                await helper.insertPatient(Patient(
                                     name: newPatient['name'],
                                     userId: prefs.getInt('LOGGED_USER')!,
                                     surname: newPatient['surname'],

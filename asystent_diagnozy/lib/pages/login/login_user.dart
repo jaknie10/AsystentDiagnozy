@@ -39,7 +39,7 @@ class _LoginUserState extends State<LoginUser> {
 
   asyncMethod() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    rememberUser = prefs.getBool('REMEMBER_USER')!;
+    rememberUser = await prefs.getBool('REMEMBER_USER')!;
   }
 
   @override
@@ -308,7 +308,7 @@ class _LoginUserState extends State<LoginUser> {
                             } else {
                               SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
-                              prefs.setInt('LOGGED_USER', widget.userId);
+                              await prefs.setInt('LOGGED_USER', widget.userId);
                               if (!context.mounted) return;
                               Navigator.push(
                                   context,
