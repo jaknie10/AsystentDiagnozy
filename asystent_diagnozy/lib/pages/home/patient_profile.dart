@@ -292,7 +292,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                 debugPrint("Patient id: $result");
                               },
                               icon: const Image(
-                                image: AssetImage('assets/Morfologia_logo.png'),
+                                image: AssetImage('assets/morfologia_logo.png'),
                               ),
                               highlightColor: Colors.transparent,
                               hoverColor: Colors.transparent,
@@ -334,7 +334,7 @@ class _PatientProfileState extends State<PatientProfile> {
                                 },
                                 icon: const Image(
                                   image:
-                                      AssetImage('assets/Gazometria_logo.png'),
+                                      AssetImage('assets/gazometria_logo.png'),
                                 ),
                                 highlightColor: Colors.transparent,
                                 hoverColor: Colors.transparent,
