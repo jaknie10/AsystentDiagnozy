@@ -82,6 +82,16 @@ class _ChooseUserState extends State<ChooseUser> {
                       padding: const EdgeInsets.all(30.0),
                       child: Column(
                         children: [
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 15.0),
+                              child: Text(
+                                "Wybierz użytkownika",
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
                           FutureBuilder(
                               future: helper.getAllUsers(),
                               builder: (context, snapshot) {

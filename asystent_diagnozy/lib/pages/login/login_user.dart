@@ -80,12 +80,17 @@ class _LoginUserState extends State<LoginUser> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 15.0),
-                    child: SvgPicture.asset(
-                      'assets/asystent_diagnozy_logo.svg',
-                      width: 160,
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(bottom: 15.0, top: 100),
+                      child: Container(
+                        height: 120.0,
+                        width: 120.0,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/logo_new.png'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      )),
                   Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Container(
