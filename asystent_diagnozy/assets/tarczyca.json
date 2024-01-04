@@ -42,12 +42,12 @@
     },
     "int":{
       "E": ["Brak symptomów"],
-      "PNT": [""],
-      "WNT": [""],
-      "SNT": [""],
-      "PDN": [""],
-      "PRR": [""],
-      "PNIT": [""],
-      "SNIT": [""]
+      "PNT": ["Symptom pierwotna nadczynności tarczycy"],
+      "WNT": ["Symptom wtónej nadczynności tarczycy"],
+      "SNT": ["Symptom subklinicznej nadczynności tarczycy"],
+      "PDN": ["Symptom podostrego zapalenienia tarczycy w fazie nadcynności"],
+      "PRR": ["Symptom przejściowego zapalenia tarczycy w fazie rozwoju"],
+      "PNIT": ["Symptom pierwotnej niedoczynności tarczycy"],
+      "SNIT": ["Symptom subklinicznej niedoczynnośc tarczycy"]
     }
   }
