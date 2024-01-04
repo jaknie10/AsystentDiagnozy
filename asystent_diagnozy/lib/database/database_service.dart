@@ -180,12 +180,16 @@ class SQLiteHelper {
 
   Future<List<List<Map<String, Object?>>>> getDoctorStatistics() async {
     final db = await database;
-    final List<Map<String, Object?>> liczbaBadan =
-        await db.rawQuery("SELECT COUNT(id) FROM testResults LIMIT 1");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final List<Map<String, Object?>> liczbaBadan = await db.rawQuery(
+        "SELECT COUNT(testResults.id) FROM testResults LEFT JOIN patients ON patients.id = testResults.patientId LEFT JOIN users ON users.id = patients.userId WHERE users.id = ?",
+        [prefs.getInt('LOGGED_USER')]);
     final List<Map<String, Object?>> najczestszeBadanie = await db.rawQuery(
-        "SELECT testType, COUNT(id) FROM testResults ORDER BY COUNT(id) desc");
-    final List<Map<String, Object?>> liczbaPacjentow =
-        await db.rawQuery("SELECT COUNT(id) FROM patients");
+        "SELECT testResults.testType, COUNT(testResults.id) FROM testResults LEFT JOIN patients ON patients.id = testResults.patientId LEFT JOIN users ON users.id = patients.userId WHERE users.id = ? ORDER BY COUNT(testResults.id) desc",
+        [prefs.getInt('LOGGED_USER')]);
+    final List<Map<String, Object?>> liczbaPacjentow = await db.rawQuery(
+        "SELECT COUNT(id) FROM patients WHERE patients.userId = ?",
+        [prefs.getInt('LOGGED_USER')]);
     return [liczbaBadan, najczestszeBadanie, liczbaPacjentow];
   }
 
