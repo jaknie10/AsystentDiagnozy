@@ -48,9 +48,9 @@
   
   },
   "int":{
-    "HCP": ["symptom hipercholesterolemii prostej"],
-    "HT": ["symptom hipertrójglicerydemii"],
-    "HLM": ["symptom hiperlipidemii mieszanej"],
-    "DLA": ["symptom dyslipidemii aterogennej"]
+    "HCP": ["żółtaki", "rąbek rogówkowy"],
+    "HT": ["napadowy ból brzucha", "ostre zapalenie trzustk"],
+    "HLM": ["cukrzyca", "otyłość", "insulinooporność", "spożywanie estrogenów", "przewlekłe stosowanie alkoholu"],
+    "DLA": [""]
   }
 }

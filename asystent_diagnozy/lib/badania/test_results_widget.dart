@@ -634,65 +634,67 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                       ),
                                     ),
                                   ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10.0,
-                                      right: 10.0,
-                                      bottom: 5.0,
-                                      top: 5.0),
-                                  child: Container(
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context1)
-                                          .colorScheme
-                                          .secondary,
-                                      borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(5.0),
-                                        topLeft: Radius.circular(5.0),
+                                if (widget.testName != "Tarczyca")
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0,
+                                        right: 10.0,
+                                        bottom: 5.0,
+                                        top: 5.0),
+                                    child: Container(
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context1)
+                                            .colorScheme
+                                            .secondary,
+                                        borderRadius: const BorderRadius.only(
+                                          topRight: Radius.circular(5.0),
+                                          topLeft: Radius.circular(5.0),
+                                        ),
                                       ),
-                                    ),
-                                    child: const Center(
-                                      child: Padding(
-                                        padding: EdgeInsets.all(5.0),
-                                        child: Text(
-                                          "Potencjalne interpretacje",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
+                                      child: const Center(
+                                        child: Padding(
+                                          padding: EdgeInsets.all(5.0),
+                                          child: Text(
+                                            "Potencjalne interpretacje",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                  child: Wrap(
-                                    children: [
-                                      for (var entryv in entry.value)
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 5.0, bottom: 5.0),
-                                          child: Container(
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5)),
-                                              color: Colors.white,
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Text(
-                                                entryv,
-                                                textAlign: TextAlign.center,
+                                if (widget.testName != "Tarczyca")
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5.0),
+                                    child: Wrap(
+                                      children: [
+                                        for (var entryv in entry.value)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 5.0, bottom: 5.0),
+                                            child: Container(
+                                              decoration: const BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5)),
+                                                color: Colors.white,
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Text(
+                                                  entryv,
+                                                  textAlign: TextAlign.center,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
                               ])
                           .expand((e) => e),
                     ],
