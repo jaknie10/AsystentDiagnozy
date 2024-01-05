@@ -4,7 +4,6 @@ import 'package:asystent_diagnozy/models/user_model.dart';
 import 'package:asystent_diagnozy/pages/login/encryption_decryption_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginUser extends StatefulWidget {
@@ -39,7 +38,7 @@ class _LoginUserState extends State<LoginUser> {
 
   asyncMethod() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    rememberUser = await prefs.getBool('REMEMBER_USER')!;
+    rememberUser = prefs.getBool('REMEMBER_USER')!;
   }
 
   @override

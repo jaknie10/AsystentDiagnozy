@@ -510,7 +510,7 @@ class _TestResultsWidgetState extends State<TestResultsWidget> {
                                                   entry.value['result'] == 'gd')
                                               ? const Color.fromRGBO(
                                                   168, 255, 191, 1.0)
-                                              : Color.fromARGB(
+                                              : const Color.fromARGB(
                                                   255, 202, 202, 202)),
                                   child: Center(
                                       child: (entry.value['result'] == 'gt')

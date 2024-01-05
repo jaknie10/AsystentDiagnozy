@@ -229,7 +229,7 @@ class _MoczState extends State<Mocz> {
                                       onChanged: (String? newValue) {
                                         selectedOption = newValue;
                                       },
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         labelText: 'Wybierz',
                                         // Inne właściwości dekoracji
                                       ),
@@ -287,10 +287,10 @@ class _MoczState extends State<Mocz> {
                                               index <
                                                   entry.value["bad_int"]
                                                       .length) {
-                                            var found_interpretations =
+                                            var foundInterpretations =
                                                 entry.value["bad_int"][index];
                                             interpretations
-                                                .addAll(found_interpretations);
+                                                .addAll(foundInterpretations);
                                             // dodać warunek na false-positive
                                           }
                                         }

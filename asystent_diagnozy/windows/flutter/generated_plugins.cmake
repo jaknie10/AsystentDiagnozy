@@ -3,7 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  url_launcher_windows
+  sqlite3_flutter_libs
   window_size
 )
 
