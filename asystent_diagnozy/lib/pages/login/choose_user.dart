@@ -82,9 +82,9 @@ class _ChooseUserState extends State<ChooseUser> {
                       padding: const EdgeInsets.all(30.0),
                       child: Column(
                         children: [
-                          Center(
+                          const Center(
                             child: Padding(
-                              padding: const EdgeInsets.only(bottom: 15.0),
+                              padding: EdgeInsets.only(bottom: 15.0),
                               child: Text(
                                 "Wybierz użytkownika",
                                 style: TextStyle(

@@ -2,7 +2,6 @@ import 'package:asystent_diagnozy/database/database_service.dart';
 import 'package:asystent_diagnozy/pages/login/choose_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'encryption_decryption_system.dart';
 
 class Register extends StatefulWidget {
@@ -106,12 +105,11 @@ Aplikacja działa w pełni lokalnie, na zainstalowanym urządzeniu, żadne z pod
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 15.0),
-                    child: SvgPicture.asset(
-                      'assets/asystent_diagnozy_logo.svg',
-                      width: 160,
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(bottom: 15.0),
+                      child: Image.asset(
+                        'assets/logo_new.png',
+                        width: 160,
+                      )),
                   Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Container(
