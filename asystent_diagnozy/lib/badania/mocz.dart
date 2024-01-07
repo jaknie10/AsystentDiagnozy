@@ -294,6 +294,17 @@ class _MoczState extends State<Mocz> {
                                             // dodać warunek na false-positive
                                           }
                                         }
+                                        if (resultValue == 'fp' &&
+                                            entry.value['short'] == "ketony") {
+                                          interpretations.add(
+                                              "Przy niewłaściwej bilirubinie objawy ketonów nie są brane pod uwagę (false positive)");
+                                        }
+                                        if (resultValue == 'fp' &&
+                                            entry.value['short'] ==
+                                                "urobilinogen") {
+                                          interpretations.add(
+                                              "Przy niewłaściwej bilirubinie objawy urobilinogenu nie są brane pod uwagę (false positive)");
+                                        }
                                       },
                                     );
                                   }

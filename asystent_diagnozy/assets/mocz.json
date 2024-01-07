@@ -63,7 +63,7 @@
         "unit": "",
         "good": ["nieobecne"],
         "bad": ["występują"],
-        "bad_int": [["żółtaczka mechaniczna", "wirusowe zapalenie wątroby", "niedrożność dróg żółciowych", "przewlekłe choroby miąższowe wątroby", "zespół Dubin-Johnsona i Rotora"]],
+        "bad_int": [["cukrzyca", "kwasica ketonowa", "gorączka", "głodzenie", "długotrwały wysiłek fizyczny", "dieta wysokobiałkowa i ubogowęglowodanowa", "długotrwałe wymioty lub biegunki"]],
         "false_positive_by": "bilirubina"
     },
     "urobilinogen":{
