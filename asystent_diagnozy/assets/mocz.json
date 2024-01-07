@@ -70,7 +70,7 @@
         "short": "urobilinogen",
         "full_name": "urobilinogen",
         "unit": "",
-        "good": ["nieobecny (do 1 mg/dl)"],
+        "good": ["nieobecny"],
         "bad": ["występuje"],
         "bad_int": [["żółtaczka hemolityczna", "powikłanie poprzetoczeniowe", "choroby miąższowe wątroby", "niedrożność jelit", "czerwienica prawdziwa", "niedrożność żyły wrotnej", "zapalenie jelit"]],
         "false_positive_by": "bilirubina"
