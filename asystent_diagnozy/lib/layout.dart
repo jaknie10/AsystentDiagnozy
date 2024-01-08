@@ -205,6 +205,8 @@ class _LayoutState extends State<Layout> {
                     icon: SvgPicture.asset(
                       'assets/home_icon.svg',
                       height: 50,
+                      colorFilter: const ColorFilter.mode(
+                          Color.fromARGB(255, 99, 99, 99), BlendMode.srcIn),
                     ),
                   ),
                   IconButton(
@@ -232,6 +234,8 @@ class _LayoutState extends State<Layout> {
                     icon: SvgPicture.asset(
                       'assets/list_icon.svg',
                       height: 50,
+                      colorFilter: const ColorFilter.mode(
+                          Color.fromARGB(255, 99, 99, 99), BlendMode.srcIn),
                     ),
                   ),
                   IconButton(
@@ -259,6 +263,8 @@ class _LayoutState extends State<Layout> {
                     icon: SvgPicture.asset(
                       'assets/person_icon.svg',
                       height: 50,
+                      colorFilter: const ColorFilter.mode(
+                          Color.fromARGB(255, 99, 99, 99), BlendMode.srcIn),
                     ),
                   ),
                 ],
