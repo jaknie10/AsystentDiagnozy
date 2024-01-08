@@ -122,7 +122,7 @@ class _LayoutState extends State<Layout> {
                 PopupMenuItem(
                   onTap: () {
                     setState(() {
-                      _selectedIndex = 1;
+                      _selectedIndex = 2;
                     });
                   },
                   child: const Text('Profil'),

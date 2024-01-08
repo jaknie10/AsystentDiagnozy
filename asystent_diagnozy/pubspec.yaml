@@ -40,7 +40,6 @@ dependencies:
   flutter_phoenix: ^1.1.1
   shared_preferences: ^2.2.2
   tutorial_coach_mark: ^1.2.11
-  sqlite3_flutter_libs: ^0.5.18
 
 dev_dependencies:
   flutter_test:
