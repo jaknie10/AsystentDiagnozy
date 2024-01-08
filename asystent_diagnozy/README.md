@@ -1,4 +1,4 @@
-# asystent_diagnozy_test
+# asystent_diagnozy
 
 A new Flutter project.
 
